@@ -1,0 +1,6 @@
+##-------------------------------------------------------------------------------------------------
+# object:  StackReference/ExistsStackReferenceAccountSetup
+# class:   condition
+##-------------------------------------------------------------------------------------------------
+ExistsStackReferenceAccountSetup:
+  !Not [!Equals [!Ref "StackReferenceAccountSetup", ""]]

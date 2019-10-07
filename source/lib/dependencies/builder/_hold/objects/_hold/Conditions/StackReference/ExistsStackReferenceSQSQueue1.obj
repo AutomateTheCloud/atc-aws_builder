@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  StackReference/ExistsStackReferenceSQSQueue1
+# class:   condition
+##-------------------------------------------------------------------------------------------------
+ExistsStackReferenceSQSQueue1:
+  !Not [!Equals [!Ref "StackReferenceSQSQueue1", ""]]
+

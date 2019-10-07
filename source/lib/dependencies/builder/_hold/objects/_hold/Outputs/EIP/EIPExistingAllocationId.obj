@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EIP/EIPExistingAllocationId
+# class:   output
+##-------------------------------------------------------------------------------------------------
+EIPExistingAllocationId:
+  Description: "Elastic IP (Existing): Allocation ID"
+  Value: !Ref "EIPExistingAllocationId"
+  Export:
+    Name: !Sub "${AWS::StackName}-EIPExistingAllocationId"

@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  CloudFront/CloudFrontOriginAccessIdentity/WebsiteS3Origin
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+CloudFrontOriginAccessIdentityWebsite:
+  Type: "AWS::CloudFront::CloudFrontOriginAccessIdentity"
+  Properties:
+    CloudFrontOriginAccessIdentityConfig:
+      Comment: !Ref "BucketWebsiteOrigin"

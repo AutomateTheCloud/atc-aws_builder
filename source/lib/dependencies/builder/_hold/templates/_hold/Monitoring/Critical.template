@@ -1,0 +1,57 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Monitoring/Critical
+# class:   template
+##-------------------------------------------------------------------------------------------------
+
+Paradigm:
+##-------------------------------------------------------------------------------------------------
+  Parameters:
+    #-- SNS -----------------------------------------------------------------------------
+    - Base/SNS/SNSSubscriptionCritical1Endpoint
+    - Base/SNS/SNSSubscriptionCritical1Protocol
+    - Base/SNS/SNSSubscriptionCritical2Endpoint
+    - Base/SNS/SNSSubscriptionCritical2Protocol
+    - Base/SNS/SNSSubscriptionCritical3Endpoint
+    - Base/SNS/SNSSubscriptionCritical3Protocol
+    - Base/SNS/SNSSubscriptionCritical4Endpoint
+    - Base/SNS/SNSSubscriptionCritical4Protocol
+
+##-------------------------------------------------------------------------------------------------
+  Mappings:
+
+##-------------------------------------------------------------------------------------------------
+  Conditions:
+    #-- SNS -----------------------------------------------------------------------------
+    - Base/SNS/EnabledSNSSubscriptionCritical1
+    - Base/SNS/EnabledSNSSubscriptionCritical2
+    - Base/SNS/EnabledSNSSubscriptionCritical3
+    - Base/SNS/EnabledSNSSubscriptionCritical4
+
+##-------------------------------------------------------------------------------------------------
+  Resources:
+    #-- SNS -----------------------------------------------------------------------------
+    - Base/SNS/Topic/Critical
+    - Base/SNS/Subscription/Critical1
+    - Base/SNS/Subscription/Critical2
+    - Base/SNS/Subscription/Critical3
+    - Base/SNS/Subscription/Critical4
+
+##-------------------------------------------------------------------------------------------------
+  Outputs:
+    #-- SNS -----------------------------------------------------------------------------
+    - Base/SNS/Topic/Critical
+
+    #-- Tags Related --------------------------------------------------------------------
+    - Base/Details/AccountName
+    - Base/Details/AccountAbbr
+    - Base/Details/AccountNumber
+    - Base/Details/OrganizationName
+    - Base/Details/OrganizationAbbr
+    - Base/Details/Environment
+    - Base/Details/ProjectName
+    - Base/Details/ProjectAbbr
+    - Base/Details/FunctionName
+    - Base/Details/FunctionAbbr
+    - Base/Details/Owner
+    - Base/Details/Contact
+    - Base/Details/Region

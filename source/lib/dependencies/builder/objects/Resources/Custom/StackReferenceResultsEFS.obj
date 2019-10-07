@@ -1,0 +1,12 @@
+##---------------------------------------------------------------------------------------
+# object: Custom/StackReferenceResultsEFS
+##---------------------------------------------------------------------------------------
+StackReferenceResultsEFS:
+  Condition: "ExistsStackReferenceEFS"
+  Type: "Custom::StackReferenceResultsEFS"
+  Version: "1.0"
+  Properties:
+    "ServiceToken": !Join [ "", [ "arn:aws:lambda:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":function:stack-reference" ] ]
+    "Region": !Ref "AWS::Region"
+    "StackName": !Ref "StackReferenceEFS"
+    "LastUpdate": !Ref "LastUpdate"

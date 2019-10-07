@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: SNS/Topic/ConfigTopicName
+##---------------------------------------------------------------------------------------
+SNSTopicConfigTopicName:
+  Description: "SNS Topic (Config): Topic Name"
+  Value: !GetAtt "SNSTopicConfig.TopicName"
+  Export:
+    Name: !Sub "${AWS::StackName}-SNSTopicConfigTopicName"

@@ -1,0 +1,29 @@
+##-------------------------------------------------------------------------------------------------
+# object:  IAM/Policy/S3BucketApplication
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+PolicyS3BucketApplication:
+  Type: "AWS::IAM::Policy"
+  Properties:
+    PolicyName: !Join [ "", [ "ec2-s3bucketapplication", "_", !Select [1, !Split ["|", !Ref "Project"]], "-", !Select [1, !Split ["|", !Ref "Function"]], "-", !Select [3, !Split ["|", !Ref "Organization"]], "-", !Select [1, !Split ["|", !Ref "Organization"]], "_", !Ref "AWS::Region" ] ]
+    PolicyDocument:
+      Version: "2012-10-17"
+      Statement:
+        - Effect: "Allow"
+          Action:
+            - "s3:GetBucketLocation"
+            - "s3:ListAllMyBuckets"
+          Resource: "arn:aws:s3:::*"
+        - Effect: "Allow"
+          Action:
+            - "s3:Get*"
+            - "s3:Put*"
+            - "s3:Delete*"
+            - "s3:List*"
+          Resource:
+            - !Join [ "", [ "arn:aws:s3:::", !Ref "S3BucketApplication" ] ]
+            - !Join [ "", [ "arn:aws:s3:::", !Ref "S3BucketApplication", "/*" ] ]
+    Roles:
+      - !Ref "RoleInstance"
+  DependsOn:
+    - "RoleInstance"

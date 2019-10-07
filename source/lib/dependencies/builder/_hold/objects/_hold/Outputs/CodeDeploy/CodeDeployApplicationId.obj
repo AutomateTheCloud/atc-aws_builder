@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  CodeDeploy/CodeDeployApplicationId
+# class:   output
+##-------------------------------------------------------------------------------------------------
+CodeDeployApplicationId:
+  Description: "CodeDeploy: Application ID"
+  Value: !Ref "CodeDeployApplicationApp"
+  Export:
+    Name: !Sub "${AWS::StackName}-CodeDeployApplicationId"

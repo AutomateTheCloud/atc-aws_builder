@@ -1,0 +1,30 @@
+##-------------------------------------------------------------------------------------------------
+# object:  ElasticLoadBalancingV2/LoadBalancer/InstanceNLB
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+LoadBalancerInstanceNLB:
+  Type: "AWS::ElasticLoadBalancingV2::LoadBalancer"
+  Properties:
+    Name: !Join [ "", [ !Select [1, !Split ["|", !Ref "Project"]], "-", !Select [1, !Split ["|", !Ref "Function"]], "-", !Select [3, !Split ["|", !Ref "Organization"]], "-", "nlb" ] ]
+    Type: "network"
+    Scheme: !If [SubnetTypeLoadBalancerPrivateNLB, "internal", "internet-facing"]
+    Subnets:
+      - !If [SubnetTypeLoadBalancerPrivateNLB, !GetAtt "StackReferenceResultsVPC.SubnetPrivate1Id",!GetAtt "StackReferenceResultsVPC.SubnetPublic1Id"]
+      - !If [SubnetTypeLoadBalancerPrivateNLB, !GetAtt "StackReferenceResultsVPC.SubnetPrivate2Id",!GetAtt "StackReferenceResultsVPC.SubnetPublic2Id"]
+      - !If [SubnetTypeLoadBalancerPrivateNLB, !GetAtt "StackReferenceResultsVPC.SubnetPrivate3Id",!GetAtt "StackReferenceResultsVPC.SubnetPublic3Id"]
+    LoadBalancerAttributes:
+    - Key: load_balancing.cross_zone.enabled
+      Value: "true"
+    Tags:
+      - Key: "Name"
+        Value: !Join [ "", [ !Select [1, !Split ["|", !Ref "Project"]], "-", !Select [1, !Split ["|", !Ref "Function"]], "-", !Select [3, !Split ["|", !Ref "Organization"]], "-", "nlb" ] ]
+      - Key: "Organization"
+        Value: !Select [0, !Split ["|", !Ref "Organization"]]
+      - Key: "Project"
+        Value: !Select [0, !Split ["|", !Ref "Project"]]
+      - Key: "Function"
+        Value: !Select [0, !Split ["|", !Ref "Function"]]
+      - Key: "Owner"
+        Value: !Select [0, !Split ["|", !Ref "Owner"]]
+      - Key: "Contact"
+        Value: !Select [1, !Split ["|", !Ref "Owner"]]

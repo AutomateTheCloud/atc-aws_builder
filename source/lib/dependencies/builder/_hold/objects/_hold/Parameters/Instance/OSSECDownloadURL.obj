@@ -1,0 +1,8 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Instance/OSSECDownloadURL
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+OSSECDownloadURL:
+  Type:                  String
+  Default:               ""
+  Description:           "OSSEC (Download URL)"

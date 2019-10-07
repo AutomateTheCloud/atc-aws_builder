@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Logs/LogGroup/LinuxMessages
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+LogGroupLinuxMessages:
+  Type: "AWS::Logs::LogGroup"
+  Properties:
+    LogGroupName: !Join [ "", [ !Select [1, !Split ["|", !Ref "Organization"]], "-", !Ref "AWS::Region", "-linux-messages" ] ]
+    RetentionInDays: 365

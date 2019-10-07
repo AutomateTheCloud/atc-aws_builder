@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  CloudFront/CloudFrontDocumentError403
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+CloudFrontDocumentError403:
+  Type:                  String
+  Default:               "error.html"
+  Description:           "CloudFront: Document - Error403"
+

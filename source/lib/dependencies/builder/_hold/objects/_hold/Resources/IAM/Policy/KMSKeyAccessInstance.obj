@@ -1,0 +1,64 @@
+##-------------------------------------------------------------------------------------------------
+# object:  IAM/Policy/InstanceKMSKeyAccess
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+PolicyInstanceKMSKeyAccess:
+  Type: "AWS::IAM::Policy"
+  Properties:
+    PolicyName: !Join [ "", [ "ec2-kmsaccess", "_", !Select [1, !Split ["|", !Ref "Project"]], "-", !Select [1, !Split ["|", !Ref "Function"]], "-", !Select [3, !Split ["|", !Ref "Organization"]], "-", !Select [1, !Split ["|", !Ref "Organization"]], "_", !Ref "AWS::Region" ] ]
+    PolicyDocument:
+      Version: "2012-10-17"
+      Statement:
+        - Effect: "Allow"
+          Action:
+            - "kms:ListKeys"
+            - "kms:ListAliases"
+            - "kms:DescribeKey"
+            - "kms:ListKeyPolicies"
+            - "kms:GetKeyPolicy"
+            - "kms:GetKeyRotationStatus"
+          Resource: "*"
+        - !If
+          - ExistsStackReferenceKMSKey1
+          - Effect: "Allow"
+            Action:
+            - "kms:Encrypt"
+            - "kms:Decrypt"
+            Resource:
+            - !GetAtt "StackReferenceResultsKMSKey1.KMSKeyArn"
+            - !GetAtt "StackReferenceResultsKMSKey1.KMSAliasArn"
+          - !Ref "AWS::NoValue"
+        - !If
+          - ExistsStackReferenceKMSKey2
+          - Effect: "Allow"
+            Action:
+            - "kms:Encrypt"
+            - "kms:Decrypt"
+            Resource:
+            - !GetAtt "StackReferenceResultsKMSKey2.KMSKeyArn"
+            - !GetAtt "StackReferenceResultsKMSKey2.KMSAliasArn"
+          - !Ref "AWS::NoValue"
+        - !If
+          - ExistsStackReferenceKMSKey3
+          - Effect: "Allow"
+            Action:
+            - "kms:Encrypt"
+            - "kms:Decrypt"
+            Resource:
+            - !GetAtt "StackReferenceResultsKMSKey3.KMSKeyArn"
+            - !GetAtt "StackReferenceResultsKMSKey3.KMSAliasArn"
+          - !Ref "AWS::NoValue"
+        - !If
+          - ExistsStackReferenceKMSKey4
+          - Effect: "Allow"
+            Action:
+            - "kms:Encrypt"
+            - "kms:Decrypt"
+            Resource:
+            - !GetAtt "StackReferenceResultsKMSKey4.KMSKeyArn"
+            - !GetAtt "StackReferenceResultsKMSKey4.KMSAliasArn"
+          - !Ref "AWS::NoValue"
+    Roles:
+      - !Ref "RoleInstance"
+  DependsOn:
+    - "RoleInstance"

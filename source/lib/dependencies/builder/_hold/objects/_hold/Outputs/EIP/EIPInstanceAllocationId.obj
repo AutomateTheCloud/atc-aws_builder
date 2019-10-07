@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EIP/EIPInstanceAllocationId
+# class:   output
+##-------------------------------------------------------------------------------------------------
+EIPInstanceAllocationId:
+  Condition: "EnabledElasticIp"
+  Description: "Elastic IP (Instance): Allocation ID"
+  Value: !GetAtt "EIPInstance.AllocationId"
+  Export:
+    Name: !Sub "${AWS::StackName}-EIPInstanceAllocationId"

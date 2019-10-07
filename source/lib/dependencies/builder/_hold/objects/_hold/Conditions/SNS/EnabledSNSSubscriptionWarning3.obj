@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SNS/EnabledSNSSubscriptionWarning3
+# class:   condition
+##-------------------------------------------------------------------------------------------------
+EnabledSNSSubscriptionWarning3: !And
+  - !Not [!Equals [!Ref "SNSSubscriptionWarning3Endpoint", ""]]
+  - !Not [!Equals [!Ref "SNSSubscriptionWarning3Protocol", ""]]

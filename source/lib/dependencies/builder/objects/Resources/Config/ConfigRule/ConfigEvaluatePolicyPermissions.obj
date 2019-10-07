@@ -1,0 +1,20 @@
+##---------------------------------------------------------------------------------------
+# object: Config/ConfigRule/ConfigEvaluatePolicyPermissions
+# notes:
+#   - CIS Amazon Web Services Foundations
+#     - 1.22: Ensure IAM policies that allow full "*:*" administrative privileges are not created
+##---------------------------------------------------------------------------------------
+ConfigRuleConfigEvaluatePolicyPermissions:
+  Type: "AWS::Config::ConfigRule"
+  Properties:
+    ConfigRuleName: "config-evaluate-policy-permissions"
+    Description: "Evaluates whether IAM policies contain *.* statements"
+    MaximumExecutionFrequency: "TwentyFour_Hours"
+    Source:
+      Owner: CUSTOM_LAMBDA
+      SourceDetails:
+        - EventSource: aws.config
+          MessageType: ScheduledNotification
+      SourceIdentifier: !GetAtt "LambdaFunctionConfigEvaluatePolicyPermissions.Arn"
+  DependsOn:
+    - "LambdaPermissionConfigEvaluatePolicyPermissions"

@@ -1,0 +1,13 @@
+##-------------------------------------------------------------------------------------------------
+# object:  VPC/EnableVPCFlowLogs
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+EnableVPCFlowLogs:
+  Type:                  "String"
+  Default:               "false"
+  AllowedValues:
+    - ""
+    - "true"
+    - "false"
+  Description:           "Enable VPC Flow Logs"
+  ConstraintDescription: "true/false"

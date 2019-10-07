@@ -1,0 +1,16 @@
+##-------------------------------------------------------------------------------------------------
+# object: Logs/MetricFilter/UnauthorizedAttemptCount
+# notes:
+#   - CIS Amazon Web Services Foundations
+#     - 3.1: Ensure a log metric filter and alarm exist for unauthorized API calls
+##-------------------------------------------------------------------------------------------------
+MetricFilterUnauthorizedAttemptCount:
+  Type: "AWS::Logs::MetricFilter"
+  Properties:
+    LogGroupName: !GetAtt "StackReferenceResultsInitialize.LogGroupCloudTrailAuditId"
+    FilterPattern: "{ ($.errorCode = \"*UnauthorizedOperation\") || ($.errorCode = \"AccessDenied*\") }"
+    MetricTransformations:
+      -
+        MetricNamespace: CloudTrailMetrics
+        MetricName: "UnauthorizedAttemptCount"
+        MetricValue: 1

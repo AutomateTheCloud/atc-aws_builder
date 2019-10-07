@@ -1,0 +1,32 @@
+##-------------------------------------------------------------------------------------------------
+# object:  KMS/Key/Vault
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+KMSKeyVault:
+  Type: "AWS::KMS::Key"
+  Properties:
+    Enabled: true
+    EnableKeyRotation: true
+    Description: !Join [ "", [ "Encryption Key for Vault Information (account: ", !Ref "AWS::AccountId", " / region: ", !Ref "AWS::Region",")" ] ]
+    KeyPolicy:
+      Version: "2012-10-17"
+      Id: !Join [ "", [ "keypolicy_", "_vault_", !Ref "AWS::Region" ] ]
+      Statement:
+        - Sid: "Enable Root KMS Permissions"
+          Effect: Allow
+          Principal:
+            AWS:
+              - !Join [ "", [ "arn:aws:iam::", !Ref "AWS::AccountId", ":root" ] ]
+          Action: "kms:*"
+          Resource: "*"
+    Tags:
+      - Key: "Organization"
+        Value: !Select [0, !Split ["|", !Ref "Organization"]]
+      - Key: "Project"
+        Value: !Select [0, !Split ["|", !Ref "Project"]]
+      - Key: "Function"
+        Value: "Encryption Key for Vault Information"
+      - Key: "Owner"
+        Value: !Select [0, !Split ["|", !Ref "Owner"]]
+      - Key: "Contact"
+        Value: !Select [1, !Split ["|", !Ref "Owner"]]

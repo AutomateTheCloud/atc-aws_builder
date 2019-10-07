@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  ElastiCache/EncryptionEnabled
+# class:   output
+##-------------------------------------------------------------------------------------------------
+EncryptionEnabled:
+  Description: "Encryption Enabled"
+  Value: !Ref "EncryptionEnabled"
+  Export:
+    Name: !Sub "${AWS::StackName}-EncryptionEnabled"

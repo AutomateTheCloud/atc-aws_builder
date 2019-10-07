@@ -1,0 +1,62 @@
+##-------------------------------------------------------------------------------------------------
+# object:  KMS/Key/AuditRegion
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+KMSKeyAudit:
+  Type: "AWS::KMS::Key"
+  Properties:
+    Enabled: true
+    EnableKeyRotation: true
+    Description: !Join [ "", [ "Audit Encryption Key for ", !Select [0, !Split ["|", !Ref "Organization"]], "(", !Ref "AWS::Region", ")" ] ]
+    KeyPolicy:
+      Version: "2012-10-17"
+      Id: "keypolicy_audit"
+      Statement:
+        - Sid: "Enable Root KMS Permissions"
+          Effect: Allow
+          Principal:
+            AWS:
+              - !Join [ "", [ "arn:aws:iam::", !Ref "AWS::AccountId", ":root" ] ]
+          Action: "kms:*"
+          Resource: "*"
+        - Sid: "Enable AWS Services KMS Permissions"
+          Effect: Allow
+          Principal:
+            Service:
+              - "cloudtrail.amazonaws.com"
+              - "config.amazonaws.com"
+              - "ses.amazonaws.com"
+              - "sns.amazonaws.com"
+          Action:
+            - "kms:Encrypt"
+            - "kms:Decrypt"
+            - "kms:ReEncrypt"
+            - "kms:GenerateDataKey*"
+            - "kms:DescribeKey"
+          Resource: "*"
+        - Sid: "Enable S3 KMS Permissions"
+          Effect: Allow
+          Principal:
+            AWS: '*'
+          Action:
+          - 'kms:Encrypt'
+          - 'kms:Decrypt'
+          - 'kms:ReEncrypt*'
+          - 'kms:GenerateDataKey*'
+          - 'kms:DescribeKey'
+          Resource: '*'
+          Condition:
+            StringEquals:
+              'kms:CallerAccount': !Ref 'AWS::AccountId'
+              'kms:ViaService': !Sub 's3.${AWS::Region}.amazonaws.com'
+    Tags:
+      - Key: "Organization"
+        Value: !Select [0, !Split ["|", !Ref "Organization"]]
+      - Key: "Project"
+        Value: !Select [0, !Split ["|", !Ref "Project"]]
+      - Key: "Function"
+        Value: "Audit Encryption Key"
+      - Key: "Owner"
+        Value: !Select [0, !Split ["|", !Ref "Owner"]]
+      - Key: "Contact"
+        Value: !Select [1, !Split ["|", !Ref "Owner"]]

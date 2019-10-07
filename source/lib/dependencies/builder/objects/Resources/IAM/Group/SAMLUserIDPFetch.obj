@@ -1,0 +1,17 @@
+##---------------------------------------------------------------------------------------
+# object: IAM/Group/SAMLUserIDPFetch
+##---------------------------------------------------------------------------------------
+IAMGroupSAMLUserIDPFetch:
+  Type: "AWS::IAM::Group"
+  Properties:
+    GroupName: !Ref "SAMLUserIDPFetch"
+    Path: "/"
+    Policies:
+      - PolicyName: "saml_idp-fetch"
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: "Allow"
+              Action:
+                - "iam:ListRoles"
+              Resource: "*"

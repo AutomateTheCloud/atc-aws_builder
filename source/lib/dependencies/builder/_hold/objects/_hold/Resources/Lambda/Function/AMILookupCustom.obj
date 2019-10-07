@@ -1,0 +1,54 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Lambda/Function/AMILookupCustom
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+LambdaFunctionAMILookupCustom:
+  Type: "AWS::Lambda::Function"
+  Properties:
+    FunctionName: "ami-lookup-custom"
+    Description: "AMI Lookup - Custom"
+    Handler: "index.handler"
+    Code:
+      ZipFile:
+        !Sub |
+          var response = require('cfn-response');
+          exports.handler = function(event, context) {
+            if (event.RequestType == 'Delete') {
+              response.send(event, context, response.SUCCESS);
+              return;
+            }
+            var regionName = event.ResourceProperties.Region;
+            var amiName = event.ResourceProperties.AMINamePrepend + ".*." + event.ResourceProperties.AMINameAppend;
+            var responseData = {};
+            if (regionName) {
+              var aws = require('aws-sdk');
+              var ec2 = new aws.EC2({region: regionName});
+              var describeImagesParams = {
+                Filters: [{ Name: 'name', Values: [ amiName ]}]
+              };
+              ec2.describeImages(describeImagesParams, function(err, describeImagesResult) {
+                if (err) {
+                  responseData = {Error: 'DescribeImages call failed'};
+                  response.send(event, context, response.FAILED, responseData);
+                }
+                else {
+                  var images = describeImagesResult.Images;
+                  images.sort(function(x, y) { return y.Name.localeCompare(x.Name); });
+                  for (var j = 0; j < images.length; j++) {
+                    if (isDevelopment(images[j].Name)) continue;
+                    responseData['Id'] = images[j].ImageId;
+                    break;
+                  }
+                }
+                response.send(event, context, response.SUCCESS, responseData);
+              });
+            } else {
+              responseData = {Error: 'Region name not specified'};
+              response.send(event, context, response.FAILED, responseData);
+            }
+          };
+          function isDevelopment(imageName){return imageName.toLowerCase().indexOf('beta') > -1 || imageName.toLowerCase().indexOf('.rc') > -1;}
+    Role: !GetAtt "IAMRoleLambdaFunctionAMILookupCustom.Arn"
+    Runtime: "nodejs8.10"
+    MemorySize: "128"
+    Timeout: "180"

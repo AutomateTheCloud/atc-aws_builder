@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  S3/S3BucketArtifacts
+# class:   output
+##-------------------------------------------------------------------------------------------------
+S3BucketArtifacts:
+  Description: "S3 Bucket: Artifacts"
+  Value: !Ref "S3BucketArtifacts"
+  Export:
+    Name: !Sub "${AWS::StackName}-S3BucketArtifacts"

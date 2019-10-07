@@ -1,0 +1,39 @@
+##-------------------------------------------------------------------------------------------------
+# object:  IAM/Role/DataPipelineEC2ResourceDefault
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+IAMRoleDataPipelineEC2ResourceDefault:
+  Type: "AWS::IAM::Role"
+  Properties:
+    RoleName: "datapipeline_ec2resource-default"
+    AssumeRolePolicyDocument:
+      Version: "2012-10-17"
+      Statement:
+        - Effect: "Allow"
+          Principal:
+            Service:
+              - "ec2.amazonaws.com"
+          Action:
+            - "sts:AssumeRole"
+    Path: "/"
+    Policies:
+    - PolicyName: "datapipeline_workflow-default"
+      PolicyDocument:
+        Statement:
+        - Effect: "Allow"
+          Action:
+          - "cloudwatch:*"
+          - "datapipeline:*"
+          - "dynamodb:*"
+          - "ec2:Describe*"
+          - "elasticmapreduce:AddJobFlowSteps"
+          - "elasticmapreduce:Describe*"
+          - "elasticmapreduce:ListInstance*"
+          - "rds:Describe*"
+          - "redshift:DescribeClusters"
+          - "redshift:DescribeClusterSecurityGroups"
+          - "s3:*"
+          - "sdb:*"
+          - "sns:*"
+          - "sqs:*"
+          Resource: "*"

@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SNS/Topic/Config
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+SNSTopicConfig:
+  Type: "AWS::SNS::Topic"
+  Properties:
+    TopicName: !Join [ "-", ["config", !Ref "AWS::Region"] ]
+    DisplayName: !Join [ "-", ["config", !Ref "AWS::Region"] ]
+    KmsMasterKeyId: !GetAtt "KMSKeyAudit.Arn"

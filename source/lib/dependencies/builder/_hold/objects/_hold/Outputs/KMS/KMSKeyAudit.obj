@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  KMS/KMSKeyAudit
+# class:   output
+##-------------------------------------------------------------------------------------------------
+KMSKeyAudit:
+  Description: "KMS Key: Audit"
+  Value: !GetAtt "KMSKeyAudit.Arn"
+  Export:
+    Name: !Sub "${AWS::StackName}-KMSKeyAudit"

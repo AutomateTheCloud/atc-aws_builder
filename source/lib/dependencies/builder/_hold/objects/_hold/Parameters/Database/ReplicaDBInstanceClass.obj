@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/ReplicaDBInstanceClass
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+ReplicaDBInstanceClass:
+  Type:                  String
+  Description:           "Replica DB Instance Class"

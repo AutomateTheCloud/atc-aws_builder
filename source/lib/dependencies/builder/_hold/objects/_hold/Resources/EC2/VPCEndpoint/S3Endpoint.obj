@@ -1,0 +1,22 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EC2/VPCEndpoint/S3Endpoint
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+S3Endpoint:
+  Type: "AWS::EC2::VPCEndpoint"
+  Properties:
+    PolicyDocument: {
+      "Version":"2012-10-17",
+      "Statement": [ {
+        "Effect":"Allow",
+        "Principal": "*",
+        "Action": "*",
+        "Resource": "*"
+      } ]
+    }
+    RouteTableIds:
+      - !Ref "RouteTablePublic"
+      - !Ref "RouteTablePrivate"
+      - !Ref "RouteTableRestricted"
+    ServiceName: !Join [ "", [ "com.amazonaws.", !Ref "AWS::Region", ".s3" ] ]
+    VpcId: !Ref "VPC"

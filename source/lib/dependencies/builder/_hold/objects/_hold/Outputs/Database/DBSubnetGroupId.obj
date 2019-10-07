@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/DBSubnetGroupId
+# class:   output
+##-------------------------------------------------------------------------------------------------
+DBSubnetGroupId:
+  Description: "Database - Subnet Group - ID"
+  Value: !If [SubnetTypePublic, !GetAtt "StackReferenceResultsVPC.DBSubnetGroupPublicId", !If [SubnetTypePrivate, !GetAtt "StackReferenceResultsVPC.DBSubnetGroupPrivateId", !GetAtt "StackReferenceResultsVPC.DBSubnetGroupRestrictedId"]]
+  Export:
+    Name: !Sub "${AWS::StackName}-DBSubnetGroupId"

@@ -1,0 +1,9 @@
+##---------------------------------------------------------------------------------------
+# object: IAM/SAMLMaxSessionDurationPrivileged
+##---------------------------------------------------------------------------------------
+SAMLMaxSessionDurationPrivileged:
+  Description: "SAML: Maximum Session Duration (Privileged User)"
+  Type: Number
+  MinValue: 3600
+  MaxValue: 43200
+  Default: 3600

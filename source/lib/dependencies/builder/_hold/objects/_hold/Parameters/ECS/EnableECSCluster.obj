@@ -1,0 +1,13 @@
+##-------------------------------------------------------------------------------------------------
+# object:  ECS/EnableECSCluster
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+EnableECSCluster:
+  Type:                  "String"
+  Default:               "no"
+  AllowedValues:
+    - ""
+    - "yes"
+    - "no"
+  Description:           "Enable ECS Cluster"
+  ConstraintDescription: "yes/no"

@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SQS/SQSQueueMessageRetentionPeriod
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+SQSQueueMessageRetentionPeriod:
+  Type:                  Number
+  Description:           "SQS: Message Retention Period (seconds)"
+  Default:               345600
+  MinValue:              60
+  MaxValue:              1209600

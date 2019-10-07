@@ -1,0 +1,15 @@
+##---------------------------------------------------------------------------------------
+# object: Route53/RecordSetGroup/DNSEIP
+##---------------------------------------------------------------------------------------
+RecordSetGroupDNSEIP:
+  Type: "AWS::Route53::RecordSetGroup"
+  Properties:
+    HostedZoneId: !Select [2, !Split ["|", !Ref "DNSEIP"]]
+    RecordSets:
+    - Name: !Join [ "", [ !Select [0, !Split ["|", !Ref "DNSEIP"]], ".", !Select [1, !Split ["|", !Ref "DNSEIP"]] ] ]
+      Type: "A"
+      TTL: "300"
+      ResourceRecords:
+        - !Ref "EIPInstance"
+  DependsOn:
+    - "EIPInstance"

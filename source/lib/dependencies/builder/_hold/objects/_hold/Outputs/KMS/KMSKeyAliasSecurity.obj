@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  KMS/KMSKeyAliasSecurity
+# class:   output
+##-------------------------------------------------------------------------------------------------
+KMSKeyAliasSecurity:
+  Description: "KMS Key: Security  (Alias)"
+  Value: !Join [ "", [ "arn:aws:kms:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":alias/security-", !Ref "AWS::Region" ] ]
+  Export:
+    Name: !Sub "${AWS::StackName}-KMSKeyAliasSecurity"

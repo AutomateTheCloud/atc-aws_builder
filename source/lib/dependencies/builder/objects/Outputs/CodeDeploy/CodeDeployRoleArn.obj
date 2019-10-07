@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: CodeDeploy/CodeDeployRoleArn
+##---------------------------------------------------------------------------------------
+CodeDeployRoleArn:
+  Description: "CodeDeploy: Role ARN"
+  Value: !GetAtt "RoleCodeDeploy.Arn"
+  Export:
+    Name: !Sub "${AWS::StackName}-CodeDeployRoleArn"

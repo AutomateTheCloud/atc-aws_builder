@@ -1,0 +1,49 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SQS/Instance_Access
+# class:   template
+##-------------------------------------------------------------------------------------------------
+Paradigm:
+  Parameters:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/StackReference/StackReferenceSQSQueue1
+    - Base/StackReference/StackReferenceSQSQueue2
+    - Base/StackReference/StackReferenceSQSQueue3
+    - Base/StackReference/StackReferenceSQSQueue4
+
+##-------------------------------------------------------------------------------------------------
+  Mappings:
+
+##-------------------------------------------------------------------------------------------------
+  Conditions:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/StackReference/ExistsStackReferenceSQSQueue1
+    - Base/StackReference/ExistsStackReferenceSQSQueue2
+    - Base/StackReference/ExistsStackReferenceSQSQueue3
+    - Base/StackReference/ExistsStackReferenceSQSQueue4
+
+##-------------------------------------------------------------------------------------------------
+  Resources:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/IAM/Policy/SQSAccessInstance
+
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/Custom/StackReferenceResultsSQSQueue1
+    - Base/Custom/StackReferenceResultsSQSQueue2
+    - Base/Custom/StackReferenceResultsSQSQueue3
+    - Base/Custom/StackReferenceResultsSQSQueue4
+
+##-------------------------------------------------------------------------------------------------
+  Outputs:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/SQS/SQSQueue1Arn
+    - Base/SQS/SQSQueue1Name
+    - Base/SQS/SQSQueue1Url
+    - Base/SQS/SQSQueue2Arn
+    - Base/SQS/SQSQueue2Name
+    - Base/SQS/SQSQueue2Url
+    - Base/SQS/SQSQueue3Arn
+    - Base/SQS/SQSQueue3Name
+    - Base/SQS/SQSQueue3Url
+    - Base/SQS/SQSQueue4Arn
+    - Base/SQS/SQSQueue4Name
+    - Base/SQS/SQSQueue4Url

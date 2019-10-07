@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  CloudFront/ExistsCloudFrontDocumentError501
+# class:   condition
+##-------------------------------------------------------------------------------------------------
+ExistsCloudFrontDocumentError501:
+  !Not [!Equals [!Ref "CloudFrontDocumentError501", ""]]
+

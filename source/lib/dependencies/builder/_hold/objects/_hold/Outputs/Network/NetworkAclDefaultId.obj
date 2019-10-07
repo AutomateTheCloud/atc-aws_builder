@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Network/NetworkAclDefaultId
+# class:   output
+##-------------------------------------------------------------------------------------------------
+NetworkAclDefaultId:
+  Description: "Network ACL (Default): ID"
+  Value: !GetAtt "VPC.DefaultNetworkAcl"
+  Export:
+    Name: !Sub "${AWS::StackName}-NetworkAclDefaultId"

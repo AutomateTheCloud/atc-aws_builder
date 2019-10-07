@@ -1,0 +1,76 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Lambda/Function/SAMLCreateIdentityProvider
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+LambdaFunctionSAMLCreateIdentityProvider:
+  Type: "AWS::Lambda::Function"
+  Properties:
+    FunctionName: "saml-create-identity-provider"
+    Description: "SAML Create Identity Provider"
+    Environment:
+      Variables:
+        saml_bucket_name: !Ref "SAMLMetadataBucket"
+        saml_filename: !Ref "SAMLMetadataFilename"
+        saml_provider_name: !Ref "SAMLProviderName"
+        saml_provider_arn: !Sub arn:aws:iam::${AWS::AccountId}:saml-provider/${SAMLProviderName}
+    Code:
+      ZipFile: !Sub |
+        #==================================================================================================
+        # Function: CreateSamlIdentityProvider
+        # Purpose:  Creates the SAML identity provider
+        #==================================================================================================
+        import json
+        import boto3
+        import os
+        import botocore
+        import cfnresponse
+        #==================================================
+        # Default handler
+        #==================================================
+        def lambda_handler(event, context):
+            print(json.dumps(event))
+            response_status = cfnresponse.SUCCESS
+            response_data = ''
+            saml_provider_exists = False # prove otherwise
+            # First, determine whether the SAML provider already exists.
+            for saml_provider in boto3.client('iam').list_saml_providers()['SAMLProviderList']:
+              saml_provider_exists = saml_provider_exists or os.environ['saml_provider_arn'] == saml_provider['Arn']
+            print('SAML provider {} exists: {}'.format(os.environ['saml_provider_arn'], saml_provider_exists))
+            # Only execute in a custom CloudFormation resource creation or update event.
+            if not saml_provider_exists and ('RequestType' in event and event['RequestType'] in ['Create', 'Update']):
+              try:
+                # Specify the local filename.
+                local_filename = '/tmp/saml.xml'
+                # Download the file from S3 to a local file.
+                boto3.resource('s3').Bucket(os.environ['saml_bucket_name']).download_file(
+                    os.environ['saml_filename'],
+                    local_filename
+                    )
+                # Get the contents of the file.
+                file = open(local_filename, 'r')
+                file_contents = file.read()
+                file.close()
+                # Create the SAML provider and provide the metatdata document.
+                response = boto3.resource('iam').create_saml_provider(
+                    SAMLMetadataDocument = file_contents,
+                    Name = os.environ['saml_provider_name']
+                )
+              except botocore.exceptions.ClientError as e:
+                  if e.response['Error']['Code'] == '404':
+                      print('The file {} does not exist in the bucket {}.'.format(os.environ['saml_filename'], os.environ['saml_bucket_name']))
+                  else:
+                      raise
+            elif saml_provider_exists and ('RequestType' in event and event['RequestType'] == 'Delete'):
+                # Delete the SAML provider.
+                response = boto3.client('iam').delete_saml_provider(
+                    SAMLProviderArn = os.environ['saml_provider_arn']
+                )
+            # Send the response to CloudFormation.
+            cfnresponse.send(event, context, response_status, {"Response":response_data}, '')
+    Handler: "index.lambda_handler"
+    MemorySize: 1024
+    Role: !GetAtt "IAMRoleLambdaFunctionSAMLCreateIdentityProvider.Arn"
+    Runtime: "python3.6"
+    Timeout: 60
+  DependsOn:
+    - IAMRoleLambdaFunctionSAMLCreateIdentityProvider

@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  LoadBalancer/TargetGroupInstanceName_Source
+# class:   output
+##-------------------------------------------------------------------------------------------------
+TargetGroupInstanceName:
+  Description: "Target Group (Instance): Name"
+  Value: !GetAtt "StackReferenceResultsSource.TargetGroupInstanceName"
+  Export:
+    Name: !Sub "${AWS::StackName}-TargetGroupInstanceName"

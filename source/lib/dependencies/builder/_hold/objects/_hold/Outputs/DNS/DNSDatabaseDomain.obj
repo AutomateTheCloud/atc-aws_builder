@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DNS/DNSDatabaseDomain
+# class:   output
+##-------------------------------------------------------------------------------------------------
+DNSDatabaseDomain:
+  Description: "DNS: Database (Domain)"
+  Value: !Select [1, !Split ["|", !Ref "DNSDatabase"]]
+  Export:
+    Name: !Sub "${AWS::StackName}-DNSDatabaseDomain"

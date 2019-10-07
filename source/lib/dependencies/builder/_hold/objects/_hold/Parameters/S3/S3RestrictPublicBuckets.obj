@@ -1,0 +1,12 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EIP/S3RestrictPublicBuckets
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+S3RestrictPublicBuckets:
+  Type:                  "String"
+  Default:               "true"
+  AllowedValues:
+    - "true"
+    - "false"
+  Description:           "S3: Restrict Public Buckets"
+  ConstraintDescription: "true/false"

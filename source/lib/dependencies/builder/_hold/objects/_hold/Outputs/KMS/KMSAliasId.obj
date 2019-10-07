@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  KMS/KMSAliasId
+# class:   output
+##-------------------------------------------------------------------------------------------------
+KMSAliasId:
+  Description: "KMS Alias (ID)"
+  Value: !Ref "KMSAlias"
+  Export:
+    Name: !Sub "${AWS::StackName}-KMSAliasId"

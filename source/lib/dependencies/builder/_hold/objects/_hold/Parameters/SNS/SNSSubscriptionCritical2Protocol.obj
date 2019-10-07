@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SNS/SNSSubscriptionCritical2Protocol
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+SNSSubscriptionCritical2Protocol:
+  Type:                  String
+  Description:           "SNS Subscription (critical) 2: Protocol"

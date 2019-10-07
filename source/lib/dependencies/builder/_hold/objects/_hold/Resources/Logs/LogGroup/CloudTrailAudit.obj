@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Logs/LogGroup/CloudTrailAudit
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+LogGroupCloudTrailAudit:
+  Type: "AWS::Logs::LogGroup"
+  Properties:
+    LogGroupName: "/aws/cloudtrail/audit"
+    RetentionInDays: 365

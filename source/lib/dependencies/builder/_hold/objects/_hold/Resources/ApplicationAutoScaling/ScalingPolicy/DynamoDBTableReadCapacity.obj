@@ -1,0 +1,16 @@
+##-------------------------------------------------------------------------------------------------
+# object:  ApplicationAutoScaling/ScalingPolicy/DynamoDBTableReadCapacity
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+ScalingPolicyDynamoDBTableReadCapacity: 
+  Type: "AWS::ApplicationAutoScaling::ScalingPolicy"
+  Properties: 
+    PolicyName: "ReadAutoScalingPolicy"
+    PolicyType: "TargetTrackingScaling"
+    ScalingTargetId: !Ref "ScalableTargetDynamoDBTableReadCapacity"
+    TargetTrackingScalingPolicyConfiguration: 
+      TargetValue: !Ref "ReadCapacityTargetValue"
+      ScaleInCooldown: !Ref "ReadCapacityScaleInCooldown"
+      ScaleOutCooldown: !Ref "ReadCapacityScaleOutCooldown"
+      PredefinedMetricSpecification: 
+        PredefinedMetricType: "DynamoDBReadCapacityUtilization"

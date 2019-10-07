@@ -1,0 +1,5 @@
+##-------------------------------------------------------------------------------------------------
+# object:  VPCPeeringConnection/SourceToTarget1
+# class:   target
+##-------------------------------------------------------------------------------------------------
+modify_vpc_peering_connection|VPCPeeringConnectionSourceToTarget1Id

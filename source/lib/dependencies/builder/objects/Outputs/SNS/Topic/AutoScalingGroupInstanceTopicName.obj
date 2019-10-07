@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: SNS/Topic/AutoScalingGroupInstanceTopicName
+##---------------------------------------------------------------------------------------
+SNSTopicAutoScalingGroupInstanceTopicName:
+  Description: "SNS Topic (AutoScalingGroupInstance): Topic Name"
+  Value: !GetAtt "SNSTopicAutoScalingGroupInstance.TopicName"
+  Export:
+    Name: !Sub "${AWS::StackName}-SNSTopicAutoScalingGroupInstanceTopicName"

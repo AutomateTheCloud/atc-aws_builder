@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  IAM/Group/IAMGroupAWSUserBillingArn
+# class:   output
+##-------------------------------------------------------------------------------------------------
+IAMGroupAWSUserBillingArn:
+  Description: "IAM Group (AWSUserBilling): ARN"
+  Value: !GetAtt "IAMGroupAWSUserBilling.Arn"
+  Export:
+    Name: !Sub "${AWS::StackName}-IAMGroupAWSUserBillingArn"

@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  ECS/Cluster/ECSCluster
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+ECSCluster:
+  Condition: "EnabledECSCluster"
+  Type: "AWS::ECS::Cluster"
+  Properties:
+    ClusterName: !Join [ "_", [ "ecs", !Select [1, !Split ["|", !Ref "Organization"]], !Ref "AWS::Region" ] ]

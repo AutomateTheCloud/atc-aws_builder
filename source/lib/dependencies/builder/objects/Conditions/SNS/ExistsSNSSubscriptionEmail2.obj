@@ -1,0 +1,5 @@
+##---------------------------------------------------------------------------------------
+# object: SNS/ExistsSNSSubscriptionEmail2
+##---------------------------------------------------------------------------------------
+ExistsSNSSubscriptionEmail2:
+  !Not [!Equals [!Ref SNSSubscriptionEmail2, ""]]

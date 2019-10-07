@@ -1,0 +1,13 @@
+##---------------------------------------------------------------------------------------
+# object: IAM/RequireUppercaseCharacters
+# notes:
+#   - CIS Amazon Web Services Foundations
+#     - 1.5: Ensure IAM password policy requires at least one uppercase letter
+##---------------------------------------------------------------------------------------
+RequireUppercaseCharacters:
+  Description: "You can require that IAM user passwords contain at least one uppercase character from the ISO basic Latin alphabet (A to Z)."
+  Type: String
+  Default: true
+  AllowedValues:
+  - true
+  - false

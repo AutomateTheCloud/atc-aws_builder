@@ -1,0 +1,75 @@
+##---------------------------------------------------------------------------------------
+# object:  EC2/Route/PeeringSourceToTarget7
+##---------------------------------------------------------------------------------------
+PeeringSourceToTarget7Private:
+  Condition: "ExistsStackReferenceTarget7"
+  Type: "AWS::EC2::Route"
+  Properties:
+    RouteTableId:           !GetAtt "StackReferenceResultsSource.RouteTablePrivateId"
+    DestinationCidrBlock:   !GetAtt "StackReferenceResultsTarget7.VPCCidr"
+    VpcPeeringConnectionId: !Ref "VPCPeeringConnectionSourceToTarget7"
+  DependsOn:
+    - "VPCPeeringConnectionSourceToTarget7"
+    - "StackReferenceResultsSource"
+    - "StackReferenceResultsTarget7"
+
+RoutePeerTarget7ToSourcePrivate:
+  Condition: "ExistsStackReferenceTarget7"
+  Type: "AWS::EC2::Route"
+  Properties:
+    RouteTableId:           !GetAtt "StackReferenceResultsTarget7.RouteTablePrivateId"
+    DestinationCidrBlock:   !GetAtt "StackReferenceResultsSource.VPCCidr"
+    VpcPeeringConnectionId: !Ref "VPCPeeringConnectionSourceToTarget7"
+  DependsOn:
+    - "VPCPeeringConnectionSourceToTarget7"
+    - "StackReferenceResultsSource"
+    - "StackReferenceResultsTarget7"
+
+PeeringSourceToTarget7Restricted:
+  Condition: "ExistsStackReferenceTarget7"
+  Type: "AWS::EC2::Route"
+  Properties:
+    RouteTableId:           !GetAtt "StackReferenceResultsSource.RouteTableRestrictedId"
+    DestinationCidrBlock:   !GetAtt "StackReferenceResultsTarget7.VPCCidr"
+    VpcPeeringConnectionId: !Ref "VPCPeeringConnectionSourceToTarget7"
+  DependsOn:
+    - "VPCPeeringConnectionSourceToTarget7"
+    - "StackReferenceResultsSource"
+    - "StackReferenceResultsTarget7"
+
+RoutePeerTarget7ToSourceRestricted:
+  Condition: "ExistsStackReferenceTarget7"
+  Type: "AWS::EC2::Route"
+  Properties:
+    RouteTableId:           !GetAtt "StackReferenceResultsTarget7.RouteTableRestrictedId"
+    DestinationCidrBlock:   !GetAtt "StackReferenceResultsSource.VPCCidr"
+    VpcPeeringConnectionId: !Ref "VPCPeeringConnectionSourceToTarget7"
+  DependsOn:
+    - "VPCPeeringConnectionSourceToTarget7"
+    - "StackReferenceResultsSource"
+    - "StackReferenceResultsTarget7"
+
+PeeringSourceToTarget7Public:
+  Condition: "ExistsStackReferenceTarget7"
+  Type: "AWS::EC2::Route"
+  Properties:
+    RouteTableId:           !GetAtt "StackReferenceResultsSource.RouteTablePublicId"
+    DestinationCidrBlock:   !GetAtt "StackReferenceResultsTarget7.VPCCidr"
+    VpcPeeringConnectionId: !Ref "VPCPeeringConnectionSourceToTarget7"
+  DependsOn:
+    - "VPCPeeringConnectionSourceToTarget7"
+    - "StackReferenceResultsSource"
+    - "StackReferenceResultsTarget7"
+
+RoutePeerTarget7ToSourcePublic:
+  Condition: "ExistsStackReferenceTarget7"
+  Type: "AWS::EC2::Route"
+  Properties:
+    RouteTableId:           !GetAtt "StackReferenceResultsTarget7.RouteTablePublicId"
+    DestinationCidrBlock:   !GetAtt "StackReferenceResultsSource.VPCCidr"
+    VpcPeeringConnectionId: !Ref "VPCPeeringConnectionSourceToTarget7"
+  DependsOn:
+    - "VPCPeeringConnectionSourceToTarget7"
+    - "StackReferenceResultsSource"
+    - "StackReferenceResultsTarget7"
+

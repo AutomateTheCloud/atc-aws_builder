@@ -1,0 +1,27 @@
+##-------------------------------------------------------------------------------------------------
+# object:  StackReference/Security
+# class:   template
+##-------------------------------------------------------------------------------------------------
+Paradigm:
+  Parameters:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/StackReference/StackReferenceSecurity1
+    - Base/StackReference/StackReferenceSecurity2
+
+##-------------------------------------------------------------------------------------------------
+  Mappings:
+
+##-------------------------------------------------------------------------------------------------
+  Conditions:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/StackReference/ExistsStackReferenceSecurity1
+    - Base/StackReference/ExistsStackReferenceSecurity2
+
+##-------------------------------------------------------------------------------------------------
+  Resources:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/Custom/StackReferenceResultsSecurity1
+    - Base/Custom/StackReferenceResultsSecurity2
+
+##-------------------------------------------------------------------------------------------------
+  Outputs:

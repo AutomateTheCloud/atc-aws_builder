@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  IAM/Group/IAMGroupAWSUserReadOnlyArn
+# class:   output
+##-------------------------------------------------------------------------------------------------
+IAMGroupAWSUserReadOnlyArn:
+  Description: "IAM Group (AWSUserReadOnly): ARN"
+  Value: !GetAtt "IAMGroupAWSUserReadOnly.Arn"
+  Export:
+    Name: !Sub "${AWS::StackName}-IAMGroupAWSUserReadOnlyArn"

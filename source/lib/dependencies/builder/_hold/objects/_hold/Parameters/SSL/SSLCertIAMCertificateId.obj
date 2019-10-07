@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SSL/SSLCertIAMCertificateId
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+SSLCertIAMCertificateId:
+  Type:                  String
+  Description:           "SSL Cert: IAM Certificate ID"

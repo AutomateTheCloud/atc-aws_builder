@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  ElastiCache/MemcachedPort
+# class:   output
+##-------------------------------------------------------------------------------------------------
+MemcachedPort:
+  Description: "Memcached Port"
+  Value: !Ref "MemcachedPort"
+  Export:
+    Name: !Sub "${AWS::StackName}-MemcachedPort"

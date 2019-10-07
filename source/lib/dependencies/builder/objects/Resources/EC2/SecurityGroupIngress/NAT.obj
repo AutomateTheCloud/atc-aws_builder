@@ -1,0 +1,30 @@
+##---------------------------------------------------------------------------------------
+# object: EC2/SecurityGroupIngress/NAT
+##---------------------------------------------------------------------------------------
+SecurityGroupIngressNATSubnetPrivate1:
+  Type: "AWS::EC2::SecurityGroupIngress"
+  Properties:
+    GroupId:     !Ref "SecurityGroupInstance"
+    IpProtocol:  "-1"
+    FromPort:    "0"
+    ToPort:      "65535"
+    CidrIp:      !GetAtt "StackReferenceResultsVPC.SubnetPrivate1Cidr"
+    Description: !Join [ "", [ "NAT Traversal: Private Subnet 1 (", !GetAtt "StackReferenceResultsVPC.SubnetPrivate1Cidr", ")" ] ]
+SecurityGroupIngressNATSubnetPrivate2:
+  Type: "AWS::EC2::SecurityGroupIngress"
+  Properties:
+    GroupId:     !Ref "SecurityGroupInstance"
+    IpProtocol:  "-1"
+    FromPort:    "0"
+    ToPort:      "65535"
+    CidrIp:      !GetAtt "StackReferenceResultsVPC.SubnetPrivate2Cidr"
+    Description: !Join [ "", [ "NAT Traversal: Private Subnet 2 (", !GetAtt "StackReferenceResultsVPC.SubnetPrivate2Cidr", ")" ] ]
+SecurityGroupIngressNATSubnetPrivate3:
+  Type: "AWS::EC2::SecurityGroupIngress"
+  Properties:
+    GroupId:     !Ref "SecurityGroupInstance"
+    IpProtocol:  "-1"
+    FromPort:    "0"
+    ToPort:      "65535"
+    CidrIp:      !GetAtt "StackReferenceResultsVPC.SubnetPrivate3Cidr"
+    Description: !Join [ "", [ "NAT Traversal: Private Subnet 3 (", !GetAtt "StackReferenceResultsVPC.SubnetPrivate3Cidr", ")" ] ]

@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  CloudFront/ExistsCloudFrontDocumentError405
+# class:   condition
+##-------------------------------------------------------------------------------------------------
+ExistsCloudFrontDocumentError405:
+  !Not [!Equals [!Ref "CloudFrontDocumentError405", ""]]
+

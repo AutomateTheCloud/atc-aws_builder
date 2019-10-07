@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  KMS/KMSKeyAliasVault
+# class:   output
+##-------------------------------------------------------------------------------------------------
+KMSKeyAliasVault:
+  Description: "KMS Key: Vault  (Alias)"
+  Value: !Join [ "", [ "arn:aws:kms:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":alias/vault-", !Ref "AWS::Region" ] ]
+  Export:
+    Name: !Sub "${AWS::StackName}-KMSKeyAliasVault"

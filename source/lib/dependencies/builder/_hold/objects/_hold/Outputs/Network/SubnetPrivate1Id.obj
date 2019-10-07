@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Network/SubnetPrivate1Id
+# class:   output
+##-------------------------------------------------------------------------------------------------
+SubnetPrivate1Id:
+  Description: "Subnet (Private1): ID"
+  Value: !Ref "SubnetPrivate1"
+  Export:
+    Name: !Sub "${AWS::StackName}-SubnetPrivate1Id"

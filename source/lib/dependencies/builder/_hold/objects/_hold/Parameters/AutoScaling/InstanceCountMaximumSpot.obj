@@ -1,0 +1,8 @@
+##-------------------------------------------------------------------------------------------------
+# object:  AutoScaling/InstanceCountMaximumSpot
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+InstanceCountMaximumSpot:
+  Type:                  String
+  Default:               2
+  Description:           "Instance Count Maximum (Spot)"

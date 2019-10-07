@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  VPC/VPCCidr
+# class:   output
+##-------------------------------------------------------------------------------------------------
+VPCCidr:
+  Description: "VPC: CIDR"
+  Value: !Join [ "", [ !Ref "IpNetwork", "/", !Ref "IpNetmask" ] ]
+  Export:
+    Name: !Sub "${AWS::StackName}-VPCCidr"

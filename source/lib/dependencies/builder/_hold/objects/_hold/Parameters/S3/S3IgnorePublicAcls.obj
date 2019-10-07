@@ -1,0 +1,12 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EIP/S3IgnorePublicAcls
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+S3IgnorePublicAcls:
+  Type:                  "String"
+  Default:               "true"
+  AllowedValues:
+    - "true"
+    - "false"
+  Description:           "S3: Ignore Public Acls"
+  ConstraintDescription: "true/false"

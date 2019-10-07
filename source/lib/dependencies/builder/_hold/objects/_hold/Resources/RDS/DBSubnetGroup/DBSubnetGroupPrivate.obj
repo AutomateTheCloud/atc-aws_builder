@@ -1,0 +1,16 @@
+##-------------------------------------------------------------------------------------------------
+# object:  RDS/DBSubnetGroup/DBSubnetGroupPrivate
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+DBSubnetGroupPrivate:
+  Type: "AWS::RDS::DBSubnetGroup"
+  Properties:
+    DBSubnetGroupName: !Join [ "-", [ "subnet-rds", !Select [1, !Split ["|", !Ref "Organization"]], "private", !Ref "AWS::Region" ] ]
+    DBSubnetGroupDescription: !Join [ "", [ !Select [0, !Split ["|", !Ref "Organization"]], " - ", !Ref "AWS::Region", " - ", "RDS Subnet (Private)" ] ]
+    SubnetIds:
+      - !Ref "SubnetPrivate1"
+      - !Ref "SubnetPrivate2"
+      - !Ref "SubnetPrivate3"
+    Tags:
+      - Key: "Name"
+        Value: !Join [ "_", [ "subnet-rds", !Select [1, !Split ["|", !Ref "Organization"]], "private", !Ref "AWS::Region" ] ]

@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  StackReference/StackReferenceCodeDeploy
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+StackReferenceCodeDeploy:
+  Type:                  String
+  Description:           "Stack Reference: CodeDeploy"

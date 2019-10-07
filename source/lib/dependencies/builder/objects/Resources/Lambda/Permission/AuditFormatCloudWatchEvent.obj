@@ -1,0 +1,11 @@
+##-------------------------------------------------------------------------------------------------
+# object: Lambda/Permission/AuditFormatCloudWatchEvent
+##-------------------------------------------------------------------------------------------------
+LambdaPermissionAuditFormatCloudWatchEvent:
+  Type: "AWS::Lambda::Permission"
+  Properties:
+    FunctionName: !GetAtt "LambdaFunctionAuditFormatCloudWatchEvent.Arn"
+    Action: "lambda:InvokeFunction"
+    Principal: "events.amazonaws.com"
+  DependsOn:
+    - "LambdaFunctionAuditFormatCloudWatchEvent"

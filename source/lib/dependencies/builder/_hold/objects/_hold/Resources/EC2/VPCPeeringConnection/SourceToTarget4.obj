@@ -1,0 +1,16 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EC2/VPCPeeringConnection/SourceToTarget4
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+VPCPeeringConnectionSourceToTarget4:
+  Condition: "ExistsStackReferenceTarget4"
+  Type: "AWS::EC2::VPCPeeringConnection"
+  Properties:
+    VpcId: !GetAtt "StackReferenceResultsSource.VPCId"
+    PeerVpcId: !GetAtt "StackReferenceResultsTarget4.VPCId"
+    Tags:
+      - Key: "Name"
+        Value: !Join [ "", [ !GetAtt "StackReferenceResultsSource.OrganizationAbbr", "-to-", !GetAtt "StackReferenceResultsTarget4.OrganizationAbbr", "-", !Ref "AWS::Region" ] ]
+  DependsOn:
+    - "StackReferenceResultsSource"
+    - "StackReferenceResultsTarget4"

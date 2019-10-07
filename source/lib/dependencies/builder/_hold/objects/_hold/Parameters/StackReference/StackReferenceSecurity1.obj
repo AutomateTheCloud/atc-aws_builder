@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  StackReference/StackReferenceSecurity1
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+StackReferenceSecurity1:
+  Type:                  String
+  Description:           "Stack Reference: Security1"

@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  GuardDuty/Detector/Account
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+GuardDutyDetectorAccount:
+  Condition: "EnabledGuardDuty"
+  Type: "AWS::GuardDuty::Detector"
+  Properties:
+    Enable: "true"
+    FindingPublishingFrequency: "FIFTEEN_MINUTES"

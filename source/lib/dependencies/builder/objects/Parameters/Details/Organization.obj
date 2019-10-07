@@ -1,0 +1,6 @@
+##---------------------------------------------------------------------------------------
+# object: Details/Organization
+##---------------------------------------------------------------------------------------
+Organization:
+  Description: "Details: Organization (OrganizationName | OrganizationAbbr | region | environment)"
+  Type: String

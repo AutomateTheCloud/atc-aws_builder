@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: Network/SubnetPublic1Id
+##---------------------------------------------------------------------------------------
+SubnetPublic1Id:
+  Description: "Subnet (Public1): ID"
+  Value: !Ref "SubnetPublic1"
+  Export:
+    Name: !Sub "${AWS::StackName}-SubnetPublic1Id"

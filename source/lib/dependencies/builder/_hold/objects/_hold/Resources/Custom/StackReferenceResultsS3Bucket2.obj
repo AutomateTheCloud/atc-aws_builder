@@ -1,0 +1,13 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Custom/StackReferenceResultsS3Bucket2
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+StackReferenceResultsS3Bucket2:
+  Condition: "ExistsStackReferenceS3Bucket2"
+  Type: "Custom::StackReferenceResultsS3Bucket2"
+  Version: "1.0"
+  Properties:
+    "ServiceToken": !Join [ "", [ "arn:aws:lambda:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":function:stack-reference" ] ]
+    "Region": !Ref "AWS::Region"
+    "StackName": !Ref "StackReferenceS3Bucket2"
+    "LastUpdate": !Ref "LastUpdate"

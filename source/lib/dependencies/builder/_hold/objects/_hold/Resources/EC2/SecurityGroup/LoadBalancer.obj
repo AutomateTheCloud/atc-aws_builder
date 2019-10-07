@@ -1,0 +1,81 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EC2/SecurityGroup/LoadBalancer
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+SecurityGroupLoadBalancer:
+  Type: "AWS::EC2::SecurityGroup"
+  Properties:
+    GroupName: !Join [ "_", [ "lb", !Select [1, !Split ["|", !Ref "Project"]], !Select [1, !Split ["|", !Ref "Function"]], !Select [3, !Split ["|", !Ref "Organization"]], !Select [1, !Split ["|", !Ref "Organization"]], !Ref "AWS::Region" ] ]
+    GroupDescription: !Join [ "", [ !Select [0, !Split ["|", !Ref "Project"]], " - ", !Select [0, !Split ["|", !Ref "Function"]], " - EC2 (", !Select [3, !Split ["|", !Ref "Organization"]], ") [", !Select [0, !Split ["|", !Ref "Organization"]], " / ", !Ref "AWS::Region", "]" ] ]
+    VpcId: !GetAtt "StackReferenceResultsVPC.VPCId"
+    SecurityGroupIngress:
+    - !If
+        - ExistsStackReferenceAdministrative1
+        - IpProtocol:            "-1"
+          FromPort:              "0"
+          ToPort:                "65535"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsAdministrative1.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Administrative: ", !GetAtt "StackReferenceResultsAdministrative1.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceAdministrative2
+        - IpProtocol:            "-1"
+          FromPort:              "0"
+          ToPort:                "65535"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsAdministrative2.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Administrative: ", !GetAtt "StackReferenceResultsAdministrative2.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceSecurity1
+        - IpProtocol:            "-1"
+          FromPort:              "0"
+          ToPort:                "65535"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsSecurity1.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Security: ", !GetAtt "StackReferenceResultsSecurity1.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceSecurity2
+        - IpProtocol:            "-1"
+          FromPort:              "0"
+          ToPort:                "65535"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsSecurity2.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Security: ", !GetAtt "StackReferenceResultsSecurity2.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    SecurityGroupEgress:
+    - !If
+        - ExistsStackReferenceAdministrative1
+        - IpProtocol:            "-1"
+          FromPort:              "0"
+          ToPort:                "65535"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsAdministrative1.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Administrative: ", !GetAtt "StackReferenceResultsAdministrative1.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceAdministrative2
+        - IpProtocol:            "-1"
+          FromPort:              "0"
+          ToPort:                "65535"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsAdministrative2.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Administrative: ", !GetAtt "StackReferenceResultsAdministrative2.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceSecurity1
+        - IpProtocol:            "-1"
+          FromPort:              "0"
+          ToPort:                "65535"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsSecurity1.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Security: ", !GetAtt "StackReferenceResultsSecurity1.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceSecurity2
+        - IpProtocol:            "-1"
+          FromPort:              "0"
+          ToPort:                "65535"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsSecurity2.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Security: ", !GetAtt "StackReferenceResultsSecurity2.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    Tags:
+      - Key: "Name"
+        Value: !Join [ "_", [ "lb", !Select [1, !Split ["|", !Ref "Project"]], !Select [1, !Split ["|", !Ref "Function"]], !Select [3, !Split ["|", !Ref "Organization"]], !Select [1, !Split ["|", !Ref "Organization"]], !Ref "AWS::Region" ] ]
+  DependsOn:
+    - "StackReferenceResultsVPC"

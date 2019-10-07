@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  StackReference/StackReferenceDatabase4
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+StackReferenceDatabase4:
+  Type:                  String
+  Description:           "Stack Reference: Database4"

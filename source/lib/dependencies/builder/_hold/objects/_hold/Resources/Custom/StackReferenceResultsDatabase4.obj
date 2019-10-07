@@ -1,0 +1,12 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Custom/StackReferenceResultsDatabase4
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+StackReferenceResultsDatabase4:
+  Condition: "ExistsStackReferenceDatabase4"
+  Type: "Custom::StackReferenceResultsDatabase4"
+  Version: "1.0"
+  Properties:
+    "ServiceToken": !Join [ "", [ "arn:aws:lambda:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":function:stack-reference" ] ]
+    "Region": !Ref "AWS::Region"
+    "StackName": !Ref "StackReferenceDatabase4"

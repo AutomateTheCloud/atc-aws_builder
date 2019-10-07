@@ -1,0 +1,10 @@
+##---------------------------------------------------------------------------------------
+# object: SNS/Subscription/AutoScalingGroupInstanceEmail4
+##---------------------------------------------------------------------------------------
+SNSSubscriptionAutoScalingGroupInstanceEmail4:
+  Condition: "ExistsSNSSubscriptionEmail4"
+  Type: "AWS::SNS::Subscription"
+  Properties:
+    Endpoint: !Ref "SNSSubscriptionEmail4"
+    Protocol: "email"
+    TopicArn: !Ref "SNSTopicAutoScalingGroupInstance"

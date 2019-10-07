@@ -1,0 +1,5 @@
+##---------------------------------------------------------------------------------------
+# object: SecurityGroup/SecurityGroupDefault
+##---------------------------------------------------------------------------------------
+tag_ec2|SecurityGroupDefaultId|Name|default_${DETAILS_PROJECT_ABBR}_${DETAILS_FUNCTION_ABBR}_${DETAILS_ENVIRONMENT}_${DETAILS_ORGANIZATION_ABBR}_${DETAILS_REGION}
+harden_default_security_group|SecurityGroupDefaultId

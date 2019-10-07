@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  StackReference/StackReferenceSecurity
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+StackReferenceSecurity:
+  Type:                  String
+  Description:           "Stack Reference: VPN (StackReferenceSecurity1|StackReferenceSecurity2)"

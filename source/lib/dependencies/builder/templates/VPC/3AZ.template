@@ -1,0 +1,178 @@
+##-------------------------------------------------------------------------------------------------
+# object: VPC/3AZ
+##-------------------------------------------------------------------------------------------------
+
+Paradigm:
+##-------------------------------------------------------------------------------------------------
+  Parameters:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/StackReference/StackReferenceInitialize
+
+    #-- Network -------------------------------------------------------------------------
+    - Base/Network/IpNetwork
+    - Base/Network/IpNetmask
+    - Base/Network/AvailabilityZone1
+    - Base/Network/AvailabilityZone2
+    - Base/Network/AvailabilityZone3
+
+    #-- Instance ------------------------------------------------------------------------
+    - Base/Instance/KeypairDefault
+    - Base/Instance/TimezoneLinux
+    - Base/Instance/TimezoneWindows
+
+    #-- VPC -----------------------------------------------------------------------------
+    - Base/VPC/EnableVPCFlowLogs
+    - Base/FlowLog/FlowLogTrafficType
+
+##-------------------------------------------------------------------------------------------------
+  Mappings:
+
+##-------------------------------------------------------------------------------------------------
+  Conditions:
+    #-- VPC -----------------------------------------------------------------------------
+    - Base/VPC/EnabledVPCFlowLogs
+
+##-------------------------------------------------------------------------------------------------
+  Resources:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/Custom/StackReferenceResultsInitialize
+
+    #-- VPC -----------------------------------------------------------------------------
+    - Base/EC2/VPC/VPC
+
+    #-- VPC Endpoints -------------------------------------------------------------------
+    - Base/EC2/VPCEndpoint/S3Endpoint
+    - Base/EC2/VPCEndpoint/DynamodbEndpoint
+
+    #-- Subnet Groups -------------------------------------------------------------------
+    - Base/EC2/Subnet/Public1
+    - Base/EC2/Subnet/Public2
+    - Base/EC2/Subnet/Public3
+    - Base/EC2/Subnet/Private1
+    - Base/EC2/Subnet/Private2
+    - Base/EC2/Subnet/Private3
+    - Base/EC2/Subnet/Restricted1
+    - Base/EC2/Subnet/Restricted2
+    - Base/EC2/Subnet/Restricted3
+
+    #-- Route Tables---------------------------------------------------------------------
+    - Base/EC2/RouteTable/Public
+    - Base/EC2/RouteTable/Private
+    - Base/EC2/RouteTable/Restricted
+
+    #-- Routes --------------------------------------------------------------------------
+    - Base/EC2/Route/Public
+
+    #-- Subnet Route Table Associations -------------------------------------------------
+    - Base/EC2/SubnetRouteTableAssociation/Public1
+    - Base/EC2/SubnetRouteTableAssociation/Public2
+    - Base/EC2/SubnetRouteTableAssociation/Public3
+    - Base/EC2/SubnetRouteTableAssociation/Private1
+    - Base/EC2/SubnetRouteTableAssociation/Private2
+    - Base/EC2/SubnetRouteTableAssociation/Private3
+    - Base/EC2/SubnetRouteTableAssociation/Restricted1
+    - Base/EC2/SubnetRouteTableAssociation/Restricted2
+    - Base/EC2/SubnetRouteTableAssociation/Restricted3
+
+    #-- Internet ------------------------------------------------------------------------
+    - Base/EC2/VPCGatewayAttachment/Internet
+    - Base/EC2/InternetGateway/InternetGateway
+
+    #-- Lambda --------------------------------------------------------------------------
+    - Base/Custom/VPCSubnetCIDRResults
+
+    #-- RDS -----------------------------------------------------------------------------
+    - Base/RDS/DBSubnetGroup/DBSubnetGroupPublic
+    - Base/RDS/DBSubnetGroup/DBSubnetGroupPrivate
+    - Base/RDS/DBSubnetGroup/DBSubnetGroupRestricted
+
+    #-- ElastiCache ---------------------------------------------------------------------
+    - Base/ElastiCache/SubnetGroup/ECSubnetGroupPublic
+    - Base/ElastiCache/SubnetGroup/ECSubnetGroupPrivate
+    - Base/ElastiCache/SubnetGroup/ECSubnetGroupRestricted
+
+    #-- KMS -----------------------------------------------------------------------------
+    - Base/KMS/Key/Data
+    - Base/KMS/Alias/Data
+
+    #-- VPC -----------------------------------------------------------------------------
+    - Base/EC2/FlowLog/VPC
+
+##-------------------------------------------------------------------------------------------------
+  Outputs:
+    #-- VPC -----------------------------------------------------------------------------
+    - Base/VPC/VPCId
+    - Base/VPC/VPCName
+    - Base/VPC/VPCCidr
+
+    #-- Subnet - Public -----------------------------------------------------------------
+    - Base/Network/SubnetPublic1Id
+    - Base/Network/SubnetPublic1AvailabilityZone
+    - Base/Network/SubnetPublic1Cidr
+    - Base/Network/SubnetPublic2Id
+    - Base/Network/SubnetPublic2AvailabilityZone
+    - Base/Network/SubnetPublic2Cidr
+    - Base/Network/SubnetPublic3Id
+    - Base/Network/SubnetPublic3AvailabilityZone
+    - Base/Network/SubnetPublic3Cidr
+
+    #-- Subnet - Private ----------------------------------------------------------------
+    - Base/Network/SubnetPrivate1Id
+    - Base/Network/SubnetPrivate1AvailabilityZone
+    - Base/Network/SubnetPrivate1Cidr
+    - Base/Network/SubnetPrivate2Id
+    - Base/Network/SubnetPrivate2AvailabilityZone
+    - Base/Network/SubnetPrivate2Cidr
+    - Base/Network/SubnetPrivate3Id
+    - Base/Network/SubnetPrivate3AvailabilityZone
+    - Base/Network/SubnetPrivate3Cidr
+
+    #-- Subnet - Restricted -------------------------------------------------------------
+    - Base/Network/SubnetRestricted1Id
+    - Base/Network/SubnetRestricted1AvailabilityZone
+    - Base/Network/SubnetRestricted1Cidr
+    - Base/Network/SubnetRestricted2Id
+    - Base/Network/SubnetRestricted2AvailabilityZone
+    - Base/Network/SubnetRestricted2Cidr
+    - Base/Network/SubnetRestricted3Id
+    - Base/Network/SubnetRestricted3AvailabilityZone
+    - Base/Network/SubnetRestricted3Cidr
+
+    #-- Route Tables --------------------------------------------------------------------
+    - Base/Network/RouteTablePublicId
+    - Base/Network/RouteTablePrivateId
+    - Base/Network/RouteTableRestrictedId
+
+    #-- Network -------------------------------------------------------------------------
+    - Base/Network/NetworkAclDefaultId
+
+    #-- Security Groups -----------------------------------------------------------------
+    - Base/SecurityGroup/SecurityGroupDefaultId
+
+    #-- RDS -----------------------------------------------------------------------------
+    - Base/Network/DBSubnetGroupPublicId
+    - Base/Network/DBSubnetGroupPrivateId
+    - Base/Network/DBSubnetGroupRestrictedId
+
+    #-- ElastiCache ---------------------------------------------------------------------
+    - Base/Network/ECSubnetGroupPublicId
+    - Base/Network/ECSubnetGroupPrivateId
+    - Base/Network/ECSubnetGroupRestrictedId
+
+    #-- Application ---------------------------------------------------------------------
+    - Base/Instance/KeypairDefault
+    - Base/Instance/TimezoneLinux
+    - Base/Instance/TimezoneWindows
+
+    #-- KMS -----------------------------------------------------------------------------
+    - Base/KMS/KMSKeyData
+    - Base/KMS/KMSKeyAliasData
+
+    #-- S3 ------------------------------------------------------------------------------
+    - Base/S3/S3BucketLogs_Initialize
+    - Base/S3/S3BucketArtifacts_Initialize
+
+##-------------------------------------------------------------------------------------------------
+  Targets:
+    - Base/SecurityGroup/SecurityGroupDefault
+    - Base/Network/NetworkAclDefault

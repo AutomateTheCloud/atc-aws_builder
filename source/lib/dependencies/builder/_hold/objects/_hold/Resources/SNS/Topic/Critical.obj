@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SNS/Topic/Critical
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+SNSTopicCritical:
+  Type: "AWS::SNS::Topic"
+  Properties:
+    TopicName: !Join [ "", [ !Select [1, !Split ["|", !Ref "Project"]], "-", !Select [1, !Split ["|", !Ref "Function"]], "-", !Select [3, !Split ["|", !Ref "Organization"]], "-", "critical" ] ]
+    DisplayName: !Join [ "", [ !Select [0, !Split ["|", !Ref "Project"]], " - ", !Select [0, !Split ["|", !Ref "Function"]], " (", !Select [3, !Split ["|", !Ref "Organization"]], ") - [critical]" ] ]

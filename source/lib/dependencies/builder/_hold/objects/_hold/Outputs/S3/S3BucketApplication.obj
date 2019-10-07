@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  S3/S3BucketApplication
+# class:   output
+##-------------------------------------------------------------------------------------------------
+S3Bucket:
+  Description: "S3 Bucket: Application"
+  Value: !Ref "S3BucketApplication"
+  Export:
+    Name: !Sub "${AWS::StackName}-S3Bucket"

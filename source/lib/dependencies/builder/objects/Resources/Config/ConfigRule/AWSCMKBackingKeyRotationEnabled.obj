@@ -1,0 +1,15 @@
+##---------------------------------------------------------------------------------------
+# object: Config/ConfigRule/AWSCMKBackingKeyRotationEnabled
+# notes:
+#   - CIS Amazon Web Services Foundations
+#     - 2.8: Ensure rotation for customer created CMKs is enabled
+##---------------------------------------------------------------------------------------
+ConfigRuleAWSCMKBackingKeyRotationEnabled:
+  Type: "AWS::Config::ConfigRule"
+  Properties:
+    ConfigRuleName: "aws-cmk-backing-key-rotation-enabled"
+    Description: "Checks that key rotation is enabled for each key and matches to the key ID of the customer created customer master key (CMK)"
+    MaximumExecutionFrequency: "TwentyFour_Hours"
+    Source:
+      Owner: AWS
+      SourceIdentifier: "CMK_BACKING_KEY_ROTATION_ENABLED"

@@ -1,0 +1,8 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/AllocatedStorage
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+AllocatedStorage:
+  Type:                  Number
+  Default:               20
+  Description:           "Allocated Storage"

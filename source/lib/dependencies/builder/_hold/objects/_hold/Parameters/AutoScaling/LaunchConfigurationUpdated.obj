@@ -1,0 +1,8 @@
+##-------------------------------------------------------------------------------------------------
+# object:  AutoScaling/LaunchConfigurationUpdated
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+LaunchConfigurationUpdated:
+  Type:                  String
+  Default:               0
+  Description:           "LaunchConfiguration Updated Timestamp (changing this will trigger a redeployment)"

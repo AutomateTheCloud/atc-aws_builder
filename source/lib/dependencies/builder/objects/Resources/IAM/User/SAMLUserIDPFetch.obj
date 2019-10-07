@@ -1,0 +1,11 @@
+##---------------------------------------------------------------------------------------
+# object: IAM/User/SAMLUserIDPFetch
+##---------------------------------------------------------------------------------------
+UserSAMLUserIDPFetch:
+  Type: "AWS::IAM::User"
+  Properties:
+    UserName: !Ref "SAMLUserIDPFetch"
+    Groups:
+      - !Ref "IAMGroupSAMLUserIDPFetch"
+  DependsOn:
+    - "IAMGroupSAMLUserIDPFetch"

@@ -1,0 +1,12 @@
+##---------------------------------------------------------------------------------------
+# object: Network/SubnetType
+##---------------------------------------------------------------------------------------
+SubnetType:
+  Description: "Subnet Type"
+  Type: String
+  Default: "private"
+  AllowedValues:
+    - private
+    - public
+    - restricted
+  ConstraintDescription: "public, private, or restricted"

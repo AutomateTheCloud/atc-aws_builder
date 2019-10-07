@@ -1,0 +1,29 @@
+##-------------------------------------------------------------------------------------------------
+# object:  S3/Bucket/Application
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+S3BucketApplication:
+  Type: "AWS::S3::Bucket"
+  DeletionPolicy: "Retain"
+  Properties:
+    BucketName: !Ref "S3BucketName"
+    BucketEncryption: 
+        ServerSideEncryptionConfiguration: 
+        - ServerSideEncryptionByDefault:
+            SSEAlgorithm: "AES256"
+    PublicAccessBlockConfiguration:
+      BlockPublicAcls: !Ref "S3BlockPublicAcls"
+      BlockPublicPolicy: !Ref "S3BlockPublicPolicy"
+      IgnorePublicAcls: !Ref "S3IgnorePublicAcls"
+      RestrictPublicBuckets: !Ref "S3RestrictPublicBuckets"
+    AccessControl: "Private"
+    LifecycleConfiguration:
+      Rules:
+      - Id: "ExpireNoncurrentVerions"
+        Status: "Enabled"
+        NoncurrentVersionExpirationInDays: !Ref "S3NoncurrentVersionExpiration"
+    VersioningConfiguration:
+      Status: "Enabled"
+    LoggingConfiguration:
+      DestinationBucketName: !Join [ "", [ !Ref "AWS::AccountId", "-", "logs", "-", !Ref "AWS::Region" ] ]
+      LogFilePrefix: !Join [ "", [ "s3/", !Ref "S3BucketName", "/" ] ]

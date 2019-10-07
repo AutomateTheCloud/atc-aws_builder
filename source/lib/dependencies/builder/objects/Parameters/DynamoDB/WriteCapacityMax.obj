@@ -1,0 +1,7 @@
+##---------------------------------------------------------------------------------------
+# object: DynamoDB/WriteCapacityMax
+##---------------------------------------------------------------------------------------
+WriteCapacityMax:
+  Description: "DynamoDB Write Capacity (Max)"
+  Type: Number
+  Default: 10

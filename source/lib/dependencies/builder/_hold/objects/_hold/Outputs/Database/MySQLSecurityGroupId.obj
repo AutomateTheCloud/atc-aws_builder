@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/MySQLSecurityGroupId
+# class:   output
+##-------------------------------------------------------------------------------------------------
+MySQLSecurityGroupId:
+  Description: "Security Group ID - MySQL"
+  Value: !Ref "SecurityGroupMySQL"
+  Export:
+    Name: !Sub "${AWS::StackName}-MySQLSecurityGroupId"

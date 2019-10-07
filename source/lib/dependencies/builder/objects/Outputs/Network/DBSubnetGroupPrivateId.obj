@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: Network/DBSubnetGroupPrivateId
+##---------------------------------------------------------------------------------------
+DBSubnetGroupPrivateId:
+  Description: "DB Subnet Group (Private): ID"
+  Value: !Ref DBSubnetGroupPrivate
+  Export:
+    Name: !Sub "${AWS::StackName}-DBSubnetGroupPrivateId"

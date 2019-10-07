@@ -1,0 +1,7 @@
+##---------------------------------------------------------------------------------------
+# object: Instance/VolumeSize
+##---------------------------------------------------------------------------------------
+VolumeSize:
+  Description: "Volume Size (RootVolumeSize|ApplicationVolumeSize)"
+  Type: String
+  Default: "8|0"

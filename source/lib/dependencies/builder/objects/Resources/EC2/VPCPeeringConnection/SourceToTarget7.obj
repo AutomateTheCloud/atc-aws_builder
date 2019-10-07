@@ -1,0 +1,15 @@
+##---------------------------------------------------------------------------------------
+# object:  EC2/VPCPeeringConnection/SourceToTarget7
+##---------------------------------------------------------------------------------------
+VPCPeeringConnectionSourceToTarget7:
+  Condition: "ExistsStackReferenceTarget7"
+  Type: "AWS::EC2::VPCPeeringConnection"
+  Properties:
+    VpcId: !GetAtt "StackReferenceResultsSource.VPCId"
+    PeerVpcId: !GetAtt "StackReferenceResultsTarget7.VPCId"
+    Tags:
+      - Key: "Name"
+        Value: !Join [ "", [ !GetAtt "StackReferenceResultsSource.OrganizationAbbr", "-to-", !GetAtt "StackReferenceResultsTarget7.OrganizationAbbr", "-", !Ref "AWS::Region" ] ]
+  DependsOn:
+    - "StackReferenceResultsSource"
+    - "StackReferenceResultsTarget7"

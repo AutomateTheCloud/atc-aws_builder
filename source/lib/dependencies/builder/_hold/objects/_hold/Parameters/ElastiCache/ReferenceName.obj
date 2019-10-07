@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Elasticache/ReferenceName
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+ReferenceName:
+  Type:                  String
+  MinLength:             2
+  MaxLength:             17
+  Description:           "Reference Name"
+  ConstraintDescription: "must be between 2 and 17 characters"

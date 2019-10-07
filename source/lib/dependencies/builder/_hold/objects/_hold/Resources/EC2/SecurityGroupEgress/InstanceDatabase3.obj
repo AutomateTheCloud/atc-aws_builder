@@ -1,0 +1,14 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EC2/SecurityGroupEgress/InstanceDatabase3
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+SecurityGroupEgressInstanceDatabase3:
+  Condition: "ExistsStackReferenceDatabase3"
+  Type: "AWS::EC2::SecurityGroupEgress"
+  Properties:
+    GroupId:               !GetAtt "StackReferenceResultsDatabase3.DatabaseSecurityGroupId"
+    IpProtocol:            "tcp"
+    FromPort:              !GetAtt "StackReferenceResultsDatabase3.Port"
+    ToPort:                !GetAtt "StackReferenceResultsDatabase3.Port"
+    SourceSecurityGroupId: !Ref "SecurityGroupInstance"
+    Description: !Join [ "", [ !Select [0, !Split ["|", !Ref "Project"]], " - ", !Select [0, !Split ["|", !Ref "Function"]], " (", !Select [3, !Split ["|", !Ref "Organization"]], ") - [", !Select [0, !Split ["|", !Ref "Organization"]], "]" ] ]

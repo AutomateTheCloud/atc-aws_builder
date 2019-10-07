@@ -1,0 +1,37 @@
+##-------------------------------------------------------------------------------------------------
+# object:  ElastiCache/ParameterGroup
+# class:   template
+##-------------------------------------------------------------------------------------------------
+
+Paradigm:
+##-------------------------------------------------------------------------------------------------
+  Parameters:
+
+##-------------------------------------------------------------------------------------------------
+  Mappings:
+
+##-------------------------------------------------------------------------------------------------
+  Conditions:
+
+##-------------------------------------------------------------------------------------------------
+  Resources:
+
+##-------------------------------------------------------------------------------------------------
+  Outputs:
+    #-- ElastiCache Info ----------------------------------------------------------------
+    - Base/ElastiCache/ElastiCacheParameterGroupName
+
+    #-- Tags Related --------------------------------------------------------------------
+    - Base/Details/AccountName
+    - Base/Details/AccountAbbr
+    - Base/Details/AccountNumber
+    - Base/Details/OrganizationName
+    - Base/Details/OrganizationAbbr
+    - Base/Details/Environment
+    - Base/Details/ProjectName
+    - Base/Details/ProjectAbbr
+    - Base/Details/FunctionName
+    - Base/Details/FunctionAbbr
+    - Base/Details/Owner
+    - Base/Details/Contact
+    - Base/Details/Region

@@ -1,0 +1,16 @@
+##---------------------------------------------------------------------------------------
+# object: Network/IpNetmask
+##---------------------------------------------------------------------------------------
+IpNetmask:
+  Description: "IP Netmask of the VPC"
+  Type: String
+  Default: 24
+  AllowedValues:
+    - 24
+    - 22
+    - 21
+    - 20
+    - 19
+    - 18
+    - 16
+  ConstraintDescription: "Supported Netmask: 24, 22, 21, 20, 19, 18, 16"

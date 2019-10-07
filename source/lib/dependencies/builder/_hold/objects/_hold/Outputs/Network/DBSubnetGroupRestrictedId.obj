@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Network/DBSubnetGroupRestrictedId
+# class:   output
+##-------------------------------------------------------------------------------------------------
+DBSubnetGroupRestrictedId:
+  Description: "DB Subnet Group (Restricted): ID"
+  Value: !Ref DBSubnetGroupRestricted
+  Export:
+    Name: !Sub "${AWS::StackName}-DBSubnetGroupRestrictedId"

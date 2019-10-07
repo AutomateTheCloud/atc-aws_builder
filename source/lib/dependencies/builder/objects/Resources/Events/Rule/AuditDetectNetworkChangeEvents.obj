@@ -1,0 +1,38 @@
+##---------------------------------------------------------------------------------------
+# object: Events/Rule/AuditDetectNetworkChangeEvents
+#   - CIS Amazon Web Services Foundations
+#     - 3.12: Ensure a log metric filter and alarm exist for changes to network gateways
+#     - 3.13: Ensure a log metric filter and alarm exist for route table changes
+#     - 3.14: Ensure a log metric filter and alarm exist for VPC changes
+##---------------------------------------------------------------------------------------
+EventsRuleAuditDetectNetworkChangeEvents:
+  Type: "AWS::Events::Rule"
+  Properties:
+    Name: "audit-detect-network-change-events"
+    Description: "Publishes formatted network change events to an SNS topic"
+    EventPattern:
+      detail-type:
+        - "AWS API Call via CloudTrail"
+      detail:
+        eventSource:
+          - "ec2.amazonaws.com"
+        eventName:
+          - "AttachInternetGateway"
+          - "AssociateRouteTable"
+          - "CreateCustomerGateway"
+          - "CreateInternetGateway"
+          - "CreateRoute"
+          - "CreateRouteTable"
+          - "DeleteCustomerGateway"
+          - "DeleteInternetGateway"
+          - "DeleteRoute"
+          - "DeleteRouteTable"
+          - "DeleteDhcpOptions"
+          - "DetachInternetGateway"
+          - "DisassociateRouteTable"
+          - "ReplaceRoute"
+          - "ReplaceRouteTableAssociation"
+    State: "ENABLED"
+    Targets:
+      - Arn: !GetAtt "LambdaFunctionAuditFormatCloudWatchEvent.Arn"
+        Id: "TargetFunctionV1"

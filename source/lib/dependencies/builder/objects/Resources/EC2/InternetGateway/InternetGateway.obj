@@ -1,0 +1,9 @@
+##---------------------------------------------------------------------------------------
+# object: EC2/InternetGateway/InternetGateway
+##---------------------------------------------------------------------------------------
+InternetGateway:
+  Type: "AWS::EC2::InternetGateway"
+  Properties:
+    Tags:
+      - Key: "Name"
+        Value: !Join [ "_", [ "igw", !Select [1, !Split ["|", !Ref "Organization"]], !Ref "AWS::Region" ] ]

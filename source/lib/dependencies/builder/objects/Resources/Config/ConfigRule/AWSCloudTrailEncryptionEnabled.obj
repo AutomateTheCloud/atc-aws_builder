@@ -1,0 +1,15 @@
+##---------------------------------------------------------------------------------------
+# object: Config/ConfigRule/AWSCloudTrailEncryptionEnabled
+# notes:
+#   - CIS Amazon Web Services Foundations
+#     - 2.7: Ensure CloudTrail logs are encrypted at rest using KMS CMKs
+##---------------------------------------------------------------------------------------
+ConfigRuleAWSCloudTrailEncryptionEnabled:
+  Type: "AWS::Config::ConfigRule"
+  Properties:
+    ConfigRuleName: "aws-cloudtrail-encryption-enabled"
+    Description: "Checks whether AWS CloudTrail is configured to use the server side encryption (SSE) AWS Key Management Service (AWS KMS) customer master key (CMK) encryption"
+    MaximumExecutionFrequency: "TwentyFour_Hours"
+    Source:
+      Owner: AWS
+      SourceIdentifier: "CLOUD_TRAIL_ENCRYPTION_ENABLED"

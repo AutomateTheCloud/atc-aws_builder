@@ -1,0 +1,31 @@
+##---------------------------------------------------------------------------------------
+# object: KMS/Key/Data
+##---------------------------------------------------------------------------------------
+KMSKeyData:
+  Type: "AWS::KMS::Key"
+  Properties:
+    Enabled: true
+    EnableKeyRotation: true
+    Description: !Join [ "", [ "Data Encryption Key for ", !Select [0, !Split ["|", !Ref "Organization"]] ] ]
+    KeyPolicy:
+      Version: "2012-10-17"
+      Id: !Join [ "", [ "keypolicy_", !Select [1, !Split ["|", !Ref "Organization"]], "_", "_data_", !Ref "AWS::Region" ] ]
+      Statement:
+        - Sid: "Enable Root KMS Permissions"
+          Effect: Allow
+          Principal:
+            AWS:
+              - !Join [ "", [ "arn:aws:iam::", !Ref "AWS::AccountId", ":root" ] ]
+          Action: "kms:*"
+          Resource: "*"
+    Tags:
+      - Key: "Organization"
+        Value: !Select [0, !Split ["|", !Ref "Organization"]]
+      - Key: "Project"
+        Value: !Select [0, !Split ["|", !Ref "Project"]]
+      - Key: "Function"
+        Value: "Data Encryption Key"
+      - Key: "Owner"
+        Value: !Select [0, !Split ["|", !Ref "Owner"]]
+      - Key: "Contact"
+        Value: !Select [1, !Split ["|", !Ref "Owner"]]

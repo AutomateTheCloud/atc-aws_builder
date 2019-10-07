@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  KMS/Alias/AuditGlobal
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+KMSAliasAudit:
+  Type: "AWS::KMS::Alias"
+  Properties:
+    AliasName: "alias/audit-global"
+    TargetKeyId: !Ref "KMSKeyAudit"

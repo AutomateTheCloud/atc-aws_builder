@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Instance/SecurityGroupInstanceId_Source
+# class:   output
+##-------------------------------------------------------------------------------------------------
+SecurityGroupInstanceId:
+  Description: "Security Group (Instance): ID"
+  Value: !GetAtt "StackReferenceResultsSource.SecurityGroupInstanceId"
+  Export:
+    Name: !Sub "${AWS::StackName}-SecurityGroupInstanceId"

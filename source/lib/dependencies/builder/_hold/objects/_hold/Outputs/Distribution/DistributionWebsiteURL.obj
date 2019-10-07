@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Distribution/DistributionWebsiteURL
+# class:   output
+##-------------------------------------------------------------------------------------------------
+DistributionURL:
+  Description: "CloudFront Distribution: Website URL"
+  Value: !Join ['', [ "https://", !GetAtt "DistributionWebsite.DomainName" ] ]
+  Export:
+    Name: !Sub "${AWS::StackName}-DistributionURL"

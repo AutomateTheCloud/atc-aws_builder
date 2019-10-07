@@ -1,0 +1,17 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EC2/Subnet/Public3
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+SubnetPublic3:
+  Type: "AWS::EC2::Subnet"
+  Properties:
+    VpcId: !Ref "VPC"
+    CidrBlock: !Join [ "", [ !GetAtt "VPCSubnetCIDRResults.subnet-public-3-cidrstart", "/", !GetAtt "VPCSubnetCIDRResults.subnet-public-3-netmask" ] ]
+    MapPublicIpOnLaunch: "true"
+    AvailabilityZone: !Ref "AvailabilityZone3"
+    Tags:
+      - Key: "Name"
+        Value: !Join [ "_", [ "subnet", !Select [1, !Split ["|", !Ref "Organization"]], "public-3", !Ref "AWS::Region" ] ]
+      - Key: "Network"
+        Value: "public"
+  DependsOn: "VPCSubnetCIDRResults"

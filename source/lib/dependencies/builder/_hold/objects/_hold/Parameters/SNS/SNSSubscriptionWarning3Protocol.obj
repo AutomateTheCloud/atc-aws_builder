@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SNS/SNSSubscriptionWarning3Protocol
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+SNSSubscriptionWarning3Protocol:
+  Type:                  String
+  Description:           "SNS Subscription (warning) 3: Protocol"

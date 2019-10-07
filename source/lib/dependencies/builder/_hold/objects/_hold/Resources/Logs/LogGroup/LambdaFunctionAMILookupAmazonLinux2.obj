@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Logs/LogGroup/LambdaFunctionAMILookupAmazonLinux2
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+LogGroupLambdaFunctionAMILookupAmazonLinux2:
+  Type: "AWS::Logs::LogGroup"
+  Properties:
+    LogGroupName: !Sub "/aws/lambda/${LambdaFunctionAMILookupAmazonLinux2}"
+    RetentionInDays: !Ref "LogRetentionAMILookupAmazonLinux2"

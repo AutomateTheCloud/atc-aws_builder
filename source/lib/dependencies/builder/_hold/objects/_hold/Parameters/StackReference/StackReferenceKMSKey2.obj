@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  StackReference/StackReferenceKMSKey2
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+StackReferenceKMSKey2:
+  Type:                  String
+  Description:           "Stack Reference: KMSKey2"

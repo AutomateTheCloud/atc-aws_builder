@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SecurityGroup/SecurityGroupTarget6
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+SecurityGroupTarget6:
+  Type:                  String
+  Description:           "SecurityGroupTarget6 (CIDR|Description)"

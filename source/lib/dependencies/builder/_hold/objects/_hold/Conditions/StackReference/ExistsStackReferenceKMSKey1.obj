@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  StackReference/ExistsStackReferenceKMSKey1
+# class:   condition
+##-------------------------------------------------------------------------------------------------
+ExistsStackReferenceKMSKey1:
+  !Not [!Equals [!Ref "StackReferenceKMSKey1", ""]]
+

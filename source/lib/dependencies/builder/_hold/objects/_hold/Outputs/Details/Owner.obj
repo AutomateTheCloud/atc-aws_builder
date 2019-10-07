@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Details/Owner
+# class:   output
+##-------------------------------------------------------------------------------------------------
+Owner:
+  Description: "Details: Owner"
+  Value: !Select [0, !Split ["|", !Ref "Owner"]]
+  Export:
+    Name: !Sub "${AWS::StackName}-Owner"

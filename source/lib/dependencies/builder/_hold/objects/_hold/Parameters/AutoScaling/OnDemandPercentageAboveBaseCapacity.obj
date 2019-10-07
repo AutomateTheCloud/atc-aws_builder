@@ -1,0 +1,8 @@
+##-------------------------------------------------------------------------------------------------
+# object:  AutoScaling/OnDemandPercentageAboveBaseCapacity
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+OnDemandPercentageAboveBaseCapacity:
+  Type:                  Number
+  Default:               25
+  Description:           "On-Demand Percentage Above Base Capacity"

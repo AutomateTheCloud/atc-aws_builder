@@ -1,0 +1,65 @@
+##---------------------------------------------------------------------------------------
+# object: Lambda/Function/ConfigEvaluateConfigInAllRegions
+# notes:
+#   - Based on AWS Lab: aws-security-benchmark
+#     - https://github.com/awslabs/aws-security-benchmark/blob/master/architecture/create-benchmark-rules.yaml
+#   - CIS Amazon Web Services Foundations
+#     - 2.5: Ensure AWS Config is enabled in all regions
+##---------------------------------------------------------------------------------------
+LambdaFunctionConfigEvaluateConfigInAllRegions:
+  Type: "AWS::Lambda::Function"
+  Properties:
+    FunctionName: "config-evaluate-config-in-all-regions"
+    Description: "Evaluates whether Config is enabled in all regions"
+    Code:
+      ZipFile: |
+        #==================================================================================================
+        # Function: config-evaluate-config-in-all-regions
+        # Purpose:  Evaluates whether Config is enabled in all regions
+        #==================================================================================================
+        import boto3
+        import json
+        import datetime
+        def lambda_handler(event, context):
+            is_compliant = True
+            evaluations = []
+            annotation = []
+            result_token = 'No token found.'
+            if 'resultToken' in event: result_token = event['resultToken']
+            # Get a list of regions. (Using EC2 in this way is a reliable and durable means of retrieving AWS regions.)
+            regions = [region['RegionName'] for region in boto3.client('ec2').describe_regions()['Regions']]
+            # Determine whether each region has an active configuration recorder and that at least one
+            # region is recording global events (such as IAM).
+            for region in regions:
+                client = boto3.client('config', region_name = region)
+                configuration_recorder_statuses = client.describe_configuration_recorder_status()['ConfigurationRecordersStatus']
+                if configuration_recorder_statuses and configuration_recorder_statuses[0]['recording']:
+                    # Now determine whether the active recorder is recording all resources in the region.
+                    configuration_recorders = client.describe_configuration_recorders()['ConfigurationRecorders']
+                    if configuration_recorders and configuration_recorders[0]['recordingGroup']['allSupported']:
+                        evaluations.append(put_evaluation(region, True, ''))
+                    else:
+                        evaluations.append(put_evaluation(region, False, 'Config is not capturing all resources.'))
+                else:
+                    evaluations.append(put_evaluation(region, False, 'Region does not have an active recorder.'))
+            boto3.client('config').put_evaluations(
+                Evaluations = evaluations,
+                ResultToken = result_token
+            )
+        def put_evaluation(region, is_compliant, annotation):
+                evaluation = {
+                        'ComplianceResourceType': 'AWS::Config::ConfigurationRecorder',
+                        'ComplianceResourceId': region,
+                        'ComplianceType': 'COMPLIANT' if is_compliant else 'NON_COMPLIANT',
+                        'OrderingTimestamp': datetime.datetime.now()
+                    }
+                if annotation: evaluation['Annotation'] = annotation
+                return evaluation
+
+    Handler: "index.lambda_handler"
+    MemorySize: 1024
+    Role: !GetAtt "IAMRoleLambdaFunctionConfig.Arn"
+    Runtime: "python2.7"
+    Timeout: 120
+  DependsOn:
+    - "IAMRoleLambdaFunctionConfig"

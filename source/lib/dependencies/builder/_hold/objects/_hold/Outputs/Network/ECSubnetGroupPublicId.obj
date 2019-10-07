@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Network/ECSubnetGroupPublicId
+# class:   output
+##-------------------------------------------------------------------------------------------------
+ECSubnetGroupPublicId:
+  Description: "ElastiCache Subnet Group (Public): ID"
+  Value: !Ref ECSubnetGroupPublic
+  Export:
+    Name: !Sub "${AWS::StackName}-ECSubnetGroupPublicId"

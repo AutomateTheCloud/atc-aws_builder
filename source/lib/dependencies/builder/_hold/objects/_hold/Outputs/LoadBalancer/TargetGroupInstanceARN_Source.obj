@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  LoadBalancer/TargetGroupInstanceARN_Source
+# class:   output
+##-------------------------------------------------------------------------------------------------
+TargetGroupInstanceARN:
+  Description: "Target Group (Instance): ARN"
+  Value: !GetAtt "StackReferenceResultsSource.TargetGroupInstanceARN"
+  Export:
+    Name: !Sub "${AWS::StackName}-TargetGroupInstanceARN"

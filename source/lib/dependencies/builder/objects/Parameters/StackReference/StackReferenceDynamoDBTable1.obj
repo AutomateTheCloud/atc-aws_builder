@@ -1,0 +1,6 @@
+##---------------------------------------------------------------------------------------
+# object: StackReference/StackReferenceDynamoDBTable1
+##---------------------------------------------------------------------------------------
+StackReferenceDynamoDBTable1:
+  Description: "Stack Reference: DynamoDBTable1"
+  Type: String

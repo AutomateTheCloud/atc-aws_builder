@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DNS/RedisDNSRecord
+# class:   output
+##-------------------------------------------------------------------------------------------------
+RedisDNSRecord:
+  Description: "Redis: DNS Record"
+  Value: !Join [ "", [ "redis-", !Ref "RedisReferenceName", "-", !Ref "AWS::Region", ".", !GetAtt "StackReferenceResultsVPC.DomainUtilityName" ] ]
+  Export:
+    Name: !Sub "${AWS::StackName}-RedisDNSRecord"

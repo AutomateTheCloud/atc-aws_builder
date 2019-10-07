@@ -1,0 +1,13 @@
+##---------------------------------------------------------------------------------------
+# object:  Custom/StackReferenceResultsTarget8
+##---------------------------------------------------------------------------------------
+StackReferenceResultsTarget8:
+  Condition: "ExistsStackReferenceTarget8"
+  Type: "Custom::StackReferenceResultsTarget8"
+  Version: "1.0"
+  Properties:
+    "ServiceToken": !Join [ "", [ "arn:aws:lambda:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":function:stack-reference" ] ]
+    "Region": !Ref "AWS::Region"
+    "StackName": !Ref "StackReferenceTarget8"
+    "LastUpdate": !Ref "LastUpdate"
+

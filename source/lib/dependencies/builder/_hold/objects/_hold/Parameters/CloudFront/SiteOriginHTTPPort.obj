@@ -1,0 +1,8 @@
+##-------------------------------------------------------------------------------------------------
+# object:  CloudFront/SiteOriginHTTPPort
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+SiteOriginHTTPPort:
+  Type:                  Number
+  Default:               80
+  Description:           "CloudFront Distribution Origin (HTTP Port)"

@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/EngineVersion
+# class:   output
+##-------------------------------------------------------------------------------------------------
+EngineVersion:
+  Description: "Engine Version"
+  Value: !Ref "EngineVersion"
+  Export:
+    Name: !Sub "${AWS::StackName}-EngineVersion"

@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Instance/Security
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+Security:
+  Type:                  String
+  Description:           "Security (IAMGroupsAdmin | IAMGroupsView | UseGoogleAuthenticator | IP CIDR to skip Google Authenticator)"

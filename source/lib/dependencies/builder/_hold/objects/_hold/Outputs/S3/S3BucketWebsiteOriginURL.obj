@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  S3/S3BucketWebsiteOriginURL
+# class:   output
+##-------------------------------------------------------------------------------------------------
+S3BucketURL:
+  Description: "S3 Bucket: Website (Origin) URL"
+  Value: !Join ['', [ "http://", !Ref 'BucketWebsiteOrigin', !FindInMap ["RegionToS3WebsiteSuffix", !Ref "AWS::Region", "suffix"] ] ]
+  Export:
+    Name: !Sub "${AWS::StackName}-S3BucketURL"

@@ -1,0 +1,45 @@
+##-------------------------------------------------------------------------------------------------
+# object: Account/Compliance_Region
+# notes:
+#   - CIS Amazon Web Services Foundations
+#     - 1.4: Ensure access keys are rotated every 90 days or less
+#     - 2.8: Ensure rotation for customer created CMKs is enabled
+#     - 2.9: Ensure VPC flow logging is enabled in all VPCs
+#     - 4.1: Ensure no security groups allow ingress from 0.0.0.0/0 to port 22
+#     - 4.2: Ensure no security groups allow ingress from 0.0.0.0/0 to port 3389
+#     - 4.3: Ensure the default security group of every VPC restricts all traffic
+#   - CIS Amazon Web Services Three-tier Web
+#     - 1.5: Ensure all EBS volumes for Web-Tier are encrypted
+#     - 1.6: Ensure all EBS volumes for App-Tier are encrypted
+#     - 5.12: Ensure an AWS Managed Config Rule for EIPs attached to EC2 instances within VPC
+##-------------------------------------------------------------------------------------------------
+
+Paradigm:
+##-------------------------------------------------------------------------------------------------
+  Parameters:
+
+##-------------------------------------------------------------------------------------------------
+  Mappings:
+
+##-------------------------------------------------------------------------------------------------
+  Conditions:
+
+##-------------------------------------------------------------------------------------------------
+  Resources:
+    #-- Config --------------------------------------------------------------------------
+    - Base/Config/ConfigRule/AWSEC2VolumeInuseCheck
+    - Base/Config/ConfigRule/AWSEIPAttached
+    - Base/Config/ConfigRule/AWSInstancesInVPC
+    - Base/Config/ConfigRule/AWSCMKBackingKeyRotationEnabled
+    - Base/Config/ConfigRule/AWSELBLoggingEnabled
+    - Base/Config/ConfigRule/AWSIncomingSSHDisabled
+    - Base/Config/ConfigRule/AWSRestrictedIncomingTraffic
+    - Base/Config/ConfigRule/AWSVPCDefaultSecurityGroupClosed
+    - Base/Config/ConfigRule/AWSEFSEncryptedCheck
+    - Base/Config/ConfigRule/AWSVPCFlowLogsEnabled
+
+##-------------------------------------------------------------------------------------------------
+  Outputs:
+
+##-------------------------------------------------------------------------------------------------
+  Targets:

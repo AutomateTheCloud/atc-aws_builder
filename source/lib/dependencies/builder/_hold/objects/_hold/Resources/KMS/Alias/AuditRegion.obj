@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  KMS/Alias/AuditRegion
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+KMSAliasAudit:
+  Type: "AWS::KMS::Alias"
+  Properties:
+    AliasName: "alias/audit-global"
+    AliasName: !Join [ "", [ "alias/audit-", !Ref "AWS::Region" ] ]
+    TargetKeyId: !Ref "KMSKeyAudit"

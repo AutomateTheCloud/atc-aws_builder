@@ -1,0 +1,20 @@
+##---------------------------------------------------------------------------------------
+# object: Config/ConfigRule/ConfigInstanceRoleUse
+# notes:
+#   - CIS Amazon Web Services Foundations
+#     - 1.19: Ensure IAM instance roles are used for AWS resource access from instances
+##---------------------------------------------------------------------------------------
+ConfigRuleConfigInstanceRoleUse:
+  Type: "AWS::Config::ConfigRule"
+  Properties:
+    ConfigRuleName: "config-instance-role-use"
+    Description: "Evaluates whether instances use instance roles"
+    MaximumExecutionFrequency: "TwentyFour_Hours"
+    Source:
+      Owner: CUSTOM_LAMBDA
+      SourceDetails:
+        - EventSource: aws.config
+          MessageType: ScheduledNotification
+      SourceIdentifier: !GetAtt "LambdaFunctionConfigInstanceRoleUse.Arn"
+  DependsOn:
+    - "LambdaPermissionConfigInstanceRoleUse"

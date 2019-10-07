@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DNS/DNSInstance
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+DNSInstance:
+  Type:                  String
+  Description:           "DNS: Instance (Subdomain|Domain|HostedZoneID)"

@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  CodeDeploy/CodeDeployApplication
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+CodeDeployApplication:
+  Type:                  String
+  Description:           "CodeDeploy Application (CodeDeployApplicationName | CodeDeployApplicationAbbr)"

@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  LoadBalancer/LoadBalancerEnabledTarget8
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+LoadBalancerEnabledTarget8:
+  Type:                  String
+  Default:               "false"
+  Description:           "LoadBalancer Enabled (Target8)"
+

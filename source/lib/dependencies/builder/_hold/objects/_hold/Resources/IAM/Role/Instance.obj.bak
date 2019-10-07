@@ -1,0 +1,239 @@
+##-------------------------------------------------------------------------------------------------
+# object:  IAM/Role/Instance
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+RoleInstance:
+  Type: "AWS::IAM::Role"
+  Properties:
+    RoleName: !Join [ "", [ "instance-", !Select [1, !Split ["|", !Ref "Project"]], "-", !Select [1, !Split ["|", !Ref "Function"]], "-", !Select [3, !Split ["|", !Ref "Organization"]], "-", !Select [1, !Split ["|", !Ref "Organization"]] ] ]
+    AssumeRolePolicyDocument:
+      Version: "2012-10-17"
+      Statement:
+        -
+          Effect: "Allow"
+          Principal:
+            Service:
+              - "ec2.amazonaws.com"
+          Action:
+            - "sts:AssumeRole"
+    Path: !Join [ "", [ "/", !Ref "AWS::Region", "/" ] ]
+    Policies:
+      -
+        PolicyName: !Join [ "", [ "policy_", !Select [1, !Split ["|", !Ref "Project"]], "_", !Select [1, !Split ["|", !Ref "Function"]], "_instance_", !Select [3, !Split ["|", !Ref "Organization"]], "_", !Ref "AWS::Region" ] ]
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            ##-----------------------------------------------------------------------------------------------------------------------------------------
+            ## CloudFormation
+            - Effect: "Allow"
+              Action:
+                - "cloudformation:DescribeStacks"
+              Resource: "*"
+
+            ##-----------------------------------------------------------------------------------------------------------------------------------------
+            ## SSM
+            - Effect: "Allow"
+              Action:
+                - "ssm:DescribeAssociation"
+                - "ssm:GetDocument"
+                - "ssm:ListAssociations"
+                - "ssm:ListInstanceAssociations"
+                - "ssm:UpdateAssociationStatus"
+                - "ssm:UpdateInstanceInformation"
+                - "ssmmessages:CreateControlChannel"
+                - "ssmmessages:CreateDataChannel"
+                - "ssmmessages:OpenControlChannel"
+                - "ssmmessages:OpenDataChannel"
+                - "s3:GetEncryptionConfiguration"
+              Resource: "*"
+
+            ##-----------------------------------------------------------------------------------------------------------------------------------------
+            ## Logging
+            - Effect: "Allow"
+              Action:
+                - "ec2messages:AcknowledgeMessage"
+                - "ec2messages:DeleteMessage"
+                - "ec2messages:FailMessage"
+                - "ec2messages:GetEndpoint"
+                - "ec2messages:GetMessages"
+                - "ec2messages:SendReply"
+                - "cloudwatch:PutMetricData"
+                - "logs:CreateLogGroup"
+                - "logs:CreateLogStream"
+                - "logs:DescribeLogGroups"
+                - "logs:DescribeLogStreams"
+                - "logs:PutLogEvents"
+              Resource: "*"
+
+            ##-----------------------------------------------------------------------------------------------------------------------------------------
+            ## Tagging
+            - Effect: "Allow"
+              Action:
+                - "ec2:DescribeVolumes"
+                - "ec2:DescribeNetworkInterfaces"
+                - "ec2:CreateTags"
+              Resource: "*"
+
+            ##-----------------------------------------------------------------------------------------------------------------------------------------
+            ## Security
+            - Effect: "Allow"
+              Action:
+                - "iam:ListUsers"
+                - "iam:GetGroup"
+              Resource: "*"
+            - Effect: "Allow"
+              Action:
+                - "ssm:GetParametersByPath"
+                - "ssm:GetParameter"
+                - "ssm:GetParameters"
+              Resource:
+                - !Join [ "", [ "arn:aws:ssm:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":parameter/global/*" ] ]
+                - !Join [ "", [ "arn:aws:ssm:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":parameter/security/ssh/*" ] ]
+                - !Join [ "", [ "arn:aws:ssm:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":parameter/security/google_authenticator/*" ] ]
+                - !Join [ "", [ "arn:aws:ssm:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":parameter/security/ssl/*" ] ]
+                - !Join [ "", [ "arn:aws:ssm:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":parameter/secrets/", !Select [1, !Split ["|", !Ref "Project"]], "/", !Select [1, !Split ["|", !Ref "Function"]], "/", !Select [3, !Split ["|", !Ref "Organization"]], "/*" ] ]
+                - !Join [ "", [ "arn:aws:ssm:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":parameter/secrets/", !Select [1, !Split ["|", !Ref "Project"]], "/", "global", "/", !Select [3, !Split ["|", !Ref "Organization"]], "/*" ] ]
+                - !Join [ "", [ "arn:aws:ssm:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":parameter/projects/", !Select [1, !Split ["|", !Ref "Project"]], "/", !Select [1, !Split ["|", !Ref "Function"]], "/", !Select [3, !Split ["|", !Ref "Organization"]], "/*" ] ]
+                - !Join [ "", [ "arn:aws:ssm:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":parameter/projects/", !Select [1, !Split ["|", !Ref "Project"]], "/", "global", "/", !Select [3, !Split ["|", !Ref "Organization"]], "/*" ] ]
+            - Effect: "Allow"
+              Action:
+                - "kms:Decrypt"
+              Resource:
+                - !GetAtt "StackReferenceResultsVPC.KMSKeyData"
+                - !GetAtt "StackReferenceResultsVPC.KMSKeyAliasData"
+                - !GetAtt "StackReferenceResultsVPC.KMSKeySecurity"
+                - !GetAtt "StackReferenceResultsVPC.KMSKeyAliasSecurity"
+
+            ##-----------------------------------------------------------------------------------------------------------------------------------------
+            ## SSL
+            - Effect: "Allow"
+              Action:
+                - "iam:GetServerCertificate"
+              Resource:
+                - !Join [ "", [ "arn:aws:iam::", !Ref "AWS::AccountId", ":server-certificate/*" ] ]
+            - Effect: "Allow"
+              Action:
+                - "ssm:GetParametersByPath"
+                - "ssm:GetParameter"
+              Resource:
+                - !Join [ "", [ "arn:aws:ssm:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":parameter/ssl/", !Select [1, !Split ["|", !Ref "Organization"]], "/*" ] ]
+
+            ##-----------------------------------------------------------------------------------------------------------------------------------------
+            ## DNS
+            - !If
+                - EnabledInstanceDNS
+                - Effect: "Allow"
+                  Action:
+                    - "route53:GetHostedZone"
+                    - "route53:ListResourceRecordSets"
+                    - "route53:ChangeResourceRecordSets"
+                  Resource:
+                    - !Join [ "", [ "arn:aws:route53:::hostedzone/", !GetAtt "StackReferenceResultsVPC.DomainUtilityHostedZoneId" ] ]
+                - !Ref "AWS::NoValue"
+
+            ##-----------------------------------------------------------------------------------------------------------------------------------------
+            ## CodeDeploy
+            - !If
+                - ExistsCodeDeployApplication
+                - Effect: "Allow"
+                  Action:
+                    - "s3:GetBucketLocation"
+                    - "s3:ListAllMyBuckets"
+                  Resource: "arn:aws:s3:::*"
+                - !Ref "AWS::NoValue"
+            - !If
+                - ExistsCodeDeployApplication
+                - Effect: "Allow"
+                  Action:
+                    - "s3:Get*"
+                    - "s3:List*"
+                  Resource:
+                    - !Join [ "", [ "arn:aws:s3:::", !Ref "AWS::AccountId", "-", "artifacts", "-", !Ref "AWS::Region" ] ]
+                    - !Join [ "", [ "arn:aws:s3:::", !Ref "AWS::AccountId", "-", "artifacts", "-", !Ref "AWS::Region", "/*" ] ]
+                - !Ref "AWS::NoValue"
+            - !If
+                - ExistsCodeDeployApplication
+                - Effect: "Allow"
+                  Action:
+                    - "s3:GetObject"
+                    - "s3:ListBucket"
+                  Resource:
+                    - !Join [ "", [ "arn:aws:s3:::", !Ref "AWS::AccountId", "-", "artifacts", "-", !Ref "AWS::Region", "/codedeploy/", !Select [0, !Split ["|", !Ref "CodeDeployApplication"]] ] ]
+                    - !Join [ "", [ "arn:aws:s3:::", !Ref "AWS::AccountId", "-", "artifacts", "-", !Ref "AWS::Region", "/codedeploy/", !Select [0, !Split ["|", !Ref "CodeDeployApplication"]], "/*" ] ]
+                - !Ref "AWS::NoValue"
+            - !If
+                - ExistsCodeDeployApplication
+                - Effect: "Allow"
+                  Action:
+                    - "s3:Get*"
+                    - "s3:List*"
+                  Resource:
+                    - "arn:aws:s3:::aws-codedeploy-us-east-1/*"
+                    - "arn:aws:s3:::aws-codedeploy-us-west-1/*"
+                    - "arn:aws:s3:::aws-codedeploy-us-west-2/*"
+                    - "arn:aws:s3:::aws-codedeploy-ap-northeast-1/*"
+                    - "arn:aws:s3:::aws-codedeploy-ap-northeast-2/*"
+                    - "arn:aws:s3:::aws-codedeploy-ap-south-1/*"
+                    - "arn:aws:s3:::aws-codedeploy-ap-southeast-1/*"
+                    - "arn:aws:s3:::aws-codedeploy-ap-southeast-2/*"
+                    - "arn:aws:s3:::aws-codedeploy-eu-central-1/*"
+                    - "arn:aws:s3:::aws-codedeploy-eu-west-1/*"
+                    - "arn:aws:s3:::aws-codedeploy-sa-east-1/*"
+                - !Ref "AWS::NoValue"
+            - !If
+                - ExistsCodeDeployApplication
+                - Effect: "Allow"
+                  Action:
+                    - "codedeploy:*"
+                    - "codedeploy:Get*"
+                    - "codedeploy:List*"
+                    - "codedeploy:Batch*"
+                    - "codedeploy:CreateDeployment"
+                    - "codedeploy:CreateDeploymentGroup"
+                    - "codedeploy:CreateDeployment"
+                    - "codedeploy:DeleteDeploymentGroup"
+                    - "codedeploy:RegisterApplicationRevision"
+                    - "codedeploy:ContinueDeployment"
+                    - "codedeploy:StopDeployment"
+                    - "codedeploy:UpdateDeploymentGroup"
+                  Resource:
+                    - !Join [ "", [ "arn:aws:codedeploy:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":application:", !Select [0, !Split ["|", !Ref "CodeDeployApplication"]] ] ]
+                    - !Join [ "", [ "arn:aws:codedeploy:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":application:", !Select [0, !Split ["|", !Ref "CodeDeployApplication"]], "/*" ] ]
+                    - !Join [ "", [ "arn:aws:codedeploy:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":deploymentgroup:", !Select [0, !Split ["|", !Ref "CodeDeployApplication"]] ] ]
+                    - !Join [ "", [ "arn:aws:codedeploy:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":deploymentgroup:", !Select [0, !Split ["|", !Ref "CodeDeployApplication"]], "/*" ] ]
+                    - !Join [ "", [ "arn:aws:codedeploy:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":deploymentconfig:*" ] ]
+                - !Ref "AWS::NoValue"
+            - !If
+                - ExistsCodeDeployApplication
+                - Effect: "Allow"
+                  Action:
+                    - "iam:PassRole"
+                  Resource:
+                    - !Join [ "", [ "arn:aws:iam::", !Ref "AWS::AccountId", ":role/", "codedeploy-", !Select [1, !Split ["|", !Ref "CodeDeployApplication"]], "-", !Ref "AWS::Region" ] ]
+                - !Ref "AWS::NoValue"
+
+            ##-----------------------------------------------------------------------------------------------------------------------------------------
+            ## LoadBalancer
+            - Effect: "Allow"
+              Action:
+                - "elasticloadbalancing:RegisterTargets"
+                - "elasticloadbalancing:DeregisterTargets"
+              Resource:
+                - "*"
+
+            ##-----------------------------------------------------------------------------------------------------------------------------------------
+            ## Elastic IP Related
+            - !If
+                - EnabledElasticIp
+                - Effect: "Allow"
+                  Action:
+                    - "ec2:DescribeInstances"
+                    - "ec2:DescribeTags"
+                    - "ec2:DescribeAddresses"
+                    - "ec2:AssociateAddress"
+                    - "ec2:DisassociateAddress"
+                  Resource:
+                    - "*"
+                - !Ref "AWS::NoValue"
+  DependsOn:
+    - "StackReferenceResultsVPC"

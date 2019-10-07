@@ -1,0 +1,190 @@
+##-------------------------------------------------------------------------------------------------
+# object:  VPC/2AZ
+# class:   template
+##-------------------------------------------------------------------------------------------------
+Paradigm:
+##-------------------------------------------------------------------------------------------------
+  Parameters:
+    #-- Network -------------------------------------------------------------------------
+    - Base/Network/EnableMangementNetwork
+    - Base/Network/IpNetwork
+    - Base/Network/IpNetmask
+    - Base/Network/AvailabilityZone1
+    - Base/Network/AvailabilityZone2
+
+    #-- Instance ------------------------------------------------------------------------
+    - Base/Instance/KeypairDefault
+    - Base/Instance/TimezoneLinux
+    - Base/Instance/TimezoneWindows
+
+    #-- Domain: Utility -----------------------------------------------------------------
+    - Base/DNS/DomainUtility
+
+    #-- ECS -----------------------------------------------------------------------------
+    - Base/ECS/EnableECSCluster
+
+    #-- VPC -----------------------------------------------------------------------------
+    - Base/VPC/EnableVPCFlowLogs
+
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/StackReference/StackReferenceAccountSetup
+
+##-------------------------------------------------------------------------------------------------
+  Mappings:
+
+##-------------------------------------------------------------------------------------------------
+  Conditions:
+    #-- Network -------------------------------------------------------------------------
+    - Base/Network/EnabledMangementNetwork
+
+    #-- ECS -----------------------------------------------------------------------------
+    - Base/ECS/EnabledECSCluster
+
+    #-- VPC -----------------------------------------------------------------------------
+    - Base/VPC/EnabledVPCFlowLogs
+
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/StackReference/ExistsStackReferenceAccountSetup
+
+##-------------------------------------------------------------------------------------------------
+  Resources:
+    #-- VPC -----------------------------------------------------------------------------
+    - Base/EC2/VPC/VPC
+
+    #-- VPC Endpoints -------------------------------------------------------------------
+    - Base/EC2/VPCEndpoint/S3Endpoint
+    - Base/EC2/VPCEndpoint/DynamodbEndpoint
+
+    #-- Subnet Groups -------------------------------------------------------------------
+    - Base/EC2/Subnet/Public1
+    - Base/EC2/Subnet/Public2
+    - Base/EC2/Subnet/Private1
+    - Base/EC2/Subnet/Private2
+    - Base/EC2/Subnet/Management1
+    - Base/EC2/Subnet/Management2
+
+    #-- Route Tables---------------------------------------------------------------------
+    - Base/EC2/RouteTable/Public
+    - Base/EC2/RouteTable/Private
+  - Base/EC2/RouteTable/Management
+
+    #-- Routes --------------------------------------------------------------------------
+    - Base/EC2/Route/Public
+
+    #-- Subnet Route Table Associations (Public) ----------------------------------------
+    - Base/EC2/SubnetRouteTableAssociation/Public1
+    - Base/EC2/SubnetRouteTableAssociation/Public2
+
+    #-- Subnet Route Table Associations (Private) ---------------------------------------
+    - Base/EC2/SubnetRouteTableAssociation/Private1
+    - Base/EC2/SubnetRouteTableAssociation/Private2
+
+    #-- Subnet Route Table Associations (Management) ------------------------------------
+    - Base/EC2/SubnetRouteTableAssociation/Management1
+    - Base/EC2/SubnetRouteTableAssociation/Management2
+
+    #-- Security Groups -----------------------------------------------------------------
+    - Base/EC2/SecurityGroupIngress/VPCDefault
+    - Base/EC2/SecurityGroupEgress/VPCDefault
+
+    #-- Internet ------------------------------------------------------------------------
+    - Base/EC2/VPCGatewayAttachment/Internet
+    - Base/EC2/InternetGateway/InternetGateway
+
+    #-- Lambda --------------------------------------------------------------------------
+    - Base/Custom/VPCSubnetCalculator
+
+    #-- RDS -----------------------------------------------------------------------------
+    - Base/RDS/DBSubnetGroup/DBSubnetGroupPublic_2AZ
+    - Base/RDS/DBSubnetGroup/DBSubnetGroupPrivate_2AZ
+    - Base/RDS/DBSubnetGroup/DBSubnetGroupManagement_2AZ
+
+    #-- ElastiCache ---------------------------------------------------------------------
+    - Base/ElastiCache/SubnetGroup/ECSubnetGroupPublic_2AZ
+    - Base/ElastiCache/SubnetGroup/ECSubnetGroupPrivate_2AZ
+    - Base/ElastiCache/SubnetGroup/ECSubnetGroupManagement_2AZ
+
+    #-- ECS -----------------------------------------------------------------------------
+    - Base/ECS/Cluster/ECSCluster
+
+    #-- Logs ----------------------------------------------------------------------------
+    - Base/Logs/LogGroup/LinuxAudit
+    - Base/Logs/LogGroup/LinuxDmesg
+    - Base/Logs/LogGroup/LinuxMessages
+    - Base/Logs/LogGroup/LinuxOssec
+    - Base/Logs/LogGroup/LinuxSecure
+
+    #-- KMS -----------------------------------------------------------------------------
+    - Base/KMS/Key/Data
+    - Base/KMS/Alias/Data
+
+    #-- VPC -----------------------------------------------------------------------------
+    - Base/EC2/FlowLog/VPC
+
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/Custom/StackReferenceResultsAccountSetup
+
+##-------------------------------------------------------------------------------------------------
+  Outputs:
+    #-- VPC -----------------------------------------------------------------------------
+    - Base/VPC/VPCId
+    - Base/VPC/VPCName
+    - Base/VPC/VPCCidr
+
+    #-- Subnet - Public -----------------------------------------------------------------
+    - Base/Network/SubnetPublic1Id
+    - Base/Network/SubnetPublic1AvailabilityZone
+    - Base/Network/SubnetPublic1Cidr
+    - Base/Network/SubnetPublic2Id
+    - Base/Network/SubnetPublic2AvailabilityZone
+    - Base/Network/SubnetPublic2Cidr
+
+    #-- Subnet - Private ----------------------------------------------------------------
+    - Base/Network/SubnetPrivate1Id
+    - Base/Network/SubnetPrivate1AvailabilityZone
+    - Base/Network/SubnetPrivate1Cidr
+    - Base/Network/SubnetPrivate2Id
+    - Base/Network/SubnetPrivate2AvailabilityZone
+    - Base/Network/SubnetPrivate2Cidr
+
+    #-- Subnet - Management ----------------------------------------------------------------
+    - Base/Network/SubnetManagement1Id
+    - Base/Network/SubnetManagement1AvailabilityZone
+    - Base/Network/SubnetManagement1Cidr
+    - Base/Network/SubnetManagement2Id
+    - Base/Network/SubnetManagement2AvailabilityZone
+    - Base/Network/SubnetManagement2Cidr
+
+    #-- Route Tables --------------------------------------------------------------------
+    - Base/Network/RouteTablePublicId
+    - Base/Network/RouteTablePrivateId
+    - Base/Network/RouteTableManagementId
+
+    #-- RDS -----------------------------------------------------------------------------
+    - Base/Network/DBSubnetGroupPublicId
+    - Base/Network/DBSubnetGroupPrivateId
+    - Base/Network/DBSubnetGroupManagementId
+
+    #-- ElastiCache ---------------------------------------------------------------------
+    - Base/Network/ECSubnetGroupPublicId
+    - Base/Network/ECSubnetGroupPrivateId
+    - Base/Network/ECSubnetGroupManagementId
+
+    #-- ECS -----------------------------------------------------------------------------
+    - Base/ECS/ECSClusterId
+    - Base/ECS/ECSClusterArn
+
+    #-- Application ---------------------------------------------------------------------
+    - Base/Instance/KeypairDefault
+    - Base/Instance/TimezoneLinux
+    - Base/Instance/TimezoneWindows
+
+    #-- KMS -----------------------------------------------------------------------------
+    - Base/KMS/KMSKeyData
+    - Base/KMS/KMSKeyAliasData
+    - Base/KMS/KMSKeySecurityVPC
+    - Base/KMS/KMSKeyAliasSecurityVPC
+
+    #-- Domain: Utility -----------------------------------------------------------------
+    - Base/DNS/DomainUtilityName
+    - Base/DNS/DomainUtilityHostedZoneId

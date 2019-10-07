@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DynamoDB/DynamoDBTableName
+# class:   output
+##-------------------------------------------------------------------------------------------------
+DynamoDBTableName:
+  Description: "DynamoDB Table Name"
+  Value: !Ref "TableName"
+  Export:
+    Name: !Sub "${AWS::StackName}-DynamoDBTableName"

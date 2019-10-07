@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SNS/Topic/ConfigArn
+# class:   output
+##-------------------------------------------------------------------------------------------------
+SNSTopicConfigArn:
+  Description: "SNS Topic (Config): ARN"
+  Value: !Ref "SNSTopicConfig"
+  Export:
+    Name: !Sub "${AWS::StackName}-SNSTopicConfigArn"

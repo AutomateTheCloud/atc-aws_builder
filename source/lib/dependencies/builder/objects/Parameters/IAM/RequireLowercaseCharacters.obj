@@ -1,0 +1,13 @@
+##---------------------------------------------------------------------------------------
+# object: IAM/RequireLowercaseCharacters
+# notes:
+#   - CIS Amazon Web Services Foundations
+#     - 1.6: Ensure IAM password policy require at least one lowercase letter
+##---------------------------------------------------------------------------------------
+RequireLowercaseCharacters:
+  Description: "You can require that IAM user passwords contain at least one lowercase character from the ISO basic Latin alphabet (a to z)."
+  Type: String
+  Default: true
+  AllowedValues:
+  - true
+  - false

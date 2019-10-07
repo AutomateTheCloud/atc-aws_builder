@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Logs/LogGroupApplicationError
+# class:   output
+##-------------------------------------------------------------------------------------------------
+LogGroupApplicationError:
+  Description: "Log Group: Application Error"
+  Value: !Ref "LogGroupApplicationError"
+  Export:
+    Name: !Sub "${AWS::StackName}-LogGroupApplicationError"

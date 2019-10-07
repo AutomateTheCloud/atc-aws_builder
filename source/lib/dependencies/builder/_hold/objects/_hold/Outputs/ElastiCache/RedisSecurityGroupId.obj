@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  ElastiCache/RedisSecurityGroupId
+# class:   output
+##-------------------------------------------------------------------------------------------------
+RedisSecurityGroupId:
+  Description: "Security Group ID - Redis"
+  Value: !Ref "SecurityGroupRedis"
+  Export:
+    Name: !Sub "${AWS::StackName}-RedisSecurityGroupId"

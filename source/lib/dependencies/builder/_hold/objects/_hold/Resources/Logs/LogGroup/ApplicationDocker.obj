@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Logs/LogGroup/ApplicationDocker
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+LogGroupApplicationDocker:
+  Type: "AWS::Logs::LogGroup"
+  Properties:
+    LogGroupName: !Join [ "", [ !Select [1, !Split ["|", !Ref "Project"]], "-", !Select [1, !Split ["|", !Ref "Function"]], "-", !Select [3, !Split ["|", !Ref "Organization"]], "-", !Ref "AWS::Region", "-docker" ] ]
+    RetentionInDays: !Ref "LogRetentionDays"

@@ -1,0 +1,6 @@
+##---------------------------------------------------------------------------------------
+# object: StackReference/StackReferenceTarget1
+##---------------------------------------------------------------------------------------
+StackReferenceTarget1:
+  Description: "Stack Reference: Target1"
+  Type: String

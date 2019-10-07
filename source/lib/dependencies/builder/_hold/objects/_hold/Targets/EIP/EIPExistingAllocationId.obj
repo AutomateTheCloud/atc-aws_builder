@@ -1,0 +1,6 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EIP/EIPExistingAllocationId
+# class:   target
+# example: ProjectName - FunctionName (environment) - [orgname / region]
+##-------------------------------------------------------------------------------------------------
+tag_ec2|EIPExistingAllocationId|Name|${DETAILS_PROJECT_NAME} - ${DETAILS_FUNCTION_NAME} (${DETAILS_ENVIRONMENT}) - [${DETAILS_ORGANIZATION_NAME} / ${DETAILS_REGION}]

@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EFS/EFSFileSystemApplicationId
+# class:   output
+##-------------------------------------------------------------------------------------------------
+EFSFileSystemApplicationId:
+  Description: "EFS Filesystem (Application): ID"
+  Value: !Ref "FileSystemApplication"
+  Export:
+    Name: !Sub "${AWS::StackName}-EFSFileSystemApplicationId"

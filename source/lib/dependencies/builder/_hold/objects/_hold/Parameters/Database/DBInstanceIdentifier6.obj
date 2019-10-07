@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DBInstanceIdentifier6
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+DBInstanceIdentifier6:
+  Type:                  String
+  Description:           "Database Instance Identifier (6)"

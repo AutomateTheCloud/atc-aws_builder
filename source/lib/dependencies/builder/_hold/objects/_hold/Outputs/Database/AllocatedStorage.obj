@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/AllocatedStorage
+# class:   output
+##-------------------------------------------------------------------------------------------------
+AllocatedStorage:
+  Description: "AllocatedStorage"
+  Value: !Ref "AllocatedStorage"
+  Export:
+    Name: !Sub "${AWS::StackName}-AllocatedStorage"

@@ -1,0 +1,8 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Instance/AWSDeployTarget
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+AWSDeployTarget:
+  Type:                  String
+  Default:               ""
+  Description:           "AWS Deploy (Target File)"

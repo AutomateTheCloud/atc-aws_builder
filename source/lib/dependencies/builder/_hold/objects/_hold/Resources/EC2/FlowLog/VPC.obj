@@ -1,0 +1,15 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EC2/FlowLog/VPC
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+FlowLogVPC:
+  Condition: "EnabledVPCFlowLogs"
+  Type: "AWS::EC2::FlowLog"
+  Properties:
+    LogDestination: !Join [ "", [ "arn:aws:s3:::", !Ref "AWS::AccountId", "-", "logs", "-", !Ref "AWS::Region", "/flowlogs/", !Ref "VPC", "/" ] ]
+    LogDestinationType: "s3"
+    ResourceId: !Ref "VPC"
+    ResourceType: "VPC"
+    TrafficType: !Ref "FlowLogTrafficType"
+  DependsOn:
+    - "VPC"

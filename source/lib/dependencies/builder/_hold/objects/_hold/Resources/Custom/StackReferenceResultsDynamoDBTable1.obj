@@ -1,0 +1,13 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Custom/StackReferenceResultsDynamoDBTable1
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+StackReferenceResultsDynamoDBTable1:
+  Condition: "ExistsStackReferenceDynamoDBTable1"
+  Type: "Custom::StackReferenceResultsDynamoDBTable1"
+  Version: "1.0"
+  Properties:
+    "ServiceToken": !Join [ "", [ "arn:aws:lambda:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":function:stack-reference" ] ]
+    "Region": !Ref "AWS::Region"
+    "StackName": !Ref "StackReferenceDynamoDBTable1"
+    "LastUpdate": !Ref "LastUpdate"

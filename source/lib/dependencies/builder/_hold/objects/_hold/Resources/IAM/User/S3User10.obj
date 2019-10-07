@@ -1,0 +1,155 @@
+##-------------------------------------------------------------------------------------------------
+# object:  IAM/User/S3User10
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+S3User10:
+  Condition: "ExistsIAMUsername10"
+  Type: "AWS::IAM::User"
+  Properties:
+    UserName: !Ref "IAMUsername10"
+    Policies:
+      -
+        PolicyName: !Join [ "", [ "user-s3access", "_", !Ref "IAMUsername10", "_", !Select [1, !Split ["|", !Ref "Project"]], "-", !Select [1, !Split ["|", !Ref "Function"]], "-", !Select [3, !Split ["|", !Ref "Organization"]], "-", !Select [1, !Split ["|", !Ref "Organization"]], "_", !Ref "AWS::Region" ] ]
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - !If
+              - ExistsStackReferenceS3Bucket1
+              - Effect: "Allow"
+                Action:
+                - "s3:GetBucketLocation"
+                - "s3:ListBucket"
+                - "s3:ListObject"
+                - "s3:Get*"
+                - "s3:Put*"
+                - "s3:DeleteObject"
+                Resource:
+                - !Join [ "", [ "arn:aws:s3:::", !GetAtt "StackReferenceResultsS3Bucket1.S3Bucket" ] ]
+                - !Join [ "", [ "arn:aws:s3:::", !GetAtt "StackReferenceResultsS3Bucket1.S3Bucket", "/*" ] ]
+              - !Ref "AWS::NoValue"
+            - !If
+              - ExistsStackReferenceS3Bucket2
+              - Effect: "Allow"
+                Action:
+                - "s3:GetBucketLocation"
+                - "s3:ListBucket"
+                - "s3:ListObject"
+                - "s3:Get*"
+                - "s3:Put*"
+                - "s3:DeleteObject"
+                Resource:
+                - !Join [ "", [ "arn:aws:s3:::", !GetAtt "StackReferenceResultsS3Bucket2.S3Bucket" ] ]
+                - !Join [ "", [ "arn:aws:s3:::", !GetAtt "StackReferenceResultsS3Bucket2.S3Bucket", "/*" ] ]
+              - !Ref "AWS::NoValue"
+            - !If
+              - ExistsStackReferenceS3Bucket3
+              - Effect: "Allow"
+                Action:
+                - "s3:GetBucketLocation"
+                - "s3:ListBucket"
+                - "s3:ListObject"
+                - "s3:Get*"
+                - "s3:Put*"
+                - "s3:DeleteObject"
+                Resource:
+                - !Join [ "", [ "arn:aws:s3:::", !GetAtt "StackReferenceResultsS3Bucket3.S3Bucket" ] ]
+                - !Join [ "", [ "arn:aws:s3:::", !GetAtt "StackReferenceResultsS3Bucket3.S3Bucket", "/*" ] ]
+              - !Ref "AWS::NoValue"
+            - !If
+              - ExistsStackReferenceS3Bucket4
+              - Effect: "Allow"
+                Action:
+                - "s3:GetBucketLocation"
+                - "s3:ListBucket"
+                - "s3:ListObject"
+                - "s3:Get*"
+                - "s3:Put*"
+                - "s3:DeleteObject"
+                Resource:
+                - !Join [ "", [ "arn:aws:s3:::", !GetAtt "StackReferenceResultsS3Bucket4.S3Bucket" ] ]
+                - !Join [ "", [ "arn:aws:s3:::", !GetAtt "StackReferenceResultsS3Bucket4.S3Bucket", "/*" ] ]
+              - !Ref "AWS::NoValue"
+            - !If
+              - ExistsStackReferenceS3Bucket5
+              - Effect: "Allow"
+                Action:
+                - "s3:GetBucketLocation"
+                - "s3:ListBucket"
+                - "s3:ListObject"
+                - "s3:Get*"
+                - "s3:Put*"
+                - "s3:DeleteObject"
+                Resource:
+                - !Join [ "", [ "arn:aws:s3:::", !GetAtt "StackReferenceResultsS3Bucket5.S3Bucket" ] ]
+                - !Join [ "", [ "arn:aws:s3:::", !GetAtt "StackReferenceResultsS3Bucket5.S3Bucket", "/*" ] ]
+              - !Ref "AWS::NoValue"
+            - !If
+              - ExistsStackReferenceS3Bucket6
+              - Effect: "Allow"
+                Action:
+                - "s3:GetBucketLocation"
+                - "s3:ListBucket"
+                - "s3:ListObject"
+                - "s3:Get*"
+                - "s3:Put*"
+                - "s3:DeleteObject"
+                Resource:
+                - !Join [ "", [ "arn:aws:s3:::", !GetAtt "StackReferenceResultsS3Bucket6.S3Bucket" ] ]
+                - !Join [ "", [ "arn:aws:s3:::", !GetAtt "StackReferenceResultsS3Bucket6.S3Bucket", "/*" ] ]
+              - !Ref "AWS::NoValue"
+            - !If
+              - ExistsStackReferenceS3Bucket7
+              - Effect: "Allow"
+                Action:
+                - "s3:GetBucketLocation"
+                - "s3:ListBucket"
+                - "s3:ListObject"
+                - "s3:Get*"
+                - "s3:Put*"
+                - "s3:DeleteObject"
+                Resource:
+                - !Join [ "", [ "arn:aws:s3:::", !GetAtt "StackReferenceResultsS3Bucket7.S3Bucket" ] ]
+                - !Join [ "", [ "arn:aws:s3:::", !GetAtt "StackReferenceResultsS3Bucket7.S3Bucket", "/*" ] ]
+              - !Ref "AWS::NoValue"
+            - !If
+              - ExistsStackReferenceS3Bucket8
+              - Effect: "Allow"
+                Action:
+                - "s3:GetBucketLocation"
+                - "s3:ListBucket"
+                - "s3:ListObject"
+                - "s3:Get*"
+                - "s3:Put*"
+                - "s3:DeleteObject"
+                Resource:
+                - !Join [ "", [ "arn:aws:s3:::", !GetAtt "StackReferenceResultsS3Bucket8.S3Bucket" ] ]
+                - !Join [ "", [ "arn:aws:s3:::", !GetAtt "StackReferenceResultsS3Bucket8.S3Bucket", "/*" ] ]
+              - !Ref "AWS::NoValue"
+            - !If
+              - ExistsStackReferenceS3Bucket9
+              - Effect: "Allow"
+                Action:
+                - "s3:GetBucketLocation"
+                - "s3:ListBucket"
+                - "s3:ListObject"
+                - "s3:Get*"
+                - "s3:Put*"
+                - "s3:DeleteObject"
+                Resource:
+                - !Join [ "", [ "arn:aws:s3:::", !GetAtt "StackReferenceResultsS3Bucket9.S3Bucket" ] ]
+                - !Join [ "", [ "arn:aws:s3:::", !GetAtt "StackReferenceResultsS3Bucket9.S3Bucket", "/*" ] ]
+              - !Ref "AWS::NoValue"
+            - !If
+              - ExistsStackReferenceS3Bucket10
+              - Effect: "Allow"
+                Action:
+                - "s3:GetBucketLocation"
+                - "s3:ListBucket"
+                - "s3:ListObject"
+                - "s3:Get*"
+                - "s3:Put*"
+                - "s3:DeleteObject"
+                Resource:
+                - !Join [ "", [ "arn:aws:s3:::", !GetAtt "StackReferenceResultsS3Bucket10.S3Bucket" ] ]
+                - !Join [ "", [ "arn:aws:s3:::", !GetAtt "StackReferenceResultsS3Bucket10.S3Bucket", "/*" ] ]
+              - !Ref "AWS::NoValue"

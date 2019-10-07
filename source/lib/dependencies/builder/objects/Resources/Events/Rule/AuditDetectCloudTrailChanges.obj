@@ -1,0 +1,24 @@
+##---------------------------------------------------------------------------------------
+# object: Events/Rule/AuditDetectCloudTrailChanges
+#   - CIS Amazon Web Services Foundations
+#     - 3.5: Ensure a log metric filter and alarm exist for CloudTrail configuration changes
+##---------------------------------------------------------------------------------------
+EventsRuleAuditDetectCloudTrailChanges:
+  Type: "AWS::Events::Rule"
+  Properties:
+    Name: "audit-detect-cloudtrail-changes"
+    Description: "Publishes formatted CloudTrail change events to an SNS topic"
+    EventPattern:
+      detail-type:
+        - "AWS API Call via CloudTrail"
+      detail:
+        eventSource:
+          - "cloudtrail.amazonaws.com"
+        eventName:
+          - "StopLogging"
+          - "DeleteTrail"
+          - "UpdateTrail"
+    State: "ENABLED"
+    Targets:
+      - Arn: !GetAtt "LambdaFunctionAuditFormatCloudWatchEvent.Arn"
+        Id: "TargetFunctionV1"

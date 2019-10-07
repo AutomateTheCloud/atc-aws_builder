@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  ElastiCache/ElastiCacheParameterGroupName
+# class:   output
+##-------------------------------------------------------------------------------------------------
+ParameterGroupName:
+  Description: "Parameter Group Name"
+  Value: !Ref "ElastiCacheParameterGroup"
+  Export:
+    Name: !Sub "${AWS::StackName}-ParameterGroupName"

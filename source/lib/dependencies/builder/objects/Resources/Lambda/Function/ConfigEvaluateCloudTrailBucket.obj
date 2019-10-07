@@ -1,0 +1,79 @@
+##---------------------------------------------------------------------------------------
+# object: Lambda/Function/ConfigEvaluateCloudTrailBucket
+# notes:
+#   - Based on AWS Lab: aws-security-benchmark
+#     - https://github.com/awslabs/aws-security-benchmark/blob/master/architecture/create-benchmark-rules.yaml
+#   - CIS Amazon Web Services Foundations
+#     - 2.3: Ensure the S3 bucket CloudTrail logs to is not publicly accessible
+#     - 2.6: Ensure S3 bucket access logging is enabled on the CloudTrail S3 bucket
+##---------------------------------------------------------------------------------------
+LambdaFunctionConfigEvaluateCloudTrailBucket:
+  Type: "AWS::Lambda::Function"
+  Properties:
+    FunctionName: "config-evaluate-cloudtrail-bucket"
+    Description: "Evaluates whether the CloudTrail S3 bucket has appropriate security properties"
+    Code:
+      ZipFile: |
+        #==================================================================================================
+        # Function: config-evaluate-cloudtrail-bucket
+        # Purpose:  Evaluates whether the CloudTrail S3 bucket has appropriate security properties
+        #==================================================================================================
+        import json
+        import boto3
+        import datetime
+        import time
+        def lambda_handler(event, context):
+            is_compliant = True #default
+            annotation = ''
+            is_publicly_accessible = False
+            s3_bucket_name = ''
+            # Get the trail for the current region.
+            client = boto3.client('cloudtrail')
+            for trail in client.describe_trails(includeShadowTrails = False)['trailList']:
+              # CloudTrail S3 bucket not publicly accessible and is logged?
+              if trail['S3BucketName']:
+                  s3_bucket_name = trail['S3BucketName']
+                  client = boto3.client('s3')
+                  try:
+                      for grant in client.get_bucket_acl(Bucket = s3_bucket_name)['Grants']:
+                          if grant['Permission'] in ['READ','FULL_CONTROL'] \
+                              and ('URI' in grant['Grantee'] \
+                              and ('AuthenticatedUsers' in grant['Grantee']['URI'] or 'AllUsers' in grant['Grantee']['URI'])):
+                              # Bucket has an ACL that allows it to be publicly accessible.
+                              is_publicly_accessible = True
+                      if is_publicly_accessible:
+                          is_compliant = False
+                          annotation = annotation + ' The CloudTrail S3 bucket \'{}\' is publicly accessible.'.format(s3_bucket_name)
+                      # CloudTrail S3 bucket has logging enabled?
+                      if not client.get_bucket_logging(Bucket = s3_bucket_name):
+                          is_compliant = False
+                          annotation = annotation + ' The CloudTrail S3 bucket \'{}\' does not have logging enabled.'.format(s3_bucket_name)
+                  except E:
+                      is_compliant = False
+                      annotation = annotation + ' There was an error looking up CloudTrail S3 bucket \'{}\'.'.format(s3_bucket_name)
+              else:
+                  annotation = annotation + ' CloudTrail is not integrated with S3.'
+            result_token = 'No token found.'
+            if 'resultToken' in event: result_token = event['resultToken']
+            evaluations = [
+                {
+                    'ComplianceResourceType': 'AWS::S3::Bucket',
+                    'ComplianceResourceId': s3_bucket_name,
+                    'ComplianceType': 'COMPLIANT' if is_compliant else 'NON_COMPLIANT',
+                    'OrderingTimestamp': datetime.datetime.now()
+                }
+            ]
+            if annotation: evaluations[0]['Annotation'] = annotation
+            config = boto3.client('config')
+            config.put_evaluations(
+                Evaluations = evaluations,
+                ResultToken = result_token
+            )
+
+    Handler: "index.lambda_handler"
+    MemorySize: 1024
+    Role: !GetAtt "IAMRoleLambdaFunctionConfig.Arn"
+    Runtime: "python2.7"
+    Timeout: 10
+  DependsOn:
+    - "IAMRoleLambdaFunctionConfig"

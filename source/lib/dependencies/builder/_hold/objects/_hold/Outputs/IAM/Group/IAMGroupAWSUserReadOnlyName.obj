@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  IAM/Group/IAMGroupAWSUserReadOnlyName
+# class:   output
+##-------------------------------------------------------------------------------------------------
+IAMGroupAWSUserReadOnlyName:
+  Description: "IAM Group (AWSUserReadOnly): Name"
+  Value: !Ref "IAMGroupAWSUserReadOnly"
+  Export:
+    Name: !Sub "${AWS::StackName}-IAMGroupAWSUserReadOnlyName"

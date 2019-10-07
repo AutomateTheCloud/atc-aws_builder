@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SNS/Topic/AuditTopicName
+# class:   output
+##-------------------------------------------------------------------------------------------------
+SNSTopicAuditTopicName:
+  Description: "SNS Topic (Audit): Topic Name"
+  Value: !GetAtt "SNSTopicAudit.TopicName"
+  Export:
+    Name: !Sub "${AWS::StackName}-SNSTopicAuditTopicName"

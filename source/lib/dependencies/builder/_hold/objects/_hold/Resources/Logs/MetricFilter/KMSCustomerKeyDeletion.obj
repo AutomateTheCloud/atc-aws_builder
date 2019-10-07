@@ -1,0 +1,18 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Logs/MetricFilter/KMSCustomerKeyDeletion
+# class:   resource
+# cis:     3.7: Ensure a log metric filter and alarm exist for disabling or scheduled deletion of customer created CMKs
+##-------------------------------------------------------------------------------------------------
+MetricFilterKMSCustomerKeyDeletion:
+  Type: "AWS::Logs::MetricFilter"
+  Properties:
+    LogGroupName: !GetAtt "StackReferenceResultsAccountConfiguration.LogGroupCloudTrailAuditId"
+    FilterPattern: "{
+        ($.eventSource = kms.amazonaws.com) &&
+        (($.eventName=DisableKey)||($.eventName=ScheduleKeyDeletion))
+        }"
+    MetricTransformations:
+      -
+        MetricNamespace: "CloudTrailMetrics"
+        MetricName: "KMSCustomerKeyDeletion"
+        MetricValue: 1

@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DNS/DNSDistributionWebsiteRecordName
+# class:   output
+##-------------------------------------------------------------------------------------------------
+DNSDistributionRecord:
+  Condition: "ExistsDNSDistributionWebsite"
+  Description: "DNS: Distribution Website Record Name"
+  Value: !Join [ "", [ !Select [0, !Split ["|", !Ref "DNSDistributionWebsite"]], ".", !Select [1, !Split ["|", !Ref "DNSDistributionWebsite"]] ] ]
+  Export:
+    Name: !Sub "${AWS::StackName}-DNSDistributionRecord"

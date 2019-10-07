@@ -1,0 +1,13 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Instance/LaunchEncryptedAMI
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+LaunchEncryptedAMI:
+  Type:                  "String"
+  Default:               "no"
+  AllowedValues:
+    - ""
+    - "yes"
+    - "no"
+  Description:           "Launch Encrypted AMI"
+  ConstraintDescription: "yes/no"

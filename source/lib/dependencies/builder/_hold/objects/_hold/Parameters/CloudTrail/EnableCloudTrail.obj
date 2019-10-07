@@ -1,0 +1,13 @@
+##-------------------------------------------------------------------------------------------------
+# object:  CloudTrail/EnableCloudTrail
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+EnableCloudTrail:
+  Type:                  "String"
+  Default:               "no"
+  AllowedValues:
+    - ""
+    - "yes"
+    - "no"
+  Description:           "Enable CloudTrail"
+  ConstraintDescription: "yes/no"

@@ -1,0 +1,97 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Account/Configuration_Global
+# class:   template
+##-------------------------------------------------------------------------------------------------
+
+Paradigm:
+##-------------------------------------------------------------------------------------------------
+  Parameters:
+    #-- S3 ------------------------------------------------------------------------------
+    - Base/S3/S3BucketAuditName
+    - Base/S3/S3BucketLogsGlobalName
+
+    #-- CloudTrail ------------------------------------------------------------------------
+    - Base/Logs/CloudTrailLogRetentionDays
+
+    #-- IAM -----------------------------------------------------------------------------
+    - Base/IAM/AllowUsersToChangePassword
+    - Base/IAM/HardExpiry
+    - Base/IAM/MaxPasswordAge
+    - Base/IAM/MinimumPasswordLength
+    - Base/IAM/PasswordReusePrevention
+    - Base/IAM/RequireLowercaseCharacters
+    - Base/IAM/RequireNumbers
+    - Base/IAM/RequireSymbols
+    - Base/IAM/RequireUppercaseCharacters
+
+##-------------------------------------------------------------------------------------------------
+  Mappings:
+
+##-------------------------------------------------------------------------------------------------
+  Conditions:
+
+##-------------------------------------------------------------------------------------------------
+  Resources:
+    #-- KMS -----------------------------------------------------------------------------
+    - Base/KMS/Key/AuditGlobal
+    - Base/KMS/Alias/AuditGlobal
+
+    #-- S3 ------------------------------------------------------------------------------
+    - Base/S3/Bucket/Audit
+    - Base/S3/BucketPolicy/Audit
+    - Base/S3/Bucket/LogsGlobal
+    - Base/S3/BucketPolicy/LogsGlobal
+
+    #-- CloudTrail ----------------------------------------------------------------------
+    - Base/CloudTrail/Trail/Audit
+    - Base/Logs/LogGroup/CloudTrailAudit
+    - Base/IAM/Role/LogGroupCloudTrailAudit
+
+    #-- Lambda Functions ----------------------------------------------------------------
+    - Base/Lambda/Function/IAMPasswordPolicy
+
+    #-- IAM -----------------------------------------------------------------------------
+    - Base/IAM/Group/AWSUserAdministrator
+    - Base/IAM/Group/AWSUserPowerUser
+    - Base/IAM/Group/AWSUserReadOnly
+    - Base/IAM/Group/AWSUserHuman
+    - Base/IAM/Group/AWSUserBilling
+    - Base/IAM/Group/AWSUserSupport
+    - Base/IAM/Role/LambdaFunctionIAMPasswordPolicy
+
+    #-- Cloudwatch Logs -----------------------------------------------------------------
+    - Base/Logs/LogGroup/LambdaFunctionIAMPasswordPolicy
+
+    #-- Custom --------------------------------------------------------------------------
+    - Base/Custom/IAMPasswordPolicy
+
+##-------------------------------------------------------------------------------------------------
+  Outputs:
+    #-- KMS -----------------------------------------------------------------------------
+    - Base/KMS/KMSKeyAudit
+    - Base/KMS/KMSKeyAliasAudit
+
+    #-- S3 ------------------------------------------------------------------------------
+    - Base/S3/S3BucketAudit
+    - Base/S3/S3BucketLogs
+
+    #-- CloudTrail ----------------------------------------------------------------------
+    - Base/Logs/LogGroupCloudTrailAuditId
+    - Base/Logs/LogGroupCloudTrailAuditArn
+
+    #-- IAM -----------------------------------------------------------------------------
+    - Base/IAM/Group/IAMGroupAWSUserAdministratorName
+    - Base/IAM/Group/IAMGroupAWSUserAdministratorArn
+    - Base/IAM/Group/IAMGroupAWSUserPowerUserName
+    - Base/IAM/Group/IAMGroupAWSUserPowerUserArn
+    - Base/IAM/Group/IAMGroupAWSUserReadOnlyName
+    - Base/IAM/Group/IAMGroupAWSUserReadOnlyArn
+    - Base/IAM/Group/IAMGroupAWSUserHumanName
+    - Base/IAM/Group/IAMGroupAWSUserHumanArn
+    - Base/IAM/Group/IAMGroupAWSUserBillingName
+    - Base/IAM/Group/IAMGroupAWSUserBillingArn
+    - Base/IAM/Group/IAMGroupAWSUserSupportName
+    - Base/IAM/Group/IAMGroupAWSUserSupportArn
+
+##-------------------------------------------------------------------------------------------------
+  Targets:

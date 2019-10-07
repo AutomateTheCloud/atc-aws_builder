@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SQS/SQSQueueMaximumMessageSize
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+SQSQueueMaximumMessageSize:
+  Type:                  Number
+  Description:           "SQS: Maximum Message Size (bytes)"
+  Default:               262144
+  MinValue:              1024
+  MaxValue:              262144

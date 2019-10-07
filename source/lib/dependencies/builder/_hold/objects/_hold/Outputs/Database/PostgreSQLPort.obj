@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/PostgreSQLPort
+# class:   output
+##-------------------------------------------------------------------------------------------------
+PostgreSQLPort:
+  Description: "PostgreSQL Port"
+  Value: !Ref "PostgreSQLPort"
+  Export:
+    Name: !Sub "${AWS::StackName}-PostgreSQLPort"

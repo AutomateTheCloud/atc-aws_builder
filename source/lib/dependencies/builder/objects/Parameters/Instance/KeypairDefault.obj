@@ -1,0 +1,7 @@
+##---------------------------------------------------------------------------------------
+# object: Instance/KeypairDefault
+##---------------------------------------------------------------------------------------
+KeypairDefault:
+  Description: "EC2 KeyPair (Default)"
+  Type: "AWS::EC2::KeyPair::KeyName"
+  ConstraintDescription: "must be the name of an existing EC2 KeyPair"

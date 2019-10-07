@@ -1,0 +1,12 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Custom/NetworkLBIpAddressResults
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+NetworkLBIpAddressResults:
+  Type: "Custom::NetworkLBIpAddressResults"
+  Version: "1.0"
+  Properties:
+    "ServiceToken": !Join [ "", [ "arn:aws:lambda:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":function:network_lb_ip_address" ] ]
+    "Region": !Ref "AWS::Region"
+    "LoadBalancerName": !GetAtt "LoadBalancerInstanceNLB.LoadBalancerName"
+    "LastUpdate": !Ref "LastUpdate"

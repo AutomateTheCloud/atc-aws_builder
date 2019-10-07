@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  ECS/ECSClusterId
+# class:   output
+##-------------------------------------------------------------------------------------------------
+ECSClusterId:
+  Condition: "EnabledECSCluster"
+  Description: "ECS Cluster: ID"
+  Value: !Ref "ECSCluster"
+  Export:
+    Name: !Sub "${AWS::StackName}-ECSClusterId"

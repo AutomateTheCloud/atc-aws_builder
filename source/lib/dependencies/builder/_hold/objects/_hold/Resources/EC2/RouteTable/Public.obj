@@ -1,0 +1,13 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EC2/RouteTable/Public
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+RouteTablePublic:
+  Type: "AWS::EC2::RouteTable"
+  Properties:
+    VpcId: !Ref "VPC"
+    Tags:
+      - Key: "Name"
+        Value: !Join [ "_", [ "route", !Select [1, !Split ["|", !Ref "Organization"]], "public", !Ref "AWS::Region" ] ]
+      - Key: "Network"
+        Value: "public"

@@ -1,0 +1,8 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Website/WebsiteErrorDocument
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+WebsiteErrorDocument:
+  Type:                  String
+  Default:               "error.html"
+  Description:           "Website: Error Document"

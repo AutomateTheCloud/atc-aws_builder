@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  KMS/KMSKeyArn
+# class:   output
+##-------------------------------------------------------------------------------------------------
+KMSKeyArn:
+  Description: "KMS Key (ARN)"
+  Value: !GetAtt "KMSKey.Arn"
+  Export:
+    Name: !Sub "${AWS::StackName}-KMSKeyArn"

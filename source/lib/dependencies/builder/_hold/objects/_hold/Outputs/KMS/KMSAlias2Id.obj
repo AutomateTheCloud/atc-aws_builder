@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  KMS/KMSAlias2Id
+# class:   output
+##-------------------------------------------------------------------------------------------------
+KMSAlias2Id:
+  Condition: "ExistsStackReferenceKMSKey2"
+  Description: "KMS: Alias 2 (ID)"
+  Value: !GetAtt "StackReferenceResultsKMSKey2.KMSAliasId"
+  Export:
+    Name: !Sub "${AWS::StackName}-KMSAlias2Id"

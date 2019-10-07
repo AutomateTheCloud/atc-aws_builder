@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/ReplicaDBStorageType
+# class:   output
+##-------------------------------------------------------------------------------------------------
+ReplicaDBStorageType:
+  Condition: "ReplicasEnabled"
+  Description: "Replica Database Storage Type"
+  Value: !Ref "ReplicaDBStorageType"
+  Export:
+    Name: !Sub "${AWS::StackName}-ReplicaDBStorageType"

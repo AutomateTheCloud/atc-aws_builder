@@ -1,0 +1,14 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Config/ConfigRule/AWSMultiRegionCloudTrailEnabled
+# class:   resource
+# cis:     
+##-------------------------------------------------------------------------------------------------
+ConfigRuleAWSMultiRegionCloudTrailEnabled:
+  Type: "AWS::Config::ConfigRule"
+  Properties:
+    ConfigRuleName: "aws-multi-region-cloudtrail-enabled"
+    Description: "Checks that there is at least one multi-region AWS CloudTrail"
+    MaximumExecutionFrequency: "TwentyFour_Hours"
+    Source:
+      Owner: AWS
+      SourceIdentifier: "MULTI_REGION_CLOUD_TRAIL_ENABLED"

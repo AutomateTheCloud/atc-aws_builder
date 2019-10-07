@@ -1,0 +1,64 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Instance/Linux_LoadBalancer
+# class:   template
+##-------------------------------------------------------------------------------------------------
+Paradigm:
+  Parameters:
+    #-- Network Related -----------------------------------------------------------------
+    - Base/Network/SubnetTypeLoadBalancer
+
+    #-- LoadBalancer Related ------------------------------------------------------------
+    - Base/LoadBalancer/LoadBalancerSSLPolicy
+
+    #-- DNS -----------------------------------------------------------------------------
+    - Base/DNS/DNSLoadBalancer
+
+    #-- SSL Certificate -----------------------------------------------------------------
+    - Base/SSL/SSLCertificateName
+
+##-------------------------------------------------------------------------------------------------
+  Mappings:
+
+##-------------------------------------------------------------------------------------------------
+  Conditions:
+    #-- Network Related -----------------------------------------------------------------
+    - Base/Network/SubnetTypeLoadBalancerPublic
+    - Base/Network/SubnetTypeLoadBalancerPrivate
+    - Base/Network/SubnetTypeLoadBalancerRestricted
+
+    #-- DNS -----------------------------------------------------------------------------
+    - Base/DNS/ExistsDNSLoadBalancer
+
+##-------------------------------------------------------------------------------------------------
+  Resources:
+    #-- AutoScaling ---------------------------------------------------------------------
+    - Base/AutoScaling/AutoScalingGroup/Instance_LoadBalancer
+    - Base/EC2/LaunchTemplate/Instance_AmazonLinux2_LoadBalancer
+
+    #-- CodeDeploy ----------------------------------------------------------------------
+    - Base/CodeDeploy/DeploymentGroup/Instance_LoadBalancer
+
+    #-- Security Group ------------------------------------------------------------------
+    - Base/EC2/SecurityGroup/LoadBalancer
+
+    #-- LoadBalancer --------------------------------------------------------------------
+    - Base/ElasticLoadBalancingV2/LoadBalancer/Instance
+    - Base/ElasticLoadBalancingV2/Listener/Instance
+    - Base/ElasticLoadBalancingV2/Listener/InstanceHTTPSRedirect
+
+    #-- DNS -----------------------------------------------------------------------------
+    - Base/Route53/RecordSetGroup/DNSLoadBalancer
+
+##-------------------------------------------------------------------------------------------------
+  Outputs:
+    #-- LoadBalancer --------------------------------------------------------------------
+    - Base/LoadBalancer/LoadBalancerEnabledTrue
+    - Base/LoadBalancer/TargetGroupInstanceName
+    - Base/LoadBalancer/TargetGroupInstanceARN
+    - Base/LoadBalancer/SecurityGroupLoadBalancerId
+
+    #-- DNS -----------------------------------------------------------------------------
+    - Base/DNS/DNSLoadBalancer
+
+##-------------------------------------------------------------------------------------------------
+  Targets:

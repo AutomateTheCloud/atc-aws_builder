@@ -1,0 +1,16 @@
+##---------------------------------------------------------------------------------------
+# object: Config/ConfigRule/AWSEFSEncryptedCheck
+# notes:
+#   - CIS Amazon Web Services Three-tier Web
+#     - 1.5: Ensure all EBS volumes for Web-Tier are encrypted
+#     - 1.6: Ensure all EBS volumes for App-Tier are encrypted
+##---------------------------------------------------------------------------------------
+ConfigRuleAWSEFSEncryptedCheck:
+  Type: "AWS::Config::ConfigRule"
+  Properties:
+    ConfigRuleName: "aws-efs-encrypted-check"
+    Description: "Checks whether Amazon EFS are configured to encrypt file data using AWS KMS"
+    MaximumExecutionFrequency: "TwentyFour_Hours"
+    Source:
+      Owner: AWS
+      SourceIdentifier: "EFS_ENCRYPTED_CHECK"

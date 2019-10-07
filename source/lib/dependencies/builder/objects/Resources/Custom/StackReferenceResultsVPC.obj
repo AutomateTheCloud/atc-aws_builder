@@ -1,0 +1,11 @@
+##---------------------------------------------------------------------------------------
+# object: Custom/StackReferenceResultsVPC
+##---------------------------------------------------------------------------------------
+StackReferenceResultsVPC:
+  Type: "Custom::StackReferenceResultsVPC"
+  Version: "1.0"
+  Properties:
+    "ServiceToken": !Join [ "", [ "arn:aws:lambda:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":function:stack-reference" ] ]
+    "Region": !Ref "AWS::Region"
+    "StackName": !Ref "StackReferenceVPC"
+    "LastUpdate": !Ref "LastUpdate"

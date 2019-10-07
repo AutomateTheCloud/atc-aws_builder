@@ -1,0 +1,6 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SSL/ExistsSSLCertIAMCertificateId
+# class:   condition
+##-------------------------------------------------------------------------------------------------
+ExistsSSLCertIAMCertificateId:
+  !Not [!Equals [!Ref SSLCertIAMCertificateId, ""]]

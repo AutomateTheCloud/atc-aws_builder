@@ -1,0 +1,13 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Custom/StackReferenceResultsS3Bucket5
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+StackReferenceResultsS3Bucket5:
+  Condition: "ExistsStackReferenceS3Bucket5"
+  Type: "Custom::StackReferenceResultsS3Bucket5"
+  Version: "1.0"
+  Properties:
+    "ServiceToken": !Join [ "", [ "arn:aws:lambda:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":function:stack-reference" ] ]
+    "Region": !Ref "AWS::Region"
+    "StackName": !Ref "StackReferenceS3Bucket5"
+    "LastUpdate": !Ref "LastUpdate"

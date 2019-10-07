@@ -1,0 +1,13 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Network/SubnetTypeLoadBalancer
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+SubnetTypeLoadBalancer:
+  Type:                  String
+  Default:               "private"
+  AllowedValues:
+    - private
+    - public
+    - restricted
+  Description:           "Subnet Type (LoadBalancer)"
+  ConstraintDescription: "public, private, or restricted"

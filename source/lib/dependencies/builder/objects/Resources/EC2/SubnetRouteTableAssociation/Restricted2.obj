@@ -1,0 +1,11 @@
+##---------------------------------------------------------------------------------------
+# object: EC2/SubnetRouteTableAssociation/Restricted2
+##---------------------------------------------------------------------------------------
+SubnetRouteTableAssociationRestricted2:
+  Type: "AWS::EC2::SubnetRouteTableAssociation"
+  Properties:
+    SubnetId: !Ref "SubnetRestricted2"
+    RouteTableId: !Ref "RouteTableRestricted"
+  DependsOn:
+    - "SubnetRestricted2"
+    - "RouteTableRestricted"

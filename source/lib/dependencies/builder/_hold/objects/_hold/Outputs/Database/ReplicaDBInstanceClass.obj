@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/ReplicaDBInstanceClass
+# class:   output
+##-------------------------------------------------------------------------------------------------
+ReplicaDBInstanceClass:
+  Condition: "ReplicasEnabled"
+  Description: "Replica DB Instance Class"
+  Value: !Ref "ReplicaDBInstanceClass"
+  Export:
+    Name: !Sub "${AWS::StackName}-ReplicaDBInstanceClass"

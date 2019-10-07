@@ -1,0 +1,14 @@
+##---------------------------------------------------------------------------------------
+# object: EFS/FileSystem/Application
+##---------------------------------------------------------------------------------------
+FileSystemApplication:
+  Type: "AWS::EFS::FileSystem"
+  Properties:
+    PerformanceMode: "generalPurpose"
+    Encrypted: "true"
+    KmsKeyId: !GetAtt "StackReferenceResultsVPC.KMSKeyAliasData"
+    FileSystemTags:
+      - Key: "Name"
+        Value: !Join [ "_", [ "efs", !Select [1, !Split ["|", !Ref "Project"]], !Select [1, !Split ["|", !Ref "Function"]], !Select [3, !Split ["|", !Ref "Organization"]], !Select [1, !Split ["|", !Ref "Organization"]], !Ref "AWS::Region" ] ]
+  DependsOn:
+    - "StackReferenceResultsVPC"

@@ -1,0 +1,6 @@
+##-------------------------------------------------------------------------------------------------
+# object:  StackReference/ExistsStackReferenceDatabase4
+# class:   condition
+##-------------------------------------------------------------------------------------------------
+ExistsStackReferenceDatabase4:
+  !Not [!Equals [!Ref "StackReferenceDatabase4", ""]]

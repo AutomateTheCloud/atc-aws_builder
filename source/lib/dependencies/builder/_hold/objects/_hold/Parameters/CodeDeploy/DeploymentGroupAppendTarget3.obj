@@ -1,0 +1,8 @@
+##-------------------------------------------------------------------------------------------------
+# object:  CodeDeploy/DeploymentGroupAppendTarget3
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+DeploymentGroupAppendTarget3:
+  Type:                  String
+  Description:           "CodeDeploy DeploymentGroup Append (Target3)"
+

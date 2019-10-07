@@ -1,0 +1,51 @@
+##---------------------------------------------------------------------------------------
+# object: Lambda/Function/NetworkLBIpAddress
+##---------------------------------------------------------------------------------------
+LambdaFunctionNetworkLBIpAddress:
+  Type: "AWS::Lambda::Function"
+  Properties:
+    FunctionName: "network-lb-ip-address"
+    Description: "Network LB Ip Address"
+    Handler: "index.handler"
+    Code:
+      ZipFile:
+        !Sub |
+          var response = require('cfn-response');
+          exports.handler = function(event, context) {
+            if (event.RequestType == 'Delete') {
+              response.send(event, context, response.SUCCESS);
+              return;
+            }
+            var regionName = event.ResourceProperties.Region;
+            var loadbalancerName = event.ResourceProperties.LoadBalancerName;
+            var responseData = {};
+            if (regionName && loadbalancerName) {
+              var aws = require('aws-sdk');
+              var ec2 = new aws.EC2({region: regionName});
+              var describeNetworkInterfaceParams = {
+                Filters: [{ Name: 'description', Values: ["*" + loadbalancerName + "*"]}]
+              };
+              ec2.describeNetworkInterfaces(describeNetworkInterfaceParams, function(err, data) {
+                if (err) {
+                    responseData = {Error: 'DescribeNetworkInterfaces call failed'};
+                    response.send(event, context, response.FAILED, responseData);
+                } else {
+                  var interfaces = data.NetworkInterfaces;
+                  interfaces.sort(function(x, y) { return x.AvailabilityZone.localeCompare(y.AvailabilityZone); });
+                  var j = 1;
+                  interfaces.forEach(function(output) {
+                    responseData["Subnet" + j + "IP"] = output.PrivateIpAddress;
+                    j++;
+                  });
+                  response.send(event, context, response.SUCCESS, responseData);
+                }
+              });
+            } else {
+              responseData = {Error: 'Region name or LoadBalancer Name not specified'};
+              response.send(event, context, response.FAILED, responseData);
+            }
+          };
+    Role: !GetAtt "IAMRoleLambdaFunctionNetworkLBIpAddress.Arn"
+    Runtime: "nodejs8.10"
+    MemorySize: "128"
+    Timeout: "180"

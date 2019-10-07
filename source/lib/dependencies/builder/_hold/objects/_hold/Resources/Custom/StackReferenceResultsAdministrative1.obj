@@ -1,0 +1,12 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Custom/StackReferenceResultsAdministrative1
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+StackReferenceResultsAdministrative1:
+  Condition: "ExistsStackReferenceAdministrative1"
+  Type: "Custom::StackReferenceResultsAdministrative1"
+  Version: "1.0"
+  Properties:
+    "ServiceToken": !Join [ "", [ "arn:aws:lambda:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":function:stack-reference" ] ]
+    "Region": !Ref "AWS::Region"
+    "StackName": !Ref "StackReferenceAdministrative1"

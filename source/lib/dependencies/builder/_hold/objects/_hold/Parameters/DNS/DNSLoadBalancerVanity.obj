@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DNS/DNSLoadBalancerVanity
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+DNSLoadBalancerVanity:
+  Type:                  String
+  Description:           "DNS (LoadBalancer): Vanity (Subdomain|Domain|HostedZoneID)"

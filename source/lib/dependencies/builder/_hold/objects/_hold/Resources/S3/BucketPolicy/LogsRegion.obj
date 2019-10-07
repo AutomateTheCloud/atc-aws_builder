@@ -1,0 +1,65 @@
+##-------------------------------------------------------------------------------------------------
+# object:  S3/BucketPolicy/LogsRegion
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+S3BucketPolicyLogs:
+  Type: "AWS::S3::BucketPolicy"
+  Properties:
+    Bucket: !Ref "S3BucketLogs"
+    PolicyDocument:
+      Version: "2012-10-17"
+      Statement:
+        -
+          Sid: "AWSELBAllowWrite"
+          Effect: "Allow"
+          Principal:
+            AWS: !FindInMap ["AccountsELB", !Ref "AWS::Region", "accountID"]
+          Action: "s3:PutObject"
+          Resource:
+            - !Join [ "", [ "arn:aws:s3:::", !Ref "S3BucketLogsRegionName", "/elb/*" ] ]
+        -
+          Sid: "AWSCloudTrailAclCheck"
+          Effect: "Allow"
+          Principal:
+            Service: "cloudtrail.amazonaws.com"
+          Action: "s3:GetBucketAcl"
+          Resource:
+            - !Join [ "", [ "arn:aws:s3:::", !Ref "S3BucketLogsRegionName" ] ]
+        -
+          Sid: "AWSCloudTrailWrite"
+          Effect: "Allow"
+          Principal:
+            Service: "cloudtrail.amazonaws.com"
+          Action: "s3:PutObject"
+          Resource:
+            - !Join [ "", [ "arn:aws:s3:::", !Ref "S3BucketLogsRegionName", "/AWSLogs/", !Ref "AWS::AccountId", "/*" ] ]
+          Condition:
+            StringEquals:
+              s3:x-amz-acl: "bucket-owner-full-control"
+        -
+          Sid: "AWSConfigBucketPermissionsCheck"
+          Effect: "Allow"
+          Principal:
+            Service: "config.amazonaws.com"
+          Action: "s3:GetBucketAcl"
+          Resource:
+            - !Join [ "", [ "arn:aws:s3:::", !Ref "S3BucketLogsRegionName" ] ]
+        -
+          Sid: "AWSConfigBucketExistenceCheck"
+          Effect: "Allow"
+          Principal:
+            Service: "config.amazonaws.com"
+          Action: "s3:ListBucket"
+          Resource:
+            - !Join [ "", [ "arn:aws:s3:::", !Ref "S3BucketLogsRegionName" ] ]
+        -
+          Sid: "AWSConfigBucketDelivery"
+          Effect: "Allow"
+          Principal:
+            Service: "config.amazonaws.com"
+          Action: "s3:PutObject"
+          Resource:
+            - !Join [ "", [ "arn:aws:s3:::", !Ref "S3BucketLogsRegionName", "/AWSLogs/", !Ref "AWS::AccountId", "/Config/*" ] ]
+          Condition:
+            StringEquals:
+              s3:x-amz-acl: "bucket-owner-full-control"

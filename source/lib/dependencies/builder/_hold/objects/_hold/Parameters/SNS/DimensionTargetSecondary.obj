@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SNS/DimensionTargetSecondary
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+DimensionTargetSecondary:
+  Type:                  String
+  Description:           "Dimension: Target (Secondary)"

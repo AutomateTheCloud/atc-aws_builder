@@ -1,0 +1,11 @@
+##---------------------------------------------------------------------------------------
+# object: Custom/SAMLCreateIdentityProvider
+##---------------------------------------------------------------------------------------
+SAMLCreateIdentityProvider:
+  Type: "Custom::SAMLCreateIdentityProvider"
+  Version: "1.0"
+  Properties:
+    "ServiceToken": !GetAtt "LambdaFunctionSAMLCreateIdentityProvider.Arn"
+    saml_provider_name: !Ref "SAMLProviderName"
+    saml_provider_arn: !Sub arn:aws:iam::${AWS::AccountId}:saml-provider/${SAMLProviderName}
+  DependsOn: "LogGroupLambdaFunctionSAMLCreateIdentityProvider"

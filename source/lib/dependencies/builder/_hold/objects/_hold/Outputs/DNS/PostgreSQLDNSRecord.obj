@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DNS/PostgreSQLDNSRecord
+# class:   output
+##-------------------------------------------------------------------------------------------------
+PostgreSQLDNSRecord:
+  Description: "PostgreSQL: DNS Record"
+  Value: !Join [ "", [ !Select [0, !Split ["|", !Ref "DNSDatabase"]], ".postgresql.database.", !Ref "AWS::Region", ".", !Select [1, !Split ["|", !Ref "DNSDatabase"]] ] ]
+  Export:
+    Name: !Sub "${AWS::StackName}-PostgreSQLDNSRecord"

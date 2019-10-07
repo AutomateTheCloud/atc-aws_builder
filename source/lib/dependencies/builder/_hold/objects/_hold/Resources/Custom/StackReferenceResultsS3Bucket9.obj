@@ -1,0 +1,13 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Custom/StackReferenceResultsS3Bucket9
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+StackReferenceResultsS3Bucket9:
+  Condition: "ExistsStackReferenceS3Bucket9"
+  Type: "Custom::StackReferenceResultsS3Bucket9"
+  Version: "1.0"
+  Properties:
+    "ServiceToken": !Join [ "", [ "arn:aws:lambda:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":function:stack-reference" ] ]
+    "Region": !Ref "AWS::Region"
+    "StackName": !Ref "StackReferenceS3Bucket9"
+    "LastUpdate": !Ref "LastUpdate"

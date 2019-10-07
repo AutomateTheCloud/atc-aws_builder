@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  StackReference/StackReferenceSNSTopics
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+StackReferenceSNSTopics:
+  Type:                  String
+  Description:           "Stack Reference: SNS Topics"

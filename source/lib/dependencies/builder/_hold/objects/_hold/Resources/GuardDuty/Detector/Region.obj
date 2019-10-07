@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  GuardDuty/Detector/Region
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+GuardDutyDetectorRegion:
+  Condition: "EnabledGuardDuty"
+  Type: "AWS::GuardDuty::Detector"
+  Properties:
+    Enable: "true"
+    FindingPublishingFrequency: !Ref "GuardDutyFindingPublishingFrequency"

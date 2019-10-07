@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Instance/InstanceTypePrimary
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+InstanceTypePrimary:
+  Type:                  String
+  Default:               "t3.micro"
+  Description:           "EC2 Instance Type (Primary)"
+  ConstraintDescription: "Must be a valid EC2 instance type"

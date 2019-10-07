@@ -1,0 +1,22 @@
+##-------------------------------------------------------------------------------------------------
+# object:  S3/Bucket/Policy/WebsiteOrigin
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+BucketPolicyWebsiteOrigin:
+  Type: "AWS::S3::BucketPolicy"
+  Properties:
+    Bucket: !Ref "BucketWebsiteOrigin"
+    PolicyDocument:
+      Version: "2012-10-17"
+      Statement:
+        -
+          Sid: "s3website_public_read"
+          Effect: "Allow"
+          Principal:
+              CanonicalUser: !GetAtt "CloudFrontOriginAccessIdentityWebsite.S3CanonicalUserId"
+          Action:
+            - "s3:GetObject"
+          Resource:
+            - !Join [ "", [ "arn:aws:s3:::", !Ref "BucketWebsiteOrigin", "/*" ] ]
+  DependsOn:
+    - "BucketWebsiteOrigin"

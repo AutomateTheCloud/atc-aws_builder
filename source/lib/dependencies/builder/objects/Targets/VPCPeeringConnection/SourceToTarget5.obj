@@ -1,0 +1,4 @@
+##---------------------------------------------------------------------------------------
+# object:  VPCPeeringConnection/SourceToTarget5
+##---------------------------------------------------------------------------------------
+modify_vpc_peering_connection|VPCPeeringConnectionSourceToTarget5Id

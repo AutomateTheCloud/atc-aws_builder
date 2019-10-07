@@ -1,0 +1,11 @@
+##-------------------------------------------------------------------------------------------------
+# object:  IAM/RequireNumbers
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+RequireNumbers:
+  Description: "You can require that IAM user passwords contain at least one numeric character (0 to 9)."
+  Type: String
+  Default: true
+  AllowedValues:
+  - true
+  - false

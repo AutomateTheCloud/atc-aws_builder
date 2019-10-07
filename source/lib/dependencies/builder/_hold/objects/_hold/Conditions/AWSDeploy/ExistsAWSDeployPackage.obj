@@ -1,0 +1,6 @@
+##-------------------------------------------------------------------------------------------------
+# object:  AWSDeploy/ExistsAWSDeployPackage
+# class:   condition
+##-------------------------------------------------------------------------------------------------
+ExistsAWSDeployPackage:
+  !Not [!Equals [!Ref AWSDeployPackageURL, ""]]

@@ -1,0 +1,16 @@
+##-------------------------------------------------------------------------------------------------
+# object:  ApplicationAutoScaling/ScalableTarget/DynamoDBTableReadCapacity
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+ScalableTargetDynamoDBTableReadCapacity: 
+  Type: "AWS::ApplicationAutoScaling::ScalableTarget"
+  Properties:
+    ResourceId: !Join
+      - /
+      - - table
+        - !Ref "DynamoDBTable"
+    MaxCapacity: !Ref "ReadCapacityMax"
+    MinCapacity: !Ref "ReadCapacityMin"
+    RoleARN: !GetAtt "RoleDynamoDBScaling.Arn"
+    ScalableDimension: "dynamodb:table:ReadCapacityUnits"
+    ServiceNamespace: "dynamodb"

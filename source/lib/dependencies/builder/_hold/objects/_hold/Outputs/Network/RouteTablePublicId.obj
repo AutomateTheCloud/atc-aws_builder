@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Network/RouteTablePublicId
+# class:   output
+##-------------------------------------------------------------------------------------------------
+RouteTablePublicId:
+  Description: "Route Table: Public"
+  Value: !Ref RouteTablePublic
+  Export:
+    Name: !Sub "${AWS::StackName}-RouteTablePublicId"

@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  ElastiCache/SnapshotRetentionLimit
+# class:   output
+##-------------------------------------------------------------------------------------------------
+SnapshotRetentionLimit:
+  Description: "Snapshot Retention Limit"
+  Value: !Ref "SnapshotRetentionLimit"
+  Export:
+    Name: !Sub "${AWS::StackName}-SnapshotRetentionLimit"

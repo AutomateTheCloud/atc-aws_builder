@@ -1,0 +1,11 @@
+##-------------------------------------------------------------------------------------------------
+# object:  IAM/RequireSymbols
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+RequireSymbols:
+  Description: "You can require that IAM user passwords contain at least one of the following nonalphanumeric characters: ! @ # $ % ^ & * ( ) _ + - = [ ] {} | '"
+  Type: String
+  Default: true
+  AllowedValues:
+  - true
+  - false

@@ -1,0 +1,7 @@
+##---------------------------------------------------------------------------------------
+# object: DynamoDB/WriteCapacityScaleInCooldown
+##---------------------------------------------------------------------------------------
+WriteCapacityScaleInCooldown:
+  Description: "DynamoDB Write Capacity (Scale In Cooldown in Seconds)"
+  Type: Number
+  Default: 60

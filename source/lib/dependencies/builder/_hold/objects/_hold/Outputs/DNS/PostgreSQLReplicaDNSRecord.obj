@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DNS/PostgreSQLReplicaDNSRecord
+# class:   output
+##-------------------------------------------------------------------------------------------------
+PostgreSQLReplicaDNSRecord:
+  Description: "PostgreSQL Replica: DNS Record"
+  Value: !Join [ "", [ !Select [0, !Split ["|", !Ref "DNSDatabase"]], "-replica.postgresql.database.", !Ref "AWS::Region", ".", !Select [1, !Split ["|", !Ref "DNSDatabase"]] ] ]
+  Export:
+    Name: !Sub "${AWS::StackName}-PostgreSQLReplicaDNSRecord"

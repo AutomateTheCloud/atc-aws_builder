@@ -1,0 +1,323 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EC2/LaunchTemplate/Instance
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+LaunchTemplateInstance:
+  Type: "AWS::EC2::LaunchTemplate"
+  Properties:
+    LaunchTemplateName:  !Join [ "", [ !Select [1, !Split ["|", !Ref "Project"]], "-", !Select [1, !Split ["|", !Ref "Function"]], "-", !Select [3, !Split ["|", !Ref "Organization"]], "-", !Select [1, !Split ["|", !Ref "Organization"]], "-", !Ref "AWS::Region" ] ]
+    LaunchTemplateData:
+      ImageId: !GetAtt "AMIResults.Id"
+      KeyName: !GetAtt "StackReferenceResultsVPC.KeypairDefault"
+      IamInstanceProfile:
+        Arn: !GetAtt "InstanceProfileInstance.Arn"
+      SecurityGroupIds:
+        - !GetAtt "SecurityGroupInstance.GroupId"
+      InstanceInitiatedShutdownBehavior: "terminate"
+      Monitoring:
+        Enabled: "true"
+      BlockDeviceMappings:
+        !If
+          - "ExistsApplicationVolumeSize"
+          -
+            - DeviceName: "/dev/xvda"
+              Ebs:
+                VolumeSize: !If [ExistsRootVolumeSize, !Select [0, !Split ["|", !Ref "VolumeSize"]], "8" ]
+                VolumeType: "gp2"
+            - DeviceName: "/dev/sdb"
+              Ebs:
+                VolumeSize: !Select [1, !Split ["|", !Ref "VolumeSize"]]
+                VolumeType: "gp2"
+                Encrypted: true
+          -
+            - DeviceName: "/dev/xvda"
+              Ebs:
+                VolumeSize: !If [ExistsRootVolumeSize, !Select [0, !Split ["|", !Ref "VolumeSize"]], "8" ]
+                VolumeType: "gp2"
+      UserData:
+        "Fn::Base64":
+          !Sub |
+            #!/bin/bash -x
+            # Iteration: ${LaunchTemplateUpdated}
+            /usr/bin/systemctl stop update-motd.service; sync; wait; yum -y update
+            yum -y install awslogs
+            yum update -y aws-cfn-bootstrap
+            mkdir /deploy; mkdir /deploy/bin; mkdir /deploy/info
+            /opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource LaunchTemplateInstance --region ${AWS::Region} --configset "LinuxConfig,InstallConfigure"
+            /opt/aws/bin/cfn-signal -e $? --stack ${AWS::StackName} --resource AutoScalingGroupInstance --region ${AWS::Region}
+      TagSpecifications:
+        - ResourceType: "instance"
+          Tags:
+            - Key: "Name"
+              Value: !Join [ "", [ !Select [0, !Split ["|", !Ref "Project"]], " - ", !Select [0, !Split ["|", !Ref "Function"]], " (", !Select [3, !Split ["|", !Ref "Organization"]], ") - [", !Select [0, !Split ["|", !Ref "Organization"]], " / ", !Ref "AWS::Region", "]" ] ]
+            - Key: "Organization"
+              Value: !Select [0, !Split ["|", !Ref "Organization"]]
+            - Key: "Project"
+              Value: !Select [0, !Split ["|", !Ref "Project"]]
+            - Key: "Function"
+              Value: !Select [0, !Split ["|", !Ref "Function"]]
+            - Key: "Environment"
+              Value: !Select [3, !Split ["|", !Ref "Organization"]]
+            - Key: "Owner"
+              Value: !Select [0, !Split ["|", !Ref "Owner"]]
+            - Key: "Contact"
+              Value: !Select [1, !Split ["|", !Ref "Owner"]]
+            - Key: "StackID"
+              Value: !Ref "AWS::StackId"
+            - Key: "StackName"
+              Value: !Ref "AWS::StackName"
+            - Key: "OperatingSystem"
+              Value: "linux"
+        - ResourceType: "volume"
+          Tags:
+            - Key: "Name"
+              Value: !Join [ "", [ !Select [0, !Split ["|", !Ref "Project"]], " - ", !Select [0, !Split ["|", !Ref "Function"]], " (", !Select [3, !Split ["|", !Ref "Organization"]], ") - [", !Select [0, !Split ["|", !Ref "Organization"]], " / ", !Ref "AWS::Region", "]" ] ]
+            - Key: "Organization"
+              Value: !Select [0, !Split ["|", !Ref "Organization"]]
+            - Key: "Project"
+              Value: !Select [0, !Split ["|", !Ref "Project"]]
+            - Key: "Function"
+              Value: !Select [0, !Split ["|", !Ref "Function"]]
+            - Key: "Environment"
+              Value: !Select [3, !Split ["|", !Ref "Organization"]]
+            - Key: "Owner"
+              Value: !Select [0, !Split ["|", !Ref "Owner"]]
+            - Key: "Contact"
+              Value: !Select [1, !Split ["|", !Ref "Owner"]]
+            - Key: "StackID"
+              Value: !Ref "AWS::StackId"
+            - Key: "StackName"
+              Value: !Ref "AWS::StackName"
+  Metadata:
+    Comment: "Instance"
+    AWS::CloudFormation::Authentication:
+      S3AccessCreds:
+        type: "S3"
+        roleName: !Ref "RoleInstance"
+        buckets:
+          - !Join [ "-", [ !Ref "AWS::AccountId", "artifacts", !Ref "AWS::Region" ] ]
+    AWS::CloudFormation::Init:
+      configSets:
+        LinuxConfig:
+          - "GenerateInfoFiles"
+          - "ConfigureAWSTools"
+          - "SetTags"
+          - "InstallAWSDeploy"
+          - "ConfigureInstance"
+          - "SetupSecurity"
+        InstallConfigure:
+          - "AttachEIP"
+          - "BootstrapCodeDeploy"
+      GenerateInfoFiles:
+        files:
+          "/deploy/info/aws.info":
+            content: !Join [ "", [
+              "## START AWS Info", "\n",
+              "stack_id=", !Ref "AWS::StackId", "\n",
+              "stack_name=", !Ref "AWS::StackName", "\n",
+              "aws_account_id=", !Ref "AWS::AccountId", "\n",
+              "org_name=", !Select [0, !Split ["|", !Ref "Organization"]], "\n",
+              "org_abbr=", !Select [1, !Split ["|", !Ref "Organization"]], "\n",
+              "region=", !Ref "AWS::Region", "\n",
+              "environment=", !Select [3, !Split ["|", !Ref "Organization"]], "\n",
+              "project_name=", !Select [0, !Split ["|", !Ref "Project"]], "\n",
+              "project_abbr=", !Select [1, !Split ["|", !Ref "Project"]], "\n",
+              "function_name=", !Select [0, !Split ["|", !Ref "Function"]], "\n",
+              "function_abbr=", !Select [1, !Split ["|", !Ref "Function"]], "\n",
+              "owner=", !Select [0, !Split ["|", !Ref "Owner"]], "\n",
+              "contact=", !Select [1, !Split ["|", !Ref "Owner"]], "\n",
+              "vpc_stack_name=", !Join [ "", [ "infrastructure-vpc-", !Select [1, !Split ["|", !Ref "Organization"]], "-", !Select [2, !Split ["|", !Ref "Organization"]] ] ], "\n",
+              "## END AWS Info", "\n",
+            ] ]
+            mode:  "000444"
+            owner: "root"
+            group: "root"
+      ConfigureAWSTools:
+        files:
+          "/etc/cfn/cfn-hup.conf":
+            content: !Sub |
+              [main]
+              stack=${AWS::StackId}
+              region=${AWS::Region}
+            mode:  "000400"
+            owner: "root"
+            group: "root"
+          "/etc/cfn/hooks.d/cfn-auto-reloader.conf":
+            content: !Sub |
+              [cfn-auto-reloader-hook]
+              triggers=post.update
+              path=Resources.LaunchTemplateInstance.Metadata.AWS::CloudFormation::Init
+              action=/opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource LaunchTemplateInstance --region ${AWS::Region}
+              runas=root
+          "/etc/awslogs/awslogs.conf":
+            content: !Join [ "", [
+              "[general]", "\n",
+              "state_file = /var/lib/awslogs/agent-state", "\n",
+            ] ]
+          "/etc/awslogs/config/system.config":
+            content: !Join [ "", [
+              "[/var/log/audit/audit.log]", "\n",
+              "file = /var/log/audit/audit.log", "\n",
+              "log_group_name = ", !Select [1, !Split ["|", !Ref "Organization"]], "-", !Ref "AWS::Region", "-linux-audit", "\n",
+              "log_stream_name = {instance_id}", "\n",
+              "[/var/log/dmesg]", "\n",
+              "file = /var/log/dmesg", "\n",
+              "log_group_name = ", !Select [1, !Split ["|", !Ref "Organization"]], "-", !Ref "AWS::Region", "-linux-dmesg", "\n",
+              "log_stream_name = {instance_id}", "\n",
+              "[/var/log/messages]", "\n",
+              "file = /var/log/messages", "\n",
+              "log_group_name = ", !Select [1, !Split ["|", !Ref "Organization"]], "-", !Ref "AWS::Region", "-linux-messages", "\n",
+              "log_stream_name = {instance_id}", "\n",
+              "datetime_format = %b %d %H:%M:%S", "\n",
+              "[/var/log/secure]", "\n",
+              "file = /var/log/secure", "\n",
+              "log_group_name = ", !Select [1, !Split ["|", !Ref "Organization"]], "-", !Ref "AWS::Region", "-linux-secure", "\n",
+              "log_stream_name = {instance_id}", "\n",
+              "datetime_format = %b %d %H:%M:%S", "\n",
+            ] ]
+            mode:  "000444"
+            owner: "root"
+            group: "root"
+        services:
+          sysvinit:
+            cfn-hup:
+              enabled: 'true'
+              ensureRunning: 'true'
+              files:
+                - "/etc/cfn/cfn-hup.conf"
+                - "/etc/cfn/hooks.d/cfn-auto-reloader.conf"
+        commands:
+          01-start_awslogs_agent:
+            command: "/bin/systemctl restart awslogsd.service"
+      SetTags:
+        files:
+          "/deploy/tags.json":
+            content: !Join [ "", [
+              '[', "\n",
+              '  { "Key": "Name", "Value": "', !Select [0, !Split ["|", !Ref "Project"]], ' - ', !Select [0, !Split ["|", !Ref "Function"]], ' (', !Select [3, !Split ["|", !Ref "Organization"]], ') - [', !Select [0, !Split ["|", !Ref "Organization"]], ']', '" },', "\n",
+              '  { "Key": "Organization", "Value": "', !Select [0, !Split ["|", !Ref "Organization"]], '" },', "\n",
+              '  { "Key": "Project", "Value": "', !Select [0, !Split ["|", !Ref "Project"]], '" },', "\n",
+              '  { "Key": "Function", "Value": "', !Select [0, !Split ["|", !Ref "Function"]], '" },', "\n",
+              '  { "Key": "Environment", "Value": "', !Select [3, !Split ["|", !Ref "Organization"]], '" },', "\n",
+              '  { "Key": "Owner", "Value": "', !Select [0, !Split ["|", !Ref "Owner"]], '" },', "\n",
+              '  { "Key": "Contact", "Value": "', !Select [1, !Split ["|", !Ref "Owner"]], '" },', "\n",
+              '  { "Key": "StackID", "Value": "', !Ref "AWS::StackId", '" },', "\n",
+              '  { "Key": "StackName", "Value": "', !Ref "AWS::StackName", '" }', "\n",
+              ']', "\n",
+            ] ]
+            mode:  "000444"
+            owner: "root"
+            group: "root"
+          "/deploy/set_tags.sh":
+            content: !Sub |
+              #!/bin/bash
+              INSTANCE_ID="$($(which curl) --retry 3 --silent --fail http://169.254.169.254/latest/meta-data/instance-id | sed -e 's/^ *//g' -e 's/ *$//g')"
+              VOLUME_IDS="$($(which aws) ec2 describe-volumes --region ${AWS::Region} --filter "Name=attachment.instance-id, Values=${!INSTANCE_ID}" --query "Volumes[].VolumeId" --out text 2>/dev/null | sed -e 's/^ *//g' -e 's/ *$//g')"
+              ENI_IDS="$($(which aws) ec2 describe-network-interfaces --region ${AWS::Region} --filter "Name=attachment.instance-id, Values=${!INSTANCE_ID}" --query "NetworkInterfaces[].NetworkInterfaceId" --out text 2>/dev/null | sed -e 's/^ *//g' -e 's/ *$//g')"
+              $(which aws) ec2 create-tags --region ${AWS::Region} --resources ${!INSTANCE_ID} ${!VOLUME_IDS} ${!ENI_IDS} --tags file:///deploy/tags.json
+              $(which aws) ec2 create-tags --region ${AWS::Region} --resources ${!INSTANCE_ID} ${!VOLUME_IDS} ${!ENI_IDS} --tags Key=InstanceId,Value=${!INSTANCE_ID}
+            mode:  "000755"
+            owner: "root"
+            group: "root"
+        commands:
+          01-set_tags:
+            command: "/deploy/set_tags.sh"
+      InstallAWSDeploy:
+        sources:
+          "/opt/aws_deploy" : !Join [ "", [ "https://", !Ref "AWS::AccountId", "-", "artifacts", "-", !Ref "AWS::Region", ".s3.amazonaws.com", "/releases/", !Ref "AWSDeployTarget" ] ]
+        commands:
+          01-install_awsdeploy:
+            command: !Sub |
+              chmod 755 /opt/aws_deploy/scripts/utility/install.sh; /opt/aws_deploy/scripts/utility/install.sh -d /usr/local/sbin/
+      ConfigureInstance:
+        packages:
+          yum:
+            nfs-utils: []
+            amazon-efs-utils: []
+        files:
+          "/etc/cron.d/yum-security":
+            content: !Sub |
+              0  * * * * root /usr/bin/yum -y update --security >/dev/null 2>&1
+            mode:  "000644"
+            owner: "root"
+            group: "root"
+        commands:
+          01-update_yum_packages_security:
+            command: "yum update -y --security"
+          02-configure_timezone:
+            command: !Sub |
+              /opt/aws_deploy/scripts/bootstrap/timezone.sh -t ${StackReferenceResultsVPC.TimezoneLinux}
+          03-configure_additional_repos:
+            command: !Sub |
+              /opt/aws_deploy/scripts/bootstrap/repos.sh
+          04-configure_disk:
+            command: !Sub |
+              /opt/aws_deploy/scripts/bootstrap/disk.sh
+          05-configure_swap:
+            !If
+              - "ExistsSwapSize"
+              - command: !Sub |
+                  /opt/aws_deploy/scripts/bootstrap/swap.sh -s ${SwapSize}
+              - !Ref "AWS::NoValue"
+          06-configure_nfs:
+            !If
+              - "ExistsStackReferenceEFS"
+              - command: !Sub |
+                  mkdir /apps_nfs >/dev/null 2>&1; mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport ${StackReferenceResultsEFS.EFSFileSystemApplicationId}.efs.${AWS::Region}.amazonaws.com:/ /apps_nfs
+              - !Ref "AWS::NoValue"
+          07-configure_profile:
+            command: !Sub |
+              /opt/aws_deploy/scripts/bootstrap/profile.sh
+          08-configure_motd:
+            command: !Sub |
+              /opt/aws_deploy/scripts/bootstrap/motd.sh
+      SetupSecurity:
+        files:
+          "/deploy/info/security.info":
+            content: !Join [ "", [
+              "## START Security Info", "\n",
+              "groups_admin=", !Select [0, !Split ["|", !Ref "Security"]], "\n",
+              "groups_view=", !Select [1, !Split ["|", !Ref "Security"]], "\n",
+              "use_google_authenticator=", !Select [2, !Split ["|", !Ref "Security"]], "\n",
+              "ignore_mfa_cidrs=", !Select [3, !Split ["|", !Ref "Security"]], "\n",
+              "## END Security Info", "\n",
+            ] ]
+            mode:  "000444"
+            owner: "root"
+            group: "root"
+        commands:
+          01-execute_security_setup:
+            command: !Sub |
+              /opt/aws_deploy/scripts/bootstrap/security.sh
+      BootstrapCodeDeploy:
+        commands:
+          01-install_codedeploy_dependency:
+            command: "yum install -y ruby"
+          02-download_codedeploy_agent:
+            command: !Sub |
+              curl https://aws-codedeploy-${AWS::Region}.s3.amazonaws.com/latest/install -o /deploy/bin/codedeploy_agent_install; chmod +x /deploy/bin/codedeploy_agent_install
+          03-install_codedeploy_agent:
+            command: "/deploy/bin/codedeploy_agent_install auto"
+      AttachEIP:
+        files:
+          "/deploy/info/eip.info":
+            !If
+              - "EnabledElasticIp"
+              - content: !Sub |
+                  ## START EIP Info
+                  eip_id=${EIPInstance.AllocationId}
+                  ## END EIP Info
+                mode:  "000400"
+                owner: "root"
+                group: "root"
+              - !Ref "AWS::NoValue"
+        commands:
+          01-eip-setup:
+            !If
+              - "EnabledElasticIp"
+              - command: !Sub |
+                  /opt/aws_deploy/scripts/bootstrap/eip.sh
+              - !Ref "AWS::NoValue"
+  DependsOn:
+    - "StackReferenceResultsVPC"
+    - "AMIResults"

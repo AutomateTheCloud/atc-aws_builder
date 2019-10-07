@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Details/Function
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+Function:
+  Type:                  String
+  Description:           "Details: Function (FunctionName | FunctionAbbr)"

@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/PostgreSQLReferenceName
+# class:   output
+##-------------------------------------------------------------------------------------------------
+PostgreSQLReferenceName:
+  Description: "PostgreSQL Reference Name"
+  Value: !Ref "PostgreSQLReferenceName"
+  Export:
+    Name: !Sub "${AWS::StackName}-PostgreSQLReferenceName"

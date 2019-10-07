@@ -1,0 +1,11 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Custom/AMIAmazonLinux2
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+AMIResults:
+  Type: "Custom::AMIResults"
+  Version: "1.0"
+  Properties:
+    "ServiceToken": !If [UseEncryptedAMI, !Join [ "", [ "arn:aws:lambda:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":function:ami-results-amazonlinux2-encrypted" ] ], !Join [ "", [ "arn:aws:lambda:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":function:ami-results-amazonlinux2" ] ] ]
+    "Region": !Ref "AWS::Region"
+    "Updated": !Ref "LaunchTemplateUpdated"

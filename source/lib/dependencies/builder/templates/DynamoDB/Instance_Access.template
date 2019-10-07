@@ -1,0 +1,44 @@
+##-------------------------------------------------------------------------------------------------
+# object: DynamoDB/Instance_Access
+##-------------------------------------------------------------------------------------------------
+Paradigm:
+  Parameters:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/StackReference/StackReferenceDynamoDBTable1
+    - Base/StackReference/StackReferenceDynamoDBTable2
+    - Base/StackReference/StackReferenceDynamoDBTable3
+    - Base/StackReference/StackReferenceDynamoDBTable4
+
+##-------------------------------------------------------------------------------------------------
+  Mappings:
+
+##-------------------------------------------------------------------------------------------------
+  Conditions:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/StackReference/ExistsStackReferenceDynamoDBTable1
+    - Base/StackReference/ExistsStackReferenceDynamoDBTable2
+    - Base/StackReference/ExistsStackReferenceDynamoDBTable3
+    - Base/StackReference/ExistsStackReferenceDynamoDBTable4
+
+##-------------------------------------------------------------------------------------------------
+  Resources:
+    #-- IAM  ----------------------------------------------------------------------------
+    - Base/IAM/Policy/DynamoDBTableAccessInstance
+
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/Custom/StackReferenceResultsDynamoDBTable1
+    - Base/Custom/StackReferenceResultsDynamoDBTable2
+    - Base/Custom/StackReferenceResultsDynamoDBTable3
+    - Base/Custom/StackReferenceResultsDynamoDBTable4
+
+##-------------------------------------------------------------------------------------------------
+  Outputs:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/DynamoDB/DynamoDBTable1Arn
+    - Base/DynamoDB/DynamoDBTable1Name
+    - Base/DynamoDB/DynamoDBTable2Arn
+    - Base/DynamoDB/DynamoDBTable2Name
+    - Base/DynamoDB/DynamoDBTable3Arn
+    - Base/DynamoDB/DynamoDBTable3Name
+    - Base/DynamoDB/DynamoDBTable4Arn
+    - Base/DynamoDB/DynamoDBTable4Name

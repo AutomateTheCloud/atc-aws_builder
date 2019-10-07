@@ -1,0 +1,22 @@
+##-------------------------------------------------------------------------------------------------
+# object:  CloudWatch/Alarm/RootUserEventCount
+# class:   resource
+# cis:     3.3: Ensure a log metric filter and alarm exist for usage of "root" account
+##-------------------------------------------------------------------------------------------------
+AlarmRootUserEventCount:
+  Type: "AWS::CloudWatch::Alarm"
+  Properties:
+    AlarmName: "compliance_iam-root-user-activity"
+    AlarmDescription: "Compliance: IAM Root User activity detected"
+    AlarmActions:
+      - !Ref "SNSTopicAudit"
+    MetricName: "RootUserEventCount"
+    Namespace: "CloudTrailMetrics"
+    ComparisonOperator: "GreaterThanOrEqualToThreshold"
+    EvaluationPeriods: "1"
+    Period: "60"
+    Statistic: "Sum"
+    Threshold: "1"
+    TreatMissingData: "notBreaching"
+  DependsOn:
+    - "MetricFilterRootUserEventCount"

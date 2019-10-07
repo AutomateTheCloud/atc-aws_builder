@@ -1,0 +1,41 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Targets/SecurityGroup_11_20
+# class:   template
+##-------------------------------------------------------------------------------------------------
+Paradigm:
+##-------------------------------------------------------------------------------------------------
+  Parameters:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/SecurityGroup/SecurityGroupTarget11
+    - Base/SecurityGroup/SecurityGroupTarget12
+    - Base/SecurityGroup/SecurityGroupTarget13
+    - Base/SecurityGroup/SecurityGroupTarget14
+    - Base/SecurityGroup/SecurityGroupTarget15
+    - Base/SecurityGroup/SecurityGroupTarget16
+    - Base/SecurityGroup/SecurityGroupTarget17
+    - Base/SecurityGroup/SecurityGroupTarget18
+    - Base/SecurityGroup/SecurityGroupTarget19
+    - Base/SecurityGroup/SecurityGroupTarget20
+
+##-------------------------------------------------------------------------------------------------
+  Mappings:
+
+##-------------------------------------------------------------------------------------------------
+  Conditions:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/SecurityGroup/ExistsSecurityGroupTarget11
+    - Base/SecurityGroup/ExistsSecurityGroupTarget12
+    - Base/SecurityGroup/ExistsSecurityGroupTarget13
+    - Base/SecurityGroup/ExistsSecurityGroupTarget14
+    - Base/SecurityGroup/ExistsSecurityGroupTarget15
+    - Base/SecurityGroup/ExistsSecurityGroupTarget16
+    - Base/SecurityGroup/ExistsSecurityGroupTarget17
+    - Base/SecurityGroup/ExistsSecurityGroupTarget18
+    - Base/SecurityGroup/ExistsSecurityGroupTarget19
+    - Base/SecurityGroup/ExistsSecurityGroupTarget20
+
+##-------------------------------------------------------------------------------------------------
+  Resources:
+
+##-------------------------------------------------------------------------------------------------
+  Outputs:

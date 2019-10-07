@@ -1,0 +1,16 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Config/ConfigRule/AWSEIPAttached
+# class:   resource
+# cis:     
+##-------------------------------------------------------------------------------------------------
+ConfigRuleAWSEIPAttached:
+  Type: "AWS::Config::ConfigRule"
+  Properties:
+    ConfigRuleName: "aws-eip-attached"
+    Description: "Checks whether all EIP addresses allocated to a VPC are attached to EC2 instances or in-use ENIs"
+    Scope:
+      ComplianceResourceTypes:
+        - 'AWS::EC2::EIP'
+    Source:
+      Owner: AWS
+      SourceIdentifier: "EIP_ATTACHED"

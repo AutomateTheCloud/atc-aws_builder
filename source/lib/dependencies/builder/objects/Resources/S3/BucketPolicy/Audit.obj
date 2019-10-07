@@ -1,0 +1,56 @@
+##---------------------------------------------------------------------------------------
+# object: S3/BucketPolicy/Audit
+##---------------------------------------------------------------------------------------
+S3BucketPolicyAudit:
+  Type: "AWS::S3::BucketPolicy"
+  Properties:
+    Bucket: !Ref "S3BucketAudit"
+    PolicyDocument:
+      Version: "2012-10-17"
+      Statement:
+        -
+          Sid: "AWS_CloudTrail_AclCheck"
+          Effect: "Allow"
+          Principal:
+            Service: "cloudtrail.amazonaws.com"
+          Action: "s3:GetBucketAcl"
+          Resource:
+            - !Join [ "", [ "arn:aws:s3:::", !Ref "S3BucketAuditName" ] ]
+        -
+          Sid: "AWS_CloudTrail_Write"
+          Effect: "Allow"
+          Principal:
+            Service: "cloudtrail.amazonaws.com"
+          Action: "s3:PutObject"
+          Resource:
+            - !Join [ "", [ "arn:aws:s3:::", !Ref "S3BucketAuditName", "/AWSLogs/", !Ref "AWS::AccountId", "/*" ] ]
+          Condition:
+            StringEquals:
+              s3:x-amz-acl: "bucket-owner-full-control"
+        -
+          Sid: "AWSConfigBucketPermissionsCheck"
+          Effect: "Allow"
+          Principal:
+            Service: "config.amazonaws.com"
+          Action: "s3:GetBucketAcl"
+          Resource:
+            - !Join [ "", [ "arn:aws:s3:::", !Ref "S3BucketAuditName" ] ]
+        -
+          Sid: "AWSConfigBucketExistenceCheck"
+          Effect: "Allow"
+          Principal:
+            Service: "config.amazonaws.com"
+          Action: "s3:ListBucket"
+          Resource:
+            - !Join [ "", [ "arn:aws:s3:::", !Ref "S3BucketAuditName" ] ]
+        -
+          Sid: "AWSConfigBucketDelivery"
+          Effect: "Allow"
+          Principal:
+            Service: "config.amazonaws.com"
+          Action: "s3:PutObject"
+          Resource:
+            - !Join [ "", [ "arn:aws:s3:::", !Ref "S3BucketAuditName", "/AWSLogs/", !Ref "AWS::AccountId", "/Config/*" ] ]
+          Condition:
+            StringEquals:
+              s3:x-amz-acl: "bucket-owner-full-control"

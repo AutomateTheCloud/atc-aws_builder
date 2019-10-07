@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SQS/SQSQueueReceiveMessageWaitTimeSeconds
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+SQSQueueReceiveMessageWaitTimeSeconds:
+  Type:                  Number
+  Description:           "SQS: Receive Message Wait Time (seconds)"
+  Default:               0
+  MinValue:              0
+  MaxValue:              20

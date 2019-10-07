@@ -1,0 +1,11 @@
+##-------------------------------------------------------------------------------------------------
+# object:  IAM/Group/AWSUserBilling
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+IAMGroupAWSUserBilling:
+  Type: "AWS::IAM::Group"
+  Properties:
+    GroupName: "AWS-User_Billing"
+    Path: "/"
+    ManagedPolicyArns:
+      - arn:aws:iam::aws:policy/job-function/Billing

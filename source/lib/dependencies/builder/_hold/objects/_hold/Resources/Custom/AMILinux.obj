@@ -1,0 +1,11 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Custom/AMILinux
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+AMILinux:
+  Type: "Custom::AMILinux"
+  Version: "1.0"
+  Properties:
+    "ServiceToken": !If [UseEncryptedAMI, !Join [ "", [ "arn:aws:lambda:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":function:ami_results_amazonlinux2_encrypted" ] ], !Join [ "", [ "arn:aws:lambda:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":function:ami_results_amazonlinux2" ] ] ]
+    "Region": !Ref "AWS::Region"
+    "LaunchConfigurationUpdated": !Ref "LaunchConfigurationUpdated"

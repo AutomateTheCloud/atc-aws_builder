@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/ReferenceName
+# class:   output
+##-------------------------------------------------------------------------------------------------
+ReferenceName:
+  Description: "Reference Name"
+  Value: !Ref "ReferenceName"
+  Export:
+    Name: !Sub "${AWS::StackName}-ReferenceName"

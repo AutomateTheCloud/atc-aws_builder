@@ -1,0 +1,41 @@
+##-------------------------------------------------------------------------------------------------
+# object:  IAM/SAML_IDP
+# class:   template
+##-------------------------------------------------------------------------------------------------
+Paradigm:
+  Parameters:
+    #-- IAM -----------------------------------------------------------------------------
+    - Base/IAM/SAMLProviderName
+    - Base/IAM/SAMLMetadataBucket
+    - Base/IAM/SAMLMetadataFilename
+    - Base/IAM/SAMLMaxSessionDurationPrivileged
+    - Base/IAM/SAMLMaxSessionDurationUser
+
+##-------------------------------------------------------------------------------------------------
+  Mappings:
+
+##-------------------------------------------------------------------------------------------------
+  Conditions:
+
+##-------------------------------------------------------------------------------------------------
+  Resources:
+    #-- IAM -----------------------------------------------------------------------------
+    - Base/IAM/Role/LambdaFunctionSAMLCreateIdentityProvider
+    - Base/IAM/Role/SAMLAdministrator
+    - Base/IAM/Role/SAMLPowerUser
+    - Base/IAM/Role/SAMLDeveloper
+    - Base/IAM/Role/SAMLReadOnly
+    - Base/IAM/Role/SAMLSecurity
+    - Base/IAM/Role/SAMLBilling
+
+    #-- Lambda --------------------------------------------------------------------------
+    - Base/Lambda/Function/SAMLCreateIdentityProvider
+
+    #-- Cloudwatch Logs -----------------------------------------------------------------
+    - Base/Logs/LogGroup/LambdaFunctionSAMLCreateIdentityProvider
+
+    #-- Custom --------------------------------------------------------------------------
+    - Base/Custom/SAMLCreateIdentityProvider
+
+##-------------------------------------------------------------------------------------------------
+  Outputs:

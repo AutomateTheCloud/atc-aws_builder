@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DNS/DomainUtilityName
+# class:   output
+##-------------------------------------------------------------------------------------------------
+DomainUtilityName:
+  Description: "Domain: Utility (Name)"
+  Value: !Select [0, !Split ["|", !Ref "DomainUtility"]]
+  Export:
+    Name: !Sub "${AWS::StackName}-DomainUtilityName"

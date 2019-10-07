@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SNS/SNSSubscriptionWarning2Endpoint
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+SNSSubscriptionWarning2Endpoint:
+  Type:                  String
+  Description:           "SNS Subscription (warning) 2: Endpoint"

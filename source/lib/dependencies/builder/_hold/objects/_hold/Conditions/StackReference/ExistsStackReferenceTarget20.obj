@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  StackReference/ExistsStackReferenceTarget20
+# class:   condition
+##-------------------------------------------------------------------------------------------------
+ExistsStackReferenceTarget20:
+  !Not [!Equals [!Ref "StackReferenceTarget20", ""]]
+

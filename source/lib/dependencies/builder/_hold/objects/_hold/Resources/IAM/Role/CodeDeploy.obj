@@ -1,0 +1,48 @@
+##-------------------------------------------------------------------------------------------------
+# object:  IAM/Role/CodeDeploy
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+RoleCodeDeploy:
+  Type: "AWS::IAM::Role"
+  Properties:
+    RoleName: !Join [ "_", [ "codedeploy", !Select [1, !Split ["|", !Ref "CodeDeployApplication"]], !Ref "AWS::Region" ] ]
+    AssumeRolePolicyDocument:
+      Version: "2012-10-17"
+      Statement:
+        -
+          Effect: "Allow"
+          Principal:
+            Service:
+              - "codedeploy.amazonaws.com"
+          Action:
+            - "sts:AssumeRole"
+    Path: "/"
+    Policies:
+      -
+        PolicyName: !Join [ "_", [ "codedeploy", !Select [1, !Split ["|", !Ref "CodeDeployApplication"]], !Ref "AWS::Region" ] ]
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: "Allow"
+              Action:
+                - "autoscaling:CompleteLifecycleAction"
+                - "autoscaling:DeleteLifecycleHook"
+                - "autoscaling:DescribeAutoScalingGroups"
+                - "autoscaling:DescribeLifecycleHooks"
+                - "autoscaling:PutLifecycleHook"
+                - "autoscaling:RecordLifecycleActionHeartbeat"
+                - "ec2:DescribeInstances"
+                - "ec2:DescribeInstanceStatus"
+                - "tag:GetTags"
+                - "tag:GetResources"
+                - "sns:Publish"
+                - "cloudwatch:DescribeAlarms"
+                - "elasticloadbalancing:DescribeLoadBalancers"
+                - "elasticloadbalancing:DescribeInstanceHealth"
+                - "elasticloadbalancing:RegisterInstancesWithLoadBalancer"
+                - "elasticloadbalancing:DeregisterInstancesFromLoadBalancer"
+                - "elasticloadbalancing:DescribeTargetGroups"
+                - "elasticloadbalancing:DescribeTargetHealth"
+                - "elasticloadbalancing:RegisterTargets"
+                - "elasticloadbalancing:DeregisterTargets"
+              Resource: "*"

@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DNS/DNSElasticache
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+DNSElasticache:
+  Type:                  String
+  Description:           "DNS: Elasticache (Subdomain|Domain|HostedZoneID)"

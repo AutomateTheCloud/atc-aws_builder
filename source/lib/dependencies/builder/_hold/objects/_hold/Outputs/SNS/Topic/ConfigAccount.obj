@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SNS/Topic/ConfigAccount
+# class:   output
+##-------------------------------------------------------------------------------------------------
+SNSTopicConfigAccount:
+  Condition: "EnabledConfig"
+  Description: "SNS Topic (Config - Account): ARN"
+  Value: !Ref "SNSTopicConfigAccount"
+  Export:
+    Name: !Sub "${AWS::StackName}-SNSTopicConfigAccount"

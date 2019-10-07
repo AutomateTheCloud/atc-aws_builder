@@ -1,0 +1,16 @@
+##-------------------------------------------------------------------------------------------------
+# object:  ApplicationAutoScaling/ScalingPolicy/DynamoDBTableWriteCapacity
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+ScalingPolicyDynamoDBTableWriteCapacity: 
+  Type: "AWS::ApplicationAutoScaling::ScalingPolicy"
+  Properties: 
+    PolicyName: "WriteAutoScalingPolicy"
+    PolicyType: "TargetTrackingScaling"
+    ScalingTargetId: !Ref "ScalableTargetDynamoDBTableWriteCapacity"
+    TargetTrackingScalingPolicyConfiguration: 
+      TargetValue: !Ref "WriteCapacityTargetValue"
+      ScaleInCooldown: !Ref "WriteCapacityScaleInCooldown"
+      ScaleOutCooldown: !Ref "WriteCapacityScaleOutCooldown"
+      PredefinedMetricSpecification: 
+        PredefinedMetricType: "DynamoDBWriteCapacityUtilization"

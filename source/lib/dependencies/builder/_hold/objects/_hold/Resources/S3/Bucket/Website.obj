@@ -1,0 +1,31 @@
+##-------------------------------------------------------------------------------------------------
+# object:  S3/Bucket/Website
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+S3BucketWebsite:
+  Type: "AWS::S3::Bucket"
+  DeletionPolicy: Retain
+  Properties:
+    AccessControl: "PublicRead"
+    LifecycleConfiguration:
+      Rules:
+      - Status: Enabled
+        NoncurrentVersionExpirationInDays: !Ref "S3NoncurrentVersionExpiration"
+    CorsConfiguration:
+      CorsRules:
+      - AllowedHeaders: ['*']
+        AllowedMethods: [GET]
+        AllowedOrigins: ['*']
+        MaxAge: "3600"
+    BucketName: !Ref "S3BucketName"
+    VersioningConfiguration:
+      Status: Enabled
+    WebsiteConfiguration:
+      IndexDocument: !Ref "WebsiteIndexDocument"
+      ErrorDocument: !Ref "WebsiteErrorDocument"
+    LoggingConfiguration:
+     DestinationBucketName: !Join [ "", [ !Ref "AWS::AccountId", "-", "logs", "-", !Ref "AWS::Region" ] ]
+     LogFilePrefix: !Join [ "", [ "s3/", !Ref "S3BucketName", "/" ] ]
+    Tags:
+      - Key: "Name"
+        Value: !Ref "S3BucketName"

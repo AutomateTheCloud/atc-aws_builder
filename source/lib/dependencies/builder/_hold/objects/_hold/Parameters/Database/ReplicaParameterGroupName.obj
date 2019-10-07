@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/ReplicaParameterGroupName
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+ReplicaParameterGroupName:
+  Type:                  String
+  Description:           "Replica Parameter Group Name"

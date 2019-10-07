@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DNS/DNSEIPInstanceVanity
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+DNSEIPInstanceVanity:
+  Type:                  String
+  Description:           "DNS: EIP Instance (Vanity)"

@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  CloudFront/CloudFrontDocumentError501
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+CloudFrontDocumentError501:
+  Type:                  String
+  Default:               "error.html"
+  Description:           "CloudFront: Document - Error501"
+

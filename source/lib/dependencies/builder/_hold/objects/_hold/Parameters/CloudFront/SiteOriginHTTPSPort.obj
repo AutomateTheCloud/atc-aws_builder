@@ -1,0 +1,8 @@
+##-------------------------------------------------------------------------------------------------
+# object:  CloudFront/SiteOriginHTTPSPort
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+SiteOriginHTTPSPort:
+  Type:                  Number
+  Default:               443
+  Description:           "CloudFront Distribution Origin (HTTPS Port)"

@@ -1,0 +1,38 @@
+##-------------------------------------------------------------------------------------------------
+# object:  AWS/AccountsELB
+# class:   mapping
+# purpose: Amazon ELB Source Accounts
+##-------------------------------------------------------------------------------------------------
+AccountsELB:
+  us-east-1:
+    "accountID": "127311923021"
+  us-east-2:
+    "accountID": "033677994240"
+  us-west-1:
+    "accountID": "027434742980"
+  us-west-2:
+    "accountID": "797873946194"
+  ca-central-1:
+    "accountID": "985666609251"
+  eu-west-1:
+    "accountID": "156460612806"
+  eu-central-1:
+    "accountID": "054676820928"
+  eu-west-2:
+    "accountID": "652711504416"
+  ap-northeast-1:
+    "accountID": "582318560864"
+  ap-northeast-2:
+    "accountID": "600734575887"
+  ap-southeast-1:
+    "accountID": "114774131450"
+  ap-southeast-2:
+    "accountID": "783225319266"
+  ap-south-1:
+    "accountID": "718504428378"
+  sa-east-1:
+    "accountID": "507241528517"
+  us-gov-west-1:
+    "accountID": "048591011584"
+  cn-north-1:
+    "accountID": "638102146993"

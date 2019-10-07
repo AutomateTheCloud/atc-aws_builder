@@ -1,0 +1,7 @@
+##---------------------------------------------------------------------------------------
+# object: DynamoDB/WriteCapacityTargetValue
+##---------------------------------------------------------------------------------------
+WriteCapacityTargetValue:
+  Description: "DynamoDB Write Capacity (Target Value Percentage)"
+  Type: Number
+  Default: 70

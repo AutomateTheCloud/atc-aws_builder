@@ -1,0 +1,10 @@
+##---------------------------------------------------------------------------------------
+# object: SNS/Subscription/ConfigEmail3
+##---------------------------------------------------------------------------------------
+SNSSubscriptionConfigEmail3:
+  Condition: "ExistsSNSSubscriptionEmail3"
+  Type: "AWS::SNS::Subscription"
+  Properties:
+    Endpoint: !Ref "SNSSubscriptionEmail3"
+    Protocol: "email"
+    TopicArn: !Ref "SNSTopicConfig"

@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/MySQLPort
+# class:   output
+##-------------------------------------------------------------------------------------------------
+MySQLPort:
+  Description: "MySQL Port"
+  Value: !Ref "MySQLPort"
+  Export:
+    Name: !Sub "${AWS::StackName}-MySQLPort"

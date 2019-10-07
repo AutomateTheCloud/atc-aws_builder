@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: Logs/LogGroup/LambdaFunctionConfigInstanceRoleUse
+##---------------------------------------------------------------------------------------
+LogGroupLambdaFunctionConfigInstanceRoleUse:
+  Type: "AWS::Logs::LogGroup"
+  Properties:
+    LogGroupName: !Sub "/aws/lambda/${LambdaFunctionConfigInstanceRoleUse}"
+    RetentionInDays: "14"

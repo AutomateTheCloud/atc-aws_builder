@@ -1,0 +1,13 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Custom/StackReferenceResultsKMSKey4
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+StackReferenceResultsKMSKey4:
+  Condition: "ExistsStackReferenceKMSKey4"
+  Type: "Custom::StackReferenceResultsKMSKey4"
+  Version: "1.0"
+  Properties:
+    "ServiceToken": !Join [ "", [ "arn:aws:lambda:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":function:stack-reference" ] ]
+    "Region": !Ref "AWS::Region"
+    "StackName": !Ref "StackReferenceKMSKey4"
+    "LastUpdate": !Ref "LastUpdate"

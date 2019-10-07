@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  IAM/SAMLMaxSessionDuration
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+SAMLMaxSessionDuration:
+  Type:                  Number
+  MinValue:              3600
+  MaxValue:              43200
+  Default:               3600
+  Description:           "SAML: Maximum Session Duration"

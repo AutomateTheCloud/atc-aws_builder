@@ -1,0 +1,53 @@
+##-------------------------------------------------------------------------------------------------
+# object:  KMS/Instance_Access
+# class:   template
+##-------------------------------------------------------------------------------------------------
+Paradigm:
+  Parameters:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/StackReference/StackReferenceKMSKey1
+    - Base/StackReference/StackReferenceKMSKey2
+    - Base/StackReference/StackReferenceKMSKey3
+    - Base/StackReference/StackReferenceKMSKey4
+
+##-------------------------------------------------------------------------------------------------
+  Mappings:
+
+##-------------------------------------------------------------------------------------------------
+  Conditions:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/StackReference/ExistsStackReferenceKMSKey1
+    - Base/StackReference/ExistsStackReferenceKMSKey2
+    - Base/StackReference/ExistsStackReferenceKMSKey3
+    - Base/StackReference/ExistsStackReferenceKMSKey4
+
+##-------------------------------------------------------------------------------------------------
+  Resources:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/IAM/Policy/KMSKeyAccessInstance
+
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/Custom/StackReferenceResultsKMSKey1
+    - Base/Custom/StackReferenceResultsKMSKey2
+    - Base/Custom/StackReferenceResultsKMSKey3
+    - Base/Custom/StackReferenceResultsKMSKey4
+
+##-------------------------------------------------------------------------------------------------
+  Outputs:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/KMS/KMSKey1Arn
+    - Base/KMS/KMSKey1Id
+    - Base/KMS/KMSKey2Arn
+    - Base/KMS/KMSKey2Id
+    - Base/KMS/KMSKey3Arn
+    - Base/KMS/KMSKey3Id
+    - Base/KMS/KMSKey4Arn
+    - Base/KMS/KMSKey4Id
+    - Base/KMS/KMSAlias1Arn
+    - Base/KMS/KMSAlias1Id
+    - Base/KMS/KMSAlias2Arn
+    - Base/KMS/KMSAlias2Id
+    - Base/KMS/KMSAlias3Arn
+    - Base/KMS/KMSAlias3Id
+    - Base/KMS/KMSAlias4Arn
+    - Base/KMS/KMSAlias4Id

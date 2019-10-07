@@ -1,0 +1,6 @@
+##-------------------------------------------------------------------------------------------------
+# object:  ECS/EnabledMangementNetwork
+# class:   condition
+##-------------------------------------------------------------------------------------------------
+EnabledMangementNetwork:
+  !Equals [ !Ref "EnableMangementNetwork", "yes" ]

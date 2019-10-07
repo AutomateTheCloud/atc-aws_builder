@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/RDSDBParameterGroupName
+# class:   output
+##-------------------------------------------------------------------------------------------------
+ParameterGroupName:
+  Description: "Parameter Group Name"
+  Value: !Ref "RDSDBParameterGroup"
+  Export:
+    Name: !Sub "${AWS::StackName}-ParameterGroupName"

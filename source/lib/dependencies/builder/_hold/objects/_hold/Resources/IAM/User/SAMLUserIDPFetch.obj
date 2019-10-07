@@ -1,0 +1,18 @@
+##-------------------------------------------------------------------------------------------------
+# object:  IAM/User/SAMLUserIDPFetch
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+UserSAMLUserIDPFetch:
+  Type: "AWS::IAM::User"
+  Properties:
+    UserName: !Ref "SAMLUserIDPFetch"
+    Policies:
+      -
+        PolicyName: "saml_idp-fetch"
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: "Allow"
+              Action:
+                - "iam:ListRoles"
+              Resource: "*"

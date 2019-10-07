@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  ElastiCache/RedisPort
+# class:   output
+##-------------------------------------------------------------------------------------------------
+RedisPort:
+  Description: "Redis Port"
+  Value: !Ref "RedisPort"
+  Export:
+    Name: !Sub "${AWS::StackName}-RedisPort"

@@ -1,0 +1,6 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Network/SubnetTypeLoadBalancerPrivate
+# class:   condition
+##-------------------------------------------------------------------------------------------------
+SubnetTypeLoadBalancerPrivate:
+  !Equals [!Ref "SubnetTypeLoadBalancer", "private"]

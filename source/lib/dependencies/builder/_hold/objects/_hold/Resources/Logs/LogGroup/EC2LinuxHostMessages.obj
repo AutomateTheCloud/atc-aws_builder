@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Logs/LogGroup/EC2LinuxHostMessages
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+LogGroupEC2LinuxHostMessages:
+  Type: "AWS::Logs::LogGroup"
+  Properties:
+    LogGroupName: "/aws/ec2/linux/host_messages"
+    RetentionInDays: !Ref "LogRetentionEC2LinuxHostMessages"

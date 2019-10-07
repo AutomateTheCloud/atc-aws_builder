@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DynamoDB/DynamoDBTable1Arn
+# class:   output
+##-------------------------------------------------------------------------------------------------
+DynamoDBTable1Arn:
+  Condition: "ExistsStackReferenceDynamoDBTable1"
+  Description: "KMS: Key 1 (ARN)"
+  Value: !GetAtt "StackReferenceResultsDynamoDBTable1.DynamoDBTableArn"
+  Export:
+    Name: !Sub "${AWS::StackName}-DynamoDBTable1Arn"

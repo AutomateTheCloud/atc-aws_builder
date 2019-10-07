@@ -1,0 +1,12 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/PerformanceInsightsRetentionPeriod
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+PerformanceInsightsRetentionPeriod:
+  Type:                  String
+  Default:               "7"
+  AllowedValues:
+    - "7"
+    - "731"
+  Description:           "Performance Insights Retention Period"
+  ConstraintDescription: "7 or 731"

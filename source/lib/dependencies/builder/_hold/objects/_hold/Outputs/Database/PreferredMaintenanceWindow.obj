@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/PreferredMaintenanceWindow
+# class:   output
+##-------------------------------------------------------------------------------------------------
+PreferredMaintenanceWindow:
+  Description: "Preferred Maintenance Window"
+  Value: !Ref "PreferredMaintenanceWindow"
+  Export:
+    Name: !Sub "${AWS::StackName}-PreferredMaintenanceWindow"

@@ -1,0 +1,12 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Config/DeliveryChannel/Region
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+ConfigDeliveryChannelRegion:
+  Type: "AWS::Config::DeliveryChannel"
+  Properties:
+    Name: !Join [ "", [ "config-", !Ref "AWS::Region" ] ]
+    ConfigSnapshotDeliveryProperties:
+      DeliveryFrequency: !Ref "ConfigDeliveryFrequency"
+    S3BucketName: !Ref "S3BucketLogs"
+    SnsTopicARN: !Ref "SNSTopicConfig"

@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  StackReference/ExistsStackReferenceS3Bucket10
+# class:   condition
+##-------------------------------------------------------------------------------------------------
+ExistsStackReferenceS3Bucket10:
+  !Not [!Equals [!Ref "StackReferenceS3Bucket10", ""]]
+

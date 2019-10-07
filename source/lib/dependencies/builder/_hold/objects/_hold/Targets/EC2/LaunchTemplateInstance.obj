@@ -1,0 +1,5 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EC2/LaunchTemplateInstance
+# class:   target
+##-------------------------------------------------------------------------------------------------
+tag_ec2|LaunchTemplateInstanceId|Name|template_${DETAILS_PROJECT_ABBR}_${DETAILS_FUNCTION_ABBR}_${DETAILS_ENVIRONMENT}_${DETAILS_ORGANIZATION_ABBR}_${DETAILS_REGION}

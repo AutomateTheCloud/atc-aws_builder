@@ -1,0 +1,14 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Config/ConfigRule/AWSEFSEncryptedCheck
+# class:   resource
+# cis:     
+##-------------------------------------------------------------------------------------------------
+ConfigRuleAWSEFSEncryptedCheck:
+  Type: "AWS::Config::ConfigRule"
+  Properties:
+    ConfigRuleName: "aws-efs-encrypted-check"
+    Description: "Checks whether Amazon EFS are configured to encrypt file data using AWS KMS"
+    MaximumExecutionFrequency: "TwentyFour_Hours"
+    Source:
+      Owner: AWS
+      SourceIdentifier: "EFS_ENCRYPTED_CHECK"

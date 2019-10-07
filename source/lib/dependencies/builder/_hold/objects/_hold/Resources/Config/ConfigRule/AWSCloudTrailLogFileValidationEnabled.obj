@@ -1,0 +1,16 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Config/ConfigRule/AWSCloudTrailLogFileValidationEnabled
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+# cis_benchmarks:     
+#  - 2.2: Ensure CloudTrail log file validation is enabled
+##-------------------------------------------------------------------------------------------------
+ConfigRuleAWSCloudTrailLogFileValidationEnabled:
+  Type: "AWS::Config::ConfigRule"
+  Properties:
+    ConfigRuleName: "aws-cloudtrail-log-file-validation-enabled"
+    Description: "Checks whether AWS CloudTrail creates a signed digest file with logs"
+    MaximumExecutionFrequency: "TwentyFour_Hours"
+    Source:
+      Owner: AWS
+      SourceIdentifier: "CLOUD_TRAIL_LOG_FILE_VALIDATION_ENABLED"

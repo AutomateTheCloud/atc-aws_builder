@@ -1,0 +1,17 @@
+##---------------------------------------------------------------------------------------
+# object: Config/ConfigRule/AWSEIPAttached
+# notes:
+#   - CIS Amazon Web Services Three-tier Web
+#     - 5.12: Ensure an AWS Managed Config Rule for EIPs attached to EC2 instances within VPC
+##---------------------------------------------------------------------------------------
+ConfigRuleAWSEIPAttached:
+  Type: "AWS::Config::ConfigRule"
+  Properties:
+    ConfigRuleName: "aws-eip-attached"
+    Description: "Checks whether all EIP addresses allocated to a VPC are attached to EC2 instances or in-use ENIs"
+    Scope:
+      ComplianceResourceTypes:
+        - 'AWS::EC2::EIP'
+    Source:
+      Owner: AWS
+      SourceIdentifier: "EIP_ATTACHED"

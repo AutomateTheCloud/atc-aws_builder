@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/BackupRetentionLimit
+# class:   output
+##-------------------------------------------------------------------------------------------------
+BackupRetentionLimit:
+  Description: "Backup Retention Limit"
+  Value: !Ref "BackupRetentionLimit"
+  Export:
+    Name: !Sub "${AWS::StackName}-BackupRetentionLimit"

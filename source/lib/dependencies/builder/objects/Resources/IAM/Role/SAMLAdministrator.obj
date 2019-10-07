@@ -1,0 +1,39 @@
+##---------------------------------------------------------------------------------------
+# object: IAM/Role/SAMLAdministrator
+##---------------------------------------------------------------------------------------
+RoleSAMLAdministrator:
+  Type: "AWS::IAM::Role"
+  Properties:
+    RoleName: "SAML_Administrator"
+    MaxSessionDuration: !Ref "SAMLMaxSessionDurationPrivileged"
+    AssumeRolePolicyDocument:
+      Version: "2012-10-17"
+      Statement:
+      - Action: "sts:AssumeRoleWithSAML"
+        Effect: "Allow"
+        Condition:
+          StringEquals:
+            SAML:aud: https://signin.aws.amazon.com/saml
+        Principal:
+          Federated: !Sub arn:aws:iam::${AWS::AccountId}:saml-provider/${SAMLProviderName}
+    Path: "/"
+    ManagedPolicyArns:
+      - "arn:aws:iam::aws:policy/AdministratorAccess"
+    Policies:
+      -
+        PolicyName: "iam_instance_access_ec2-user"
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: "Allow"
+              Action:
+                - "ec2:DescribeInstances"
+              Resource: "*"
+            - Effect: "Allow"
+              Action:
+                - "ec2-instance-connect:SendSSHPublicKey"
+              Condition:
+                StringEquals:
+                  ec2:osuser: ec2-user
+              Resource:
+                - !Join [ "", [ "arn:aws:ec2:*:", !Ref "AWS::AccountId", ":instance/*" ] ]

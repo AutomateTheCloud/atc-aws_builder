@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SSL/SSLCertName
+# class:   output
+##-------------------------------------------------------------------------------------------------
+SSLCertName:
+  Description: "SSL Certificate: Name"
+  Value: !Ref "SSLCertName"
+  Export:
+    Name: !Sub "${AWS::StackName}-SSLCertName"

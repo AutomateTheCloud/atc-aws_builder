@@ -1,0 +1,15 @@
+##---------------------------------------------------------------------------------------
+# object: Config/ConfigRule/AWSRootAccountMFAEnabled
+# notes:
+#   - CIS Amazon Web Services Foundations
+#     - 1.13: Ensure MFA is enabled for the "root" account
+##---------------------------------------------------------------------------------------
+ConfigRuleAWSRootAccountMFAEnabled:
+  Type: "AWS::Config::ConfigRule"
+  Properties:
+    ConfigRuleName: "aws-root-account-mfa-enabled"
+    Description: "Checks whether the root user of your AWS account requires multi-factor authentication for console sign-in"
+    MaximumExecutionFrequency: "TwentyFour_Hours"
+    Source:
+      Owner: AWS
+      SourceIdentifier: "ROOT_ACCOUNT_MFA_ENABLED"

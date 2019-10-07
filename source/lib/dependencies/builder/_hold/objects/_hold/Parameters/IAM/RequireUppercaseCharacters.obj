@@ -1,0 +1,11 @@
+##-------------------------------------------------------------------------------------------------
+# object:  IAM/RequireUppercaseCharacters
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+RequireUppercaseCharacters:
+  Description: "You can require that IAM user passwords contain at least one uppercase character from the ISO basic Latin alphabet (A to Z)."
+  Type: String
+  Default: true
+  AllowedValues:
+  - true
+  - false

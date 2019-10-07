@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  IAM/Group/IAMGroupAWSUserBillingName
+# class:   output
+##-------------------------------------------------------------------------------------------------
+IAMGroupAWSUserBillingName:
+  Description: "IAM Group (AWSUserBilling): Name"
+  Value: !Ref "IAMGroupAWSUserBilling"
+  Export:
+    Name: !Sub "${AWS::StackName}-IAMGroupAWSUserBillingName"

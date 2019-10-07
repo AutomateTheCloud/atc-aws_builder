@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Logs/LogGroup/EC2LinuxAuthentication
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+LogGroupEC2LinuxAuthentication:
+  Type: "AWS::Logs::LogGroup"
+  Properties:
+    LogGroupName: "/aws/ec2/linux/authentication"
+    RetentionInDays: !Ref "LogRetentionEC2LinuxAuthentication"

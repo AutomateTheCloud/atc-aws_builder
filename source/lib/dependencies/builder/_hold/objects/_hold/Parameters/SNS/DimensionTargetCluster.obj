@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SNS/DimensionTargetCluster
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+DimensionTargetCluster:
+  Type:                  String
+  Description:           "Dimension: Target (Cluster)"

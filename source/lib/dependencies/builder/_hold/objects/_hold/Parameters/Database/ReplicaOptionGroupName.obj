@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/ReplicaOptionGroupName
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+ReplicaOptionGroupName:
+  Type:                  String
+  Description:           "Replica Option Group Name"

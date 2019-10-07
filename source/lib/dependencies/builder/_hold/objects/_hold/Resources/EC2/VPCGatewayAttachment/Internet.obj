@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EC2/VPCGatewayAttachment/Internet
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+VPCGatewayAttachmentInternet:
+  Type: "AWS::EC2::VPCGatewayAttachment"
+  Properties:
+    VpcId: !Ref "VPC"
+    InternetGatewayId: !Ref "InternetGateway"

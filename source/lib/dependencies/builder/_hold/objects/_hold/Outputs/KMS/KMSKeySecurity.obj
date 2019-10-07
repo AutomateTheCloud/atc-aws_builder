@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  KMS/KMSKeySecurity
+# class:   output
+##-------------------------------------------------------------------------------------------------
+KMSKeySecurity:
+  Description: "KMS Key: Security"
+  Value: !GetAtt "KMSKeySecurity.Arn"
+  Export:
+    Name: !Sub "${AWS::StackName}-KMSKeySecurity"

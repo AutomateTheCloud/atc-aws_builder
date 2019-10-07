@@ -1,0 +1,34 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Account/Compliance_Region
+# class:   template
+##-------------------------------------------------------------------------------------------------
+
+Paradigm:
+##-------------------------------------------------------------------------------------------------
+  Parameters:
+
+##-------------------------------------------------------------------------------------------------
+  Mappings:
+
+##-------------------------------------------------------------------------------------------------
+  Conditions:
+
+##-------------------------------------------------------------------------------------------------
+  Resources:
+    #-- Config --------------------------------------------------------------------------
+    - Base/Config/ConfigRule/AWSEC2VolumeInuseCheck
+    - Base/Config/ConfigRule/AWSEIPAttached
+    - Base/Config/ConfigRule/AWSInstancesInVPC
+    - Base/Config/ConfigRule/AWSCMKBackingKeyRotationEnabled
+    - Base/Config/ConfigRule/AWSELBLoggingEnabled
+    - Base/Config/ConfigRule/AWSIncomingSSHDisabled
+    - Base/Config/ConfigRule/AWSRestrictedIncomingTraffic
+    - Base/Config/ConfigRule/AWSVPCDefaultSecurityGroupClosed
+    - Base/Config/ConfigRule/AWSEFSEncryptedCheck
+    - Base/Config/ConfigRule/AWSVPCFlowLogsEnabled
+
+##-------------------------------------------------------------------------------------------------
+  Outputs:
+
+##-------------------------------------------------------------------------------------------------
+  Targets:

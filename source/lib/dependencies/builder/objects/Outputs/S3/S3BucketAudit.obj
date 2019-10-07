@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: S3/S3BucketAudit
+##---------------------------------------------------------------------------------------
+S3BucketAudit:
+  Description: "S3 Bucket: Audit"
+  Value: !Ref "S3BucketAudit"
+  Export:
+    Name: !Sub "${AWS::StackName}-S3BucketAudit"

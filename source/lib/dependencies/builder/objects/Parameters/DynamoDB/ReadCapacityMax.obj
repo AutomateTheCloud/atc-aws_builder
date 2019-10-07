@@ -1,0 +1,7 @@
+##---------------------------------------------------------------------------------------
+# object: DynamoDB/ReadCapacityMax
+##---------------------------------------------------------------------------------------
+ReadCapacityMax:
+  Description: "DynamoDB Read Capacity (Max)"
+  Type: Number
+  Default: 10

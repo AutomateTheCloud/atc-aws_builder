@@ -1,0 +1,25 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EC2/VPC/VPC
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+VPC:
+  Type: "AWS::EC2::VPC"
+  Properties:
+    CidrBlock:          !Join [ "", [ !Ref "IpNetwork", "/", !Ref "IpNetmask" ] ]
+    EnableDnsSupport:   "true"
+    EnableDnsHostnames: "true"
+    Tags:
+      - Key: "Name"
+        Value: !Join [ "", [ !Select [0, !Split ["|", !Ref "Organization"]], " (", !Ref "AWS::Region", ")" ] ]
+      - Key: "Organization"
+        Value: !Select [0, !Split ["|", !Ref "Organization"]]
+      - Key: "Project"
+        Value: !Select [0, !Split ["|", !Ref "Project"]]
+      - Key: "Function"
+        Value: !Select [0, !Split ["|", !Ref "Function"]]
+      - Key: "Environment"
+        Value: !Select [3, !Split ["|", !Ref "Organization"]]
+      - Key: "Owner"
+        Value: !Select [0, !Split ["|", !Ref "Owner"]]
+      - Key: "Contact"
+        Value: !Select [1, !Split ["|", !Ref "Owner"]]

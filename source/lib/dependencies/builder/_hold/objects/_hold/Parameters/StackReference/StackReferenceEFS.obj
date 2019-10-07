@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  StackReference/StackReferenceEFS
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+StackReferenceEFS:
+  Type:                  String
+  Description:           "Stack Reference: EFS"

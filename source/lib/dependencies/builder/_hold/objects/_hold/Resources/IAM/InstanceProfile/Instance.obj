@@ -1,0 +1,11 @@
+##-------------------------------------------------------------------------------------------------
+# object:  IAM/InstanceProfile/Instance
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+InstanceProfileInstance:
+  Type: "AWS::IAM::InstanceProfile"
+  Properties:
+    InstanceProfileName: !Join [ "", [ !Select [1, !Split ["|", !Ref "Project"]], "-", !Select [1, !Split ["|", !Ref "Function"]], "-", !Select [3, !Split ["|", !Ref "Organization"]], "-", !Select [1, !Split ["|", !Ref "Organization"]] ] ]
+    Path: !Join [ "", [ "/", !Ref "AWS::Region", "/" ] ]
+    Roles:
+      - !Ref "RoleInstance"

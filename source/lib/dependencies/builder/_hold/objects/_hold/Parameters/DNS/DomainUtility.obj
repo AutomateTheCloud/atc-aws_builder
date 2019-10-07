@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DNS/DomainUtility
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+DomainUtility:
+  Type:                  String
+  Description:           "Domain: Utility (DomainName | HostedZoneID)"

@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  CloudFront/CloudFrontOriginAccessIdentity/WebsiteSiteOrigin
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+CloudFrontOriginAccessIdentitySite:
+  Type: "AWS::CloudFront::CloudFrontOriginAccessIdentity"
+  Properties:
+    CloudFrontOriginAccessIdentityConfig:
+      Comment: !Ref "SiteOriginDomainName"

@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  CloudFront/CloudFrontDocumentError504
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+CloudFrontDocumentError504:
+  Type:                  String
+  Default:               "error.html"
+  Description:           "CloudFront: Document - Error504"
+

@@ -1,0 +1,51 @@
+##-------------------------------------------------------------------------------------------------
+# object:  StackReference/Targets
+# class:   template
+##-------------------------------------------------------------------------------------------------
+Paradigm:
+  Parameters:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/StackReference/StackReferenceTarget1
+    - Base/StackReference/StackReferenceTarget2
+    - Base/StackReference/StackReferenceTarget3
+    - Base/StackReference/StackReferenceTarget4
+    - Base/StackReference/StackReferenceTarget5
+    - Base/StackReference/StackReferenceTarget6
+    - Base/StackReference/StackReferenceTarget7
+    - Base/StackReference/StackReferenceTarget8
+    - Base/StackReference/StackReferenceTarget9
+    - Base/StackReference/StackReferenceTarget10
+
+##-------------------------------------------------------------------------------------------------
+  Mappings:
+
+##-------------------------------------------------------------------------------------------------
+  Conditions:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/StackReference/ExistsStackReferenceTarget1
+    - Base/StackReference/ExistsStackReferenceTarget2
+    - Base/StackReference/ExistsStackReferenceTarget3
+    - Base/StackReference/ExistsStackReferenceTarget4
+    - Base/StackReference/ExistsStackReferenceTarget5
+    - Base/StackReference/ExistsStackReferenceTarget6
+    - Base/StackReference/ExistsStackReferenceTarget7
+    - Base/StackReference/ExistsStackReferenceTarget8
+    - Base/StackReference/ExistsStackReferenceTarget9
+    - Base/StackReference/ExistsStackReferenceTarget10
+
+##-------------------------------------------------------------------------------------------------
+  Resources:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/Custom/StackReferenceResultsTarget1
+    - Base/Custom/StackReferenceResultsTarget2
+    - Base/Custom/StackReferenceResultsTarget3
+    - Base/Custom/StackReferenceResultsTarget4
+    - Base/Custom/StackReferenceResultsTarget5
+    - Base/Custom/StackReferenceResultsTarget6
+    - Base/Custom/StackReferenceResultsTarget7
+    - Base/Custom/StackReferenceResultsTarget8
+    - Base/Custom/StackReferenceResultsTarget9
+    - Base/Custom/StackReferenceResultsTarget10
+
+##-------------------------------------------------------------------------------------------------
+  Outputs:

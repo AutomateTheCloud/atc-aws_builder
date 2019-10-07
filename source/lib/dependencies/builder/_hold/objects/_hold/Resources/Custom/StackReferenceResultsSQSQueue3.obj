@@ -1,0 +1,14 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Custom/StackReferenceResultsSQSQueue3
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+StackReferenceResultsSQSQueue3:
+  Condition: "ExistsStackReferenceSQSQueue3"
+  Type: "Custom::StackReferenceResultsSQSQueue3"
+  Version: "1.0"
+  Properties:
+    "ServiceToken": !Join [ "", [ "arn:aws:lambda:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":function:stack-reference" ] ]
+    "Region": !Ref "AWS::Region"
+    "StackName": !Ref "StackReferenceSQSQueue3"
+    "LastUpdate": !Ref "LastUpdate"
+

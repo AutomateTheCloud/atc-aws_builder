@@ -1,0 +1,13 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Custom/StackReferenceResultsS3Bucket8
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+StackReferenceResultsS3Bucket8:
+  Condition: "ExistsStackReferenceS3Bucket8"
+  Type: "Custom::StackReferenceResultsS3Bucket8"
+  Version: "1.0"
+  Properties:
+    "ServiceToken": !Join [ "", [ "arn:aws:lambda:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":function:stack-reference" ] ]
+    "Region": !Ref "AWS::Region"
+    "StackName": !Ref "StackReferenceS3Bucket8"
+    "LastUpdate": !Ref "LastUpdate"

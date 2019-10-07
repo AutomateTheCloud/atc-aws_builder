@@ -1,0 +1,63 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Lambda/Function/AMIResultsWindows
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+LambdaFunctionAMIResultsWindows:
+  Type: "AWS::Lambda::Function"
+  Properties:
+    FunctionName: "ami_results_windows"
+    Description: "AMI Results - Windows"
+    Handler: "index.handler"
+    Code:
+      ZipFile:
+        !Sub |
+          var response = require('cfn-response');
+          var osNameToPattern = {
+            "Windows Server 2008 SP2": "Windows_Server-2008-SP2-English-64Bit-Base-*",
+            "Windows Server 2008 R2": "Windows_Server-2008-R2_SP1-English-64Bit-Base-*",
+            "Windows Server 2012 RTM": "Windows_Server-2012-RTM-English-64Bit-Base-*",
+            "Windows Server 2012 R2": "Windows_Server-2012-R2_RTM-English-64Bit-Base-*",
+            "Windows Server 2016 Full": "Windows_Server-2016-English-Full-Base-*",
+            "Windows Server 2016 Nano": "Windows_Server-2016-English-Nano-Base-*",
+            "Windows Server 2016 Core": "Windows_Server-2016-English-Core-Base-*"
+          };
+          exports.handler = function(event, context) {
+            if (event.RequestType == 'Delete') {
+              response.send(event, context, response.SUCCESS);
+              return;
+            }
+            var regionName = event.ResourceProperties.Region;
+            var windowsVersion = event.ResourceProperties.Version;
+            var responseData = {};
+            if (regionName && windowsVersion) {
+              var aws = require('aws-sdk');
+              var ec2 = new aws.EC2({region: regionName});
+              var describeImagesParams = {
+                Filters: [{ Name: 'name', Values: [osNameToPattern[windowsVersion]]}],
+                Owners: ["amazon"]
+              };
+              ec2.describeImages(describeImagesParams, function(err, describeImagesResult) {
+                if (err) {
+                  responseData = {Error: 'DescribeImages call failed'};
+                  response.send(event, context, response.FAILED, responseData);
+                } else {
+                  var images = describeImagesResult.Images;
+                  images.sort(function(x, y) { return x.CreationDate < y.CreationDate; });
+                  for (var imageIndex = 0; imageIndex < images.length; imageIndex++) {
+                    if (isBeta(images[imageIndex].Name)) continue;
+                    responseData['Id'] = images[imageIndex].ImageId;
+                    break;
+                  }
+                }
+                response.send(event, context, response.SUCCESS, responseData);
+              });
+            } else {
+              responseData = {Error: 'Region name or Windows Version not specified'};
+              response.send(event, context, response.FAILED, responseData);
+            }
+          };
+          function isBeta(imageName){return imageName.toLowerCase().indexOf('beta') > -1 || imageName.toLowerCase().indexOf('.rc') > -1;}
+    Role: !GetAtt "IAMRoleLambdaFunctionAMIResultsAmazonLinux2.Arn"
+    Runtime: "nodejs8.10"
+    MemorySize: "128"
+    Timeout: "180"

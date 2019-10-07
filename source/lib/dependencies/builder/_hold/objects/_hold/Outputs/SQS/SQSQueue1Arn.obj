@@ -1,0 +1,11 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SQS/SQSQueue1Arn
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+SQSQueue1Arn:
+  Condition: "ExistsStackReferenceSQSQueue1"
+  Description: "SQS Queue (1): ARN"
+  Value: !GetAtt "StackReferenceResultsSQSQueue1.SQSQueueArn"
+  Export:
+    Name: !Sub "-SQSQueue1Arn"
+

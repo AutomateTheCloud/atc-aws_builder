@@ -1,0 +1,8 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/BackupRetentionLimit
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+BackupRetentionLimit:
+  Type:                  Number
+  Default:               14
+  Description:           "Backup Retention Limit"

@@ -1,0 +1,34 @@
+##---------------------------------------------------------------------------------------
+# object: IAM/Role/DynamoDBScaling
+##---------------------------------------------------------------------------------------
+RoleDynamoDBScaling:
+  Type: "AWS::IAM::Role"
+  Properties:
+    RoleName: !Join [ "", [ "dynamodb", "_", !Select [1, !Split ["|", !Ref "Project"]], "-", !Select [1, !Split ["|", !Ref "Function"]], "-", !Select [3, !Split ["|", !Ref "Organization"]], "-", !Select [1, !Split ["|", !Ref "Organization"]], "_", !Ref "AWS::Region" ] ]
+    AssumeRolePolicyDocument:
+      Version: "2012-10-17"
+      Statement:
+        -
+          Effect: "Allow"
+          Principal:
+            Service:
+              - "application-autoscaling.amazonaws.com"
+          Action:
+            - "sts:AssumeRole"
+    Path: !Join [ "", [ "/", !Ref "AWS::Region", "/" ] ]
+    Policies:
+      -
+        PolicyName: !Join [ "", [ "dynamodb", "_", !Select [1, !Split ["|", !Ref "Project"]], "-", !Select [1, !Split ["|", !Ref "Function"]], "-", !Select [3, !Split ["|", !Ref "Organization"]], "-", !Select [1, !Split ["|", !Ref "Organization"]], "_", !Ref "AWS::Region" ] ]
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: "Allow"
+              Action:
+                - "dynamodb:DescribeTable"
+                - "dynamodb:UpdateTable"
+                - "cloudwatch:PutMetricAlarm"
+                - "cloudwatch:DescribeAlarms"
+                - "cloudwatch:GetMetricStatistics"
+                - "cloudwatch:SetAlarmState"
+                - "cloudwatch:DeleteAlarms"
+              Resource: "*"

@@ -1,0 +1,29 @@
+##---------------------------------------------------------------------------------------
+# object: CloudTrail/Trail/Audit
+# notes:
+#   - CIS Amazon Web Services Foundations
+#     - 2.1: Ensure CloudTrail is enabled in all regions
+#     - 2.2: Ensure CloudTrail log file validation is enabled
+#     - 2.4: Ensure CloudTrail trails are integrated with CloudWatch Logs
+#     - 2.7: Ensure CloudTrail logs are encrypted at rest using KMS CMKs
+##---------------------------------------------------------------------------------------
+CloudTrailAudit:
+  Type: "AWS::CloudTrail::Trail"
+  Properties:
+    TrailName: "cloudtrail-audit"
+    EnableLogFileValidation: true
+    IncludeGlobalServiceEvents: true
+    IsLogging: true
+    IsMultiRegionTrail: true
+    KMSKeyId: !GetAtt "KMSKeyAudit.Arn"
+    S3BucketName: !Ref "S3BucketAudit"
+    CloudWatchLogsLogGroupArn: !GetAtt "LogGroupCloudTrailAudit.Arn"
+    CloudWatchLogsRoleArn: !GetAtt "IAMRoleLogGroupCloudTrailAudit.Arn"
+    Tags:
+      - Key: "Name"
+        Value: "cloudtrail-audit"
+  DependsOn:
+    - "S3BucketPolicyAudit"
+    - "S3BucketAudit"
+    - "LogGroupCloudTrailAudit"
+    - "IAMRoleLogGroupCloudTrailAudit"

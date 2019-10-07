@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  S3/S3BucketWebsiteOrigin
+# class:   output
+##-------------------------------------------------------------------------------------------------
+S3Bucket:
+  Description: "S3 Bucket: Website (Origin)"
+  Value: !Ref "BucketWebsiteOrigin"
+  Export:
+    Name: !Sub "${AWS::StackName}-S3Bucket"

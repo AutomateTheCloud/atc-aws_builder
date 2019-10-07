@@ -1,0 +1,11 @@
+##-------------------------------------------------------------------------------------------------
+# object:  IAM/HardExpiry
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+HardExpiry:
+  Description: "You can prevent IAM users from choosing a new password after their current password has expired."
+  Type: String
+  Default: false
+  AllowedValues:
+  - true
+  - false

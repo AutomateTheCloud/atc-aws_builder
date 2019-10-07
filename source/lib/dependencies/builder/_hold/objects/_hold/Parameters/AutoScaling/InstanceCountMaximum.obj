@@ -1,0 +1,8 @@
+##-------------------------------------------------------------------------------------------------
+# object:  AutoScaling/InstanceCountMaximum
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+InstanceCountMaximum:
+  Type:                  Number
+  Default:               1
+  Description:           "Instance Count (Maximum)"

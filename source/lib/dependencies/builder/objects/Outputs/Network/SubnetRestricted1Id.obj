@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: Network/SubnetRestricted1Id
+##---------------------------------------------------------------------------------------
+SubnetRestricted1Id:
+  Description: "Subnet (Restricted1): ID"
+  Value: !Ref "SubnetRestricted1"
+  Export:
+    Name: !Sub "${AWS::StackName}-SubnetRestricted1Id"

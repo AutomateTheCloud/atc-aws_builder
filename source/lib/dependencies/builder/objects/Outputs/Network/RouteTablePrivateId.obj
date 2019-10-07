@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: Network/RouteTablePrivateId
+##---------------------------------------------------------------------------------------
+RouteTablePrivateId:
+  Description: "Route Table: Private"
+  Value: !Ref RouteTablePrivate
+  Export:
+    Name: !Sub "${AWS::StackName}-RouteTablePrivateId"

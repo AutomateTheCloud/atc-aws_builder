@@ -1,0 +1,10 @@
+##---------------------------------------------------------------------------------------
+# object: IAM/Group/AWSUserReadOnly
+##---------------------------------------------------------------------------------------
+IAMGroupAWSUserReadOnly:
+  Type: "AWS::IAM::Group"
+  Properties:
+    GroupName: "AWS-User_ReadOnly"
+    Path: "/"
+    ManagedPolicyArns:
+      - arn:aws:iam::aws:policy/ReadOnlyAccess

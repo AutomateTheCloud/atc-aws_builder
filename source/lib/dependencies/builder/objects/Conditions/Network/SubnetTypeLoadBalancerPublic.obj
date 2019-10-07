@@ -1,0 +1,5 @@
+##---------------------------------------------------------------------------------------
+# object: Network/SubnetTypeLoadBalancerPublic
+##---------------------------------------------------------------------------------------
+SubnetTypeLoadBalancerPublic:
+  !Equals [!Ref "SubnetTypeLoadBalancer", "public"]

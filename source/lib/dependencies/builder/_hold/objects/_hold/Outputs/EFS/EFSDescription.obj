@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EFS/EFSDescription
+# class:   output
+##-------------------------------------------------------------------------------------------------
+EFSDescription:
+  Description: "EFS Description"
+  Value: !Join [ "", [ !Select [0, !Split ["|", !Ref "Project"]], " - ", !Select [0, !Split ["|", !Ref "Function"]], " (", !Select [3, !Split ["|", !Ref "Organization"]], ") - [", !Select [0, !Split ["|", !Ref "Organization"]], "]" ] ]
+  Export:
+    Name: !Sub "${AWS::StackName}-EFSDescription"

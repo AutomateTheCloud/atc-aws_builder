@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: Instance/KeypairDefault
+##---------------------------------------------------------------------------------------
+KeypairDefault:
+  Description: "Keypair (Default)"
+  Value: !Ref "KeypairDefault"
+  Export:
+    Name: !Sub "${AWS::StackName}-KeypairDefault"

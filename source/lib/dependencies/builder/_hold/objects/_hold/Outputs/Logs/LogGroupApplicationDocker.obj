@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Logs/LogGroupApplicationDocker
+# class:   output
+##-------------------------------------------------------------------------------------------------
+LogGroupApplicationDocker:
+  Description: "Log Group: Application Docker"
+  Value: !Ref "LogGroupApplicationDocker"
+  Export:
+    Name: !Sub "${AWS::StackName}-LogGroupApplicationDocker"

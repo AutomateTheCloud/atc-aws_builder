@@ -1,0 +1,14 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Config/ConfigRule/AWSVPCFlowLogsEnabled
+# class:   resource
+# cis:     
+##-------------------------------------------------------------------------------------------------
+ConfigRuleAWSVPCFlowLogsEnabled:
+  Type: "AWS::Config::ConfigRule"
+  Properties:
+    ConfigRuleName: "aws-vpc-flow-logs-enabled"
+    Description: "Checks whether Amazon Virtual Private Cloud flow logs are found and enabled for Amazon VPC"
+    MaximumExecutionFrequency: "TwentyFour_Hours"
+    Source:
+      Owner: AWS
+      SourceIdentifier: "VPC_FLOW_LOGS_ENABLED"

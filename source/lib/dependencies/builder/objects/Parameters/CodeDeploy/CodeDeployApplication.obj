@@ -1,0 +1,6 @@
+##---------------------------------------------------------------------------------------
+# object: CodeDeploy/CodeDeployApplication
+##---------------------------------------------------------------------------------------
+CodeDeployApplication:
+  Description: "CodeDeploy Application (CodeDeployApplicationName | CodeDeployApplicationAbbr)"
+  Type: String

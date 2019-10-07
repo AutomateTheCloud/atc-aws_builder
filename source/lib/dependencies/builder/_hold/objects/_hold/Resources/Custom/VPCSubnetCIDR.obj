@@ -1,0 +1,12 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Custom/VPCSubnetCalculator
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+VPCSubnetCalculator:
+  Type: "Custom::VPCSubnetCalculator"
+  Version: "1.0"
+  Properties:
+    "ServiceToken": !Join [ "", [ "arn:aws:lambda:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":function:vpc_subnet_calculator" ] ]
+    "IpNetwork": !Ref "IpNetwork"
+    "IpNetmask": !Ref "IpNetmask"
+    "LastUpdate": !Ref "LastUpdate"

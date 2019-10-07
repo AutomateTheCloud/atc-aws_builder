@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DynamoDB/DynamoDBTableArn
+# class:   output
+##-------------------------------------------------------------------------------------------------
+DynamoDBTableArn:
+  Description: "DynamoDB Table ARN"
+  Value: !GetAtt "DynamoDBTable.Arn"
+  Export:
+    Name: !Sub "${AWS::StackName}-DynamoDBTableArn"

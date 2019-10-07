@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SQS/SQSQueueUrl
+# class:   output
+##-------------------------------------------------------------------------------------------------
+SQSQueueUrl:
+  Description: "SQS: Queue URL"
+  Value: !Ref "SQSQueue"
+  Export:
+    Name: !Sub "${AWS::StackName}-SQSQueueUrl"

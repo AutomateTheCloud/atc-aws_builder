@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: Details/LastUpdate
+##---------------------------------------------------------------------------------------
+LastUpdate:
+  Description: "Details: LastUpdate"
+  Value: !Ref "LastUpdate"
+  Export:
+    Name: !Sub "${AWS::StackName}-LastUpdate"

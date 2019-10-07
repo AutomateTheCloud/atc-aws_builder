@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  LoadBalancer/LoadBalancerEnabledTarget11
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+LoadBalancerEnabledTarget11:
+  Type:                  String
+  Default:               "false"
+  Description:           "LoadBalancer Enabled (Target11)"
+

@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/BackupWindow
+# class:   output
+##-------------------------------------------------------------------------------------------------
+BackupWindow:
+  Description: "Backup Window"
+  Value: !Ref "BackupWindow"
+  Export:
+    Name: !Sub "${AWS::StackName}-BackupWindow"

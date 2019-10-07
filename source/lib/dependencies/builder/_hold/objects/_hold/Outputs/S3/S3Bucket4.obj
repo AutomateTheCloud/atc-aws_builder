@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  S3/S3Bucket4
+# class:   output
+##-------------------------------------------------------------------------------------------------
+S3Bucket4:
+  Condition: "ExistsStackReferenceS3Bucket4"
+  Description: "S3 Bucket: Reference - Bucket4"
+  Value: !GetAtt "StackReferenceResultsS3Bucket4.S3Bucket"
+  Export:
+    Name: !Sub "${AWS::StackName}-S3Bucket4"

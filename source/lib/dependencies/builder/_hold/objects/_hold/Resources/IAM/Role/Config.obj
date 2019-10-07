@@ -1,0 +1,54 @@
+##-------------------------------------------------------------------------------------------------
+# object:  IAM/Role/Config
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+RoleConfig:
+  Type: "AWS::IAM::Role"
+  Properties:
+    RoleName: !Join [ "_", [ "config", !Ref "AWS::Region" ] ]
+    AssumeRolePolicyDocument:
+      Version: "2012-10-17"
+      Statement:
+        -
+          Effect: "Allow"
+          Principal:
+            Service:
+              - "config.amazonaws.com"
+          Action:
+            - "sts:AssumeRole"
+    Path: "/"
+    ManagedPolicyArns:
+      - "arn:aws:iam::aws:policy/service-role/AWSConfigRole"
+    Policies:
+      -
+        PolicyName: "config"
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: "Allow"
+              Action:
+                - "s3:GetBucketAcl"
+              Resource: !Join ['', ['arn:aws:s3:::', !Ref "S3BucketLogs"]]
+            - Effect: "Allow"
+              Action:
+                - "s3:PutObject"
+              Resource: !Join ['', ['arn:aws:s3:::', !Ref 'S3BucketLogs', /AWSLogs/, !Ref 'AWS::AccountId', /*]]
+              Condition:
+                StringEquals:
+                  s3:x-amz-acl: bucket-owner-full-control
+            - Effect: "Allow"
+              Action:
+                - "sns:Publish"
+              Resource: !Ref "SNSTopicConfig"
+            - Effect: "Allow"
+              Action:
+                - "config:Put*"
+              Resource: "*"
+            - Effect: "Allow"
+              Action:
+                - "kms:Encrypt"
+                - "kms:Decrypt"
+                - "kms:ReEncrypt"
+                - "kms:GenerateDataKey*"
+                - "kms:DescribeKey"
+              Resource: !GetAtt "KMSKeyAudit.Arn"

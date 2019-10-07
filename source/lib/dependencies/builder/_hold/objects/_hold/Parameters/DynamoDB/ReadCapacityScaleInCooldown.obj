@@ -1,0 +1,8 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DynamoDB/ReadCapacityScaleInCooldown
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+ReadCapacityScaleInCooldown:
+  Type:                  Number
+  Default:               60
+  Description:           "DynamoDB Read Capacity (Scale In Cooldown in Seconds)"

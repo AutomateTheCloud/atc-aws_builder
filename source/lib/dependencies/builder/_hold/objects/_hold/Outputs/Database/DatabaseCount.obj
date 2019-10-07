@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/DatabaseCount
+# class:   output
+##-------------------------------------------------------------------------------------------------
+DatabaseCount:
+  Description: "Database Count"
+  Value: !Ref "DatabaseCount"
+  Export:
+    Name: !Sub "${AWS::StackName}-DatabaseCount"

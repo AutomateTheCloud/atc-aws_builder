@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  AutoScaling/LaunchConfigurationInstanceOnDemandId
+# class:   output
+##-------------------------------------------------------------------------------------------------
+LaunchConfigurationInstanceOnDemandId:
+  Description: "Launch Configuration (Instance - OnDemand): ID"
+  Value: !Ref "LaunchConfigurationInstanceOnDemand"
+  Export:
+    Name: !Sub "${AWS::StackName}-LaunchConfigurationInstanceOnDemandId"

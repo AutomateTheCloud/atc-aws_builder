@@ -1,0 +1,11 @@
+##-------------------------------------------------------------------------------------------------
+# object:  IAM/Group/AWSUserAdministrator
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+IAMGroupAWSUserAdministrator:
+  Type: "AWS::IAM::Group"
+  Properties:
+    GroupName: "AWS-User_Administrator"
+    Path: "/"
+    ManagedPolicyArns:
+      - arn:aws:iam::aws:policy/AdministratorAccess

@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  KMS/KMSKeyAliasSecurityVPC
+# class:   output
+##-------------------------------------------------------------------------------------------------
+KMSKeyAliasSecurity:
+  Condition: "ExistsStackReferenceAccountSetup"
+  Description: "KMS Key: Security (Alias)"
+  Value: !GetAtt "StackReferenceResultsAccountSetup.KMSKeyAliasSecurity"
+  Export:
+    Name: !Sub "${AWS::StackName}-KMSKeyAliasSecurity"

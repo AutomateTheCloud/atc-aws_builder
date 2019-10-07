@@ -1,0 +1,6 @@
+##-------------------------------------------------------------------------------------------------
+# object:  CodeDeploy/ExistsCodeDeployApplication
+# class:   condition
+##-------------------------------------------------------------------------------------------------
+ExistsCodeDeployApplication:
+  !Not [!Equals [!Select [0, !Split ["|", !Ref "CodeDeployApplication"]], ""]]

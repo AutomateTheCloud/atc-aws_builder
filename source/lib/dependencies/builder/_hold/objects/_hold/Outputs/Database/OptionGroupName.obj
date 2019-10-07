@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/OptionGroupName
+# class:   output
+##-------------------------------------------------------------------------------------------------
+OptionGroupName:
+  Description: "Option Group Name"
+  Value: !Ref "OptionGroupName"
+  Export:
+    Name: !Sub "${AWS::StackName}-OptionGroupName"

@@ -1,0 +1,15 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Route53/RecordSet/EIPInstanceVanity
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+RecordSetEIPInstanceVanity:
+  Type: "AWS::Route53::RecordSet"
+  Properties:
+    HostedZoneId: !GetAtt "StackReferenceResultsVPC.DomainUtilityHostedZoneId"
+    Name: !Join [ "", [ !Ref "DNSEIPInstanceVanity", ".", !GetAtt "StackReferenceResultsVPC.DomainUtilityName" ] ]
+    Type: "A"
+    TTL: "300"
+    ResourceRecords:
+      - !Ref "EIPInstance"
+  DependsOn:
+    - "EIPInstance"

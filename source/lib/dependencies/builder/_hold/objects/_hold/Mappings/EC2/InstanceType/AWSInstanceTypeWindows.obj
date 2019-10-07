@@ -1,0 +1,301 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EC2/InstanceType/AWSInstanceTypeWindows
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+AWSInstanceType:
+  #-- c4 ------------------------------------------------------------------------------
+  c4.large:
+    "Price": "0.192"
+    "EBS": true
+  c4.xlarge:
+    "Price": "0.383"
+    "EBS": true
+  c4.2xlarge:
+    "Price": "0.766"
+    "EBS": true
+  c4.4xlarge:
+    "Price": "1.532"
+    "EBS": true
+  c4.8xlarge:
+    "Price": "3.091"
+    "EBS": true
+
+  #-- c5 ------------------------------------------------------------------------------
+  c5.large:
+    "Price": "0.177"
+    "EBS": true
+  c5.xlarge:
+    "Price": "0.354"
+    "EBS": true
+  c5.2xlarge:
+    "Price": "0.708"
+    "EBS": true
+  c5.4xlarge:
+    "Price": "1.416"
+    "EBS": true
+  c5.9xlarge:
+    "Price": "3.186"
+    "EBS": true
+  c5.18xlarge:
+    "Price": "6.372"
+    "EBS": true
+
+  #-- c5d -----------------------------------------------------------------------------
+  c5d.large:
+    "Price": "0.188"
+    "EBS": true
+  c5d.xlarge:
+    "Price": "0.376"
+    "EBS": true
+  c5d.2xlarge:
+    "Price": "0.752"
+    "EBS": true
+  c5d.4xlarge:
+    "Price": "1.504"
+    "EBS": true
+  c5d.9xlarge:
+    "Price": "3.384"
+    "EBS": true
+  c5d.18xlarge:
+    "Price": "6.768"
+    "EBS": true
+
+  #-- i3 ------------------------------------------------------------------------------
+  i3.large:
+    "Price": "0.248"
+    "EBS": true
+  i3.xlarge:
+    "Price": "0.496"
+    "EBS": true
+  i3.2xlarge:
+    "Price": "0.992"
+    "EBS": true
+  i3.4xlarge:
+    "Price": "1.984"
+    "EBS": true
+  i3.8xlarge:
+    "Price": "3.968"
+    "EBS": false
+  i3.16xlarge:
+    "Price": "7.936"
+    "EBS": false
+
+  #-- m3 ------------------------------------------------------------------------------
+  m3.medium:
+    "Price": "0.13"
+    "EBS": false
+  m3.large:
+    "Price": "0.259"
+    "EBS": false
+  m3.xlarge:
+    "Price": "0.518"
+    "EBS": true
+  m3.2xlarge:
+    "Price": "1.036"
+    "EBS": true
+
+  #-- m4 ------------------------------------------------------------------------------
+  m4.large:
+    "Price": "0.192"
+    "EBS": true
+  m4.xlarge:
+    "Price": "0.384"
+    "EBS": true
+  m4.2xlarge:
+    "Price": "0.768"
+    "EBS": true
+  m4.4xlarge:
+    "Price": "1.536"
+    "EBS": true
+  m4.10xlarge:
+    "Price": "3.84"
+    "EBS": true
+  m4.16xlarge:
+    "Price": "6.144"
+    "EBS": false
+
+  #-- m5 ------------------------------------------------------------------------------
+  m5.large:
+    "Price": "0.188"
+    "EBS": true
+  m5.xlarge:
+    "Price": "0.376"
+    "EBS": true
+  m5.2xlarge:
+    "Price": "0.752"
+    "EBS": true
+  m5.4xlarge:
+    "Price": "1.504"
+    "EBS": true
+  m5.12xlarge:
+    "Price": "4.512"
+    "EBS": true
+  m5.24xlarge:
+    "Price": "9.024"
+    "EBS": false
+
+  #-- m5a -----------------------------------------------------------------------------
+  m5a.large:
+    "Price": "0.178"
+    "EBS": true
+  m5a.xlarge:
+    "Price": "0.356"
+    "EBS": true
+  m5a.2xlarge:
+    "Price": "0.712"
+    "EBS": true
+  m5a.4xlarge:
+    "Price": "1.424"
+    "EBS": true
+  m5a.12xlarge:
+    "Price": "4.272"
+    "EBS": true
+  m5a.24xlarge:
+    "Price": "8.544"
+    "EBS": false
+
+  #-- m5d -----------------------------------------------------------------------------
+  m5d.large:
+    "Price": "0.205"
+    "EBS": true
+  m5d.xlarge:
+    "Price": "0.41"
+    "EBS": true
+  m5d.2xlarge:
+    "Price": "0.82"
+    "EBS": true
+  m5d.4xlarge:
+    "Price": "1.64"
+    "EBS": true
+  m5d.12xlarge:
+    "Price": "4.92"
+    "EBS": true
+  m5d.24xlarge:
+    "Price": "9.84"
+    "EBS": false
+
+  #-- r4 ------------------------------------------------------------------------------
+  r4.large:
+    "Price": "0.225"
+    "EBS": false
+  r4.xlarge:
+    "Price": "0.45"
+    "EBS": false
+  r4.2xlarge:
+    "Price": "0.9"
+    "EBS": false
+  r4.4xlarge:
+    "Price": "1.8"
+    "EBS": false
+  r4.8xlarge:
+    "Price": "3.6"
+    "EBS": false
+  r4.16xlarge:
+    "Price": "7.2"
+    "EBS": false
+
+  #-- r5 ------------------------------------------------------------------------------
+  r5.large:
+    "Price": "0.218"
+    "EBS": false
+  r5.xlarge:
+    "Price": "0.436"
+    "EBS": false
+  r5.2xlarge:
+    "Price": "0.872"
+    "EBS": false
+  r5.4xlarge:
+    "Price": "1.744"
+    "EBS": false
+  r5.12xlarge:
+    "Price": "5.232"
+    "EBS": false
+  r5.24xlarge:
+    "Price": "10.464"
+    "EBS": false
+
+  #-- r5a -----------------------------------------------------------------------------
+  r5a.large:
+    "Price": "0.205"
+    "EBS": false
+  r5a.xlarge:
+    "Price": "0.41"
+    "EBS": false
+  r5a.2xlarge:
+    "Price": "0.82"
+    "EBS": false
+  r5a.4xlarge:
+    "Price": "1.64"
+    "EBS": false
+  r5a.12xlarge:
+    "Price": "4.92"
+    "EBS": false
+  r5a.24xlarge:
+    "Price": "9.84"
+    "EBS": false
+
+  #-- r5d -----------------------------------------------------------------------------
+  r5d.large:
+    "Price": "0.236"
+    "EBS": false
+  r5d.xlarge:
+    "Price": "0.472"
+    "EBS": false
+  r5d.2xlarge:
+    "Price": "0.944"
+    "EBS": false
+  r5d.4xlarge:
+    "Price": "1.888"
+    "EBS": false
+  r5d.12xlarge:
+    "Price": "5.664"
+    "EBS": false
+  r5d.24xlarge:
+    "Price": "11.328"
+    "EBS": false
+
+  #-- t2 ------------------------------------------------------------------------------
+  t2.nano:
+    "Price": "0.0081"
+    "EBS": false
+  t2.micro:
+    "Price": "0.0162"
+    "EBS": false
+  t2.small:
+    "Price": "0.032"
+    "EBS": false
+  t2.medium:
+    "Price": "0.0644"
+    "EBS": false
+  t2.large:
+    "Price": "0.1208"
+    "EBS": false
+  t2.xlarge:
+    "Price": "0.2266"
+    "EBS": false
+  t2.2xlarge:
+    "Price": "0.4332"
+    "EBS": false
+
+  #-- t3 ------------------------------------------------------------------------------
+  t3.nano:
+    "Price": "0.0098"
+    "EBS": false
+  t3.micro:
+    "Price": "0.0196"
+    "EBS": false
+  t3.small:
+    "Price": "0.0392"
+    "EBS": false
+  t3.medium:
+    "Price": "0.06"
+    "EBS": false
+  t3.large:
+    "Price": "0.1108"
+    "EBS": false
+  t3.xlarge:
+    "Price": "0.24"
+    "EBS": false
+  t3.2xlarge:
+    "Price": "0.48"
+    "EBS": false

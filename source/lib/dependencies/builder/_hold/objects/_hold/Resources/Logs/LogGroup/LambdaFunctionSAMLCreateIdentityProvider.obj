@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Logs/LogGroup/LambdaFunctionSAMLCreateIdentityProvider
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+LogGroupLambdaFunctionSAMLCreateIdentityProvider:
+  Type: "AWS::Logs::LogGroup"
+  Properties:
+    LogGroupName: !Sub "/aws/lambda/${LambdaFunctionSAMLCreateIdentityProvider}"
+    RetentionInDays: "3653"

@@ -1,0 +1,11 @@
+##-------------------------------------------------------------------------------------------------
+# object: Lambda/Permission/ConfigEvaluateConfigInAllRegions
+##-------------------------------------------------------------------------------------------------
+LambdaPermissionConfigEvaluateConfigInAllRegions:
+  Type: "AWS::Lambda::Permission"
+  Properties:
+    FunctionName: !GetAtt "LambdaFunctionConfigEvaluateConfigInAllRegions.Arn"
+    Action: "lambda:InvokeFunction"
+    Principal: "config.amazonaws.com"
+  DependsOn:
+    - "LambdaFunctionConfigEvaluateConfigInAllRegions"

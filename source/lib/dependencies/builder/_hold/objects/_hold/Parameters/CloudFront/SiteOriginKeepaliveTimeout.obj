@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  CloudFront/SiteOriginKeepaliveTimeout
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+SiteOriginKeepaliveTimeout:
+  Type:                  Number
+  Default:               5
+  MinValue:              1
+  MaxValue:              60
+  Description:           "CloudFront Distribution Origin (Keepalive Timeout)"

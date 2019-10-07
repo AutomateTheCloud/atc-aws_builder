@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DNS/DNSLoadBalancerNLB
+# class:   output
+##-------------------------------------------------------------------------------------------------
+DNSLoadBalancerNLB:
+  Condition: "ExistsDNSLoadBalancerNLB"
+  Description: "DNS: Network LoadBalancer (Record)"
+  Value: !Join [ "", [ !Select [0, !Split ["|", !Ref "DNSLoadBalancerNLB"]], ".", !Select [1, !Split ["|", !Ref "DNSLoadBalancerNLB"]] ] ]
+  Export:
+    Name: !Sub "${AWS::StackName}-DNSLoadBalancerNLB"

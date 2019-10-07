@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: SNS/Topic/Config
+##---------------------------------------------------------------------------------------
+SNSTopicConfig:
+  Type: "AWS::SNS::Topic"
+  Properties:
+    TopicName: !Join [ "-", ["config", !Ref "AWS::Region"] ]
+    DisplayName: !Join [ "-", ["config", !Ref "AWS::Region"] ]

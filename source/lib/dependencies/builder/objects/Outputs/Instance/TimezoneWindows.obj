@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: Instance/TimezoneWindows
+##---------------------------------------------------------------------------------------
+TimezoneWindows:
+  Description: "Timezone (Windows)"
+  Value: !Ref "TimezoneWindows"
+  Export:
+    Name: !Sub "${AWS::StackName}-TimezoneWindows"

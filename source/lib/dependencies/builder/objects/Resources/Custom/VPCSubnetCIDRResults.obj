@@ -1,0 +1,11 @@
+##---------------------------------------------------------------------------------------
+# object: Custom/VPCSubnetCIDRResults
+##---------------------------------------------------------------------------------------
+VPCSubnetCIDRResults:
+  Type: "Custom::VPCSubnetCIDRResults"
+  Version: "1.0"
+  Properties:
+    "ServiceToken": !Join [ "", [ "arn:aws:lambda:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":function:vpc-subnet-cidr" ] ]
+    "IpNetwork": !Ref "IpNetwork"
+    "IpNetmask": !Ref "IpNetmask"
+    "LastUpdate": !Ref "LastUpdate"

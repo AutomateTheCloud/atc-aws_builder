@@ -1,0 +1,15 @@
+##---------------------------------------------------------------------------------------
+# object: Config/ConfigRule/AWSCloudTrailEnabled
+# notes:
+#   - CIS Amazon Web Services Foundations
+#     - 2.1: Ensure CloudTrail is enabled in all regions
+##---------------------------------------------------------------------------------------
+ConfigRuleAWSCloudTrailEnabled:
+  Type: "AWS::Config::ConfigRule"
+  Properties:
+    ConfigRuleName: "aws-cloudtrail-enabled"
+    Description: "Checks whether AWS CloudTrail is enabled in your AWS account"
+    MaximumExecutionFrequency: "TwentyFour_Hours"
+    Source:
+      Owner: AWS
+      SourceIdentifier: "CLOUD_TRAIL_ENABLED"

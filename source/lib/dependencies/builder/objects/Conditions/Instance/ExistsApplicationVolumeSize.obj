@@ -1,0 +1,5 @@
+##---------------------------------------------------------------------------------------
+# object: Instance/ExistsApplicationVolumeSize
+##---------------------------------------------------------------------------------------
+ExistsApplicationVolumeSize:
+  !Not [ !Or [ !Equals [!Select [1, !Split ["|", !Ref "VolumeSize"]], ""], !Equals [!Select [1, !Split ["|", !Ref "VolumeSize"]], "0"] ] ]

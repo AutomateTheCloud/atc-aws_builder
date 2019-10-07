@@ -1,0 +1,6 @@
+##---------------------------------------------------------------------------------------
+# object: Instance/InstanceUsers
+##---------------------------------------------------------------------------------------
+InstanceUsers:
+  Description: "Instance Users (UserName1:admin_flag|UserName2:admin_flag)"
+  Type: String

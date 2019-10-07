@@ -1,0 +1,18 @@
+##-------------------------------------------------------------------------------------------------
+# object:  ElasticLoadBalancingV2/Listener/Instance
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+ListenerInstance:
+  Type: "AWS::ElasticLoadBalancingV2::Listener"
+  Properties:
+    DefaultActions:
+    -  Type: "forward"
+       TargetGroupArn:
+         Ref: "TargetGroupInstance"
+    LoadBalancerArn:
+      Ref: "LoadBalancerInstance"
+    Port: "443"
+    SslPolicy: !Ref "LoadBalancerSSLPolicy"
+    Protocol: "HTTPS"
+    Certificates:
+      - CertificateArn: !Join [ "", [ "arn:aws:iam::", !Ref "AWS::AccountId", ":server-certificate/", !Ref "SSLCertificateName" ] ]

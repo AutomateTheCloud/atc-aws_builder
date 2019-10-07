@@ -1,0 +1,7 @@
+##---------------------------------------------------------------------------------------
+# object: DynamoDB/ReadCapacityMin
+##---------------------------------------------------------------------------------------
+ReadCapacityMin:
+  Description: "DynamoDB Read Capacity (Min)"
+  Type: Number
+  Default: 5

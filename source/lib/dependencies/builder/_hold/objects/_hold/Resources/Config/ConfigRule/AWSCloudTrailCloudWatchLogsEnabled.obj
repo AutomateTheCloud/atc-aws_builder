@@ -1,0 +1,16 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Config/ConfigRule/AWSCloudTrailCloudWatchLogsEnabled
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+# cis_benchmarks:     
+#  - 2.4: Ensure CloudTrail trails are integrated with CloudWatch Logs
+##-------------------------------------------------------------------------------------------------
+ConfigRuleAWSCloudTrailCloudWatchLogsEnabled:
+  Type: "AWS::Config::ConfigRule"
+  Properties:
+    ConfigRuleName: "aws-cloudtrail-cloudwatch-logs-enabled"
+    Description: "Checks whether AWS CloudTrail trails are configured to send logs to Amazon CloudWatch logs"
+    MaximumExecutionFrequency: "TwentyFour_Hours"
+    Source:
+      Owner: AWS
+      SourceIdentifier: "CLOUD_TRAIL_CLOUD_WATCH_LOGS_ENABLED"

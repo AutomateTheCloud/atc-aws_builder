@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: Instance/SecurityGroupInstanceId
+##---------------------------------------------------------------------------------------
+SecurityGroupInstanceId:
+  Description: "Security Group (Instance): ID"
+  Value: !Ref "SecurityGroupInstance"
+  Export:
+    Name: !Sub "${AWS::StackName}-SecurityGroupInstanceId"

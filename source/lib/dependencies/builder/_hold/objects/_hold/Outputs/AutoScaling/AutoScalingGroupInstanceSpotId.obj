@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  AutoScaling/AutoScalingGroupInstanceSpotId
+# class:   output
+##-------------------------------------------------------------------------------------------------
+AutoScalingGroupInstanceSpotId:
+  Condition: "EnabledSpot"
+  Description: "AutoScalingGroup (Instance - Spot): ID"
+  Value: !Ref "AutoScalingGroupInstanceSpot"
+  Export:
+    Name: !Sub "${AWS::StackName}-AutoScalingGroupInstanceSpotId"

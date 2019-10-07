@@ -1,0 +1,209 @@
+##-------------------------------------------------------------------------------------------------
+# object:  RDS/MySQL
+# class:   template
+##-------------------------------------------------------------------------------------------------
+
+Paradigm:
+##-------------------------------------------------------------------------------------------------
+  Parameters:
+    #-- MySQL Info ----------------------------------------------------------------------
+    - Base/Database/MySQLReferenceName
+    - Base/Database/DBInstanceClass
+    - Base/Database/EngineVersion
+    - Base/Database/ParameterGroupName
+    - Base/Database/OptionGroupName
+    - Base/Database/DBName
+
+    #-- MySQL Storage -------------------------------------------------------------------
+    - Base/Database/AllocatedStorage
+    - Base/Database/DBStorageType
+    - Base/Database/IOPS
+    - Base/Database/EncryptionEnabled
+
+    #-- MySQL Replica Info --------------------------------------------------------------
+    - Base/Database/ReplicaCount
+    - Base/Database/ReplicaDBInstanceClass
+    - Base/Database/ReplicaParameterGroupName
+    - Base/Database/ReplicaOptionGroupName
+
+    #-- MySQL Replica Storage Info ------------------------------------------------------
+    - Base/Database/ReplicaDBStorageType
+    - Base/Database/ReplicaIOPS
+
+    #-- Network -------------------------------------------------------------------------
+    - Base/Network/SubnetType
+    - Base/Database/MultiAZ
+    - Base/Database/MySQLPort
+
+    #-- DNS -----------------------------------------------------------------------------
+    - Base/DNS/DNSDatabase
+
+    #-- Maintenance ---------------------------------------------------------------------
+    - Base/Database/AutoMinorVersionUpgrade
+    - Base/Database/PreferredMaintenanceWindow
+
+    #-- Backups -------------------------------------------------------------------------
+    - Base/Database/BackupRetentionLimit
+    - Base/Database/BackupWindow
+
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/StackReference/StackReferenceTarget1
+    - Base/StackReference/StackReferenceTarget2
+    - Base/StackReference/StackReferenceTarget3
+    - Base/StackReference/StackReferenceTarget4
+    - Base/StackReference/StackReferenceTarget5
+    - Base/StackReference/StackReferenceTarget6
+    - Base/StackReference/StackReferenceTarget7
+    - Base/StackReference/StackReferenceTarget8
+    - Base/StackReference/StackReferenceTarget9
+    - Base/StackReference/StackReferenceTarget10
+    - Base/StackReference/StackReferenceVPN1
+    - Base/StackReference/StackReferenceVPN2
+    - Base/StackReference/StackReferenceAdministrative1
+    - Base/StackReference/StackReferenceAdministrative2
+    - Base/StackReference/StackReferenceSecurity1
+    - Base/StackReference/StackReferenceSecurity2
+
+    #-- SecurityGroup Reference ---------------------------------------------------------
+    - Base/SecurityGroup/SecurityGroupTarget1
+    - Base/SecurityGroup/SecurityGroupTarget2
+    - Base/SecurityGroup/SecurityGroupTarget3
+    - Base/SecurityGroup/SecurityGroupTarget4
+    - Base/SecurityGroup/SecurityGroupTarget5
+    - Base/SecurityGroup/SecurityGroupTarget6
+    - Base/SecurityGroup/SecurityGroupTarget7
+    - Base/SecurityGroup/SecurityGroupTarget8
+    - Base/SecurityGroup/SecurityGroupTarget9
+    - Base/SecurityGroup/SecurityGroupTarget10
+
+##-------------------------------------------------------------------------------------------------
+  Mappings:
+
+##-------------------------------------------------------------------------------------------------
+  Conditions:
+    #-- MySQL Info ----------------------------------------------------------------------
+    - Base/Database/ExistsIOPS
+    - Base/Database/ExistsReplicaIOPS
+    - Base/Database/ReplicasEnabled
+
+    #-- Network -------------------------------------------------------------------------
+    - Base/Network/SubnetTypePublic
+    - Base/Network/SubnetTypePrivate
+    - Base/Network/SubnetTypeRestricted
+
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/StackReference/ExistsStackReferenceTarget1
+    - Base/StackReference/ExistsStackReferenceTarget2
+    - Base/StackReference/ExistsStackReferenceTarget3
+    - Base/StackReference/ExistsStackReferenceTarget4
+    - Base/StackReference/ExistsStackReferenceTarget5
+    - Base/StackReference/ExistsStackReferenceTarget6
+    - Base/StackReference/ExistsStackReferenceTarget7
+    - Base/StackReference/ExistsStackReferenceTarget8
+    - Base/StackReference/ExistsStackReferenceTarget9
+    - Base/StackReference/ExistsStackReferenceTarget10
+    - Base/StackReference/ExistsStackReferenceVPN1
+    - Base/StackReference/ExistsStackReferenceVPN2
+    - Base/StackReference/ExistsStackReferenceAdministrative1
+    - Base/StackReference/ExistsStackReferenceAdministrative2
+    - Base/StackReference/ExistsStackReferenceSecurity1
+    - Base/StackReference/ExistsStackReferenceSecurity2
+
+    #-- SecurityGroup Reference ---------------------------------------------------------
+    - Base/SecurityGroup/ExistsSecurityGroupTarget1
+    - Base/SecurityGroup/ExistsSecurityGroupTarget2
+    - Base/SecurityGroup/ExistsSecurityGroupTarget3
+    - Base/SecurityGroup/ExistsSecurityGroupTarget4
+    - Base/SecurityGroup/ExistsSecurityGroupTarget5
+    - Base/SecurityGroup/ExistsSecurityGroupTarget6
+    - Base/SecurityGroup/ExistsSecurityGroupTarget7
+    - Base/SecurityGroup/ExistsSecurityGroupTarget8
+    - Base/SecurityGroup/ExistsSecurityGroupTarget9
+    - Base/SecurityGroup/ExistsSecurityGroupTarget10
+
+##-------------------------------------------------------------------------------------------------
+  Resources:
+    #-- Security Groups -----------------------------------------------------------------
+    - Base/EC2/SecurityGroup/MySQL
+
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/Custom/StackReferenceResultsVPC
+    - Base/Custom/StackReferenceResultsTarget1
+    - Base/Custom/StackReferenceResultsTarget2
+    - Base/Custom/StackReferenceResultsTarget3
+    - Base/Custom/StackReferenceResultsTarget4
+    - Base/Custom/StackReferenceResultsTarget5
+    - Base/Custom/StackReferenceResultsTarget6
+    - Base/Custom/StackReferenceResultsTarget7
+    - Base/Custom/StackReferenceResultsTarget8
+    - Base/Custom/StackReferenceResultsTarget9
+    - Base/Custom/StackReferenceResultsTarget10
+    - Base/Custom/StackReferenceResultsVPN1
+    - Base/Custom/StackReferenceResultsVPN2
+    - Base/Custom/StackReferenceResultsAdministrative1
+    - Base/Custom/StackReferenceResultsAdministrative2
+    - Base/Custom/StackReferenceResultsSecurity1
+    - Base/Custom/StackReferenceResultsSecurity2
+
+##-------------------------------------------------------------------------------------------------
+  Outputs:
+    #-- MySQL Info ----------------------------------------------------------------------
+    - Base/Database/MySQLReferenceName
+    - Base/Database/DBInstanceClass
+    - Base/Database/EngineVersion
+    - Base/Database/ParameterGroupName
+    - Base/Database/OptionGroupName
+    - Base/Database/DBName
+
+    #-- MySQL Storage -------------------------------------------------------------------
+    - Base/Database/AllocatedStorage
+    - Base/Database/DBStorageType
+    - Base/Database/IOPS
+    - Base/Database/EncryptionEnabled
+
+    #-- MySQL Replica Info --------------------------------------------------------------
+    - Base/Database/ReplicaCount
+    - Base/Database/ReplicaDBInstanceClass
+    - Base/Database/ReplicaParameterGroupName
+    - Base/Database/ReplicaOptionGroupName
+
+    #-- MySQL Replica Storage Info ------------------------------------------------------
+    - Base/Database/ReplicaDBStorageType
+    - Base/Database/ReplicaIOPS
+
+    #-- Network Related -----------------------------------------------------------------
+    - Base/Network/SubnetType
+    - Base/Database/MultiAZ
+    - Base/Database/MySQLPort
+    - Base/Database/DBSubnetGroupId
+    - Base/Database/MySQLSecurityGroupId
+
+    #-- Maintenance ---------------------------------------------------------------------
+    - Base/Database/AutoMinorVersionUpgrade
+    - Base/Database/PreferredMaintenanceWindow
+
+    #-- Backups -------------------------------------------------------------------------
+    - Base/Database/BackupRetentionLimit
+    - Base/Database/BackupWindow
+
+    #-- DNS -----------------------------------------------------------------------------
+    - Base/DNS/DNSDatabaseDomain
+    - Base/DNS/DNSDatabaseHostedZoneID
+    - Base/DNS/DNSDatabaseSubdomain
+    - Base/DNS/MySQLDNSRecord
+    - Base/DNS/MySQLReplicaDNSRecord
+
+    #-- Tags Related ------------------------------------------------------------------------
+    - Base/Details/AccountName
+    - Base/Details/AccountAbbr
+    - Base/Details/AccountNumber
+    - Base/Details/OrganizationName
+    - Base/Details/OrganizationAbbr
+    - Base/Details/Environment
+    - Base/Details/ProjectName
+    - Base/Details/ProjectAbbr
+    - Base/Details/FunctionName
+    - Base/Details/FunctionAbbr
+    - Base/Details/Owner
+    - Base/Details/Contact
+    - Base/Details/Region

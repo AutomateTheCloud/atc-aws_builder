@@ -1,0 +1,20 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SNS/Subscription/Warning4
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+SNSSubscriptionWarning4:
+  Type: "AWS::SNS::Subscription"
+  Condition: "EnabledSNSSubscriptionWarning4"
+  Properties:
+    TopicArn: !Ref "SNSTopicWarning"
+    Endpoint: !Ref "SNSSubscriptionWarning4Endpoint"
+    Protocol: !Ref "SNSSubscriptionWarning4Protocol"
+    DeliveryPolicy:
+      healthyRetryPolicy:
+        numRetries: 5
+        minDelayTarget: 20
+        maxDelayTarget: 30
+        numMinDelayRetries: 2
+        numMaxDelayRetries: 3
+        numNoDelayRetries: 0
+        backoffFunction: exponential

@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: KMS/KMSKeyAliasData
+##---------------------------------------------------------------------------------------
+KMSKeyAliasData:
+  Description: "KMS Key: Data"
+  Value: !Join [ "", [ "arn:aws:kms:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":alias/data-", !Select [1, !Split ["|", !Ref "Organization"]], "-", !Ref "AWS::Region" ] ]
+  Export:
+    Name: !Sub "${AWS::StackName}-KMSKeyAliasData"

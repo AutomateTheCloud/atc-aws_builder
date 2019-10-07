@@ -1,0 +1,8 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Instance/InstanceType
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+InstanceType:
+  Type:                  String
+  Default:               "t3.micro|t2.micro|encrypted"
+  Description:           "Instance Type (InstanceTypePrimary|InstanceTypeSecondary|LaunchEncryptedAMI)"

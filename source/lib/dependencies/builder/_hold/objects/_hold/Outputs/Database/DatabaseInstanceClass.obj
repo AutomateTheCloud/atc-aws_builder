@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/DatabaseInstanceClass
+# class:   output
+##-------------------------------------------------------------------------------------------------
+DatabaseInstanceClass:
+  Description: "Database Instance Class"
+  Value: !Ref "DatabaseInstanceClass"
+  Export:
+    Name: !Sub "${AWS::StackName}-DatabaseInstanceClass"

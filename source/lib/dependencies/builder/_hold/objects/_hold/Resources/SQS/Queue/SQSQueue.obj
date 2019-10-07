@@ -1,0 +1,20 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SQS/Queue/SQSQueue
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+SQSQueue:
+  Type: "AWS::SQS::Queue"
+  Properties:
+    QueueName: !Ref "SQSQueueName"
+    DelaySeconds: !Ref "SQSQueueDelaySeconds"
+    MaximumMessageSize: !Ref "SQSQueueMaximumMessageSize"
+    MessageRetentionPeriod: !Ref "SQSQueueMessageRetentionPeriod"
+    ReceiveMessageWaitTimeSeconds: !Ref "SQSQueueReceiveMessageWaitTimeSeconds"
+    VisibilityTimeout: !Ref "SQSQueueVisibilityTimeout"
+    KmsDataKeyReusePeriodSeconds: 300
+    KmsMasterKeyId: !GetAtt "StackReferenceResultsVPC.KMSKeyAliasData"
+    Tags:
+      - Key: "Name"
+        Value: !Ref "SQSQueueName"
+  DependsOn:
+    - "StackReferenceResultsVPC"

@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  KMS/Alias/KMSAlias
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+KMSAlias:
+  Type: "AWS::KMS::Alias"
+  Properties:
+    AliasName: !Join [ "", [ "alias/", !Ref "KMSKeyName", "-", !Select [3, !Split ["|", !Ref "Organization"]], "-", !Ref "AWS::Region" ] ]
+    TargetKeyId: !Ref "KMSKey"

@@ -1,0 +1,13 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Config/ConfigIncludeGlobalResourceTypes
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+ConfigIncludeGlobalResourceTypes:
+  Type:                  "String"
+  Default:               "true"
+  AllowedValues:
+    - ""
+    - "true"
+    - "false"
+  Description:           "Config: Include Global Resource Types"
+  ConstraintDescription: "true/false"

@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DNS/DNSDatabase
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+DNSDatabase:
+  Type:                  String
+  Description:           "DNS: Database (Subdomain|Domain|HostedZoneID)"

@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  ElastiCache/RedisReferenceName
+# class:   output
+##-------------------------------------------------------------------------------------------------
+RedisReferenceName:
+  Description: "Redis Reference Name"
+  Value: !Ref "RedisReferenceName"
+  Export:
+    Name: !Sub "${AWS::StackName}-RedisReferenceName"

@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/DatabaseInstanceClass
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+DatabaseInstanceClass:
+  Type:                  String
+  Description:           "Database Instance Class"

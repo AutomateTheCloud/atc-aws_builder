@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SNS/Topic/ConfigAudit
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+SNSTopicConfig:
+  Type: "AWS::SNS::Topic"
+  Properties:
+    TopicName: "account-config-audit"
+    DisplayName: "account-config-audit"
+    KmsMasterKeyId: !GetAtt "KMSKeyAudit.Arn"

@@ -1,0 +1,87 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EFS/Application
+# class:   template
+##-------------------------------------------------------------------------------------------------
+
+Paradigm:
+##-------------------------------------------------------------------------------------------------
+  Parameters:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/StackReference/StackReferenceTarget1
+    - Base/StackReference/StackReferenceTarget2
+    - Base/StackReference/StackReferenceTarget3
+    - Base/StackReference/StackReferenceTarget4
+    - Base/StackReference/StackReferenceTarget5
+    - Base/StackReference/StackReferenceTarget6
+    - Base/StackReference/StackReferenceTarget7
+    - Base/StackReference/StackReferenceTarget8
+    - Base/StackReference/StackReferenceTarget9
+    - Base/StackReference/StackReferenceTarget10
+    - Base/StackReference/StackReferenceVPN1
+    - Base/StackReference/StackReferenceVPN2
+    - Base/StackReference/StackReferenceAdministrative1
+    - Base/StackReference/StackReferenceAdministrative2
+    - Base/StackReference/StackReferenceSecurity1
+    - Base/StackReference/StackReferenceSecurity2
+
+##-------------------------------------------------------------------------------------------------
+  Mappings:
+
+##-------------------------------------------------------------------------------------------------
+  Conditions:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/StackReference/ExistsStackReferenceTarget1
+    - Base/StackReference/ExistsStackReferenceTarget2
+    - Base/StackReference/ExistsStackReferenceTarget3
+    - Base/StackReference/ExistsStackReferenceTarget4
+    - Base/StackReference/ExistsStackReferenceTarget5
+    - Base/StackReference/ExistsStackReferenceTarget6
+    - Base/StackReference/ExistsStackReferenceTarget7
+    - Base/StackReference/ExistsStackReferenceTarget8
+    - Base/StackReference/ExistsStackReferenceTarget9
+    - Base/StackReference/ExistsStackReferenceTarget10
+    - Base/StackReference/ExistsStackReferenceVPN1
+    - Base/StackReference/ExistsStackReferenceVPN2
+    - Base/StackReference/ExistsStackReferenceAdministrative1
+    - Base/StackReference/ExistsStackReferenceAdministrative2
+    - Base/StackReference/ExistsStackReferenceSecurity1
+    - Base/StackReference/ExistsStackReferenceSecurity2
+
+##-------------------------------------------------------------------------------------------------
+  Resources:
+    #-- EFS -----------------------------------------------------------------------------
+    - Base/EFS/FileSystem/Application
+    - Base/EFS/MountTarget/ApplicationAvailabilityZone1
+    - Base/EFS/MountTarget/ApplicationAvailabilityZone2
+    - Base/EFS/MountTarget/ApplicationAvailabilityZone3
+
+    #-- Security Groups -----------------------------------------------------------------
+    - Base/EC2/SecurityGroup/ApplicationEFS
+
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/Custom/StackReferenceResultsVPC
+    - Base/Custom/StackReferenceResultsTarget1
+    - Base/Custom/StackReferenceResultsTarget2
+    - Base/Custom/StackReferenceResultsTarget3
+    - Base/Custom/StackReferenceResultsTarget4
+    - Base/Custom/StackReferenceResultsTarget5
+    - Base/Custom/StackReferenceResultsTarget6
+    - Base/Custom/StackReferenceResultsTarget7
+    - Base/Custom/StackReferenceResultsTarget8
+    - Base/Custom/StackReferenceResultsTarget9
+    - Base/Custom/StackReferenceResultsTarget10
+    - Base/Custom/StackReferenceResultsVPN1
+    - Base/Custom/StackReferenceResultsVPN2
+    - Base/Custom/StackReferenceResultsAdministrative1
+    - Base/Custom/StackReferenceResultsAdministrative2
+    - Base/Custom/StackReferenceResultsSecurity1
+    - Base/Custom/StackReferenceResultsSecurity2
+
+##-------------------------------------------------------------------------------------------------
+  Outputs:
+    #-- EFS -----------------------------------------------------------------------------
+    - Base/EFS/EFSFileSystemApplicationId
+    - Base/EFS/EFSDescription
+
+    #-- Security Groups -----------------------------------------------------------------
+    - Base/EFS/SecurityGroupApplicationEFSId

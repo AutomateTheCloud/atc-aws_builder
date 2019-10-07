@@ -1,0 +1,14 @@
+##---------------------------------------------------------------------------------------
+# object: Config/ConfigRule/AWSInstancesInVPC
+##---------------------------------------------------------------------------------------
+ConfigRuleAWSInstancesInVPC:
+  Type: "AWS::Config::ConfigRule"
+  Properties:
+    ConfigRuleName: "aws-instances-in-vpc"
+    Description: "Checks whether your EC2 instances belong to a virtual private cloud (VPC)"
+    Scope:
+      ComplianceResourceTypes:
+        - 'AWS::EC2::Instance'
+    Source:
+      Owner: AWS
+      SourceIdentifier: "INSTANCES_IN_VPC"

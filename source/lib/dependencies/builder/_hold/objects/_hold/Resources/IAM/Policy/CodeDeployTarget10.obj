@@ -1,0 +1,36 @@
+##-------------------------------------------------------------------------------------------------
+# object:  IAM/Policy/CodeDeployTarget10
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+PolicyCodeDeployTarget10:
+  Condition: "EnabledCodeDeployTarget10"
+  Type: "AWS::IAM::Policy"
+  Properties:
+    PolicyName: !Join [ "", [ "ec2-codedeploy", "_", !GetAtt "StackReferenceResultsTarget10.ProjectAbbr", "-", !GetAtt "StackReferenceResultsTarget10.FunctionAbbr", "-", !GetAtt "StackReferenceResultsTarget10.Environment", "-", !GetAtt "StackReferenceResultsTarget10.OrganizationAbbr", "_", !Ref "AWS::Region" ] ]
+    PolicyDocument:
+      Version: "2012-10-17"
+      Statement:
+        - Effect: "Allow"
+          Action:
+            - "s3:GetBucketLocation"
+            - "s3:ListAllMyBuckets"
+          Resource: "arn:aws:s3:::*"
+        - Effect: "Allow"
+          Action:
+            - "s3:Get*"
+            - "s3:List*"
+          Resource:
+            - !Join [ "", [ "arn:aws:s3:::", !Ref "AWS::AccountId", "-", "artifacts", "-", !Ref "AWS::Region" ] ]
+            - !Join [ "", [ "arn:aws:s3:::", !Ref "AWS::AccountId", "-", "artifacts", "-", !Ref "AWS::Region", "/*" ] ]
+        - Effect: "Allow"
+          Action:
+            - "s3:GetObject"
+            - "s3:ListBucket"
+          Resource:
+            - !Join [ "", [ "arn:aws:s3:::", !Ref "AWS::AccountId", "-", "artifacts", "-", !Ref "AWS::Region", "/codedeploy/", !Select [0, !Split ["|", !Ref "CodeDeployApplication"]] ] ]
+            - !Join [ "", [ "arn:aws:s3:::", !Ref "AWS::AccountId", "-", "artifacts", "-", !Ref "AWS::Region", "/codedeploy/", !Select [0, !Split ["|", !Ref "CodeDeployApplication"]], "/*" ] ]
+    Roles:
+      - !GetAtt "StackReferenceResultsTarget10.RoleInstanceName"
+  DependsOn:
+    - "StackReferenceResultsTarget10"
+

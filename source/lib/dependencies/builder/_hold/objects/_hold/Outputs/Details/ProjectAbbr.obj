@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Details/ProjectAbbr
+# class:   output
+##-------------------------------------------------------------------------------------------------
+ProjectAbbr:
+  Description: "Details: ProjectAbbr"
+  Value: !Select [1, !Split ["|", !Ref "Project"]]
+  Export:
+    Name: !Sub "${AWS::StackName}-ProjectAbbr"

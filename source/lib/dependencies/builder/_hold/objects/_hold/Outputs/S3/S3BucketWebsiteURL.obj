@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  S3/S3BucketWebsiteURL
+# class:   output
+##-------------------------------------------------------------------------------------------------
+S3BucketWebsiteURL:
+  Description: "S3 Bucket: Website URL"
+  Value: !GetAtt "S3BucketWebsite.WebsiteURL"
+  Export:
+    Name: !Sub "${AWS::StackName}-S3BucketWebsiteURL"

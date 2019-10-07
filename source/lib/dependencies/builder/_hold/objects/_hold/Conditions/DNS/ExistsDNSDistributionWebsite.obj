@@ -1,0 +1,6 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DNS/ExistsDNSDistributionWebsite
+# class:   condition
+##-------------------------------------------------------------------------------------------------
+ExistsDNSDistributionWebsite:
+  !Not [!Equals [!Select [0, !Split ["|", !Ref "DNSDistributionWebsite"]], ""]]

@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: Details/Environment
+##---------------------------------------------------------------------------------------
+Environment:
+  Description: "Details: Environment"
+  Value: !Select [3, !Split ["|", !Ref "Organization"]]
+  Export:
+    Name: !Sub "${AWS::StackName}-Environment"

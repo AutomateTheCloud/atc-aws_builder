@@ -1,0 +1,23 @@
+##---------------------------------------------------------------------------------------
+# object: S3/Bucket/LogsGlobal
+##---------------------------------------------------------------------------------------
+S3BucketLogs:
+  Type: "AWS::S3::Bucket"
+  DeletionPolicy: "Retain"
+  Properties:
+    BucketName: !Ref "S3BucketLogsGlobalName"
+    BucketEncryption: 
+        ServerSideEncryptionConfiguration: 
+        - ServerSideEncryptionByDefault:
+            SSEAlgorithm: "AES256"
+    PublicAccessBlockConfiguration:
+      BlockPublicAcls: true
+      BlockPublicPolicy: true
+      IgnorePublicAcls: true
+      RestrictPublicBuckets: true
+    VersioningConfiguration:
+      Status: Enabled
+    AccessControl: "LogDeliveryWrite"
+    Tags:
+      - Key: "Name"
+        Value: !Ref "S3BucketLogsGlobalName"

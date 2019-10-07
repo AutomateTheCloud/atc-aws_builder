@@ -1,0 +1,6 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SecurityGroup/ExistsSecurityGroupTarget11
+# class:   condition
+##-------------------------------------------------------------------------------------------------
+ExistsSecurityGroupTarget11:
+  !Not [!Equals [!Ref "SecurityGroupTarget11", ""]]

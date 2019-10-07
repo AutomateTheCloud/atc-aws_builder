@@ -1,0 +1,8 @@
+##-------------------------------------------------------------------------------------------------
+# object:  AutoScaling/InstanceCountMaximumOnDemand
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+InstanceCountMaximumOnDemand:
+  Type:                  String
+  Default:               2
+  Description:           "Instance Count Maximum (OnDemand)"

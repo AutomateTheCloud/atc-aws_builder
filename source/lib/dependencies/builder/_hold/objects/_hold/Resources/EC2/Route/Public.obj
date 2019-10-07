@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EC2/Route/Public
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+RoutePublic:
+  Type: "AWS::EC2::Route"
+  Properties:
+    DestinationCidrBlock: "0.0.0.0/0"
+    GatewayId: !Ref "InternetGateway"
+    RouteTableId: !Ref "RouteTablePublic"

@@ -1,0 +1,9 @@
+##---------------------------------------------------------------------------------------
+# object: DynamoDB/DynamoDBTable3Name
+##---------------------------------------------------------------------------------------
+DynamoDBTable3Name:
+  Condition: "ExistsStackReferenceDynamoDBTable3"
+  Description: "KMS: Key 3 (ID)"
+  Value: !GetAtt "StackReferenceResultsDynamoDBTable3.DynamoDBTableName"
+  Export:
+    Name: !Sub "${AWS::StackName}-DynamoDBTable3Name"

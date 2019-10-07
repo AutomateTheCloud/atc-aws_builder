@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: Logs/LogGroup/LambdaFunctionConfigEvaluatePolicyPermissions
+##---------------------------------------------------------------------------------------
+LogGroupLambdaFunctionConfigEvaluatePolicyPermissions:
+  Type: "AWS::Logs::LogGroup"
+  Properties:
+    LogGroupName: !Sub "/aws/lambda/${LambdaFunctionConfigEvaluatePolicyPermissions}"
+    RetentionInDays: "14"

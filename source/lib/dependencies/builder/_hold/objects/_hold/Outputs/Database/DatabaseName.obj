@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/DatabaseName
+# class:   output
+##-------------------------------------------------------------------------------------------------
+DatabaseName:
+  Description: "Database Name"
+  Value: !Ref "DatabaseName"
+  Export:
+    Name: !Sub "${AWS::StackName}-DatabaseName"

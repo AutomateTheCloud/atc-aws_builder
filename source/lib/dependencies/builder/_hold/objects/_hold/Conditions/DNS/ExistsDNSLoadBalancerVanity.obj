@@ -1,0 +1,6 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DNS/ExistsDNSLoadBalancerVanity
+# class:   condition
+##-------------------------------------------------------------------------------------------------
+ExistsDNSLoadBalancerVanity:
+  !Not [!Equals [!Ref "DNSLoadBalancerVanity", ""]]

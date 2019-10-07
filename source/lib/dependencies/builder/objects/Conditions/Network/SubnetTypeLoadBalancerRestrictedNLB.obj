@@ -1,0 +1,5 @@
+##---------------------------------------------------------------------------------------
+# object: Network/SubnetTypeLoadBalancerRestrictedNLB
+##---------------------------------------------------------------------------------------
+SubnetTypeLoadBalancerRestrictedNLB:
+  !Equals [!Ref "SubnetTypeLoadBalancerNLB", "restricted"]

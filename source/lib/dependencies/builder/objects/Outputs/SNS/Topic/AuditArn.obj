@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: SNS/Topic/AuditArn
+##---------------------------------------------------------------------------------------
+SNSTopicAuditArn:
+  Description: "SNS Topic (Audit): ARN"
+  Value: !Ref "SNSTopicAudit"
+  Export:
+    Name: !Sub "${AWS::StackName}-SNSTopicAuditArn"

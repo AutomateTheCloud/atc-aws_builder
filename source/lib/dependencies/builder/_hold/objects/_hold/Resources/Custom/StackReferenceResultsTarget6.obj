@@ -1,0 +1,14 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Custom/StackReferenceResultsTarget6
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+StackReferenceResultsTarget6:
+  Condition: "ExistsStackReferenceTarget6"
+  Type: "Custom::StackReferenceResultsTarget6"
+  Version: "1.0"
+  Properties:
+    "ServiceToken": !Join [ "", [ "arn:aws:lambda:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":function:stack-reference" ] ]
+    "Region": !Ref "AWS::Region"
+    "StackName": !Ref "StackReferenceTarget6"
+    "LastUpdate": !Ref "LastUpdate"
+

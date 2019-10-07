@@ -1,0 +1,16 @@
+##-------------------------------------------------------------------------------------------------
+# object:  RDS/DBSubnetGroup/DBSubnetGroupPublic
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+DBSubnetGroupPublic:
+  Type: "AWS::RDS::DBSubnetGroup"
+  Properties:
+    DBSubnetGroupName: !Join [ "-", [ "subnet-rds", !Select [1, !Split ["|", !Ref "Organization"]], "public", !Ref "AWS::Region" ] ]
+    DBSubnetGroupDescription: !Join [ "", [ !Select [0, !Split ["|", !Ref "Organization"]], " - ", !Ref "AWS::Region", " - ", "RDS Subnet (Public)" ] ]
+    SubnetIds:
+      - !Ref "SubnetPublic1"
+      - !Ref "SubnetPublic2"
+      - !Ref "SubnetPublic3"
+    Tags:
+      - Key: "Name"
+        Value: !Join [ "_", [ "subnet-rds", !Select [1, !Split ["|", !Ref "Organization"]], "public", !Ref "AWS::Region" ] ]

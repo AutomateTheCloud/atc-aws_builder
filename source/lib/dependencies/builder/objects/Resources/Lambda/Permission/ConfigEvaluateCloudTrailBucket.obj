@@ -1,0 +1,11 @@
+##-------------------------------------------------------------------------------------------------
+# object: Lambda/Permission/ConfigEvaluateCloudTrailBucket
+##-------------------------------------------------------------------------------------------------
+LambdaPermissionConfigEvaluateCloudTrailBucket:
+  Type: "AWS::Lambda::Permission"
+  Properties:
+    FunctionName: !GetAtt "LambdaFunctionConfigEvaluateCloudTrailBucket.Arn"
+    Action: "lambda:InvokeFunction"
+    Principal: "config.amazonaws.com"
+  DependsOn:
+    - "LambdaFunctionConfigEvaluateCloudTrailBucket"

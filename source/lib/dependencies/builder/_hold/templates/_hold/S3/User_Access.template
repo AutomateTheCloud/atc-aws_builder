@@ -1,0 +1,98 @@
+##-------------------------------------------------------------------------------------------------
+# object:  S3/User_Access
+# class:   template
+##-------------------------------------------------------------------------------------------------
+Paradigm:
+  Parameters:
+    #-- IAM -----------------------------------------------------------------------------
+    - Base/IAM/IAMUsername1
+    - Base/IAM/IAMUsername2
+    - Base/IAM/IAMUsername3
+    - Base/IAM/IAMUsername4
+    - Base/IAM/IAMUsername5
+    - Base/IAM/IAMUsername6
+    - Base/IAM/IAMUsername7
+    - Base/IAM/IAMUsername8
+    - Base/IAM/IAMUsername9
+    - Base/IAM/IAMUsername10
+
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/StackReference/StackReferenceS3Bucket1
+    - Base/StackReference/StackReferenceS3Bucket2
+    - Base/StackReference/StackReferenceS3Bucket3
+    - Base/StackReference/StackReferenceS3Bucket4
+    - Base/StackReference/StackReferenceS3Bucket5
+    - Base/StackReference/StackReferenceS3Bucket6
+    - Base/StackReference/StackReferenceS3Bucket7
+    - Base/StackReference/StackReferenceS3Bucket8
+    - Base/StackReference/StackReferenceS3Bucket9
+    - Base/StackReference/StackReferenceS3Bucket10
+
+##-------------------------------------------------------------------------------------------------
+  Mappings:
+
+##-------------------------------------------------------------------------------------------------
+  Conditions:
+    #-- IAM -----------------------------------------------------------------------------
+    - Base/IAM/ExistsIAMUsername1
+    - Base/IAM/ExistsIAMUsername2
+    - Base/IAM/ExistsIAMUsername3
+    - Base/IAM/ExistsIAMUsername4
+    - Base/IAM/ExistsIAMUsername5
+    - Base/IAM/ExistsIAMUsername6
+    - Base/IAM/ExistsIAMUsername7
+    - Base/IAM/ExistsIAMUsername8
+    - Base/IAM/ExistsIAMUsername9
+    - Base/IAM/ExistsIAMUsername10
+
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/StackReference/ExistsStackReferenceS3Bucket1
+    - Base/StackReference/ExistsStackReferenceS3Bucket2
+    - Base/StackReference/ExistsStackReferenceS3Bucket3
+    - Base/StackReference/ExistsStackReferenceS3Bucket4
+    - Base/StackReference/ExistsStackReferenceS3Bucket5
+    - Base/StackReference/ExistsStackReferenceS3Bucket6
+    - Base/StackReference/ExistsStackReferenceS3Bucket7
+    - Base/StackReference/ExistsStackReferenceS3Bucket8
+    - Base/StackReference/ExistsStackReferenceS3Bucket9
+    - Base/StackReference/ExistsStackReferenceS3Bucket10
+
+##-------------------------------------------------------------------------------------------------
+  Resources:
+    #-- IAM -----------------------------------------------------------------------------
+    - Base/IAM/User/S3User1
+    - Base/IAM/User/S3User2
+    - Base/IAM/User/S3User3
+    - Base/IAM/User/S3User4
+    - Base/IAM/User/S3User5
+    - Base/IAM/User/S3User6
+    - Base/IAM/User/S3User7
+    - Base/IAM/User/S3User8
+    - Base/IAM/User/S3User9
+    - Base/IAM/User/S3User10
+
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/Custom/StackReferenceResultsS3Bucket1
+    - Base/Custom/StackReferenceResultsS3Bucket2
+    - Base/Custom/StackReferenceResultsS3Bucket3
+    - Base/Custom/StackReferenceResultsS3Bucket4
+    - Base/Custom/StackReferenceResultsS3Bucket5
+    - Base/Custom/StackReferenceResultsS3Bucket6
+    - Base/Custom/StackReferenceResultsS3Bucket7
+    - Base/Custom/StackReferenceResultsS3Bucket8
+    - Base/Custom/StackReferenceResultsS3Bucket9
+    - Base/Custom/StackReferenceResultsS3Bucket10
+
+##-------------------------------------------------------------------------------------------------
+  Outputs:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/S3/S3Bucket1
+    - Base/S3/S3Bucket2
+    - Base/S3/S3Bucket3
+    - Base/S3/S3Bucket4
+    - Base/S3/S3Bucket5
+    - Base/S3/S3Bucket6
+    - Base/S3/S3Bucket7
+    - Base/S3/S3Bucket8
+    - Base/S3/S3Bucket9
+    - Base/S3/S3Bucket10

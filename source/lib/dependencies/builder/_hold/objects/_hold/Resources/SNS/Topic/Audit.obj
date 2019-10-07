@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SNS/Topic/Audit
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+SNSTopicAudit:
+  Type: "AWS::SNS::Topic"
+  Properties:
+    TopicName: "audit-global"
+    DisplayName: "audit-global"

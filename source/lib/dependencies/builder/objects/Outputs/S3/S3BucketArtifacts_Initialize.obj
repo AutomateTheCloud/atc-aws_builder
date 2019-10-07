@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: S3/S3BucketArtifacts_Initialize
+##---------------------------------------------------------------------------------------
+S3BucketArtifacts:
+  Description: "S3 Bucket: Artifacts"
+  Value: !GetAtt "StackReferenceResultsInitialize.S3BucketArtifacts"
+  Export:
+    Name: !Sub "${AWS::StackName}-S3BucketArtifacts"

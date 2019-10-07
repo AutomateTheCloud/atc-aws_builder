@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  ElastiCache/MemcachedReferenceName
+# class:   output
+##-------------------------------------------------------------------------------------------------
+MemcachedReferenceName:
+  Description: "Memcached Reference Name"
+  Value: !Ref "MemcachedReferenceName"
+  Export:
+    Name: !Sub "${AWS::StackName}-MemcachedReferenceName"

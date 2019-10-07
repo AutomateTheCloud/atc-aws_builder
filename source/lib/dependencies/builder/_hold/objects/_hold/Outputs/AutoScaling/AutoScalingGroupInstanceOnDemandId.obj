@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  AutoScaling/AutoScalingGroupInstanceOnDemandId
+# class:   output
+##-------------------------------------------------------------------------------------------------
+AutoScalingGroupInstanceOnDemandId:
+  Description: "AutoScalingGroup (Instance - OnDemand): ID"
+  Value: !Ref "AutoScalingGroupInstanceOnDemand"
+  Export:
+    Name: !Sub "${AWS::StackName}-AutoScalingGroupInstanceOnDemandId"

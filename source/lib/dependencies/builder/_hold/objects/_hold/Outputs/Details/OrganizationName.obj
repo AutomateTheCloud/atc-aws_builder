@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Details/OrganizationName
+# class:   output
+##-------------------------------------------------------------------------------------------------
+OrganizationName:
+  Description: "Details: OrganizationName"
+  Value: !Select [0, !Split ["|", !Ref "Organization"]]
+  Export:
+    Name: !Sub "${AWS::StackName}-OrganizationName"

@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SQS/SQSQueueDelaySeconds
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+SQSQueueDelaySeconds:
+  Type:                  Number
+  Description:           "SQS: Delay (seconds)"
+  Default:               0
+  MinValue:              0
+  MaxValue:              900

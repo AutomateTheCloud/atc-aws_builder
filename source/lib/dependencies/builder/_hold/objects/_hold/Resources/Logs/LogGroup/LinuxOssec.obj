@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Logs/LogGroup/LinuxOssec
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+LogGroupLinuxOssec:
+  Type: "AWS::Logs::LogGroup"
+  Properties:
+    LogGroupName: !Join [ "", [ !Select [1, !Split ["|", !Ref "Organization"]], "-", !Ref "AWS::Region", "-linux-ossec" ] ]
+    RetentionInDays: 365

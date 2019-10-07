@@ -1,0 +1,65 @@
+##-------------------------------------------------------------------------------------------------
+# object:  S3/Instance_Access
+# class:   template
+##-------------------------------------------------------------------------------------------------
+Paradigm:
+  Parameters:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/StackReference/StackReferenceS3Bucket1
+    - Base/StackReference/StackReferenceS3Bucket2
+    - Base/StackReference/StackReferenceS3Bucket3
+    - Base/StackReference/StackReferenceS3Bucket4
+    - Base/StackReference/StackReferenceS3Bucket5
+    - Base/StackReference/StackReferenceS3Bucket6
+    - Base/StackReference/StackReferenceS3Bucket7
+    - Base/StackReference/StackReferenceS3Bucket8
+    - Base/StackReference/StackReferenceS3Bucket9
+    - Base/StackReference/StackReferenceS3Bucket10
+
+##-------------------------------------------------------------------------------------------------
+  Mappings:
+
+##-------------------------------------------------------------------------------------------------
+  Conditions:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/StackReference/ExistsStackReferenceS3Bucket1
+    - Base/StackReference/ExistsStackReferenceS3Bucket2
+    - Base/StackReference/ExistsStackReferenceS3Bucket3
+    - Base/StackReference/ExistsStackReferenceS3Bucket4
+    - Base/StackReference/ExistsStackReferenceS3Bucket5
+    - Base/StackReference/ExistsStackReferenceS3Bucket6
+    - Base/StackReference/ExistsStackReferenceS3Bucket7
+    - Base/StackReference/ExistsStackReferenceS3Bucket8
+    - Base/StackReference/ExistsStackReferenceS3Bucket9
+    - Base/StackReference/ExistsStackReferenceS3Bucket10
+
+##-------------------------------------------------------------------------------------------------
+  Resources:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/IAM/Policy/S3AccessInstance
+
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/Custom/StackReferenceResultsS3Bucket1
+    - Base/Custom/StackReferenceResultsS3Bucket2
+    - Base/Custom/StackReferenceResultsS3Bucket3
+    - Base/Custom/StackReferenceResultsS3Bucket4
+    - Base/Custom/StackReferenceResultsS3Bucket5
+    - Base/Custom/StackReferenceResultsS3Bucket6
+    - Base/Custom/StackReferenceResultsS3Bucket7
+    - Base/Custom/StackReferenceResultsS3Bucket8
+    - Base/Custom/StackReferenceResultsS3Bucket9
+    - Base/Custom/StackReferenceResultsS3Bucket10
+
+##-------------------------------------------------------------------------------------------------
+  Outputs:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/S3/S3Bucket1
+    - Base/S3/S3Bucket2
+    - Base/S3/S3Bucket3
+    - Base/S3/S3Bucket4
+    - Base/S3/S3Bucket5
+    - Base/S3/S3Bucket6
+    - Base/S3/S3Bucket7
+    - Base/S3/S3Bucket8
+    - Base/S3/S3Bucket9
+    - Base/S3/S3Bucket10

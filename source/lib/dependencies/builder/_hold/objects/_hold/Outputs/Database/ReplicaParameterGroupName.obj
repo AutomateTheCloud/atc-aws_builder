@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/ReplicaParameterGroupName
+# class:   output
+##-------------------------------------------------------------------------------------------------
+ReplicaParameterGroupName:
+  Condition: "ReplicasEnabled"
+  Description: "Replica Parameter Group Name"
+  Value: !Ref "ReplicaParameterGroupName"
+  Export:
+    Name: !Sub "${AWS::StackName}-ReplicaParameterGroupName"

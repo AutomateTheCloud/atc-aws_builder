@@ -1,0 +1,11 @@
+##---------------------------------------------------------------------------------------
+# object: Logs/LogGroup/CloudTrailAudit
+# notes:
+#   - CIS Amazon Web Services Foundations
+#     - 2.4: Ensure CloudTrail trails are integrated with CloudWatch Logs
+##---------------------------------------------------------------------------------------
+LogGroupCloudTrailAudit:
+  Type: "AWS::Logs::LogGroup"
+  Properties:
+    LogGroupName: "/aws/cloudtrail/audit"
+    RetentionInDays: !Ref "LogRetentionCloudTrail"

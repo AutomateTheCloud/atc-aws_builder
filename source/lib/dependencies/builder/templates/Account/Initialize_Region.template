@@ -1,0 +1,74 @@
+##-------------------------------------------------------------------------------------------------
+# object: Account/Initialize_Region
+##-------------------------------------------------------------------------------------------------
+
+Paradigm:
+  Parameters:
+    #-- S3 ------------------------------------------------------------------------------
+    - Base/S3/S3BucketLogsRegionName
+    - Base/S3/S3BucketArtifactsRegionName
+
+    #-- Lambda --------------------------------------------------------------------------
+    - Base/Logs/LogRetentionAMILookupAmazonLinux2
+    - Base/Logs/LogRetentionAMILookupCustom
+    - Base/Logs/LogRetentionNetworkLBIpAddress
+    - Base/Logs/LogRetentionStackReference
+    - Base/Logs/LogRetentionVPCSubnetCIDR
+
+    #-- EC2 Logs ------------------------------------------------------------------------
+    - Base/Logs/LogRetentionEC2LinuxHIDSAlerts
+    - Base/Logs/LogRetentionEC2LinuxHostMessages
+    - Base/Logs/LogRetentionEC2LinuxAuthentication
+
+    #-- GuardDuty -----------------------------------------------------------------------
+    - Base/GuardDuty/EnableGuardDuty
+    - Base/GuardDuty/GuardDutyFindingPublishingFrequency
+
+##-------------------------------------------------------------------------------------------------
+  Mappings:
+    - Base/AWS/AccountsELB
+
+##-------------------------------------------------------------------------------------------------
+  Conditions:
+    #-- GuardDuty -----------------------------------------------------------------------
+    - Base/GuardDuty/EnabledGuardDuty
+
+##-------------------------------------------------------------------------------------------------
+  Resources:
+    #-- S3 ------------------------------------------------------------------------------
+    - Base/S3/Bucket/LogsRegion
+    - Base/S3/Bucket/ArtifactsRegion
+    - Base/S3/BucketPolicy/LogsRegion
+
+    #-- Lambda --------------------------------------------------------------------------
+    - Base/Lambda/Function/AMILookupAmazonLinux2
+    - Base/Lambda/Function/AMILookupCustom
+    - Base/Lambda/Function/NetworkLBIpAddress
+    - Base/Lambda/Function/StackReference
+    - Base/Lambda/Function/VPCSubnetCIDR
+    
+    #-- IAM -----------------------------------------------------------------------------
+    - Base/IAM/Role/LambdaFunctionAMILookupAmazonLinux2
+    - Base/IAM/Role/LambdaFunctionAMILookupCustom
+    - Base/IAM/Role/LambdaFunctionNetworkLBIpAddress
+    - Base/IAM/Role/LambdaFunctionStackReference
+    - Base/IAM/Role/LambdaFunctionVPCSubnetCIDR
+
+    #-- Cloudwatch Logs -----------------------------------------------------------------
+    - Base/Logs/LogGroup/LambdaFunctionAMILookupAmazonLinux2
+    - Base/Logs/LogGroup/LambdaFunctionAMILookupCustom
+    - Base/Logs/LogGroup/LambdaFunctionNetworkLBIpAddress
+    - Base/Logs/LogGroup/LambdaFunctionStackReference
+    - Base/Logs/LogGroup/LambdaFunctionVPCSubnetCIDR
+    - Base/Logs/LogGroup/EC2LinuxHIDSAlerts
+    - Base/Logs/LogGroup/EC2LinuxHostMessages
+    - Base/Logs/LogGroup/EC2LinuxAuthentication
+
+    #-- GuardDuty -----------------------------------------------------------------------
+    - Base/GuardDuty/Detector/Region
+
+##-------------------------------------------------------------------------------------------------
+  Outputs:
+    #-- S3 ------------------------------------------------------------------------------
+    - Base/S3/S3BucketLogs
+    - Base/S3/S3BucketArtifacts

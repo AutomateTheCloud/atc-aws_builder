@@ -1,0 +1,13 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Custom/StackReferenceResultsSNSTopics
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+StackReferenceResultsSNSTopics:
+  Condition: "ExistsStackReferenceSNSTopics"
+  Type: "Custom::StackReferenceResultsSNSTopics"
+  Version: "1.0"
+  Properties:
+    "ServiceToken": !Join [ "", [ "arn:aws:lambda:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":function:stack-reference" ] ]
+    "Region": !Ref "AWS::Region"
+    "StackName": !Ref "StackReferenceSNSTopics"
+    "LastUpdate": !Ref "LastUpdate"

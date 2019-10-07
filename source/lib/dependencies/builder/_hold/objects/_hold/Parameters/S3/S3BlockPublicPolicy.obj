@@ -1,0 +1,12 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EIP/S3BlockPublicPolicy
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+S3BlockPublicPolicy:
+  Type:                  "String"
+  Default:               "true"
+  AllowedValues:
+    - "true"
+    - "false"
+  Description:           "S3: Block Public Policy"
+  ConstraintDescription: "true/false"

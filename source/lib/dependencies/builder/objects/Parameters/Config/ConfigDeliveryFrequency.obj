@@ -1,0 +1,14 @@
+##---------------------------------------------------------------------------------------
+# object: Config/ConfigDeliveryFrequency
+##---------------------------------------------------------------------------------------
+ConfigDeliveryFrequency:
+  Description: "Config Deliver Frequency"
+  Type: String
+  Default: "One_Hour"
+  AllowedValues:
+    - "One_Hour"
+    - "Six_Hours"
+    - "Three_Hours"
+    - "Twelve_Hours"
+    - "TwentyFour_Hours"
+  ConstraintDescription: "Allowed Values: One_Hour, Six_Hours, Three_Hours, Twelve_Hours, TwentyFour_Hours"

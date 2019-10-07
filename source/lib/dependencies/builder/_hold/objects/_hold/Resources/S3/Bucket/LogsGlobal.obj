@@ -1,0 +1,27 @@
+##-------------------------------------------------------------------------------------------------
+# object:  S3/Bucket/LogsGlobal
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+S3BucketLogs:
+  Type: "AWS::S3::Bucket"
+  DeletionPolicy: "Retain"
+  Properties:
+    BucketName: !Ref "S3BucketLogsGlobalName"
+    BucketEncryption: 
+        ServerSideEncryptionConfiguration: 
+        - ServerSideEncryptionByDefault:
+            SSEAlgorithm: "aws:kms"
+            KMSMasterKeyID: !GetAtt "KMSKeyAudit.Arn"
+    PublicAccessBlockConfiguration:
+      BlockPublicAcls: true
+      BlockPublicPolicy: true
+      IgnorePublicAcls: true
+      RestrictPublicBuckets: true
+    VersioningConfiguration:
+      Status: Enabled
+    AccessControl: "LogDeliveryWrite"
+    Tags:
+      - Key: "Name"
+        Value: !Ref "S3BucketLogsGlobalName"
+  DependsOn:
+    - "KMSKeyAudit"

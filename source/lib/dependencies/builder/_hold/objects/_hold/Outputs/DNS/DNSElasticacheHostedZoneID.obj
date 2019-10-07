@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DNS/DNSElasticacheHostedZoneID
+# class:   output
+##-------------------------------------------------------------------------------------------------
+DNSElasticacheHostedZoneID:
+  Description: "DNS: Elasticache (HostedZoneID)"
+  Value: !Select [2, !Split ["|", !Ref "DNSElasticache"]]
+  Export:
+    Name: !Sub "${AWS::StackName}-DNSElasticacheHostedZoneID"

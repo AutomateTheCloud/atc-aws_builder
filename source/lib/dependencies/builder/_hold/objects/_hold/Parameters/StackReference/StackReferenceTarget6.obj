@@ -1,0 +1,8 @@
+##-------------------------------------------------------------------------------------------------
+# object:  StackReference/StackReferenceTarget6
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+StackReferenceTarget6:
+  Type:                  String
+  Description:           "Stack Reference: Target6"
+

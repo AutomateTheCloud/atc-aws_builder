@@ -1,0 +1,17 @@
+##---------------------------------------------------------------------------------------
+# object: Config/ConfigRule/AWSRestrictedIncomingTraffic
+# notes:
+#   - CIS Amazon Web Services Foundations
+#     - 4.2: Ensure no security groups allow ingress from 0.0.0.0/0 to port 3389
+##---------------------------------------------------------------------------------------
+ConfigRuleAWSRestrictedIncomingTraffic:
+  Type: "AWS::Config::ConfigRule"
+  Properties:
+    ConfigRuleName: "aws-restricted-incoming-traffic"
+    Description: "Checks whether security groups that are in use disallow unrestricted incoming TCP traffic to the specified ports"
+    Scope:
+      ComplianceResourceTypes:
+        - 'AWS::EC2::SecurityGroup'
+    Source:
+      Owner: AWS
+      SourceIdentifier: "RESTRICTED_INCOMING_TRAFFIC"

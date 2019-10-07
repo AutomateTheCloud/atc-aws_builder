@@ -1,0 +1,11 @@
+##-------------------------------------------------------------------------------------------------
+# object:  IAM/RequireLowercaseCharacters
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+RequireLowercaseCharacters:
+  Description: "You can require that IAM user passwords contain at least one lowercase character from the ISO basic Latin alphabet (a to z)."
+  Type: String
+  Default: true
+  AllowedValues:
+  - true
+  - false

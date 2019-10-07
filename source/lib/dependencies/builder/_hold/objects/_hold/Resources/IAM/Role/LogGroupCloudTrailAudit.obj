@@ -1,0 +1,27 @@
+##-------------------------------------------------------------------------------------------------
+# object:  IAM/Role/LogGroupCloudTrailAudit
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+IAMRoleLogGroupCloudTrailAudit:
+  Type: "AWS::IAM::Role"
+  Properties:
+    RoleName: "loggroup_cloudtrail-audit"
+    AssumeRolePolicyDocument:
+      Version: "2012-10-17"
+      Statement:
+      - Effect: "Allow"
+        Principal:
+          Service: "cloudtrail.amazonaws.com"
+        Action:
+        - "sts:AssumeRole"
+    Path: "/"
+    Policies:
+    - PolicyName: 'cloudtrail'
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Action:
+          - "logs:CreateLogStream"
+          - "logs:PutLogEvents"
+          Resource: !GetAtt "LogGroupCloudTrailAudit.Arn"

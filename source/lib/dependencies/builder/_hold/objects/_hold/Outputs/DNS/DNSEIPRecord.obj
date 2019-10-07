@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DNS/DNSEIPRecord
+# class:   output
+##-------------------------------------------------------------------------------------------------
+DNSEIPRecord:
+  Description: "DNS: EIP - Record"
+  Value: !Join [ "", [ !Select [0, !Split ["|", !Ref "DNSEIP"]], ".", !Select [1, !Split ["|", !Ref "DNSEIP"]] ] ]
+  Export:
+    Name: !Sub "${AWS::StackName}-DNSEIPRecord"

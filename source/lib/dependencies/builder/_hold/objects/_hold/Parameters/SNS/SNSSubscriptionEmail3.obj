@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SNS/SNSSubscriptionEmail3
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+SNSSubscriptionEmail3:
+  Type:                  String
+  Description:           "SNS Subscription: Email (3)"

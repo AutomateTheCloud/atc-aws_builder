@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DNS/DNSDatabaseWrite
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+DNSDatabaseWrite:
+  Type:                  String
+  Description:           "DNS: Database - Write (Subdomain|Domain|HostedZoneID)"

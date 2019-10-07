@@ -1,0 +1,13 @@
+##-------------------------------------------------------------------------------------------------
+# object:  ECS/EnableMangementNetwork
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+EnableMangementNetwork:
+  Type:                  "String"
+  Default:               "no"
+  AllowedValues:
+    - ""
+    - "yes"
+    - "no"
+  Description:           "Enable Management Network"
+  ConstraintDescription: "yes/no"

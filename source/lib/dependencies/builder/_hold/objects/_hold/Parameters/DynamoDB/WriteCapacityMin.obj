@@ -1,0 +1,8 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DynamoDB/WriteCapacityMin
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+WriteCapacityMin:
+  Type:                  Number
+  Default:               5
+  Description:           "DynamoDB Write Capacity (Min)"

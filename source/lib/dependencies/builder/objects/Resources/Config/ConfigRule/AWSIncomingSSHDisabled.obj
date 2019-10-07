@@ -1,0 +1,17 @@
+##---------------------------------------------------------------------------------------
+# object: Config/ConfigRule/AWSIncomingSSHDisabled
+# notes:
+#   - CIS Amazon Web Services Foundations
+#     - 4.1: Ensure no security groups allow ingress from 0.0.0.0/0 to port 22
+##---------------------------------------------------------------------------------------
+ConfigRuleAWSIncomingSSHDisabled:
+  Type: "AWS::Config::ConfigRule"
+  Properties:
+    ConfigRuleName: "aws-incoming-ssh-disabled"
+    Description: "Checks whether security groups that are in use disallow unrestricted incoming SSH traffic"
+    Scope:
+      ComplianceResourceTypes:
+        - 'AWS::EC2::SecurityGroup'
+    Source:
+      Owner: AWS
+      SourceIdentifier: "INCOMING_SSH_DISABLED"

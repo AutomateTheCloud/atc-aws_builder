@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/ParameterGroupName
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+ParameterGroupName:
+  Type:                  String
+  Description:           "Parameter Group Name"

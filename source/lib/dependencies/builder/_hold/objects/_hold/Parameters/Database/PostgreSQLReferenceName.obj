@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/PostgreSQLReferenceName
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+PostgreSQLReferenceName:
+  Type:                  String
+  MinLength:             2
+  MaxLength:             15
+  Description:           "PostgreSQL - Reference Name"
+  ConstraintDescription: "must be between 2 and 15 characters"

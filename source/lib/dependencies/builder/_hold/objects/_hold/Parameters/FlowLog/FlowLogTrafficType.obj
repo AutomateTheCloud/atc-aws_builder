@@ -1,0 +1,14 @@
+##-------------------------------------------------------------------------------------------------
+# object:  FlowLog/FlowLogTrafficType
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+FlowLogTrafficType:
+  Type:                  "String"
+  Default:               ""
+  AllowedValues:
+    - ""
+    - "ALL"
+    - "ACCEPT"
+    - "REJECT"
+  Description:           "FlowLog: Traffic Type"
+  ConstraintDescription: "Allowed Values: ALL, ACCEPT, REJECT"

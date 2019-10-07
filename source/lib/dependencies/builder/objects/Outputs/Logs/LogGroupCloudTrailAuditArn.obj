@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: Logs/LogGroupCloudTrailAuditArn
+##---------------------------------------------------------------------------------------
+LogGroupCloudTrailAuditArn:
+  Description: "Log Group: CloudTrailAudit (ARN)"
+  Value: !GetAtt "LogGroupCloudTrailAudit.Arn"
+  Export:
+    Name: !Sub "${AWS::StackName}-LogGroupCloudTrailAuditArn"

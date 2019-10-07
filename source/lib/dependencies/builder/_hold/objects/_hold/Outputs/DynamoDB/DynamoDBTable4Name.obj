@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DynamoDB/DynamoDBTable4Name
+# class:   output
+##-------------------------------------------------------------------------------------------------
+DynamoDBTable4Name:
+  Condition: "ExistsStackReferenceDynamoDBTable4"
+  Description: "KMS: Key 4 (ID)"
+  Value: !GetAtt "StackReferenceResultsDynamoDBTable4.DynamoDBTableName"
+  Export:
+    Name: !Sub "${AWS::StackName}-DynamoDBTable4Name"

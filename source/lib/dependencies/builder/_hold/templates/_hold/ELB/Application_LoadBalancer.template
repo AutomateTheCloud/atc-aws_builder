@@ -1,0 +1,106 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Instance/Linux_LoadBalancer
+# class:   template
+##-------------------------------------------------------------------------------------------------
+Paradigm:
+  Parameters:
+    #-- Network Related -----------------------------------------------------------------
+    - Base/Network/SubnetTypeLoadBalancer
+
+    #-- LoadBalancer Related ------------------------------------------------------------
+    - Base/LoadBalancer/LoadBalancerSSLPolicy
+
+    #-- DNS -----------------------------------------------------------------------------
+    - Base/DNS/DNSLoadBalancer
+
+    #-- SSL Certificate -----------------------------------------------------------------
+    - Base/SSL/SSLCertificateName
+
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/StackReference/StackReferenceAdministrative1
+    - Base/StackReference/StackReferenceAdministrative2
+    - Base/StackReference/StackReferenceSecurity1
+    - Base/StackReference/StackReferenceSecurity2
+
+##-------------------------------------------------------------------------------------------------
+  Mappings:
+
+##-------------------------------------------------------------------------------------------------
+  Conditions:
+    #-- Network Related -----------------------------------------------------------------
+    - Base/Network/SubnetTypeLoadBalancerPublic
+    - Base/Network/SubnetTypeLoadBalancerPrivate
+    - Base/Network/SubnetTypeLoadBalancerRestricted
+
+    #-- DNS -----------------------------------------------------------------------------
+    - Base/DNS/ExistsDNSLoadBalancer
+
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/StackReference/ExistsStackReferenceAdministrative1
+    - Base/StackReference/ExistsStackReferenceAdministrative2
+    - Base/StackReference/ExistsStackReferenceSecurity1
+    - Base/StackReference/ExistsStackReferenceSecurity2
+
+##-------------------------------------------------------------------------------------------------
+  Resources:
+    #-- Security Group ------------------------------------------------------------------
+    - Base/EC2/SecurityGroup/LoadBalancer
+
+    #-- LoadBalancer --------------------------------------------------------------------
+    - Base/ElasticLoadBalancingV2/LoadBalancer/Instance
+    - Base/ElasticLoadBalancingV2/Listener/Instance
+    - Base/ElasticLoadBalancingV2/Listener/InstanceHTTPSRedirect
+
+    #-- DNS -----------------------------------------------------------------------------
+    - Base/Route53/RecordSetGroup/DNSLoadBalancer
+
+    #-- IAM -----------------------------------------------------------------------------
+    - Base/IAM/InstanceProfile/Instance
+
+    #-- Lambda --------------------------------------------------------------------------
+    - Base/Custom/AMIAmazonLinux2
+
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/Custom/StackReferenceResultsVPC
+    - Base/Custom/StackReferenceResultsEFS
+    - Base/Custom/StackReferenceResultsTarget1
+    - Base/Custom/StackReferenceResultsTarget2
+    - Base/Custom/StackReferenceResultsTarget3
+    - Base/Custom/StackReferenceResultsTarget4
+    - Base/Custom/StackReferenceResultsTarget5
+    - Base/Custom/StackReferenceResultsTarget6
+    - Base/Custom/StackReferenceResultsTarget7
+    - Base/Custom/StackReferenceResultsTarget8
+    - Base/Custom/StackReferenceResultsTarget9
+    - Base/Custom/StackReferenceResultsTarget10
+    - Base/Custom/StackReferenceResultsAdministrative1
+    - Base/Custom/StackReferenceResultsAdministrative2
+    - Base/Custom/StackReferenceResultsSecurity1
+    - Base/Custom/StackReferenceResultsSecurity2
+
+##-------------------------------------------------------------------------------------------------
+  Outputs:
+    #-- Instance ------------------------------------------------------------------------
+    - Base/Instance/InstanceDescription
+    - Base/Instance/SecurityGroupInstanceId
+    - Base/AutoScaling/AutoScalingGroupInstanceId
+    - Base/EC2/LaunchTemplateInstanceId
+
+    #-- LoadBalancer --------------------------------------------------------------------
+    - Base/LoadBalancer/LoadBalancerEnabledTrue
+    - Base/LoadBalancer/TargetGroupInstanceName
+    - Base/LoadBalancer/TargetGroupInstanceARN
+
+    #-- DNS -----------------------------------------------------------------------------
+    - Base/DNS/DNSLoadBalancer
+
+    #-- IAM -----------------------------------------------------------------------------
+    - Base/IAM/Role/RoleInstanceName
+
+    #-- VPC -----------------------------------------------------------------------------
+    - Base/VPC/VPCStackID
+
+##-------------------------------------------------------------------------------------------------
+  Targets:
+    #-- EC2 -----------------------------------------------------------------------------
+    - Base/EC2/LaunchTemplateInstance

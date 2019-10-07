@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: EFS/SecurityGroupApplicationEFSId
+##---------------------------------------------------------------------------------------
+SecurityGroupApplicationEFSId:
+  Description: "Security Group (EFS): ID"
+  Value: !Ref "SecurityGroupApplicationEFS"
+  Export:
+    Name: !Sub "${AWS::StackName}-SecurityGroupApplicationEFSId"

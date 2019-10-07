@@ -1,0 +1,13 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Config/EnableConfig
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+EnableConfig:
+  Type:                  "String"
+  Default:               "no"
+  AllowedValues:
+    - ""
+    - "yes"
+    - "no"
+  Description:           "Enable Config"
+  ConstraintDescription: "yes/no"

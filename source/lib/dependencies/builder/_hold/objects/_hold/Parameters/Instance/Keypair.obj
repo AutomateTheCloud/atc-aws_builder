@@ -1,0 +1,8 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Instance/Keypair
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+Keypair:
+  Type:                  "AWS::EC2::KeyPair::KeyName"
+  Description:           "EC2 KeyPair"
+  ConstraintDescription: "must be the name of an existing EC2 KeyPair"

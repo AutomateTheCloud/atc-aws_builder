@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Logs/LogGroupApplicationAccess
+# class:   output
+##-------------------------------------------------------------------------------------------------
+LogGroupApplicationAccess:
+  Description: "Log Group: Application Access"
+  Value: !Ref "LogGroupApplicationAccess"
+  Export:
+    Name: !Sub "${AWS::StackName}-LogGroupApplicationAccess"

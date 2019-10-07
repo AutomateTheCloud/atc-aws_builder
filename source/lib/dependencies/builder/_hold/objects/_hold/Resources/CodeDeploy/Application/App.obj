@@ -1,0 +1,8 @@
+##-------------------------------------------------------------------------------------------------
+# object:  CodeDeploy/Application/App
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+CodeDeployApplicationApp:
+  Type: "AWS::CodeDeploy::Application"
+  Properties:
+    ApplicationName: !Select [0, !Split ["|", !Ref "CodeDeployApplication"]]

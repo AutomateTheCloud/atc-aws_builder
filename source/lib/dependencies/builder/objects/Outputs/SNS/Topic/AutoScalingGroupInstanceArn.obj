@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: SNS/Topic/AutoScalingGroupInstanceArn
+##---------------------------------------------------------------------------------------
+SNSTopicAutoScalingGroupInstanceArn:
+  Description: "SNS Topic (AutoScalingGroupInstance): ARN"
+  Value: !Ref "SNSTopicAutoScalingGroupInstance"
+  Export:
+    Name: !Sub "${AWS::StackName}-SNSTopicAutoScalingGroupInstanceArn"

@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: Logs/LogGroup/LambdaFunctionConfigEvaluateCloudTrailBucket
+##---------------------------------------------------------------------------------------
+LogGroupLambdaFunctionConfigEvaluateCloudTrailBucket:
+  Type: "AWS::Logs::LogGroup"
+  Properties:
+    LogGroupName: !Sub "/aws/lambda/${LambdaFunctionConfigEvaluateCloudTrailBucket}"
+    RetentionInDays: "14"

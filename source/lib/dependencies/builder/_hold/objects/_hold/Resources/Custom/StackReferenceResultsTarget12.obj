@@ -1,0 +1,14 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Custom/StackReferenceResultsTarget12
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+StackReferenceResultsTarget12:
+  Condition: "ExistsStackReferenceTarget12"
+  Type: "Custom::StackReferenceResultsTarget12"
+  Version: "1.0"
+  Properties:
+    "ServiceToken": !Join [ "", [ "arn:aws:lambda:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":function:stack-reference" ] ]
+    "Region": !Ref "AWS::Region"
+    "StackName": !Ref "StackReferenceTarget12"
+    "LastUpdate": !Ref "LastUpdate"
+

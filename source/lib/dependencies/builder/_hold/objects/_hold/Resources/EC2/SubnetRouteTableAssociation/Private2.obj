@@ -1,0 +1,12 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EC2/SubnetRouteTableAssociation/Private2
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+SubnetRouteTableAssociationPrivate2:
+  Type: "AWS::EC2::SubnetRouteTableAssociation"
+  Properties:
+    SubnetId: !Ref "SubnetPrivate2"
+    RouteTableId: !Ref "RouteTablePrivate"
+  DependsOn:
+    - "SubnetPrivate2"
+    - "RouteTablePrivate"

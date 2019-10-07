@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Logs/LogGroup/LinuxSecure
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+LogGroupLinuxSecure:
+  Type: "AWS::Logs::LogGroup"
+  Properties:
+    LogGroupName: !Join [ "", [ !Select [1, !Split ["|", !Ref "Organization"]], "-", !Ref "AWS::Region", "-linux-secure" ] ]
+    RetentionInDays: 365

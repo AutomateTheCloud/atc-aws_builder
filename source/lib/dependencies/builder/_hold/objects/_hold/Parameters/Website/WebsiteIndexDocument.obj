@@ -1,0 +1,8 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Website/WebsiteIndexDocument
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+WebsiteIndexDocument:
+  Type:                  String
+  Default:               "index.html"
+  Description:           "Website: Index Document"

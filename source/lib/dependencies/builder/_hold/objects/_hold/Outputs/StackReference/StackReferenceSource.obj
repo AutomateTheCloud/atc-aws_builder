@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  StackReference/StackReferenceSource
+# class:   output
+##-------------------------------------------------------------------------------------------------
+StackReferenceSource:
+  Description: "Stack Reference: Source"
+  Value: !Ref "StackReferenceSource"
+  Export:
+    Name: !Sub "${AWS::StackName}-StackReferenceSource"

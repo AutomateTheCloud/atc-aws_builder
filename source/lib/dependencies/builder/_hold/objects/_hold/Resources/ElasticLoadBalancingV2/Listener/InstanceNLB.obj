@@ -1,0 +1,15 @@
+##-------------------------------------------------------------------------------------------------
+# object:  ElasticLoadBalancingV2/Listener/InstanceNLB
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+ListenerInstanceNLB:
+  Type: "AWS::ElasticLoadBalancingV2::Listener"
+  Properties:
+    DefaultActions:
+    -  Type: "forward"
+       TargetGroupArn:
+         Ref: "TargetGroupInstanceNLB"
+    LoadBalancerArn:
+      Ref: "LoadBalancerInstanceNLB"
+    Port: !Ref "LoadBalancerNLBListenerPort"
+    Protocol: "TCP"

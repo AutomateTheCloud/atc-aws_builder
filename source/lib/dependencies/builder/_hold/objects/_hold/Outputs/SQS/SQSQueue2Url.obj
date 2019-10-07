@@ -1,0 +1,11 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SQS/SQSQueue2Url
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+SQSQueue2Url:
+  Condition: "ExistsStackReferenceSQSQueue2"
+  Description: "SQS Queue (2): URL"
+  Value: !GetAtt "StackReferenceResultsSQSQueue2.SQSQueueUrl"
+  Export:
+    Name: !Sub "-SQSQueue2Url"
+

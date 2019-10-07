@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  CloudFront/SiteOriginSSLProtocols
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+SiteOriginSSLProtocols:
+  Type:                  String
+  Description:           "CloudFront Distribution Origin (SSL Protocols)"

@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  CloudFront/CloudFrontDocumentError416
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+CloudFrontDocumentError416:
+  Type:                  String
+  Default:               "error.html"
+  Description:           "CloudFront: Document - Error416"
+

@@ -1,0 +1,6 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Website/ExistsWebsiteIndexDocument
+# class:   condition
+##-------------------------------------------------------------------------------------------------
+ExistsWebsiteIndexDocument:
+  !Not [!Equals [!Ref WebsiteIndexDocument, ""]]

@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  KMS/KMSKey4Arn
+# class:   output
+##-------------------------------------------------------------------------------------------------
+KMSKey4Arn:
+  Condition: "ExistsStackReferenceKMSKey4"
+  Description: "KMS: Key 4 (ARN)"
+  Value: !GetAtt "StackReferenceResultsKMSKey4.KMSKeyArn"
+  Export:
+    Name: !Sub "${AWS::StackName}-KMSKey4Arn"

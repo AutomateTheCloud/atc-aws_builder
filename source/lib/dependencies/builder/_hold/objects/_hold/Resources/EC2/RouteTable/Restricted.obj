@@ -1,0 +1,13 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EC2/RouteTable/Restricted
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+RouteTableRestricted:
+  Type: "AWS::EC2::RouteTable"
+  Properties:
+    VpcId: !Ref "VPC"
+    Tags:
+      - Key: "Name"
+        Value: !Join [ "_", [ "route", !Select [1, !Split ["|", !Ref "Organization"]], "restricted", !Ref "AWS::Region" ] ]
+      - Key: "Network"
+        Value: "restricted"

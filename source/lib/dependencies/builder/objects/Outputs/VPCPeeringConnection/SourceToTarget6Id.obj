@@ -1,0 +1,9 @@
+##---------------------------------------------------------------------------------------
+# object:  VPCPeeringConnection/SourceToTarget6Id
+##---------------------------------------------------------------------------------------
+VPCPeeringConnectionSourceToTarget6Id:
+  Condition: "ExistsStackReferenceTarget6"
+  Description: "VPC Peering Connection: SourceToTarget6 ID"
+  Value: !Ref "VPCPeeringConnectionSourceToTarget6"
+  Export:
+    Name: !Sub "${AWS::StackName}-VPCPeeringConnectionSourceToTarget6Id"

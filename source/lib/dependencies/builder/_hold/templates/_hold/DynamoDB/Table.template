@@ -1,0 +1,43 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DynamoDB/Table
+# class:   template
+##-------------------------------------------------------------------------------------------------
+
+Paradigm:
+##-------------------------------------------------------------------------------------------------
+  Parameters:
+    #-- DynamoDB ------------------------------------------------------------------------
+    - Base/DynamoDB/TableName
+    - Base/DynamoDB/ReadCapacityMin
+    - Base/DynamoDB/ReadCapacityMax
+    - Base/DynamoDB/ReadCapacityTargetValue
+    - Base/DynamoDB/ReadCapacityScaleInCooldown
+    - Base/DynamoDB/ReadCapacityScaleOutCooldown
+    - Base/DynamoDB/WriteCapacityMin
+    - Base/DynamoDB/WriteCapacityMax
+    - Base/DynamoDB/WriteCapacityTargetValue
+    - Base/DynamoDB/WriteCapacityScaleInCooldown
+    - Base/DynamoDB/WriteCapacityScaleOutCooldown
+
+##-------------------------------------------------------------------------------------------------
+  Mappings:
+
+##-------------------------------------------------------------------------------------------------
+  Conditions:
+
+##-------------------------------------------------------------------------------------------------
+  Resources:
+    #-- IAM -----------------------------------------------------------------------------
+    - Base/IAM/Role/DynamoDBScaling
+
+    #-- Application AutoScaling ---------------------------------------------------------
+    - Base/ApplicationAutoScaling/ScalableTarget/DynamoDBTableReadCapacity
+    - Base/ApplicationAutoScaling/ScalableTarget/DynamoDBTableWriteCapacity
+    - Base/ApplicationAutoScaling/ScalingPolicy/DynamoDBTableReadCapacity
+    - Base/ApplicationAutoScaling/ScalingPolicy/DynamoDBTableWriteCapacity
+
+##-------------------------------------------------------------------------------------------------
+  Outputs:
+    #-- DynamoDB ------------------------------------------------------------------------
+    - Base/DynamoDB/DynamoDBTableName
+    - Base/DynamoDB/DynamoDBTableArn

@@ -1,0 +1,12 @@
+##-------------------------------------------------------------------------------------------------
+# object:  ElastiCache/EncryptionEnabled
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+EncryptionEnabled:
+  Type:                  String
+  Default:               "yes"
+  AllowedValues:
+    - "yes"
+    - "no"
+  Description:           "Encryption Enabled"
+  ConstraintDescription: "yes or no"

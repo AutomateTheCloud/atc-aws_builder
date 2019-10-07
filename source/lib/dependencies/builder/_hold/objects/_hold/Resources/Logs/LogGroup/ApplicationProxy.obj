@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Logs/LogGroup/ApplicationProxy
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+LogGroupApplicationProxy:
+  Type: "AWS::Logs::LogGroup"
+  Properties:
+    LogGroupName: !Join [ "", [ !Select [1, !Split ["|", !Ref "Project"]], "-", !Select [1, !Split ["|", !Ref "Function"]], "-", !Select [3, !Split ["|", !Ref "Organization"]], "-", !Ref "AWS::Region", "-proxy" ] ]
+    RetentionInDays: !Ref "LogRetentionDays"

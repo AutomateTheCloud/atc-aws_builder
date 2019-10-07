@@ -1,0 +1,50 @@
+##---------------------------------------------------------------------------------------
+# object: Lambda/Function/ConfigInstanceRoleUse
+# notes:
+#   - Based on AWS Lab: aws-security-benchmark
+#     - https://github.com/awslabs/aws-security-benchmark/blob/master/architecture/create-benchmark-rules.yaml
+#   - CIS Amazon Web Services Foundations
+#     - 1.19: Ensure IAM instance roles are used for AWS resource access from instances
+##---------------------------------------------------------------------------------------
+LambdaFunctionConfigInstanceRoleUse:
+  Type: "AWS::Lambda::Function"
+  Properties:
+    FunctionName: "config-instance-role-use"
+    Description: "Evaluates whether instances use instance roles"
+    Code:
+      ZipFile: |
+        #==================================================================================================
+        # Function: config-instance-role-use
+        # Purpose:  Evaluates whether instances use instance roles
+        #==================================================================================================
+        import boto3
+        import json
+        def evaluate_compliance(config_item, instance_id):
+            if (config_item['resourceType'] != 'AWS::EC2::Instance'): return 'NOT_APPLICABLE'
+            reservations = boto3.client('ec2').describe_instances(InstanceIds=[instance_id])['Reservations']
+            if reservations and 'IamInstanceProfile' in reservations[0]['Instances'][0]: return 'COMPLIANT'
+            else: return 'NON_COMPLIANT'
+        def lambda_handler(event, context):
+            invoking_event = json.loads(event['invokingEvent'])
+            compliance_value = 'NOT_APPLICABLE'
+            instance_id = invoking_event['configurationItem']['resourceId']
+            compliance_value = evaluate_compliance(invoking_event['configurationItem'], instance_id)
+            config = boto3.client('config')
+            response = config.put_evaluations(
+               Evaluations=[
+                   {
+                       'ComplianceResourceType': invoking_event['configurationItem']['resourceType'],
+                       'ComplianceResourceId': instance_id,
+                       'ComplianceType': compliance_value,
+                       'OrderingTimestamp': invoking_event['configurationItem']['configurationItemCaptureTime']
+                   },
+               ],
+               ResultToken=event['resultToken'])
+
+    Handler: "index.lambda_handler"
+    MemorySize: 1024
+    Role: !GetAtt "IAMRoleLambdaFunctionConfig.Arn"
+    Runtime: "python2.7"
+    Timeout: 10
+  DependsOn:
+    - "IAMRoleLambdaFunctionConfig"

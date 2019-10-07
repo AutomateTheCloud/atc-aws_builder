@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/PerformanceInsightsRetentionPeriod
+# class:   output
+##-------------------------------------------------------------------------------------------------
+PerformanceInsightsRetentionPeriod:
+  Condition: "EnablePerformanceInsights"
+  Description: "Performance Insights Retention Period"
+  Value: !Ref "PerformanceInsightsRetentionPeriod"
+  Export:
+    Name: !Sub "${AWS::StackName}-PerformanceInsightsRetentionPeriod"

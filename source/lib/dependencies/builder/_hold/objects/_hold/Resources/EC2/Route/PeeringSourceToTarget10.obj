@@ -1,0 +1,76 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EC2/Route/PeeringSourceToTarget10
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+PeeringSourceToTarget10Private:
+  Condition: "ExistsStackReferenceTarget10"
+  Type: "AWS::EC2::Route"
+  Properties:
+    RouteTableId:           !GetAtt "StackReferenceResultsSource.RouteTablePrivateId"
+    DestinationCidrBlock:   !GetAtt "StackReferenceResultsTarget10.VPCCidr"
+    VpcPeeringConnectionId: !Ref "VPCPeeringConnectionSourceToTarget10"
+  DependsOn:
+    - "VPCPeeringConnectionSourceToTarget10"
+    - "StackReferenceResultsSource"
+    - "StackReferenceResultsTarget10"
+
+RoutePeerTarget10ToSourcePrivate:
+  Condition: "ExistsStackReferenceTarget10"
+  Type: "AWS::EC2::Route"
+  Properties:
+    RouteTableId:           !GetAtt "StackReferenceResultsTarget10.RouteTablePrivateId"
+    DestinationCidrBlock:   !GetAtt "StackReferenceResultsSource.VPCCidr"
+    VpcPeeringConnectionId: !Ref "VPCPeeringConnectionSourceToTarget10"
+  DependsOn:
+    - "VPCPeeringConnectionSourceToTarget10"
+    - "StackReferenceResultsSource"
+    - "StackReferenceResultsTarget10"
+
+PeeringSourceToTarget10Restricted:
+  Condition: "ExistsStackReferenceTarget10"
+  Type: "AWS::EC2::Route"
+  Properties:
+    RouteTableId:           !GetAtt "StackReferenceResultsSource.RouteTableRestrictedId"
+    DestinationCidrBlock:   !GetAtt "StackReferenceResultsTarget10.VPCCidr"
+    VpcPeeringConnectionId: !Ref "VPCPeeringConnectionSourceToTarget10"
+  DependsOn:
+    - "VPCPeeringConnectionSourceToTarget10"
+    - "StackReferenceResultsSource"
+    - "StackReferenceResultsTarget10"
+
+RoutePeerTarget10ToSourceRestricted:
+  Condition: "ExistsStackReferenceTarget10"
+  Type: "AWS::EC2::Route"
+  Properties:
+    RouteTableId:           !GetAtt "StackReferenceResultsTarget10.RouteTableRestrictedId"
+    DestinationCidrBlock:   !GetAtt "StackReferenceResultsSource.VPCCidr"
+    VpcPeeringConnectionId: !Ref "VPCPeeringConnectionSourceToTarget10"
+  DependsOn:
+    - "VPCPeeringConnectionSourceToTarget10"
+    - "StackReferenceResultsSource"
+    - "StackReferenceResultsTarget10"
+
+PeeringSourceToTarget10Public:
+  Condition: "ExistsStackReferenceTarget10"
+  Type: "AWS::EC2::Route"
+  Properties:
+    RouteTableId:           !GetAtt "StackReferenceResultsSource.RouteTablePublicId"
+    DestinationCidrBlock:   !GetAtt "StackReferenceResultsTarget10.VPCCidr"
+    VpcPeeringConnectionId: !Ref "VPCPeeringConnectionSourceToTarget10"
+  DependsOn:
+    - "VPCPeeringConnectionSourceToTarget10"
+    - "StackReferenceResultsSource"
+    - "StackReferenceResultsTarget10"
+
+RoutePeerTarget10ToSourcePublic:
+  Condition: "ExistsStackReferenceTarget10"
+  Type: "AWS::EC2::Route"
+  Properties:
+    RouteTableId:           !GetAtt "StackReferenceResultsTarget10.RouteTablePublicId"
+    DestinationCidrBlock:   !GetAtt "StackReferenceResultsSource.VPCCidr"
+    VpcPeeringConnectionId: !Ref "VPCPeeringConnectionSourceToTarget10"
+  DependsOn:
+    - "VPCPeeringConnectionSourceToTarget10"
+    - "StackReferenceResultsSource"
+    - "StackReferenceResultsTarget10"
+

@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Logs/LogGroup/EC2LinuxHIDSAlerts
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+LogGroupEC2LinuxHIDSAlerts:
+  Type: "AWS::Logs::LogGroup"
+  Properties:
+    LogGroupName: "/aws/ec2/linux/hids_alerts"
+    RetentionInDays: !Ref "LogRetentionEC2LinuxHIDSAlerts"

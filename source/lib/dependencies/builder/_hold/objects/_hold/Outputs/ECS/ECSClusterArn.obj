@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  ECS/ECSClusterArn
+# class:   output
+##-------------------------------------------------------------------------------------------------
+ECSClusterArn:
+  Condition: "EnabledECSCluster"
+  Description: "ECS Cluster: ARN"
+  Value: !Ref "ECSCluster"
+  Export:
+    Name: !Sub "${AWS::StackName}-ECSClusterArn"

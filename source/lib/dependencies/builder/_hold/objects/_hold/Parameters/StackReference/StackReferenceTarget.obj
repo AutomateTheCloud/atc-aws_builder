@@ -1,0 +1,43 @@
+##-------------------------------------------------------------------------------------------------
+# object:  StackReference/StackReferenceTarget
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+StackReferenceTarget1:
+  Type:                  String
+  Description:           "Stack Reference: Target1"
+
+StackReferenceTarget2:
+  Type:                  String
+  Description:           "Stack Reference: Target2"
+
+StackReferenceTarget3:
+  Type:                  String
+  Description:           "Stack Reference: Target3"
+
+StackReferenceTarget4:
+  Type:                  String
+  Description:           "Stack Reference: Target4"
+
+StackReferenceTarget5:
+  Type:                  String
+  Description:           "Stack Reference: Target5"
+
+StackReferenceTarget6:
+  Type:                  String
+  Description:           "Stack Reference: Target6"
+
+StackReferenceTarget7:
+  Type:                  String
+  Description:           "Stack Reference: Target7"
+
+StackReferenceTarget8:
+  Type:                  String
+  Description:           "Stack Reference: Target8"
+
+StackReferenceTarget9:
+  Type:                  String
+  Description:           "Stack Reference: Target9"
+
+StackReferenceTarget10:
+  Type:                  String
+  Description:           "Stack Reference: Target10"

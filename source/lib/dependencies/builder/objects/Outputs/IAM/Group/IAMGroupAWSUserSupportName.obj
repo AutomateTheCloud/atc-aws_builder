@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: IAM/Group/IAMGroupAWSUserSupportName
+##---------------------------------------------------------------------------------------
+IAMGroupAWSUserSupportName:
+  Description: "IAM Group (AWSUserSupport): Name"
+  Value: !Ref "IAMGroupAWSUserSupport"
+  Export:
+    Name: !Sub "${AWS::StackName}-IAMGroupAWSUserSupportName"

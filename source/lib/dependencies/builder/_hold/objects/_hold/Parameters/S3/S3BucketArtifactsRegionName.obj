@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  S3/S3BucketArtifactsRegionName
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+S3BucketArtifactsRegionName:
+  Type:                  String
+  Description:           "S3: Bucket Name (Artifacts - Region)"

@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Logs/LogGroup/LambdaFunctionNetworkLBIpAddress
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+LogGroupLambdaFunctionNetworkLBIpAddress:
+  Type: "AWS::Logs::LogGroup"
+  Properties:
+    LogGroupName: !Sub "/aws/lambda/${LambdaFunctionNetworkLBIpAddress}"
+    RetentionInDays: !Ref "LogRetentionNetworkLBIpAddress"

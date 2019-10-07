@@ -1,0 +1,17 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SNS/TopicPolicy/ConfigRegion
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+SNSTopicPolicyConfigRegion:
+  Type: "AWS::SNS::TopicPolicy"
+  Properties:
+    PolicyDocument:
+      Id: ConfigTopicPolicy
+      Version: '2012-10-17'
+      Statement:
+      - Effect: Allow
+        Principal:
+          Service: config.amazonaws.com
+        Action: SNS:Publish
+        Resource: '*'
+    Topics: [!Ref "SNSTopicConfigRegion"]

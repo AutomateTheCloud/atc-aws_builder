@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Logs/LogGroup/LinuxDmesg
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+LogGroupLinuxDmesg:
+  Type: "AWS::Logs::LogGroup"
+  Properties:
+    LogGroupName: !Join [ "", [ !Select [1, !Split ["|", !Ref "Organization"]], "-", !Ref "AWS::Region", "-linux-dmesg" ] ]
+    RetentionInDays: 365

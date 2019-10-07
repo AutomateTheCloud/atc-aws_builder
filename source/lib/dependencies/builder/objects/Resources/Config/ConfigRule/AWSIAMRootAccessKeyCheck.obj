@@ -1,0 +1,15 @@
+##---------------------------------------------------------------------------------------
+# object: Config/ConfigRule/AWSIAMRootAccessKeyCheck
+# notes:
+#   - CIS Amazon Web Services Foundations
+#     - 1.12: Ensure no root account access key exists
+##---------------------------------------------------------------------------------------
+ConfigRuleAWSIAMRootAccessKeyCheck:
+  Type: "AWS::Config::ConfigRule"
+  Properties:
+    ConfigRuleName: "aws-iam-root-access-key-check"
+    Description: "Checks whether the root user access key is available"
+    MaximumExecutionFrequency: "TwentyFour_Hours"
+    Source:
+      Owner: AWS
+      SourceIdentifier: "IAM_ROOT_ACCESS_KEY_CHECK"

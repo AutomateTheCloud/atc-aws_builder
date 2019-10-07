@@ -1,0 +1,31 @@
+##-------------------------------------------------------------------------------------------------
+# object:  IAM/Role/LambdaFunctionAMILookupCustom
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+IAMRoleLambdaFunctionAMILookupCustom:
+  Type: "AWS::IAM::Role"
+  Properties:
+    RoleName: !Join [ "_", [ "lambda", "ami-lookup-custom", !Ref "AWS::Region" ] ]
+    AssumeRolePolicyDocument:
+      Version: "2012-10-17"
+      Statement:
+      - Effect: "Allow"
+        Principal:
+          Service: "lambda.amazonaws.com"
+        Action:
+        - "sts:AssumeRole"
+    Path: "/"
+    ManagedPolicyArns:
+    - "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+    Policies:
+    - PolicyName: "lambda"
+      PolicyDocument:
+        Statement:
+        - Effect: "Allow"
+          Action:
+          - "logs:*"
+          Resource: !Join [ "", [ "arn:aws:logs:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":log-group:/aws/lambda/", "ami-lookup-custom", ":*" ] ]
+        - Effect: "Allow"
+          Action:
+          - "ec2:DescribeImages"
+          Resource: "*"

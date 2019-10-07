@@ -1,0 +1,193 @@
+##-------------------------------------------------------------------------------------------------
+# object:  CodeDeploy/Application
+# class:   template
+##-------------------------------------------------------------------------------------------------
+
+Paradigm:
+##-------------------------------------------------------------------------------------------------
+  Parameters:
+    #-- CodeDeploy ----------------------------------------------------------------------
+    - Base/CodeDeploy/CodeDeployApplication
+    - Base/CodeDeploy/DeploymentGroupAppendTarget1
+    - Base/CodeDeploy/DeploymentGroupAppendTarget2
+    - Base/CodeDeploy/DeploymentGroupAppendTarget3
+    - Base/CodeDeploy/DeploymentGroupAppendTarget4
+    - Base/CodeDeploy/DeploymentGroupAppendTarget5
+    - Base/CodeDeploy/DeploymentGroupAppendTarget6
+    - Base/CodeDeploy/DeploymentGroupAppendTarget7
+    - Base/CodeDeploy/DeploymentGroupAppendTarget8
+    - Base/CodeDeploy/DeploymentGroupAppendTarget9
+    - Base/CodeDeploy/DeploymentGroupAppendTarget10
+    - Base/CodeDeploy/DeploymentGroupAppendTarget11
+    - Base/CodeDeploy/DeploymentGroupAppendTarget12
+    - Base/CodeDeploy/DeploymentGroupAppendTarget13
+    - Base/CodeDeploy/DeploymentGroupAppendTarget14
+    - Base/CodeDeploy/DeploymentGroupAppendTarget15
+
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/StackReference/StackReferenceTarget1
+    - Base/StackReference/StackReferenceTarget2
+    - Base/StackReference/StackReferenceTarget3
+    - Base/StackReference/StackReferenceTarget4
+    - Base/StackReference/StackReferenceTarget5
+    - Base/StackReference/StackReferenceTarget6
+    - Base/StackReference/StackReferenceTarget7
+    - Base/StackReference/StackReferenceTarget8
+    - Base/StackReference/StackReferenceTarget9
+    - Base/StackReference/StackReferenceTarget10
+    - Base/StackReference/StackReferenceTarget11
+    - Base/StackReference/StackReferenceTarget12
+    - Base/StackReference/StackReferenceTarget13
+    - Base/StackReference/StackReferenceTarget14
+    - Base/StackReference/StackReferenceTarget15
+
+    #-- LoadBalancer --------------------------------------------------------------------
+    - Base/LoadBalancer/LoadBalancerEnabledTarget1
+    - Base/LoadBalancer/LoadBalancerEnabledTarget2
+    - Base/LoadBalancer/LoadBalancerEnabledTarget3
+    - Base/LoadBalancer/LoadBalancerEnabledTarget4
+    - Base/LoadBalancer/LoadBalancerEnabledTarget5
+    - Base/LoadBalancer/LoadBalancerEnabledTarget6
+    - Base/LoadBalancer/LoadBalancerEnabledTarget7
+    - Base/LoadBalancer/LoadBalancerEnabledTarget8
+    - Base/LoadBalancer/LoadBalancerEnabledTarget9
+    - Base/LoadBalancer/LoadBalancerEnabledTarget10
+    - Base/LoadBalancer/LoadBalancerEnabledTarget11
+    - Base/LoadBalancer/LoadBalancerEnabledTarget12
+    - Base/LoadBalancer/LoadBalancerEnabledTarget13
+    - Base/LoadBalancer/LoadBalancerEnabledTarget14
+    - Base/LoadBalancer/LoadBalancerEnabledTarget15
+
+##-------------------------------------------------------------------------------------------------
+  Mappings:
+
+##-------------------------------------------------------------------------------------------------
+  Conditions:
+    #-- Stack Targets -------------------------------------------------------------------
+    - Base/StackReference/ExistsStackReferenceTarget1
+    - Base/StackReference/ExistsStackReferenceTarget2
+    - Base/StackReference/ExistsStackReferenceTarget3
+    - Base/StackReference/ExistsStackReferenceTarget4
+    - Base/StackReference/ExistsStackReferenceTarget5
+    - Base/StackReference/ExistsStackReferenceTarget6
+    - Base/StackReference/ExistsStackReferenceTarget7
+    - Base/StackReference/ExistsStackReferenceTarget8
+    - Base/StackReference/ExistsStackReferenceTarget9
+    - Base/StackReference/ExistsStackReferenceTarget10
+    - Base/StackReference/ExistsStackReferenceTarget11
+    - Base/StackReference/ExistsStackReferenceTarget12
+    - Base/StackReference/ExistsStackReferenceTarget13
+    - Base/StackReference/ExistsStackReferenceTarget14
+    - Base/StackReference/ExistsStackReferenceTarget15
+
+    #-- CodeDeploy ----------------------------------------------------------------------
+    - Base/CodeDeploy/EnabledCodeDeployTarget1
+    - Base/CodeDeploy/EnabledCodeDeployTarget2
+    - Base/CodeDeploy/EnabledCodeDeployTarget3
+    - Base/CodeDeploy/EnabledCodeDeployTarget4
+    - Base/CodeDeploy/EnabledCodeDeployTarget5
+    - Base/CodeDeploy/EnabledCodeDeployTarget6
+    - Base/CodeDeploy/EnabledCodeDeployTarget7
+    - Base/CodeDeploy/EnabledCodeDeployTarget8
+    - Base/CodeDeploy/EnabledCodeDeployTarget9
+    - Base/CodeDeploy/EnabledCodeDeployTarget10
+    - Base/CodeDeploy/EnabledCodeDeployTarget11
+    - Base/CodeDeploy/EnabledCodeDeployTarget12
+    - Base/CodeDeploy/EnabledCodeDeployTarget13
+    - Base/CodeDeploy/EnabledCodeDeployTarget14
+    - Base/CodeDeploy/EnabledCodeDeployTarget15
+
+    - Base/CodeDeploy/EnabledCodeDeployTarget1LB
+    - Base/CodeDeploy/EnabledCodeDeployTarget2LB
+    - Base/CodeDeploy/EnabledCodeDeployTarget3LB
+    - Base/CodeDeploy/EnabledCodeDeployTarget4LB
+    - Base/CodeDeploy/EnabledCodeDeployTarget5LB
+    - Base/CodeDeploy/EnabledCodeDeployTarget6LB
+    - Base/CodeDeploy/EnabledCodeDeployTarget7LB
+    - Base/CodeDeploy/EnabledCodeDeployTarget8LB
+    - Base/CodeDeploy/EnabledCodeDeployTarget9LB
+    - Base/CodeDeploy/EnabledCodeDeployTarget10LB
+    - Base/CodeDeploy/EnabledCodeDeployTarget11LB
+    - Base/CodeDeploy/EnabledCodeDeployTarget12LB
+    - Base/CodeDeploy/EnabledCodeDeployTarget13LB
+    - Base/CodeDeploy/EnabledCodeDeployTarget14LB
+    - Base/CodeDeploy/EnabledCodeDeployTarget15LB
+
+##-------------------------------------------------------------------------------------------------
+  Resources:
+    #-- CodeDeploy ----------------------------------------------------------------------
+    - Base/CodeDeploy/Application/App
+    - Base/CodeDeploy/DeploymentGroup/Target1
+    - Base/CodeDeploy/DeploymentGroup/Target2
+    - Base/CodeDeploy/DeploymentGroup/Target3
+    - Base/CodeDeploy/DeploymentGroup/Target4
+    - Base/CodeDeploy/DeploymentGroup/Target5
+    - Base/CodeDeploy/DeploymentGroup/Target6
+    - Base/CodeDeploy/DeploymentGroup/Target7
+    - Base/CodeDeploy/DeploymentGroup/Target8
+    - Base/CodeDeploy/DeploymentGroup/Target9
+    - Base/CodeDeploy/DeploymentGroup/Target10
+    - Base/CodeDeploy/DeploymentGroup/Target11
+    - Base/CodeDeploy/DeploymentGroup/Target12
+    - Base/CodeDeploy/DeploymentGroup/Target13
+    - Base/CodeDeploy/DeploymentGroup/Target14
+    - Base/CodeDeploy/DeploymentGroup/Target15
+
+    - Base/CodeDeploy/DeploymentGroup/Target1LB
+    - Base/CodeDeploy/DeploymentGroup/Target2LB
+    - Base/CodeDeploy/DeploymentGroup/Target3LB
+    - Base/CodeDeploy/DeploymentGroup/Target4LB
+    - Base/CodeDeploy/DeploymentGroup/Target5LB
+    - Base/CodeDeploy/DeploymentGroup/Target6LB
+    - Base/CodeDeploy/DeploymentGroup/Target7LB
+    - Base/CodeDeploy/DeploymentGroup/Target8LB
+    - Base/CodeDeploy/DeploymentGroup/Target9LB
+    - Base/CodeDeploy/DeploymentGroup/Target10LB
+    - Base/CodeDeploy/DeploymentGroup/Target11LB
+    - Base/CodeDeploy/DeploymentGroup/Target12LB
+    - Base/CodeDeploy/DeploymentGroup/Target13LB
+    - Base/CodeDeploy/DeploymentGroup/Target14LB
+    - Base/CodeDeploy/DeploymentGroup/Target15LB
+
+    #-- Roles ---------------------------------------------------------------------------
+    - Base/IAM/Role/CodeDeploy
+
+    #-- Policy --------------------------------------------------------------------------
+    - Base/IAM/Policy/CodeDeployTarget1
+    - Base/IAM/Policy/CodeDeployTarget2
+    - Base/IAM/Policy/CodeDeployTarget3
+    - Base/IAM/Policy/CodeDeployTarget4
+    - Base/IAM/Policy/CodeDeployTarget5
+    - Base/IAM/Policy/CodeDeployTarget6
+    - Base/IAM/Policy/CodeDeployTarget7
+    - Base/IAM/Policy/CodeDeployTarget8
+    - Base/IAM/Policy/CodeDeployTarget9
+    - Base/IAM/Policy/CodeDeployTarget10
+    - Base/IAM/Policy/CodeDeployTarget11
+    - Base/IAM/Policy/CodeDeployTarget12
+    - Base/IAM/Policy/CodeDeployTarget13
+    - Base/IAM/Policy/CodeDeployTarget14
+    - Base/IAM/Policy/CodeDeployTarget15
+
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/Custom/StackReferenceResultsTarget1
+    - Base/Custom/StackReferenceResultsTarget2
+    - Base/Custom/StackReferenceResultsTarget3
+    - Base/Custom/StackReferenceResultsTarget4
+    - Base/Custom/StackReferenceResultsTarget5
+    - Base/Custom/StackReferenceResultsTarget6
+    - Base/Custom/StackReferenceResultsTarget7
+    - Base/Custom/StackReferenceResultsTarget8
+    - Base/Custom/StackReferenceResultsTarget9
+    - Base/Custom/StackReferenceResultsTarget10
+    - Base/Custom/StackReferenceResultsTarget11
+    - Base/Custom/StackReferenceResultsTarget12
+    - Base/Custom/StackReferenceResultsTarget13
+    - Base/Custom/StackReferenceResultsTarget14
+    - Base/Custom/StackReferenceResultsTarget15
+
+##-------------------------------------------------------------------------------------------------
+  Outputs:
+    #-- CodeDeploy ----------------------------------------------------------------------
+    - Base/CodeDeploy/CodeDeployApplicationName
+    - Base/CodeDeploy/CodeDeployApplicationAbbr

@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SNS/Topic/Critical
+# class:   output
+##-------------------------------------------------------------------------------------------------
+SNSTopicCritical:
+  Description: "SNS Topic (critical): ARN"
+  Value: !Ref "SNSTopicCritical"
+  Export:
+    Name: !Sub "${AWS::StackName}-SNSTopicCritical"

@@ -1,0 +1,24 @@
+##-------------------------------------------------------------------------------------------------
+# object:  CloudTrail/Trail/Audit
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+CloudTrailAudit:
+  Type: "AWS::CloudTrail::Trail"
+  Properties:
+    TrailName: "cloudtrail-audit"
+    EnableLogFileValidation: true
+    IncludeGlobalServiceEvents: true
+    IsLogging: true
+    IsMultiRegionTrail: true
+    KMSKeyId: !GetAtt "KMSKeyAudit.Arn"
+    S3BucketName: !Ref "S3BucketAudit"
+    CloudWatchLogsLogGroupArn: !GetAtt "LogGroupCloudTrailAudit.Arn"
+    CloudWatchLogsRoleArn: !GetAtt "IAMRoleLogGroupCloudTrailAudit.Arn"
+    Tags:
+      - Key: "Name"
+        Value: "cloudtrail-audit"
+  DependsOn:
+    - "S3BucketPolicyAudit"
+    - "S3BucketAudit"
+    - "LogGroupCloudTrailAudit"
+    - "IAMRoleLogGroupCloudTrailAudit"

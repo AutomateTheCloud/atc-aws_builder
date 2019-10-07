@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DNS/DNSDistributionWebsite
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+DNSDistributionWebsite:
+  Type:                  String
+  Description:           "DNS: Distribution Website (Subdomain|Domain|HostedZoneID)"

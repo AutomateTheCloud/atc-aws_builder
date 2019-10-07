@@ -1,0 +1,17 @@
+##-------------------------------------------------------------------------------------------------
+# object:  ElasticLoadBalancingV2/Listener/InstanceHTTPSRedirect
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+ListenerInstanceHTTPSRedirect:
+  Type: "AWS::ElasticLoadBalancingV2::Listener"
+  Properties:
+    DefaultActions:
+    -  Type: "redirect"
+       RedirectConfig:
+         Port: "443"
+         Protocol: "HTTPS"
+         StatusCode: "HTTP_301"
+    LoadBalancerArn:
+      Ref: "LoadBalancerInstance"
+    Port: "80"
+    Protocol: "HTTP"

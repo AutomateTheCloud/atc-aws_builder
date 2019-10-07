@@ -1,0 +1,6 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SNS/ExistsSNSSubscriptionEmail3
+# class:   condition
+##-------------------------------------------------------------------------------------------------
+ExistsSNSSubscriptionEmail3:
+  !Not [!Equals [!Ref SNSSubscriptionEmail3, ""]]

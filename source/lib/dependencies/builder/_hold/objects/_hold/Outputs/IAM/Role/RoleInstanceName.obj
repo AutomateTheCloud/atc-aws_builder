@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  IAM/Role/RoleInstanceName
+# class:   output
+##-------------------------------------------------------------------------------------------------
+RoleInstanceName:
+  Description: "IAM Role (Instance): Name"
+  Value: !Ref "RoleInstance"
+  Export:
+    Name: !Sub "${AWS::StackName}-RoleInstanceName"

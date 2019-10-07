@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Logs/LogGroupApplicationProxy
+# class:   output
+##-------------------------------------------------------------------------------------------------
+LogGroupApplicationProxy:
+  Description: "Log Group: Application Proxy"
+  Value: !Ref "LogGroupApplicationProxy"
+  Export:
+    Name: !Sub "${AWS::StackName}-LogGroupApplicationProxy"

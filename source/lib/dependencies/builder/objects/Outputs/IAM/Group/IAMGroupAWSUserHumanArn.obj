@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: IAM/Group/IAMGroupAWSUserHumanArn
+##---------------------------------------------------------------------------------------
+IAMGroupAWSUserHumanArn:
+  Description: "IAM Group (AWSUserHuman): ARN"
+  Value: !GetAtt "IAMGroupAWSUserHuman.Arn"
+  Export:
+    Name: !Sub "${AWS::StackName}-IAMGroupAWSUserHumanArn"

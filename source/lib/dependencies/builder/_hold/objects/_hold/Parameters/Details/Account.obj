@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Details/Account
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+Account:
+  Type:                  String
+  Description:           "Details: Account (AccountName | AccountAbbr | AccountNumber)"

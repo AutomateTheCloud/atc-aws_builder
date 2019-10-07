@@ -1,0 +1,138 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Account/Compliance_Global
+# class:   template
+##-------------------------------------------------------------------------------------------------
+# CIS Amazon Web Services Foundations recommendations achieved or verified through this template:
+#  - 1.2: Ensure multi-factor authentication (MFA) is enabled for all IAM users that have a console password
+#  - 1.4: Ensure access keys are rotated every 90 days or less
+#  - 1.5: Ensure IAM password policy requires at least one uppercase letter
+#  - 1.6: Ensure IAM password policy require at least one lowercase letter
+#  - 1.7: Ensure IAM password policy require at least one symbol
+#  - 1.8: Ensure IAM password policy require at least one number
+#  - 1.9: Ensure IAM password policy requires minimum length of 14 or greater
+#  - 1.10: Ensure IAM password policy prevents password reuse
+#  - 1.11: Ensure IAM password policy expires passwords within 90 days or less
+#  - 1.12: Ensure no root account access key exists
+#  - 1.13: Ensure MFA is enabled for the "root" account
+#  - 1.14: Ensure hardware MFA is enabled for the "root" account
+#  - 1.16: Ensure IAM policies are attached only to groups or roles
+#  - 2.1: Ensure CloudTrail is enabled in all regions
+#  - 2.2: Ensure CloudTrail log file validation is enabled
+#  - 2.4: Ensure CloudTrail trails are integrated with CloudWatch Logs
+#  - 2.7: Ensure CloudTrail logs are encrypted at rest using KMS CMKs
+#  - 2.8: Ensure rotation for customer created CMKs is enabled
+#  - 3.1: Ensure a log metric filter and alarm exist for unauthorized API calls
+#  - 3.2: Ensure a log metric filter and alarm exist for Management Console sign-in without MFA
+#  - 3.3: Ensure a log metric filter and alarm exist for usage of "root" account
+#  - 3.6: Ensure a log metric filter and alarm exist for AWS Management Console authentication failures
+#  - 3.7: Ensure a log metric filter and alarm exist for disabling or scheduled deletion of customer created CMKs
+##-------------------------------------------------------------------------------------------------
+
+Paradigm:
+##-------------------------------------------------------------------------------------------------
+  Parameters:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/StackReference/StackReferenceAccountConfiguration
+
+    #-- SNS -----------------------------------------------------------------------------
+    - Base/SNS/SNSSubscriptionEmail1
+    - Base/SNS/SNSSubscriptionEmail2
+    - Base/SNS/SNSSubscriptionEmail3
+    - Base/SNS/SNSSubscriptionEmail4
+
+##-------------------------------------------------------------------------------------------------
+  Mappings:
+
+##-------------------------------------------------------------------------------------------------
+  Conditions:
+    #-- SNS -----------------------------------------------------------------------------
+    - Base/SNS/ExistsSNSSubscriptionEmail1
+    - Base/SNS/ExistsSNSSubscriptionEmail2
+    - Base/SNS/ExistsSNSSubscriptionEmail3
+    - Base/SNS/ExistsSNSSubscriptionEmail4
+
+##-------------------------------------------------------------------------------------------------
+  Resources:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/Custom/StackReferenceResultsAccountConfiguration
+
+    #-- SNS -----------------------------------------------------------------------------
+    - Base/SNS/Topic/Audit
+    - Base/SNS/Subscription/AuditEmail1
+    - Base/SNS/Subscription/AuditEmail2
+    - Base/SNS/Subscription/AuditEmail3
+    - Base/SNS/Subscription/AuditEmail4
+
+    #-- CIS Benchmarks ------------------------------------------------------------------
+
+    # 1.2: Ensure multi-factor authentication (MFA) is enabled for all IAM users that have a console password
+    - Base/Config/ConfigRule/AWSMFAEnabledForIAMConsoleAccess
+
+    # 1.4: Ensure access keys are rotated every 90 days or less
+    - Base/Config/ConfigRule/AWSAccessKeysRotated
+
+    # 1.5: Ensure IAM password policy requires at least one uppercase letter
+    # 1.6: Ensure IAM password policy require at least one lowercase letter
+    # 1.7: Ensure IAM password policy require at least one symbol
+    # 1.8: Ensure IAM password policy require at least one number
+    # 1.9: Ensure IAM password policy requires minimum length of 14 or greater
+    # 1.10: Ensure IAM password policy prevents password reuse
+    # 1.11: Ensure IAM password policy expires passwords within 90 days or less
+    - Base/Config/ConfigRule/AWSIAMPasswordPolicy
+
+    # 1.12: Ensure no root account access key exists
+    - Base/Config/ConfigRule/AWSIAMRootAccessKeyCheck
+
+    # 1.13: Ensure MFA is enabled for the "root" account
+    - Base/Config/ConfigRule/AWSRootAccountMFAEnabled
+
+    # 1.14: Ensure hardware MFA is enabled for the "root" account
+    - Base/Config/ConfigRule/AWSRootAccountHardwareMFAEnabled
+
+    # 1.16: Ensure IAM policies are attached only to groups or roles
+    - Base/Config/ConfigRule/AWSIAMUserNoPoliciesCheck
+
+    # 2.1: Ensure CloudTrail is enabled in all regions
+    - Base/Config/ConfigRule/AWSCloudTrailEnabled
+    - Base/Config/ConfigRule/AWSMultiRegionCloudTrailEnabled
+
+    # 2.2: Ensure CloudTrail log file validation is enabled
+    - Base/Config/ConfigRule/AWSCloudTrailLogFileValidationEnabled
+
+    # 2.4: Ensure CloudTrail trails are integrated with CloudWatch Logs
+    - Base/Config/ConfigRule/AWSCloudTrailCloudWatchLogsEnabled
+
+    # 2.7: Ensure CloudTrail logs are encrypted at rest using KMS CMKs
+    - Base/Config/ConfigRule/AWSCloudTrailEncryptionEnabled
+
+    # 2.8: Ensure rotation for customer created CMKs is enabled
+    - Base/Config/ConfigRule/AWSCMKBackingKeyRotationEnabled
+
+    # 3.1: Ensure a log metric filter and alarm exist for unauthorized API calls
+    - Base/Logs/MetricFilter/UnauthorizedAttemptCount
+    - Base/CloudWatch/Alarm/UnauthorizedAttemptCount
+
+    # 3.2: Ensure a log metric filter and alarm exist for Management Console sign-in without MFA
+    - Base/Logs/MetricFilter/ConsoleSigninWithoutMFA
+    - Base/CloudWatch/Alarm/ConsoleSigninWithoutMFA
+
+    # 3.3: Ensure a log metric filter and alarm exist for usage of "root" account
+    - Base/Logs/MetricFilter/RootUserEventCount
+    - Base/CloudWatch/Alarm/RootUserEventCount
+
+    # 3.6: Ensure a log metric filter and alarm exist for AWS Management Console authentication failures
+    - Base/Logs/MetricFilter/ConsoleLoginFailures
+    - Base/CloudWatch/Alarm/ConsoleLoginFailures
+
+    # 3.7: Ensure a log metric filter and alarm exist for disabling or scheduled deletion of customer created CMKs
+    - Base/Logs/MetricFilter/KMSCustomerKeyDeletion
+    - Base/CloudWatch/Alarm/KMSCustomerKeyDeletion
+
+##-------------------------------------------------------------------------------------------------
+  Outputs:
+    #-- SNS -----------------------------------------------------------------------------
+    - Base/SNS/Topic/AuditTopicName
+    - Base/SNS/Topic/AuditArn
+
+##-------------------------------------------------------------------------------------------------
+  Targets:

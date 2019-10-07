@@ -1,0 +1,22 @@
+##---------------------------------------------------------------------------------------
+# object: IAM/Policy/DNSInstance
+##---------------------------------------------------------------------------------------
+PolicyDNSInstance:
+  Type: "AWS::IAM::Policy"
+  Properties:
+    PolicyName: !Join [ "", [ "ec2-dns", "_", !Select [1, !Split ["|", !Ref "Project"]], "-", !Select [1, !Split ["|", !Ref "Function"]], "-", !Select [3, !Split ["|", !Ref "Organization"]], "-", !Select [1, !Split ["|", !Ref "Organization"]], "_", !Ref "AWS::Region" ] ]
+    PolicyDocument:
+      Version: "2012-10-17"
+      Statement:
+        - Effect: "Allow"
+          Action: "*"
+          Action:
+            - "route53:GetHostedZone"
+            - "route53:ListResourceRecordSets"
+            - "route53:ChangeResourceRecordSets"
+          Resource:
+            - !Join [ "", [ "arn:aws:route53:::hostedzone/", !Select [2, !Split ["|", !Ref "DNSInstance"]] ] ]
+    Roles:
+      - !Ref "RoleInstance"
+  DependsOn:
+    - "RoleInstance"

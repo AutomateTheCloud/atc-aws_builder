@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DNS/DNSLoadBalancerVanity
+# class:   output
+##-------------------------------------------------------------------------------------------------
+DNSLoadBalancerVanity:
+  Condition: "ExistsDNSLoadBalancerVanity"
+  Description: "DNS (LoadBalancer): Record - Vanity"
+  Value: !Join [ "", [ !Select [0, !Split ["|", !Ref "DNSLoadBalancerVanity"]], ".", !Select [1, !Split ["|", !Ref "DNSLoadBalancerVanity"]] ] ]
+  Export:
+    Name: !Sub "${AWS::StackName}-DNSLoadBalancerVanity"

@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  StackReference/StackReferenceAccountConfiguration
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+StackReferenceAccountConfiguration:
+  Type:                  String
+  Description:           "Stack Reference: AccountConfiguration"

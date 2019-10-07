@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/PerformanceInsightsKMSKeyId
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+PerformanceInsightsKMSKeyId:
+  Type:                  String
+  Description:           "Performance Insights KMS Key ID"

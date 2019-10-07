@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  ElastiCache/MemcachedSecurityGroupId
+# class:   output
+##-------------------------------------------------------------------------------------------------
+MemcachedSecurityGroupId:
+  Description: "Security Group ID - Memcached"
+  Value: !Ref "SecurityGroupMemcached"
+  Export:
+    Name: !Sub "${AWS::StackName}-MemcachedSecurityGroupId"

@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  StackReference/StackReferenceS3Bucket7
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+StackReferenceS3Bucket7:
+  Type:                  String
+  Description:           "Stack Reference: S3Bucket7"

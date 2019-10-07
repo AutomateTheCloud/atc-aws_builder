@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: CodeDeploy/CodeDeployApplicationAbbr
+##---------------------------------------------------------------------------------------
+CodeDeployApplicationAbbr:
+  Description: "CodeDeploy: Application Abbreviation"
+  Value: !Select [1, !Split ["|", !Ref "CodeDeployApplication"]]
+  Export:
+    Name: !Sub "${AWS::StackName}-CodeDeployApplicationAbbr"

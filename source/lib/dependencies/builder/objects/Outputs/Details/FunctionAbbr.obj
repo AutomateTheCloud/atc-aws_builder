@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: Details/FunctionAbbr
+##---------------------------------------------------------------------------------------
+FunctionAbbr:
+  Description: "Details: FunctionAbbr"
+  Value: !Select [1, !Split ["|", !Ref "Function"]]
+  Export:
+    Name: !Sub "${AWS::StackName}-FunctionAbbr"

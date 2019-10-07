@@ -1,0 +1,27 @@
+##-------------------------------------------------------------------------------------------------
+# object:  IAM/Policy/SSLCertificate
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+PolicySSLCertificate:
+  Type: "AWS::IAM::Policy"
+  Properties:
+    PolicyName: !Join [ "", [ "ec2-sslcertificate", "_", !Select [1, !Split ["|", !Ref "Project"]], "-", !Select [1, !Split ["|", !Ref "Function"]], "-", !Select [3, !Split ["|", !Ref "Organization"]], "-", !Select [1, !Split ["|", !Ref "Organization"]], "_", !Ref "AWS::Region" ] ]
+    PolicyDocument:
+      Version: "2012-10-17"
+      Statement:
+        - Effect: "Allow"
+          Action:
+            - "kms:Decrypt"
+          Resource:
+            - !GetAtt "StackReferenceResultsVPC.KMSKeySecurity"
+            - !GetAtt "StackReferenceResultsVPC.KMSKeyAliasSecurity"
+        - Effect: "Allow"
+          Action:
+            - "ssm:GetParametersByPath"
+            - "ssm:GetParameter"
+          Resource:
+            - !Join [ "", [ "arn:aws:ssm:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":parameter/ssl/", !Ref "SSLCertificateName", "/*" ] ]
+    Roles:
+      - !Ref "RoleInstance"
+  DependsOn:
+    - "RoleInstance"

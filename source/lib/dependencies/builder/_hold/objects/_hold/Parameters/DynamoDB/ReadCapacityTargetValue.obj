@@ -1,0 +1,8 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DynamoDB/ReadCapacityTargetValue
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+ReadCapacityTargetValue:
+  Type:                  Number
+  Default:               70
+  Description:           "DynamoDB Read Capacity (Target Value Percentage)"

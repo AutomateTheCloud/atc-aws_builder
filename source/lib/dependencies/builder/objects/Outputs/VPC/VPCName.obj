@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: VPC/VPCName
+##---------------------------------------------------------------------------------------
+VPCName:
+  Description: "VPC: Name"
+  Value: !Join [ "", [ !Select [0, !Split ["|", !Ref "Organization"]], " (", !Ref "AWS::Region", ")" ] ]
+  Export:
+    Name: !Sub "${AWS::StackName}-VPCName"

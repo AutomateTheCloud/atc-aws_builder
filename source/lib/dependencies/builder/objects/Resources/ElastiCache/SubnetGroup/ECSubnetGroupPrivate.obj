@@ -1,0 +1,12 @@
+##---------------------------------------------------------------------------------------
+# object: ElastiCache/SubnetGroup/ECSubnetGroupPrivate
+##---------------------------------------------------------------------------------------
+ECSubnetGroupPrivate:
+  Type: "AWS::ElastiCache::SubnetGroup"
+  Properties:
+    CacheSubnetGroupName: !Join [ "-", [ "subnet-ec", !Select [1, !Split ["|", !Ref "Organization"]], "private", !Ref "AWS::Region" ] ]
+    Description: !Join [ "", [ !Select [0, !Split ["|", !Ref "Organization"]], " - ", !Ref "AWS::Region", " - ", "ElasticCache Subnet (Private)" ] ]
+    SubnetIds:
+      - !Ref "SubnetPrivate1"
+      - !Ref "SubnetPrivate2"
+      - !Ref "SubnetPrivate3"

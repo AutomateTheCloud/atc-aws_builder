@@ -1,0 +1,8 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Instance/VolumeSize
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+VolumeSize:
+  Type:                  String
+  Default:               "8|0"
+  Description:           "VolumeSize (RootVolumeSize|ApplicationVolumeSize)"

@@ -1,0 +1,8 @@
+##-------------------------------------------------------------------------------------------------
+# object:  StackReference/StackReferenceSQSQueue3
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+StackReferenceSQSQueue3:
+  Type:                  String
+  Description:           "Stack Reference: SQS Queue (3)"
+

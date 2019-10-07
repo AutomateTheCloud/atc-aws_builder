@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/DatabaseSecurityGroupId
+# class:   output
+##-------------------------------------------------------------------------------------------------
+DatabaseSecurityGroupId:
+  Description: "Security Group ID - Database"
+  Value: !Ref "SecurityGroupDatabase"
+  Export:
+    Name: !Sub "${AWS::StackName}-DatabaseSecurityGroupId"

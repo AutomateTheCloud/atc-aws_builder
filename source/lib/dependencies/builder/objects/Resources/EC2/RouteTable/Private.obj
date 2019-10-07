@@ -1,0 +1,12 @@
+##---------------------------------------------------------------------------------------
+# object: EC2/RouteTable/Private
+##---------------------------------------------------------------------------------------
+RouteTablePrivate:
+  Type: "AWS::EC2::RouteTable"
+  Properties:
+    VpcId: !Ref "VPC"
+    Tags:
+      - Key: "Name"
+        Value: !Join [ "_", [ "route", !Select [1, !Split ["|", !Ref "Organization"]], "private", !Ref "AWS::Region" ] ]
+      - Key: "Network"
+        Value: "private"

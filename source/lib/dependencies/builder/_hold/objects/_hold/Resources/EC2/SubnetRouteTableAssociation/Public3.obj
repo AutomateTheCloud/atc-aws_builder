@@ -1,0 +1,12 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EC2/SubnetRouteTableAssociation/Public3
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+SubnetRouteTableAssociationPublic3:
+  Type: "AWS::EC2::SubnetRouteTableAssociation"
+  Properties:
+    SubnetId: !Ref "SubnetPublic3"
+    RouteTableId: !Ref "RouteTablePublic"
+  DependsOn:
+    - "SubnetPublic3"
+    - "RouteTablePublic"

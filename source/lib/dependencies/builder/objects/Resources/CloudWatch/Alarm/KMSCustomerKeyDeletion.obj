@@ -1,0 +1,23 @@
+##---------------------------------------------------------------------------------------
+# object: CloudWatch/Alarm/KMSCustomerKeyDeletion
+# notes:
+#   - CIS Amazon Web Services Foundations
+#     - 3.7: Ensure a log metric filter and alarm exist for disabling or scheduled deletion of customer created CMKs
+##---------------------------------------------------------------------------------------
+AlarmKMSCustomerKeyDeletion:
+  Type: "AWS::CloudWatch::Alarm"
+  Properties:
+    AlarmName: "compliance_kms-key-disabled-or-scheduled-for-deletion"
+    AlarmDescription: "Compliance: Disabling or scheduled deletion of customer-managed KMS keys"
+    AlarmActions:
+      - !Ref "SNSTopicAudit"
+    MetricName: "KMSCustomerKeyDeletion"
+    Namespace: "CloudTrailMetrics"
+    ComparisonOperator: "GreaterThanOrEqualToThreshold"
+    EvaluationPeriods: "1"
+    Period: "60"
+    Statistic: "Sum"
+    Threshold: "1"
+    TreatMissingData: "notBreaching"
+  DependsOn:
+    - "MetricFilterKMSCustomerKeyDeletion"

@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EC2/LaunchTemplateInstanceId
+# class:   output
+##-------------------------------------------------------------------------------------------------
+LaunchTemplateInstanceId:
+  Description: "LaunchTemplate (Instance): ID"
+  Value: !Ref "LaunchTemplateInstance"
+  Export:
+    Name: !Sub "${AWS::StackName}-LaunchTemplateInstanceId"

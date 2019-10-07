@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  KMS/Alias/Security
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+KMSAliasSecurity:
+  Type: "AWS::KMS::Alias"
+  Properties:
+    AliasName: !Join [ "", [ "alias/security-", !Ref "AWS::Region" ] ]
+    TargetKeyId: !Ref "KMSKeySecurity"

@@ -1,0 +1,13 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Custom/AMICustom
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+AMI:
+  Type: "Custom::AMI"
+  Version: "1.0"
+  Properties:
+    "ServiceToken": !Join [ "", [ "arn:aws:lambda:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":function:ami-lookup-custom" ] ]
+    "Region": !Ref "AWS::Region"
+    "AMINamePrepend": !Select [0, !Split ["|", !Ref "AMICustom"]]
+    "AMINameAppend": !Select [1, !Split ["|", !Ref "AMICustom"]]
+    "Updated": !Ref "LaunchTemplateUpdated"

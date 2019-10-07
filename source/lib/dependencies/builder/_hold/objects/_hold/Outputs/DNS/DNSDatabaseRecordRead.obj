@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DNS/DNSDatabaseRecordRead
+# class:   output
+##-------------------------------------------------------------------------------------------------
+DNSDatabaseRecordRead:
+  Description: "DNS: Database - Record (Read)"
+  Value: !Join [ "", [ !Select [0, !Split ["|", !Ref "DNSDatabase"]], ".read.database.", !Ref "AWS::Region", ".", !Select [1, !Split ["|", !Ref "DNSDatabase"]] ] ]
+  Export:
+    Name: !Sub "${AWS::StackName}-DNSDatabaseRecordRead"

@@ -1,0 +1,69 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Website/CloudFront_Site_Origin
+# class:   template
+##-------------------------------------------------------------------------------------------------
+
+Paradigm:
+##-------------------------------------------------------------------------------------------------
+  Parameters:
+    #-- SSL Certificate -----------------------------------------------------------------
+    - Base/SSL/SSLCertACMCertificateArn
+    - Base/SSL/SSLCertIAMCertificateId
+
+    #-- CloudFront Configuration --------------------------------------------------------
+    - Base/CloudFront/SiteOriginDomainName
+    - Base/CloudFront/SiteOriginHTTPPort
+    - Base/CloudFront/SiteOriginHTTPSPort
+    - Base/CloudFront/SiteOriginProtocolPolicy
+    - Base/CloudFront/SiteOriginKeepaliveTimeout
+    - Base/CloudFront/SiteOriginReadTimeout
+
+    #-- Website Configuration -----------------------------------------------------------
+    - Base/Website/WebsiteAlias1
+    - Base/Website/WebsiteAlias2
+    - Base/Website/WebsiteAlias3
+    - Base/Website/WebsiteAlias4
+    - Base/Website/WebsiteAlias5
+    - Base/Website/WebsiteAlias6
+    - Base/Website/WebsiteErrorDocument
+    - Base/Website/WebsiteIndexDocument
+
+    #-- DNS -----------------------------------------------------------------------------
+    - Base/DNS/DNSDistributionWebsite
+
+##-------------------------------------------------------------------------------------------------
+  Mappings:
+
+##-------------------------------------------------------------------------------------------------
+  Conditions:
+    #-- SSL Certificate -----------------------------------------------------------------
+    - Base/SSL/ExistsSSLCertACMCertificateArn
+    - Base/SSL/ExistsSSLCertIAMCertificateId
+
+    #-- Website Configuration -----------------------------------------------------------
+    - Base/Website/ExistsWebsiteAlias1
+    - Base/Website/ExistsWebsiteAlias2
+    - Base/Website/ExistsWebsiteAlias3
+    - Base/Website/ExistsWebsiteAlias4
+    - Base/Website/ExistsWebsiteAlias5
+    - Base/Website/ExistsWebsiteAlias6
+    - Base/Website/ExistsWebsiteIndexDocument
+    - Base/Website/ExistsWebsiteErrorDocument
+
+    #-- DNS -----------------------------------------------------------------------------
+    - Base/DNS/ExistsDNSDistributionWebsite
+
+##-------------------------------------------------------------------------------------------------
+  Resources:
+    #-- CloudFront ----------------------------------------------------------------------
+    - Base/CloudFront/Distribution/WebsiteSiteOrigin
+
+    #-- DNS -----------------------------------------------------------------------------
+    - Base/Route53/RecordSetGroup/DNSDistributionWebsite
+
+##-------------------------------------------------------------------------------------------------
+  Outputs:
+    #-- Website -------------------------------------------------------------------------
+    - Base/Distribution/DistributionWebsiteId
+    - Base/Distribution/DistributionWebsiteURL
+    - Base/DNS/DNSDistributionWebsiteRecordName

@@ -1,0 +1,14 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EC2/SecurityGroupIngress/InstanceDatabase1
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+SecurityGroupIngressInstanceDatabase1:
+  Condition: "ExistsStackReferenceDatabase1"
+  Type: "AWS::EC2::SecurityGroupIngress"
+  Properties:
+    GroupId:               !GetAtt "StackReferenceResultsDatabase1.DatabaseSecurityGroupId"
+    IpProtocol:            "tcp"
+    FromPort:              !GetAtt "StackReferenceResultsDatabase1.Port"
+    ToPort:                !GetAtt "StackReferenceResultsDatabase1.Port"
+    SourceSecurityGroupId: !Ref "SecurityGroupInstance"
+    Description: !Join [ "", [ !Select [0, !Split ["|", !Ref "Project"]], " - ", !Select [0, !Split ["|", !Ref "Function"]], " (", !Select [3, !Split ["|", !Ref "Organization"]], ") - [", !Select [0, !Split ["|", !Ref "Organization"]], "]" ] ]

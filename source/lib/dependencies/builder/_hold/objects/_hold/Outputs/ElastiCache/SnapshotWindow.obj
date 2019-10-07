@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  ElastiCache/SnapshotWindow
+# class:   output
+##-------------------------------------------------------------------------------------------------
+SnapshotWindow:
+  Description: "Snapshot Window"
+  Value: !Ref "SnapshotWindow"
+  Export:
+    Name: !Sub "${AWS::StackName}-SnapshotWindow"

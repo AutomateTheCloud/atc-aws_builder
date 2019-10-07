@@ -1,0 +1,58 @@
+##-------------------------------------------------------------------------------------------------
+# purpose: AutomateTheCloud - AWS Builder
+# updated: 2019/09/22
+##-------------------------------------------------------------------------------------------------
+name: $(Date:yyyy.MM.dd)$(Rev:.r)
+
+trigger:
+  batch: true
+  branches:
+    include:
+    - master
+
+##-------------------------------------------------------------------------------------------------
+variables:
+  - name: artifact.id
+    value: 'atc-aws_builder'
+  - name: artifact.version
+    value: $(Build.BuildNumber)
+
+##-------------------------------------------------------------------------------------------------
+jobs:
+
+##---------------------------------------------------------------------------------------
+- job: build
+  displayName: 'Build'
+  pool:
+    vmImage: 'Ubuntu 16.04'
+  workspace:
+    clean: all
+
+  steps:
+
+  ##-----------------------------------------------------------------------------
+  # Package
+  - task: CopyFiles@2
+    displayName: 'Package - Copy Markdown Files'
+    inputs:
+      contents: '$(Build.SourcesDirectory)/*.md'
+      targetFolder: '$(Build.SourcesDirectory)/source'
+
+  - task: ArchiveFiles@2
+    displayName: 'Package - Generate Package Tarball'
+    inputs:
+      rootFolderOrFile: $(Build.SourcesDirectory)/source
+      includeRootFolder: false
+      archiveType: 'tar'
+      tarCompression: 'gz'
+      archiveFile: '$(Build.ArtifactStagingDirectory)/$(artifact.id)-$(artifact.version).tgz'
+      replaceExistingArchive: true
+      verbose: true
+
+  ##-----------------------------------------------------------------------------
+  # Archive
+  - task: PublishBuildArtifacts@1
+    displayName: 'Archive - Publish Pipeline Build Artifacts'
+    inputs:
+      pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      artifactName: 'build'

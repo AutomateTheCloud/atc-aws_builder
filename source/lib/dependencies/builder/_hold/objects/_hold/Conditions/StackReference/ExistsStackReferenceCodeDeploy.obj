@@ -1,0 +1,6 @@
+##-------------------------------------------------------------------------------------------------
+# object:  StackReference/ExistsStackReferenceCodeDeploy
+# class:   condition
+##-------------------------------------------------------------------------------------------------
+ExistsStackReferenceCodeDeploy:
+  !Not [!Equals [!Ref "StackReferenceCodeDeploy", ""]]

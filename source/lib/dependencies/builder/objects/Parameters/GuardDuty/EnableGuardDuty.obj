@@ -1,0 +1,12 @@
+##---------------------------------------------------------------------------------------
+# object: GuardDuty/EnableGuardDuty
+##---------------------------------------------------------------------------------------
+EnableGuardDuty:
+  Description: "Enable GuardDuty"
+  Type: String
+  Default: "false"
+  AllowedValues:
+    - ""
+    - "true"
+    - "false"
+  ConstraintDescription: "true/false"

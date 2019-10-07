@@ -1,0 +1,6 @@
+##-------------------------------------------------------------------------------------------------
+# object:  StackReference/ExistsStackReferenceVPN2
+# class:   condition
+##-------------------------------------------------------------------------------------------------
+ExistsStackReferenceVPN2:
+  !Not [!Equals [!Ref "StackReferenceVPN2", ""]]

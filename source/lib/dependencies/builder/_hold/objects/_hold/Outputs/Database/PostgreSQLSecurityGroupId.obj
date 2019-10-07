@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/PostgreSQLSecurityGroupId
+# class:   output
+##-------------------------------------------------------------------------------------------------
+PostgreSQLSecurityGroupId:
+  Description: "Security Group ID - PostgreSQL"
+  Value: !Ref "SecurityGroupPostgreSQL"
+  Export:
+    Name: !Sub "${AWS::StackName}-PostgreSQLSecurityGroupId"

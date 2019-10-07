@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: CodeDeploy/Application/Server
+##---------------------------------------------------------------------------------------
+CodeDeployApplicationApp:
+  Type: "AWS::CodeDeploy::Application"
+  Properties:
+    ApplicationName: !Select [0, !Split ["|", !Ref "CodeDeployApplication"]]
+    ComputePlatform: "Server"

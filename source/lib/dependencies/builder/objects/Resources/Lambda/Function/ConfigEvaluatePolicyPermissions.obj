@@ -1,0 +1,60 @@
+##---------------------------------------------------------------------------------------
+# object: Lambda/Function/ConfigEvaluatePolicyPermissions
+# notes:
+#   - Based on AWS Lab: aws-security-benchmark
+#     - https://github.com/awslabs/aws-security-benchmark/blob/master/architecture/create-benchmark-rules.yaml
+#   - CIS Amazon Web Services Foundations
+#     - 1.22: Ensure IAM policies that allow full "*:*" administrative privileges are not created
+##---------------------------------------------------------------------------------------
+LambdaFunctionConfigEvaluatePolicyPermissions:
+  Type: "AWS::Lambda::Function"
+  Properties:
+    FunctionName: "config-evaluate-policy-permissions"
+    Description: "Evaluates whether IAM policies contain *.* statements"
+    Code:
+      ZipFile: |
+        #==================================================================================================
+        # Function: config-evaluate-policy-permissions
+        # Purpose:  Evaluates whether IAM policies contain *.* statements
+        #==================================================================================================
+        import boto3
+        import json
+        import jmespath
+        def evaluate_compliance(config_item, policy_arn):
+            if (config_item['resourceType'] != 'AWS::IAM::Policy'):
+                return 'NOT_APPLICABLE'
+            return_value = 'COMPLIANT'
+            client = boto3.client('iam')
+            # Get the policy details.
+            policy = client.get_policy(PolicyArn = policy_arn)['Policy']
+            # Get the latest policy version.
+            policy_version = client.get_policy_version(
+                PolicyArn = policy['Arn'],
+                VersionId = policy['DefaultVersionId']
+            )
+            if jmespath.search('PolicyVersion.Document.Statement[?Effect == \'Allow\' && contains(Resource, \'*\') && contains (Action, \'*\')]', policy_version):
+                return_value = 'NON_COMPLIANT'
+            return return_value
+        def lambda_handler(event, context):
+            invoking_event = json.loads(event['invokingEvent'])
+            policy_arn = invoking_event['configurationItem']['ARN']
+            compliance_value = evaluate_compliance(invoking_event['configurationItem'], policy_arn)
+            config = boto3.client('config')
+            response = config.put_evaluations(
+               Evaluations=[
+                   {
+                       'ComplianceResourceType': invoking_event['configurationItem']['resourceType'],
+                       'ComplianceResourceId': invoking_event['configurationItem']['resourceId'],
+                       'ComplianceType': compliance_value,
+                       'OrderingTimestamp': invoking_event['configurationItem']['configurationItemCaptureTime']
+                   },
+               ],
+               ResultToken=event['resultToken'])
+
+    Handler: "index.lambda_handler"
+    MemorySize: 1024
+    Role: !GetAtt "IAMRoleLambdaFunctionConfig.Arn"
+    Runtime: "python2.7"
+    Timeout: 10
+  DependsOn:
+    - "IAMRoleLambdaFunctionConfig"

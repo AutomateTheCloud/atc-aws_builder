@@ -1,0 +1,8 @@
+##-------------------------------------------------------------------------------------------------
+# object:  AutoScaling/OnDemandBaseCapacity
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+OnDemandBaseCapacity:
+  Type:                  Number
+  Default:               1
+  Description:           "On-Demand Base Capacity"

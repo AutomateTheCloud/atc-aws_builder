@@ -1,0 +1,42 @@
+##-------------------------------------------------------------------------------------------------
+# object:  ElasticLoadBalancingV2/LoadBalancer/Instance
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+LoadBalancerInstance:
+  Type: "AWS::ElasticLoadBalancingV2::LoadBalancer"
+  Properties:
+    Name: !Join [ "", [ !Select [1, !Split ["|", !Ref "Project"]], "-", !Select [1, !Split ["|", !Ref "Function"]], "-", !Select [3, !Split ["|", !Ref "Organization"]] ] ]
+    Type: "application"
+    Scheme: !If [SubnetTypeLoadBalancerPublic, "internet-facing", "internal"]
+    Subnets:
+      - !If [SubnetTypeLoadBalancerPublic, !GetAtt "StackReferenceResultsVPC.SubnetPublic1Id", !Ref "AWS::NoValue"]
+      - !If [SubnetTypeLoadBalancerPublic, !GetAtt "StackReferenceResultsVPC.SubnetPublic2Id", !Ref "AWS::NoValue"]
+      - !If [SubnetTypeLoadBalancerPublic, !GetAtt "StackReferenceResultsVPC.SubnetPublic3Id", !Ref "AWS::NoValue"]
+      - !If [SubnetTypeLoadBalancerPrivate, !GetAtt "StackReferenceResultsVPC.SubnetPrivate1Id", !Ref "AWS::NoValue"]
+      - !If [SubnetTypeLoadBalancerPrivate, !GetAtt "StackReferenceResultsVPC.SubnetPrivate2Id", !Ref "AWS::NoValue"]
+      - !If [SubnetTypeLoadBalancerPrivate, !GetAtt "StackReferenceResultsVPC.SubnetPrivate3Id", !Ref "AWS::NoValue"]
+      - !If [SubnetTypeLoadBalancerRestricted, !GetAtt "StackReferenceResultsVPC.SubnetRestricted1Id", !Ref "AWS::NoValue"]
+      - !If [SubnetTypeLoadBalancerRestricted, !GetAtt "StackReferenceResultsVPC.SubnetRestricted2Id", !Ref "AWS::NoValue"]
+      - !If [SubnetTypeLoadBalancerRestricted, !GetAtt "StackReferenceResultsVPC.SubnetRestricted3Id", !Ref "AWS::NoValue"]
+    SecurityGroups:
+      - !Ref "SecurityGroupLoadBalancer"
+    LoadBalancerAttributes:
+    - Key: access_logs.s3.enabled
+      Value: "true"
+    - Key: access_logs.s3.bucket
+      Value: !Join [ "", [ !Ref "AWS::AccountId", "-", "logs", "-", !Ref "AWS::Region" ] ]
+    - Key: access_logs.s3.prefix
+      Value: !Join [ "", [ "elb/", !Select [1, !Split ["|", !Ref "Project"]], "-", !Select [1, !Split ["|", !Ref "Function"]], "-", !Select [3, !Split ["|", !Ref "Organization"]] ] ]
+    Tags:
+      - Key: "Name"
+        Value: !Join [ "", [ !Select [1, !Split ["|", !Ref "Project"]], "-", !Select [1, !Split ["|", !Ref "Function"]], "-", !Select [3, !Split ["|", !Ref "Organization"]] ] ]
+      - Key: "Organization"
+        Value: !Select [0, !Split ["|", !Ref "Organization"]]
+      - Key: "Project"
+        Value: !Select [0, !Split ["|", !Ref "Project"]]
+      - Key: "Function"
+        Value: !Select [0, !Split ["|", !Ref "Function"]]
+      - Key: "Owner"
+        Value: !Select [0, !Split ["|", !Ref "Owner"]]
+      - Key: "Contact"
+        Value: !Select [1, !Split ["|", !Ref "Owner"]]

@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DNS/DNSHostedZoneId
+# class:   output
+##-------------------------------------------------------------------------------------------------
+DNSHostedZoneId:
+  Description: "DNS - Hosted Zone ID"
+  Value: !GetAtt "StackReferenceResultsVPC.DomainUtilityHostedZoneId"
+  Export:
+    Name: !Sub "${AWS::StackName}-DNSHostedZoneId"

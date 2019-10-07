@@ -1,0 +1,26 @@
+##-------------------------------------------------------------------------------------------------
+# object:  CodeDeploy/DeploymentGroup/Target15
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+DeploymentGroupTarget15:
+  Condition: "EnabledCodeDeployTarget15"
+  Type: "AWS::CodeDeploy::DeploymentGroup"
+  Properties:
+    ApplicationName: !Ref "CodeDeployApplicationApp"
+    DeploymentGroupName: !Join [ "-", [ !Select [1, !Split ["|", !Ref "CodeDeployApplication"]], !Ref "DeploymentGroupAppendTarget15" ] ]
+    AutoRollbackConfiguration:
+      Enabled: "true"
+      Events:
+        - DEPLOYMENT_FAILURE
+        - DEPLOYMENT_STOP_ON_ALARM
+        - DEPLOYMENT_STOP_ON_REQUEST
+    AutoScalingGroups:
+      - !GetAtt "StackReferenceResultsTarget15.AutoScalingGroupInstanceId"
+    DeploymentStyle:
+      DeploymentOption: WITHOUT_TRAFFIC_CONTROL
+    DeploymentConfigName: "CodeDeployDefault.AllAtOnce"
+    ServiceRoleArn: !GetAtt "RoleCodeDeploy.Arn"
+  DependsOn:
+    - "RoleCodeDeploy"
+    - "StackReferenceResultsTarget15"
+

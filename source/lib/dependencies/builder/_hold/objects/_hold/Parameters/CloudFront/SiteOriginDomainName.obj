@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  CloudFront/SiteOriginDomainName
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+SiteOriginDomainName:
+  Type:                  String
+  Description:           "CloudFront Distribution Origin (Domain Name)"

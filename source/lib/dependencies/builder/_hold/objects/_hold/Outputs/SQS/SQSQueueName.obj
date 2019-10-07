@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SQS/SQSQueueName
+# class:   output
+##-------------------------------------------------------------------------------------------------
+SQSQueueName:
+  Description: "SQS: Queue Name"
+  Value: !GetAtt "SQSQueue.QueueName"
+  Export:
+    Name: !Sub "${AWS::StackName}-SQSQueueName"

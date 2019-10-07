@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  IAM/SAMLProviderName
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+SAMLProviderName:
+  Type:                  String
+  Description:           "SAML: Provider Name"
+  Default: "idp"
+  AllowedPattern: "^[a-zA-Z0-9\\.\\_\\-]{1,128}$"

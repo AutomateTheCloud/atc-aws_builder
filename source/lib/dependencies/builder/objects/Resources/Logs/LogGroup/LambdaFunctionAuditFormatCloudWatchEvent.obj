@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: Logs/LogGroup/LambdaFunctionAuditFormatCloudWatchEvent
+##---------------------------------------------------------------------------------------
+LogGroupLambdaFunctionAuditFormatCloudWatchEvent:
+  Type: "AWS::Logs::LogGroup"
+  Properties:
+    LogGroupName: !Sub "/aws/lambda/${LambdaFunctionAuditFormatCloudWatchEvent}"
+    RetentionInDays: "14"

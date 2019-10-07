@@ -1,0 +1,6 @@
+##---------------------------------------------------------------------------------------
+# object: StackReference/StackReferenceVPC
+##---------------------------------------------------------------------------------------
+StackReferenceVPC:
+  Description: "Stack Reference: VPC"
+  Type: String

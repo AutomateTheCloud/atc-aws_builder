@@ -1,0 +1,13 @@
+##-------------------------------------------------------------------------------------------------
+# object:  ElastiCache/SubnetGroup/ECSubnetGroupRestricted
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+ECSubnetGroupRestricted:
+  Type: "AWS::ElastiCache::SubnetGroup"
+  Properties:
+    CacheSubnetGroupName: !Join [ "-", [ "subnet-ec", !Select [1, !Split ["|", !Ref "Organization"]], "restricted", !Ref "AWS::Region" ] ]
+    Description: !Join [ "", [ !Select [0, !Split ["|", !Ref "Organization"]], " - ", !Ref "AWS::Region", " - ", "ElasticCache Subnet (Private)" ] ]
+    SubnetIds:
+      - !Ref "SubnetRestricted1"
+      - !Ref "SubnetRestricted2"
+      - !Ref "SubnetRestricted3"

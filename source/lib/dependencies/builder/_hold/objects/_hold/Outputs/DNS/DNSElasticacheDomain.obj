@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DNS/DNSElasticacheDomain
+# class:   output
+##-------------------------------------------------------------------------------------------------
+DNSElasticacheDomain:
+  Description: "DNS: Elasticache (Domain)"
+  Value: !Select [1, !Split ["|", !Ref "DNSElasticache"]]
+  Export:
+    Name: !Sub "${AWS::StackName}-DNSElasticacheDomain"

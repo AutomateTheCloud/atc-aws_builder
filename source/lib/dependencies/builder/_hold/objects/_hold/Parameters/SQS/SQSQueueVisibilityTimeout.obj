@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SQS/SQSQueueVisibilityTimeout
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+SQSQueueVisibilityTimeout:
+  Type:                  Number
+  Description:           "SQS: Visibility Timeout (seconds)"
+  Default:               30
+  MinValue:              0
+  MaxValue:              43200

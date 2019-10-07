@@ -1,0 +1,32 @@
+##-------------------------------------------------------------------------------------------------
+# object:  S3/Bucket/Audit
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+S3BucketAudit:
+  Type: "AWS::S3::Bucket"
+  DeletionPolicy: "Retain"
+  Properties:
+    BucketName: !Ref "S3BucketAuditName"
+    BucketEncryption: 
+        ServerSideEncryptionConfiguration: 
+        - ServerSideEncryptionByDefault:
+            SSEAlgorithm: "aws:kms"
+            KMSMasterKeyID: !GetAtt "KMSKeyAudit.Arn"
+    PublicAccessBlockConfiguration:
+      BlockPublicAcls: true
+      BlockPublicPolicy: true
+      IgnorePublicAcls: true
+      RestrictPublicBuckets: true
+    VersioningConfiguration:
+      Status: Enabled
+    AccessControl: "LogDeliveryWrite"
+    LoggingConfiguration:
+      DestinationBucketName: !Join [ "", [ !Ref "S3BucketLogs" ] ]
+      LogFilePrefix: !Join [ "", [ "s3/", !Ref "S3BucketAuditName", "/" ] ]
+    Tags:
+      - Key: "Name"
+        Value: !Ref "S3BucketAuditName"
+  DependsOn:
+    - "KMSKeyAudit"
+    - "S3BucketLogs"
+    - "S3BucketPolicyLogs"

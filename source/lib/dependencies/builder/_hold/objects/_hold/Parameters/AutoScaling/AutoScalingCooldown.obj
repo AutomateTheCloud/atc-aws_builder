@@ -1,0 +1,8 @@
+##-------------------------------------------------------------------------------------------------
+# object:  AutoScaling/AutoScalingCooldown
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+AutoScalingCooldown:
+  Type:                  String
+  Default:               "300"
+  Description:           "AutoScaling: Cooldown (in seconds)"

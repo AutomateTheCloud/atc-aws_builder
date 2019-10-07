@@ -1,0 +1,5 @@
+##---------------------------------------------------------------------------------------
+# object: StackReference/ExistsStackReferenceEFS
+##---------------------------------------------------------------------------------------
+ExistsStackReferenceEFS:
+  !Not [!Equals [!Ref "StackReferenceEFS", ""]]

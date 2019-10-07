@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: Logs/LogGroup/LambdaFunctionVPCSubnetCIDR
+##---------------------------------------------------------------------------------------
+LogGroupLambdaFunctionVPCSubnetCIDR:
+  Type: "AWS::Logs::LogGroup"
+  Properties:
+    LogGroupName: !Sub "/aws/lambda/${LambdaFunctionVPCSubnetCIDR}"
+    RetentionInDays: !Ref "LogRetentionVPCSubnetCIDR"

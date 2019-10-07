@@ -1,0 +1,38 @@
+##---------------------------------------------------------------------------------------
+# object: Events/Rule/AuditIAMPolicyChanges
+#   - CIS Amazon Web Services Foundations
+#     - 3.4: Ensure a log metric filter and alarm exist for IAM policy changes
+##---------------------------------------------------------------------------------------
+EventsRuleAuditIAMPolicyChanges:
+  Type: "AWS::Events::Rule"
+  Properties:
+    Name: "audit-iam-policy-changes"
+    Description: "Publishes formatted IAM policy change events to an SNS topic"
+    EventPattern:
+      detail-type:
+        - "AWS API Call via CloudTrail"
+      detail:
+        eventSource:
+          - "iam.amazonaws.com"
+        eventName:
+          - "CreateAccessKey"
+          - "DeleteAccessKey"
+          - "DeleteRolePolicy"
+          - "DeleteUserPolicy"
+          - "PutGroupPolicy"
+          - "PutRolePolicy"
+          - "PutUserPolicy"
+          - "CreatePolicy"
+          - "DeletePolicy"
+          - "CreatePolicyVersion"
+          - "DeletePolicyVersion"
+          - "AttachRolePolicy"
+          - "DetachRolePolicy"
+          - "AttachUserPolicy"
+          - "DetachUserPolicy"
+          - "AttachGroupPolicy"
+          - "DetachGroupPolicy"
+    State: "ENABLED"
+    Targets:
+      - Arn: !GetAtt "LambdaFunctionAuditFormatCloudWatchEvent.Arn"
+        Id: "TargetFunctionV1"

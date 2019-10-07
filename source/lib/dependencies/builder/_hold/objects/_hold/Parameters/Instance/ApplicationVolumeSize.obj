@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Instance/ApplicationVolumeSize
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+ApplicationVolumeSize:
+  Type:                  String
+  Description:           "Application Volume Size (GB)"

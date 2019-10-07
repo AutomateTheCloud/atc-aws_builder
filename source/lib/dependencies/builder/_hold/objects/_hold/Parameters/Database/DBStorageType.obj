@@ -1,0 +1,13 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/DBStorageType
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+DBStorageType:
+  Type:                  String
+  Default:               "gp2"
+  AllowedValues:
+    - "standard"
+    - "gp2"
+    - "io1"
+  Description:           "Database Storage Type"
+  ConstraintDescription: "standard, gp2, or io1"

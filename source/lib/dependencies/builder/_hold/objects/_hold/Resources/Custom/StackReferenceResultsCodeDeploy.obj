@@ -1,0 +1,13 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Custom/StackReferenceResultsCodeDeploy
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+StackReferenceResultsCodeDeploy:
+  Condition: "ExistsStackReferenceCodeDeploy"
+  Type: "Custom::StackReferenceResultsCodeDeploy"
+  Version: "1.0"
+  Properties:
+    "ServiceToken": !Join [ "", [ "arn:aws:lambda:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":function:stack-reference" ] ]
+    "Region": !Ref "AWS::Region"
+    "StackName": !Ref "StackReferenceCodeDeploy"
+    "LastUpdate": !Ref "LastUpdate"

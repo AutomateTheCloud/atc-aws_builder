@@ -1,0 +1,15 @@
+##---------------------------------------------------------------------------------------
+# object: DynamoDB/Table/AccountManifestCloudFormation
+##---------------------------------------------------------------------------------------
+DynamoDBTableAccountManifestCloudFormation:
+  Type: "AWS::DynamoDB::Table"
+  Properties:
+    TableName: "account-manifest-cloudformation"
+    BillingMode: "PAY_PER_REQUEST"
+    AttributeDefinitions:
+      - AttributeName: "StackId"
+        AttributeType: "S"
+    KeySchema:
+      -
+        AttributeName: "StackId"
+        KeyType: "HASH"

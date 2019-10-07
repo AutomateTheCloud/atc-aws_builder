@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  StackReference/StackReferenceAdministrative4
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+StackReferenceAdministrative4:
+  Type:                  String
+  Description:           "Stack Reference: Administrative4"

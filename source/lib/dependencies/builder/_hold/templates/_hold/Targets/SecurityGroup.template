@@ -1,0 +1,41 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Targets/SecurityGroup
+# class:   template
+##-------------------------------------------------------------------------------------------------
+Paradigm:
+##-------------------------------------------------------------------------------------------------
+  Parameters:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/SecurityGroup/SecurityGroupTarget1
+    - Base/SecurityGroup/SecurityGroupTarget2
+    - Base/SecurityGroup/SecurityGroupTarget3
+    - Base/SecurityGroup/SecurityGroupTarget4
+    - Base/SecurityGroup/SecurityGroupTarget5
+    - Base/SecurityGroup/SecurityGroupTarget6
+    - Base/SecurityGroup/SecurityGroupTarget7
+    - Base/SecurityGroup/SecurityGroupTarget8
+    - Base/SecurityGroup/SecurityGroupTarget9
+    - Base/SecurityGroup/SecurityGroupTarget10
+
+##-------------------------------------------------------------------------------------------------
+  Mappings:
+
+##-------------------------------------------------------------------------------------------------
+  Conditions:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/SecurityGroup/ExistsSecurityGroupTarget1
+    - Base/SecurityGroup/ExistsSecurityGroupTarget2
+    - Base/SecurityGroup/ExistsSecurityGroupTarget3
+    - Base/SecurityGroup/ExistsSecurityGroupTarget4
+    - Base/SecurityGroup/ExistsSecurityGroupTarget5
+    - Base/SecurityGroup/ExistsSecurityGroupTarget6
+    - Base/SecurityGroup/ExistsSecurityGroupTarget7
+    - Base/SecurityGroup/ExistsSecurityGroupTarget8
+    - Base/SecurityGroup/ExistsSecurityGroupTarget9
+    - Base/SecurityGroup/ExistsSecurityGroupTarget10
+
+##-------------------------------------------------------------------------------------------------
+  Resources:
+
+##-------------------------------------------------------------------------------------------------
+  Outputs:

@@ -1,0 +1,6 @@
+##---------------------------------------------------------------------------------------
+# object: EIP/EIPExistingAllocationId
+##---------------------------------------------------------------------------------------
+EIPExistingAllocationId:
+  Description: "EIP: Existing Allocation ID"
+  Type: String

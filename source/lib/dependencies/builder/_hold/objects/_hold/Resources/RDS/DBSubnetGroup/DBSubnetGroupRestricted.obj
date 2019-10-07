@@ -1,0 +1,16 @@
+##-------------------------------------------------------------------------------------------------
+# object:  RDS/DBSubnetGroup/DBSubnetGroupRestricted
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+DBSubnetGroupRestricted:
+  Type: "AWS::RDS::DBSubnetGroup"
+  Properties:
+    DBSubnetGroupName: !Join [ "-", [ "subnet-rds", !Select [1, !Split ["|", !Ref "Organization"]], "restricted", !Ref "AWS::Region" ] ]
+    DBSubnetGroupDescription: !Join [ "", [ !Select [0, !Split ["|", !Ref "Organization"]], " - ", !Ref "AWS::Region", " - ", "RDS Subnet (Restricted)" ] ]
+    SubnetIds:
+      - !Ref "SubnetRestricted1"
+      - !Ref "SubnetRestricted2"
+      - !Ref "SubnetRestricted3"
+    Tags:
+      - Key: "Name"
+        Value: !Join [ "_", [ "subnet-rds", !Select [1, !Split ["|", !Ref "Organization"]], "restricted", !Ref "AWS::Region" ] ]

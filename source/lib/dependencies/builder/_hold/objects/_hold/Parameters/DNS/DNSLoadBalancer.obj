@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DNS/DNSLoadBalancer
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+DNSLoadBalancer:
+  Type:                  String
+  Description:           "DNS: LoadBalancer (Subdomain|Domain|HostedZoneID)"

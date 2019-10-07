@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  S3/S3BucketAccountLogs
+# class:   output
+##-------------------------------------------------------------------------------------------------
+S3BucketAccountLogs:
+  Description: "S3 Bucket: AccountLogs"
+  Value: !Ref "S3BucketAccountLogs"
+  Export:
+    Name: !Sub "${AWS::StackName}-S3BucketAccountLogs"

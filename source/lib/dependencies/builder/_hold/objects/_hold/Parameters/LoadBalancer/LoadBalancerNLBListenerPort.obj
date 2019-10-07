@@ -1,0 +1,8 @@
+##-------------------------------------------------------------------------------------------------
+# object:  LoadBalancer/LoadBalancerNLBListenerPort
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+LoadBalancerNLBListenerPort:
+  Type:                  Number
+  Default:               80
+  Description:           "Network LoadBalancer Port"

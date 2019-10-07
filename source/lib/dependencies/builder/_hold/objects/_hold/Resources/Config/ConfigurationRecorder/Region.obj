@@ -1,0 +1,12 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Config/ConfigurationRecorder/Region
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+ConfigConfigurationRecorderRegion:
+  Type: "AWS::Config::ConfigurationRecorder"
+  Properties:
+    Name: !Join [ "", [ "config-", !Ref "AWS::Region" ] ]
+    RecordingGroup:
+      AllSupported: "true"
+      IncludeGlobalResourceTypes: !Ref "ConfigIncludeGlobalResourceTypes"
+    RoleARN: !GetAtt "RoleConfig.Arn"

@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DNS/DNSDatabaseRead
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+DNSDatabaseRead:
+  Type:                  String
+  Description:           "DNS: Database - Read (Subdomain|Domain|HostedZoneID)"

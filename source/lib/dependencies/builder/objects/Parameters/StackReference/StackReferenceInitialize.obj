@@ -1,0 +1,6 @@
+##---------------------------------------------------------------------------------------
+# object: StackReference/StackReferenceInitialize
+##---------------------------------------------------------------------------------------
+StackReferenceInitialize:
+  Description: "Stack Reference: Initialize"
+  Type: String

@@ -1,0 +1,20 @@
+##---------------------------------------------------------------------------------------
+# object: Config/ConfigRule/ConfigEvaluateConfigInAllRegions
+# notes:
+#   - CIS Amazon Web Services Foundations
+#     - 2.5: Ensure AWS Config is enabled in all regions
+##---------------------------------------------------------------------------------------
+ConfigRuleConfigEvaluateConfigInAllRegions:
+  Type: "AWS::Config::ConfigRule"
+  Properties:
+    ConfigRuleName: "config-evaluate-config-in-all-regions"
+    Description: "Evaluates whether Config is enabled in all regions"
+    MaximumExecutionFrequency: "TwentyFour_Hours"
+    Source:
+      Owner: CUSTOM_LAMBDA
+      SourceDetails:
+        - EventSource: aws.config
+          MessageType: ScheduledNotification
+      SourceIdentifier: !GetAtt "LambdaFunctionConfigEvaluateConfigInAllRegions.Arn"
+  DependsOn:
+    - "LambdaPermissionConfigEvaluateConfigInAllRegions"

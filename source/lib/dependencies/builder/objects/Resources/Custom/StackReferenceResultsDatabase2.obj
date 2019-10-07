@@ -1,0 +1,11 @@
+##---------------------------------------------------------------------------------------
+# object: Custom/StackReferenceResultsDatabase2
+##---------------------------------------------------------------------------------------
+StackReferenceResultsDatabase2:
+  Condition: "ExistsStackReferenceDatabase2"
+  Type: "Custom::StackReferenceResultsDatabase2"
+  Version: "1.0"
+  Properties:
+    "ServiceToken": !Join [ "", [ "arn:aws:lambda:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":function:stack-reference" ] ]
+    "Region": !Ref "AWS::Region"
+    "StackName": !Ref "StackReferenceDatabase2"

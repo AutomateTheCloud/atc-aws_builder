@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: LoadBalancer/LoadBalancerEnabledFalse
+##---------------------------------------------------------------------------------------
+LoadBalancerEnabled:
+  Description: "LoadBalancer: Enabled Flag"
+  Value: "false"
+  Export:
+    Name: !Sub "${AWS::StackName}-LoadBalancerEnabled"

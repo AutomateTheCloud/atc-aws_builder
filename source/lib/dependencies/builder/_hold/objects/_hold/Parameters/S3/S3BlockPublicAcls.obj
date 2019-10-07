@@ -1,0 +1,12 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EIP/S3BlockPublicAcls
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+S3BlockPublicAcls:
+  Type:                  "String"
+  Default:               "true"
+  AllowedValues:
+    - "true"
+    - "false"
+  Description:           "S3: Block Public Acls"
+  ConstraintDescription: "true/false"

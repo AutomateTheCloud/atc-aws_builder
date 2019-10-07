@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/IOPS
+# class:   output
+##-------------------------------------------------------------------------------------------------
+IOPS:
+  Condition: "ExistsIOPS"
+  Description: "IOPS"
+  Value: !Ref "IOPS"
+  Export:
+    Name: !Sub "${AWS::StackName}-IOPS"

@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/ReplicaCount
+# class:   output
+##-------------------------------------------------------------------------------------------------
+ReplicaCount:
+  Description: "Replica Count"
+  Value: !Ref ReplicaCount
+  Export:
+    Name: !Sub "${AWS::StackName}-ReplicaCount"

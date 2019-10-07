@@ -1,0 +1,6 @@
+##---------------------------------------------------------------------------------------
+# object: StackReference/StackReferenceAdministrative1
+##---------------------------------------------------------------------------------------
+StackReferenceAdministrative1:
+  Description: "Stack Reference: Administrative1"
+  Type: String

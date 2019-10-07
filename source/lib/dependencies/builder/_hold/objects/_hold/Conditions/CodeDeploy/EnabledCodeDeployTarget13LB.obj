@@ -1,0 +1,8 @@
+##-------------------------------------------------------------------------------------------------
+# object:  CodeDeploy/EnabledCodeDeployTarget13LB
+# class:   condition
+##-------------------------------------------------------------------------------------------------
+EnabledCodeDeployTarget13LB: !And
+  - !Not [!Equals [!Ref "StackReferenceTarget13", ""]]
+  - !Equals [!Ref "LoadBalancerEnabledTarget13", "true"]
+

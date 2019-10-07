@@ -1,0 +1,13 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EIP/EnableElasticIp
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+EnableElasticIp:
+  Type:                  "String"
+  Default:               "no"
+  AllowedValues:
+    - ""
+    - "yes"
+    - "no"
+  Description:           "Enable Elastic IP"
+  ConstraintDescription: "yes/no"

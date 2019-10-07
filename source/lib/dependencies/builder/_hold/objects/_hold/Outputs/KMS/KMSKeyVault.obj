@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  KMS/KMSKeyVault
+# class:   output
+##-------------------------------------------------------------------------------------------------
+KMSKeyVault:
+  Description: "KMS Key: Vault"
+  Value: !GetAtt "KMSKeyVault.Arn"
+  Export:
+    Name: !Sub "${AWS::StackName}-KMSKeyVault"

@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/ReplicaDBStorageType
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+ReplicaDBStorageType:
+  Type:                  String
+  Description:           "Replica Database Storage Type"

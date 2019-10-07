@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Instance/InstanceTypeSecondary
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+InstanceTypeSecondary:
+  Type:                  String
+  Default:               "t2.micro"
+  Description:           "EC2 Instance Type (Secondary)"
+  ConstraintDescription: "Must be a valid EC2 instance type"

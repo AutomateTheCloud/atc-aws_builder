@@ -1,0 +1,8 @@
+##-------------------------------------------------------------------------------------------------
+# object:  AutoScaling/AutoScalingTimeout
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+AutoScalingTimeout:
+  Type:                  String
+  Default:               "PT10M"
+  Description:           "AutoScaling: Timeout"

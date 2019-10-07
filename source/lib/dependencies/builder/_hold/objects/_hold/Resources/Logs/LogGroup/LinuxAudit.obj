@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Logs/LogGroup/LinuxAudit
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+LogGroupLinuxAudit:
+  Type: "AWS::Logs::LogGroup"
+  Properties:
+    LogGroupName: !Join [ "", [ !Select [1, !Split ["|", !Ref "Organization"]], "-", !Ref "AWS::Region", "-linux-audit" ] ]
+    RetentionInDays: 365

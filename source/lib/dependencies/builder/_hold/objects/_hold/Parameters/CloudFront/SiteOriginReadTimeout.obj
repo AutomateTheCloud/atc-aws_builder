@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  CloudFront/SiteOriginReadTimeout
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+SiteOriginReadTimeout:
+  Type:                  Number
+  Default:               30
+  MinValue:              4
+  MaxValue:              60
+  Description:           "CloudFront Distribution Origin (Read Timeout)"

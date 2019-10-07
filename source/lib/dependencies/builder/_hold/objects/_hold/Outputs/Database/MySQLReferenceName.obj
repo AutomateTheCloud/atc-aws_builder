@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/MySQLReferenceName
+# class:   output
+##-------------------------------------------------------------------------------------------------
+MySQLReferenceName:
+  Description: "MySQL Reference Name"
+  Value: !Ref "MySQLReferenceName"
+  Export:
+    Name: !Sub "${AWS::StackName}-MySQLReferenceName"

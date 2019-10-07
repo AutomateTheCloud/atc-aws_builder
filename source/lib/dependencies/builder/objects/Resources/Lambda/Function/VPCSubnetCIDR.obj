@@ -1,0 +1,112 @@
+##---------------------------------------------------------------------------------------
+# object: Lambda/Function/VPCSubnetCIDR
+# notes:
+#   - test payload:
+#     {
+#       "StackId": "arn:aws:cloudformation:us-east-1:EXAMPLE/stack-name/guid",
+#       "ResponseURL": "http://pre-signed-S3-url-for-response",
+#       "RequestType": "Create",
+#       "ResourceType": "Custom::TestResource",
+#       "RequestId": "unique id for this create request",
+#       "LogicalResourceId": "MyTestResource",
+#       "ResourceProperties": {
+#         "IpNetwork": "10.0.0.0",
+#         "IpNetmask": "19"
+#       }
+#     }
+##---------------------------------------------------------------------------------------
+LambdaFunctionVPCSubnetCIDR:
+  Type: "AWS::Lambda::Function"
+  Properties:
+    FunctionName: "vpc-subnet-cidr"
+    Description: "VPC Subnet CIDR"
+    Handler: "index.handler"
+    Code:
+      ZipFile:
+        !Sub |
+          var response = require('cfn-response');
+          var subnetMap = {
+            16:{'big':'19','small':'20'},
+            17:{'big':'20','small':'21'},
+            18:{'big':'21','small':'22'},
+            19:{'big':'22','small':'23'},
+            20:{'big':'23','small':'24'},
+            21:{'big':'24','small':'25'},
+            22:{'big':'25','small':'26'},
+            23:{'big':'26','small':'27'},
+            24:{'big':'27','small':'28'},
+            25:{'big':'28','small':'29'}
+          };
+          var i;
+          var cidr_big = [];
+          var netmask_big = [];
+          var cidr_small = [];
+          var netmask_small = [];
+          var ipConversion = {
+            toDecimal : function(ipString) {
+              var d = ipString.split('.');
+              return ((((((+d[0])*256) + (+d[1]))*256) + (+d[2]))*256) + (+d[3]);
+            },
+            toString : function(ipNum) {
+              var d = ipNum % 256;
+              for( var i = 3; i > 0; i-- ) {
+                ipNum = Math.floor( ipNum / 256 );
+                d = ipNum % 256 + '.' + d;
+              }
+              return d;
+            },
+            CIDRstart : function(ipString,ipOffset) {
+              return ipConversion.toString(ipConversion.toDecimal(ipString)+parseInt(ipOffset));
+            }
+          };
+
+          exports.handler = function(event, context) {
+            if (event.RequestType == 'Delete') {
+              response.send(event, context, response.SUCCESS);
+              return;
+            }
+            var net = event.ResourceProperties.IpNetwork;
+            var mask = event.ResourceProperties.IpNetmask;
+            var responseData = {};
+            if (net && mask) {
+              var offset = 0;
+              for (i = 1; i <= 8; i++) {
+                netmask_big[i] = subnetMap[mask]['big'];
+                cidr_big[i] = ipConversion.CIDRstart(net,offset);
+                offset += Math.pow(2, (32 - subnetMap[mask]['big']));
+              }
+              var offset = 0;
+              for (i = 1; i <= 16; i++) {
+                netmask_small[i] = subnetMap[mask]['small'];
+                cidr_small[i] = ipConversion.CIDRstart(net,offset);
+                offset += Math.pow(2, (32 - subnetMap[mask]['small']));
+              }
+              responseData['subnet-public-1-netmask'] = netmask_small[13];
+              responseData['subnet-public-1-cidrstart'] = cidr_small[13];
+              responseData['subnet-public-2-netmask'] = netmask_small[14];
+              responseData['subnet-public-2-cidrstart'] = cidr_small[14];
+              responseData['subnet-public-3-netmask'] = netmask_small[15];
+              responseData['subnet-public-3-cidrstart'] = cidr_small[15];
+              responseData['subnet-private-1-netmask'] = netmask_big[1];
+              responseData['subnet-private-1-cidrstart'] = cidr_big[1];
+              responseData['subnet-private-2-netmask'] = netmask_big[2];
+              responseData['subnet-private-2-cidrstart'] = cidr_big[2];
+              responseData['subnet-private-3-netmask'] = netmask_big[3];
+              responseData['subnet-private-3-cidrstart'] = cidr_big[3];
+              responseData['subnet-restricted-1-netmask'] = netmask_big[4];
+              responseData['subnet-restricted-1-cidrstart'] = cidr_big[4];
+              responseData['subnet-restricted-2-netmask'] = netmask_big[5];
+              responseData['subnet-restricted-2-cidrstart'] = cidr_big[5];
+              responseData['subnet-restricted-3-netmask'] = netmask_big[6];
+              responseData['subnet-restricted-3-cidrstart'] = cidr_big[6];
+
+              response.send(event, context, response.SUCCESS, responseData);
+            } else {
+              responseData = {Error: 'IP Network or IP Netmask not specified'};
+              response.send(event, context, response.FAILED, responseData);
+            }
+          };
+    Role: !GetAtt "IAMRoleLambdaFunctionVPCSubnetCIDR.Arn"
+    Runtime: "nodejs8.10"
+    MemorySize: "128"
+    Timeout: "180"

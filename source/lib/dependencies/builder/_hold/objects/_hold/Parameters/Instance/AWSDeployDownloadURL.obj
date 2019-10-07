@@ -1,0 +1,8 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Instance/AWSDeployDownloadURL
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+AWSDeployDownloadURL:
+  Type:                  String
+  Default:               ""
+  Description:           "AWS Deploy (Download URL)"

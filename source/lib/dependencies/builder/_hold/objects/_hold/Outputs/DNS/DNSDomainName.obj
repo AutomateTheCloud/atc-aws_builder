@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DNS/DNSDomainName
+# class:   output
+##-------------------------------------------------------------------------------------------------
+DNSDomainName:
+  Description: "DNS - Domain Name"
+  Value: !GetAtt "StackReferenceResultsVPC.DomainUtilityName"
+  Export:
+    Name: !Sub "${AWS::StackName}-DNSDomainName"

@@ -1,0 +1,11 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SQS/SQSQueue3Name
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+SQSQueue3Name:
+  Condition: "ExistsStackReferenceSQSQueue3"
+  Description: "SQS Queue (3): Name"
+  Value: !GetAtt "StackReferenceResultsSQSQueue3.SQSQueueName"
+  Export:
+    Name: !Sub "-SQSQueue3Name"
+

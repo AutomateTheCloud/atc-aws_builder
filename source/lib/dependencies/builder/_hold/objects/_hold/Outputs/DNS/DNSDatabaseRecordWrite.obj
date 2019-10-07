@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DNS/DNSDatabaseRecordWrite
+# class:   output
+##-------------------------------------------------------------------------------------------------
+DNSDatabaseRecordWrite:
+  Description: "DNS: Database - Record (Write)"
+  Value: !Join [ "", [ !Select [0, !Split ["|", !Ref "DNSDatabase"]], ".write.database.", !Ref "AWS::Region", ".", !Select [1, !Split ["|", !Ref "DNSDatabase"]] ] ]
+  Export:
+    Name: !Sub "${AWS::StackName}-DNSDatabaseRecordWrite"

@@ -1,0 +1,10 @@
+##---------------------------------------------------------------------------------------
+# object: IAM/Group/AWSUserSupport
+##---------------------------------------------------------------------------------------
+IAMGroupAWSUserSupport:
+  Type: "AWS::IAM::Group"
+  Properties:
+    GroupName: "AWS-User_Support"
+    Path: "/"
+    ManagedPolicyArns:
+      - arn:aws:iam::aws:policy/AWSSupportAccess

@@ -1,0 +1,14 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Custom/StackReferenceResultsTarget15
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+StackReferenceResultsTarget15:
+  Condition: "ExistsStackReferenceTarget15"
+  Type: "Custom::StackReferenceResultsTarget15"
+  Version: "1.0"
+  Properties:
+    "ServiceToken": !Join [ "", [ "arn:aws:lambda:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":function:stack-reference" ] ]
+    "Region": !Ref "AWS::Region"
+    "StackName": !Ref "StackReferenceTarget15"
+    "LastUpdate": !Ref "LastUpdate"
+

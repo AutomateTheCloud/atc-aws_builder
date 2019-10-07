@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SQS/SQSQueueArn
+# class:   output
+##-------------------------------------------------------------------------------------------------
+SQSQueueArn:
+  Description: "SQS: Queue ARN"
+  Value: !GetAtt "SQSQueue.Arn"
+  Export:
+    Name: !Sub "${AWS::StackName}-SQSQueueArn"

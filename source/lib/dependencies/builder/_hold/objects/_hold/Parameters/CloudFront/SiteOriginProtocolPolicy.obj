@@ -1,0 +1,12 @@
+##-------------------------------------------------------------------------------------------------
+# object:  CloudFront/SiteOriginProtocolPolicy
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+SiteOriginProtocolPolicy:
+  Type:                  String
+  Default: https-only
+  AllowedValues: 
+    - http-only
+    - match-viewer
+    - https-only
+  Description:           "CloudFront Distribution Origin (Protocol Policy)"

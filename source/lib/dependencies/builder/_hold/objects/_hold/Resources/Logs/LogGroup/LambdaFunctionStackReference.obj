@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Logs/LogGroup/LambdaFunctionStackReference
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+LogGroupLambdaFunctionStackReference:
+  Type: "AWS::Logs::LogGroup"
+  Properties:
+    LogGroupName: !Sub "/aws/lambda/${LambdaFunctionStackReference}"
+    RetentionInDays: !Ref "LogRetentionStackReference"

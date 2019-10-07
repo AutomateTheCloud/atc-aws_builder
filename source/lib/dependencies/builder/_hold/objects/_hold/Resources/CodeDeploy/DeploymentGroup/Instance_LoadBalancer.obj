@@ -1,0 +1,27 @@
+##-------------------------------------------------------------------------------------------------
+# object:  CodeDeploy/DeploymentGroup/Instance_LoadBalancer
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+DeploymentGroupInstance:
+  Condition: "ExistsStackReferenceCodeDeploy"
+  Type: "AWS::CodeDeploy::DeploymentGroup"
+  Properties:
+    ApplicationName: !GetAtt "StackReferenceResultsCodeDeploy.CodeDeployApplicationName"
+    DeploymentGroupName: !Ref "AWS::StackName"
+    AutoRollbackConfiguration:
+      Enabled: "true"
+      Events:
+        - DEPLOYMENT_FAILURE
+        - DEPLOYMENT_STOP_ON_ALARM
+        - DEPLOYMENT_STOP_ON_REQUEST
+    AutoScalingGroups:
+      - !Ref "AutoScalingGroupInstance"
+    LoadBalancerInfo:
+      TargetGroupInfoList:
+        - Name: !GetAtt "TargetGroupInstance.TargetGroupName"
+    DeploymentStyle:
+      DeploymentOption: WITH_TRAFFIC_CONTROL
+    DeploymentConfigName: "CodeDeployDefault.AllAtOnce"
+    ServiceRoleArn: !GetAtt "StackReferenceResultsCodeDeploy.CodeDeployRoleArn"
+  DependsOn:
+    - "StackReferenceResultsCodeDeploy"

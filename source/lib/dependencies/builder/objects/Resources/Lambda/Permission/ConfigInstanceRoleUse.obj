@@ -1,0 +1,11 @@
+##-------------------------------------------------------------------------------------------------
+# object: Lambda/Permission/ConfigInstanceRoleUse
+##-------------------------------------------------------------------------------------------------
+LambdaPermissionConfigInstanceRoleUse:
+  Type: "AWS::Lambda::Permission"
+  Properties:
+    FunctionName: !GetAtt "LambdaFunctionConfigInstanceRoleUse.Arn"
+    Action: "lambda:InvokeFunction"
+    Principal: "config.amazonaws.com"
+  DependsOn:
+    - "LambdaFunctionConfigInstanceRoleUse"

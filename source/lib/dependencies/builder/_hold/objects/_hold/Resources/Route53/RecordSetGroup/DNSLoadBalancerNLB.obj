@@ -1,0 +1,15 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Route53/RecordSetGroup/DNSLoadBalancerNLB
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+RecordSetGroupDNSLoadBalancerNLB:
+  Condition: "ExistsDNSLoadBalancerNLB"
+  Type: "AWS::Route53::RecordSetGroup"
+  Properties:
+    HostedZoneId: !Select [2, !Split ["|", !Ref "DNSLoadBalancerNLB"]]
+    RecordSets:
+    - Name: !Join [ "", [ !Select [0, !Split ["|", !Ref "DNSLoadBalancerNLB"]], ".", !Select [1, !Split ["|", !Ref "DNSLoadBalancerNLB"]] ] ]
+      Type: "A"
+      AliasTarget:
+        HostedZoneId: !GetAtt "LoadBalancerInstanceNLB.CanonicalHostedZoneID"
+        DNSName: !GetAtt "LoadBalancerInstanceNLB.DNSName"

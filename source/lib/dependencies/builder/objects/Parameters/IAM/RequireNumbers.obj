@@ -1,0 +1,13 @@
+##---------------------------------------------------------------------------------------
+# object: IAM/RequireNumbers
+# notes:
+#   - CIS Amazon Web Services Foundations
+#     - 1.8: Ensure IAM password policy require at least one number
+##---------------------------------------------------------------------------------------
+RequireNumbers:
+  Description: "You can require that IAM user passwords contain at least one numeric character (0 to 9)."
+  Type: String
+  Default: true
+  AllowedValues:
+  - true
+  - false

@@ -1,0 +1,7 @@
+##---------------------------------------------------------------------------------------
+# object: AutoScaling/LaunchTemplateUpdated
+##---------------------------------------------------------------------------------------
+LaunchTemplateUpdated:
+  Description: "Launch Template Updated Timestamp (changing this will trigger a redeployment)"
+  Type: String
+  Default: 0

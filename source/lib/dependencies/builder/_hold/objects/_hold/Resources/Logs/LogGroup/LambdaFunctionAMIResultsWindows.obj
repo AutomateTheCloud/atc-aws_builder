@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Logs/LogGroup/LambdaFunctionAMIResultsWindows
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+LogGroupLambdaFunctionAMIResultsWindows:
+  Type: "AWS::Logs::LogGroup"
+  Properties:
+    LogGroupName: !Sub "/aws/lambda/${LambdaFunctionAMIResultsWindows}"
+    RetentionInDays: !Ref "LogRetentionDays"

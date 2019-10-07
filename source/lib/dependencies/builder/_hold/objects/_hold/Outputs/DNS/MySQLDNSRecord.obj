@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DNS/MySQLDNSRecord
+# class:   output
+##-------------------------------------------------------------------------------------------------
+MySQLDNSRecord:
+  Description: "MySQL: DNS Record"
+  Value: !Join [ "", [ !Select [0, !Split ["|", !Ref "DNSDatabase"]], ".mysql.database.", !Ref "AWS::Region", ".", !Select [1, !Split ["|", !Ref "DNSDatabase"]] ] ]
+  Export:
+    Name: !Sub "${AWS::StackName}-MySQLDNSRecord"

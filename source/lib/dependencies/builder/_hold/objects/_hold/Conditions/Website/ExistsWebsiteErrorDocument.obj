@@ -1,0 +1,6 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Website/ExistsWebsiteErrorDocument
+# class:   condition
+##-------------------------------------------------------------------------------------------------
+ExistsWebsiteErrorDocument:
+  !Not [!Equals [!Ref WebsiteErrorDocument, ""]]

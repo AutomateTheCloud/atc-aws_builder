@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/PerformanceInsightsKMSKeyId
+# class:   output
+##-------------------------------------------------------------------------------------------------
+PerformanceInsightsKMSKeyId:
+  Condition: "EnablePerformanceInsights"
+  Description: "Performance Insights KMS Key ID"
+  Value: !Ref "PerformanceInsightsKMSKeyId"
+  Export:
+    Name: !Sub "${AWS::StackName}-PerformanceInsightsKMSKeyId"

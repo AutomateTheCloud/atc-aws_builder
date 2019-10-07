@@ -1,0 +1,84 @@
+##-------------------------------------------------------------------------------------------------
+# object:  AutoScaling/AutoScalingGroup/Instance
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+AutoScalingGroupInstance:
+  Type: "AWS::AutoScaling::AutoScalingGroup"
+  Properties:
+    AutoScalingGroupName: !Join [ "_", [ !Select [1, !Split ["|", !Ref "Project"]], !Select [1, !Split ["|", !Ref "Function"]], !Select [3, !Split ["|", !Ref "Organization"]], !Select [1, !Split ["|", !Ref "Organization"]], !Ref "AWS::Region" ] ]
+    AvailabilityZones:
+      - !If [SubnetTypePublic, !GetAtt "StackReferenceResultsVPC.SubnetPublic1AvailabilityZone", !Ref "AWS::NoValue"]
+      - !If [SubnetTypePublic, !GetAtt "StackReferenceResultsVPC.SubnetPublic2AvailabilityZone", !Ref "AWS::NoValue"]
+      - !If [SubnetTypePublic, !GetAtt "StackReferenceResultsVPC.SubnetPublic3AvailabilityZone", !Ref "AWS::NoValue"]
+      - !If [SubnetTypePrivate, !GetAtt "StackReferenceResultsVPC.SubnetPrivate1AvailabilityZone", !Ref "AWS::NoValue"]
+      - !If [SubnetTypePrivate, !GetAtt "StackReferenceResultsVPC.SubnetPrivate2AvailabilityZone", !Ref "AWS::NoValue"]
+      - !If [SubnetTypePrivate, !GetAtt "StackReferenceResultsVPC.SubnetPrivate3AvailabilityZone", !Ref "AWS::NoValue"]
+      - !If [SubnetTypeRestricted, !GetAtt "StackReferenceResultsVPC.SubnetRestricted1AvailabilityZone", !Ref "AWS::NoValue"]
+      - !If [SubnetTypeRestricted, !GetAtt "StackReferenceResultsVPC.SubnetRestricted2AvailabilityZone", !Ref "AWS::NoValue"]
+      - !If [SubnetTypeRestricted, !GetAtt "StackReferenceResultsVPC.SubnetRestricted3AvailabilityZone", !Ref "AWS::NoValue"]
+    VPCZoneIdentifier:
+      - !If [SubnetTypePublic, !GetAtt "StackReferenceResultsVPC.SubnetPublic1Id", !Ref "AWS::NoValue"]
+      - !If [SubnetTypePublic, !GetAtt "StackReferenceResultsVPC.SubnetPublic2Id", !Ref "AWS::NoValue"]
+      - !If [SubnetTypePublic, !GetAtt "StackReferenceResultsVPC.SubnetPublic3Id", !Ref "AWS::NoValue"]
+      - !If [SubnetTypePrivate, !GetAtt "StackReferenceResultsVPC.SubnetPrivate1Id", !Ref "AWS::NoValue"]
+      - !If [SubnetTypePrivate, !GetAtt "StackReferenceResultsVPC.SubnetPrivate2Id", !Ref "AWS::NoValue"]
+      - !If [SubnetTypePrivate, !GetAtt "StackReferenceResultsVPC.SubnetPrivate3Id", !Ref "AWS::NoValue"]
+      - !If [SubnetTypeRestricted, !GetAtt "StackReferenceResultsVPC.SubnetRestricted1Id", !Ref "AWS::NoValue"]
+      - !If [SubnetTypeRestricted, !GetAtt "StackReferenceResultsVPC.SubnetRestricted2Id", !Ref "AWS::NoValue"]
+      - !If [SubnetTypeRestricted, !GetAtt "StackReferenceResultsVPC.SubnetRestricted3Id", !Ref "AWS::NoValue"]
+    MixedInstancesPolicy:
+      InstancesDistribution:
+        OnDemandAllocationStrategy: "prioritized"
+        OnDemandBaseCapacity: "0"
+        OnDemandPercentageAboveBaseCapacity: !Select [1, !Split ["|", !Ref "AutoScalingDetails"]]
+        SpotAllocationStrategy: "lowest-price"
+      LaunchTemplate:
+        LaunchTemplateSpecification:
+          LaunchTemplateId: !Ref "LaunchTemplateInstance"
+          Version: !GetAtt "LaunchTemplateInstance.LatestVersionNumber"
+        Overrides:
+          - InstanceType: !Select [0, !Split ["|", !Ref "InstanceType"]]
+          - InstanceType: !Select [1, !Split ["|", !Ref "InstanceType"]]
+    MinSize: 0
+    MaxSize: !Select [0, !Split ["|", !Ref "AutoScalingDetails"]]
+    Cooldown: !Select [2, !Split ["|", !Ref "AutoScalingDetails"]]
+    HealthCheckGracePeriod: !Select [3, !Split ["|", !Ref "AutoScalingDetails"]]
+    HealthCheckType: "EC2"
+    MetricsCollection:
+      - Granularity: "1Minute"
+    TerminationPolicies:
+      - "OldestInstance"
+      - "Default"
+    Tags:
+      - Key: "Name"
+        Value: !Join [ "", [ !Select [0, !Split ["|", !Ref "Project"]], " - ", !Select [0, !Split ["|", !Ref "Function"]], " (", !Select [3, !Split ["|", !Ref "Organization"]], ") - [", !Select [0, !Split ["|", !Ref "Organization"]], "]" ] ]
+        PropagateAtLaunch: "true"
+      - Key: "Organization"
+        Value: !Select [0, !Split ["|", !Ref "Organization"]]
+        PropagateAtLaunch: "true"
+      - Key: "Project"
+        Value: !Select [0, !Split ["|", !Ref "Project"]]
+        PropagateAtLaunch: "true"
+      - Key: "Function"
+        Value: !Select [0, !Split ["|", !Ref "Function"]]
+        PropagateAtLaunch: "true"
+      - Key: "Owner"
+        Value: !Select [0, !Split ["|", !Ref "Owner"]]
+        PropagateAtLaunch: "true"
+      - Key: "Contact"
+        Value: !Select [1, !Split ["|", !Ref "Owner"]]
+        PropagateAtLaunch: "true"
+  CreationPolicy:
+    AutoScalingCreationPolicy:
+      MinSuccessfulInstancesPercent: 0
+    ResourceSignal:
+      Count: 0
+      Timeout: !Select [4, !Split ["|", !Ref "AutoScalingDetails"]]
+  UpdatePolicy:
+    AutoScalingRollingUpdate:
+      MinInstancesInService: "1"
+      MaxBatchSize: "1"
+      WaitOnResourceSignals: "true"
+      PauseTime: !Select [4, !Split ["|", !Ref "AutoScalingDetails"]]
+  DependsOn:
+    - "StackReferenceResultsVPC"

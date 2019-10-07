@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DNS/DomainUtilityHostedZoneId
+# class:   output
+##-------------------------------------------------------------------------------------------------
+DomainUtilityHostedZoneId:
+  Description: "Domain: Utility (HostedZoneId)"
+  Value: !Select [1, !Split ["|", !Ref "DomainUtility"]]
+  Export:
+    Name: !Sub "${AWS::StackName}-DomainUtilityHostedZoneId"

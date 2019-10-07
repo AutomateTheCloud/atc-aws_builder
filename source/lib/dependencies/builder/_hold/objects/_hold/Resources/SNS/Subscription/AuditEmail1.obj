@@ -1,0 +1,11 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SNS/Subscription/AuditEmail1
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+SNSSubscriptionAuditEmail1:
+  Condition: "ExistsSNSSubscriptionEmail1"
+  Type: "AWS::SNS::Subscription"
+  Properties:
+    Endpoint: !Ref "SNSSubscriptionEmail1"
+    Protocol: "email"
+    TopicArn: !Ref "SNSTopicAudit"

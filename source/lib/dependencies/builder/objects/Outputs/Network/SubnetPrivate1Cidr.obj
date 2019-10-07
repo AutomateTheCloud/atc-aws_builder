@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: Network/SubnetPrivate1Cidr
+##---------------------------------------------------------------------------------------
+SubnetPrivate1Cidr:
+  Description: "Subnet (Private1): CIDR"
+  Value: !Join [ "", [ !GetAtt "VPCSubnetCIDRResults.subnet-private-1-cidrstart", "/", !GetAtt "VPCSubnetCIDRResults.subnet-private-1-netmask" ] ]
+  Export:
+    Name: !Sub "${AWS::StackName}-SubnetPrivate1Cidr"

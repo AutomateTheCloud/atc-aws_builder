@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SecurityGroup/SecurityGroupDefaultId
+# class:   output
+##-------------------------------------------------------------------------------------------------
+SecurityGroupDefaultId:
+  Description: "Security Group (Default): ID"
+  Value: !GetAtt "VPC.DefaultSecurityGroup"
+  Export:
+    Name: !Sub "${AWS::StackName}-SecurityGroupDefaultId"

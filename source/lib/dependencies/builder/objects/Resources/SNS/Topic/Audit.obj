@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: SNS/Topic/Audit
+##---------------------------------------------------------------------------------------
+SNSTopicAudit:
+  Type: "AWS::SNS::Topic"
+  Properties:
+    TopicName: "audit-global"
+    DisplayName: "audit-global"

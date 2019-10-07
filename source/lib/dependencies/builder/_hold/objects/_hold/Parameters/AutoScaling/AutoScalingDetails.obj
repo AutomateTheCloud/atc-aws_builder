@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  AutoScaling/AutoScalingDetails
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+AutoScalingDetails:
+  Type:                  String
+  Description:           "AutoScaling: Details (InstanceCountMaximum|OnDemandPercentageAboveBaseCapacity|AutoScalingCooldown|AutoScalingGracePeriod|AutoScalingTimeout)"

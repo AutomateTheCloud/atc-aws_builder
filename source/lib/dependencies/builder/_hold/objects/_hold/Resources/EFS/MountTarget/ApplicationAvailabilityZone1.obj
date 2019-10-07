@@ -1,0 +1,14 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EFS/MountTarget/ApplicationAvailabilityZone1
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+ApplicationAvailabilityZone1:
+  Type: "AWS::EFS::MountTarget"
+  Properties:
+    FileSystemId: !Ref "FileSystemApplication"
+    SubnetId: !GetAtt "StackReferenceResultsVPC.SubnetRestricted1Id"
+    SecurityGroups:
+      - !Ref "SecurityGroupApplicationEFS"
+  DependsOn:
+    - "FileSystemApplication"
+    - "StackReferenceResultsVPC"

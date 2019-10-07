@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/PerformanceInsightsEnabled
+# class:   output
+##-------------------------------------------------------------------------------------------------
+PerformanceInsightsEnabled:
+  Description: "Performance Insights Enabled"
+  Value: !Ref "PerformanceInsightsEnabled"
+  Export:
+    Name: !Sub "${AWS::StackName}-PerformanceInsightsEnabled"

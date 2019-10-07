@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  CodeDeploy/CodeDeployApplicationName
+# class:   output
+##-------------------------------------------------------------------------------------------------
+CodeDeployApplicationName:
+  Description: "CodeDeploy: ApplicationName"
+  Value: !Select [0, !Split ["|", !Ref "CodeDeployApplication"]]
+  Export:
+    Name: !Sub "${AWS::StackName}-CodeDeployApplicationName"

@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: DNS/DNSInstanceHostedZoneID
+##---------------------------------------------------------------------------------------
+DNSInstanceHostedZoneID:
+  Description: "DNS: Instance (HostedZoneID)"
+  Value: !Select [2, !Split ["|", !Ref "DNSInstance"]]
+  Export:
+    Name: !Sub "${AWS::StackName}-DNSInstanceHostedZoneID"

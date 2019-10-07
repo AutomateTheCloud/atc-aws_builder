@@ -1,0 +1,21 @@
+##---------------------------------------------------------------------------------------
+# object: Config/ConfigRule/ConfigEvaluateCloudTrailBucket
+# notes:
+#   - CIS Amazon Web Services Foundations
+#     - 2.3: Ensure the S3 bucket CloudTrail logs to is not publicly accessible
+#     - 2.6: Ensure S3 bucket access logging is enabled on the CloudTrail S3 bucket
+##---------------------------------------------------------------------------------------
+ConfigRuleConfigEvaluateCloudTrailBucket:
+  Type: "AWS::Config::ConfigRule"
+  Properties:
+    ConfigRuleName: "config-evaluate-cloudtrail-bucket"
+    Description: "Evaluates whether the CloudTrail S3 bucket has appropriate security properties"
+    MaximumExecutionFrequency: "TwentyFour_Hours"
+    Source:
+      Owner: CUSTOM_LAMBDA
+      SourceDetails:
+        - EventSource: aws.config
+          MessageType: ScheduledNotification
+      SourceIdentifier: !GetAtt "LambdaFunctionConfigEvaluateCloudTrailBucket.Arn"
+  DependsOn:
+    - "LambdaPermissionConfigEvaluateCloudTrailBucket"

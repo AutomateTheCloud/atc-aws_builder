@@ -1,0 +1,29 @@
+##-------------------------------------------------------------------------------------------------
+# object:  CodeDeploy/DeploymentGroup/Target9LB_NLB
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+DeploymentGroupTarget9LB:
+  Condition: "EnabledCodeDeployTarget9LB"
+  Type: "AWS::CodeDeploy::DeploymentGroup"
+  Properties:
+    ApplicationName: !Ref "CodeDeployApplicationApp"
+    DeploymentGroupName: !Join [ "-", [ !Select [1, !Split ["|", !Ref "CodeDeployApplication"]], !Ref "DeploymentGroupAppendTarget9" ] ]
+    AutoRollbackConfiguration:
+      Enabled: "true"
+      Events:
+        - DEPLOYMENT_FAILURE
+        - DEPLOYMENT_STOP_ON_ALARM
+        - DEPLOYMENT_STOP_ON_REQUEST
+    AutoScalingGroups:
+      - !GetAtt "StackReferenceResultsTarget9.AutoScalingGroupInstanceId"
+    LoadBalancerInfo:
+      TargetGroupInfoList:
+        - Name: !GetAtt "StackReferenceResultsTarget9.TargetGroupInstanceNLBName"
+    DeploymentStyle:
+      DeploymentOption: WITH_TRAFFIC_CONTROL
+    DeploymentConfigName: "CodeDeployDefault.AllAtOnce"
+    ServiceRoleArn: !GetAtt "RoleCodeDeploy.Arn"
+  DependsOn:
+    - "RoleCodeDeploy"
+    - "StackReferenceResultsTarget9"
+

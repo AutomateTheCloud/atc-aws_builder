@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Instance/TimezoneLinux
+# class:   output
+##-------------------------------------------------------------------------------------------------
+TimezoneLinux:
+  Description: "Timezone (Linux)"
+  Value: !Ref "TimezoneLinux"
+  Export:
+    Name: !Sub "${AWS::StackName}-TimezoneLinux"

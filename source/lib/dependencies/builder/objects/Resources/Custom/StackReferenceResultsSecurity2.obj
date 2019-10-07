@@ -1,0 +1,12 @@
+##---------------------------------------------------------------------------------------
+# object: Custom/StackReferenceResultsSecurity2
+##---------------------------------------------------------------------------------------
+StackReferenceResultsSecurity2:
+  Condition: "ExistsStackReferenceSecurity2"
+  Type: "Custom::StackReferenceResultsSecurity2"
+  Version: "1.0"
+  Properties:
+    "ServiceToken": !Join [ "", [ "arn:aws:lambda:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":function:stack-reference" ] ]
+    "Region": !Ref "AWS::Region"
+    "StackName": !Ref "StackReferenceSecurity2"
+    "LastUpdate": !Ref "LastUpdate"

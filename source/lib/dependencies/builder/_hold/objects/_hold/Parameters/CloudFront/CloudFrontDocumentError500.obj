@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  CloudFront/CloudFrontDocumentError500
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+CloudFrontDocumentError500:
+  Type:                  String
+  Default:               "error.html"
+  Description:           "CloudFront: Document - Error500"
+

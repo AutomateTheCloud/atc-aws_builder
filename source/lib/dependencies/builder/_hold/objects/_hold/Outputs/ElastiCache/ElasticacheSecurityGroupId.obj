@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  ElastiCache/ElasticacheSecurityGroupId
+# class:   output
+##-------------------------------------------------------------------------------------------------
+ElasticacheSecurityGroupId:
+  Description: "Security Group ID - Elasticache"
+  Value: !Ref "SecurityGroupElasticache"
+  Export:
+    Name: !Sub "${AWS::StackName}-ElasticacheSecurityGroupId"

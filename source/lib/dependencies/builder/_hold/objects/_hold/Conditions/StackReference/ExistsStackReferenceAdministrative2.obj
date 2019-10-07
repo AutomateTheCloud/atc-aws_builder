@@ -1,0 +1,6 @@
+##-------------------------------------------------------------------------------------------------
+# object:  StackReference/ExistsStackReferenceAdministrative2
+# class:   condition
+##-------------------------------------------------------------------------------------------------
+ExistsStackReferenceAdministrative2:
+  !Not [!Equals [!Ref "StackReferenceAdministrative2", ""]]

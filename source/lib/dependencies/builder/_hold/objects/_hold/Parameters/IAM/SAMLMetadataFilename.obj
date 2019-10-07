@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  IAM/SAMLMetadataFilename
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+SAMLMetadataFilename:
+  Type:                  String
+  Description:           "SAML: Metadata (Filename)"

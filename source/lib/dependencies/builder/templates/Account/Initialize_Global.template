@@ -1,0 +1,117 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Account/Initialize_Region
+# notes:
+#   - CIS Amazon Web Services Foundations
+#     - 1.4: Ensure access keys are rotated every 90 days or less
+#     - 1.5: Ensure IAM password policy requires at least one uppercase letter
+#     - 1.6: Ensure IAM password policy require at least one lowercase letter
+#     - 1.7: Ensure IAM password policy require at least one symbol
+#     - 1.8: Ensure IAM password policy require at least one number
+#     - 1.9: Ensure IAM password policy requires minimum length of 14 or greater
+#     - 1.10: Ensure IAM password policy prevents password reuse
+#     - 1.11: Ensure IAM password policy expires passwords within 90 days or less
+#     - 1.20: Ensure a support role has been created to manage incidents with AWS Support
+#     - 2.1: Ensure CloudTrail is enabled in all regions
+#     - 2.2: Ensure CloudTrail log file validation is enabled
+#     - 2.3: Ensure the S3 bucket used to store CloudTrail logs is not publicly accessible
+#     - 2.4: Ensure CloudTrail trails are integrated with CloudWatch Logs
+#     - 2.6: Ensure S3 bucket access logging is enabled on the CloudTrail S3 bucket
+#     - 2.7: Ensure CloudTrail logs are encrypted at rest using KMS CMKs
+##-------------------------------------------------------------------------------------------------
+
+Paradigm:
+##-------------------------------------------------------------------------------------------------
+  Parameters:
+    #-- S3 ------------------------------------------------------------------------------
+    - Base/S3/S3BucketAuditName
+    - Base/S3/S3BucketLogsGlobalName
+
+    #-- CloudTrail ------------------------------------------------------------------------
+    - Base/Logs/LogRetentionCloudTrail
+
+    #-- IAM -----------------------------------------------------------------------------
+    - Base/IAM/AllowUsersToChangePassword
+    - Base/IAM/HardExpiry
+    - Base/IAM/MaxPasswordAge
+    - Base/IAM/MinimumPasswordLength
+    - Base/IAM/PasswordReusePrevention
+    - Base/IAM/RequireLowercaseCharacters
+    - Base/IAM/RequireNumbers
+    - Base/IAM/RequireSymbols
+    - Base/IAM/RequireUppercaseCharacters
+
+##-------------------------------------------------------------------------------------------------
+  Mappings:
+
+##-------------------------------------------------------------------------------------------------
+  Conditions:
+
+##-------------------------------------------------------------------------------------------------
+  Resources:
+    #-- KMS -----------------------------------------------------------------------------
+    - Base/KMS/Key/AuditGlobal
+    - Base/KMS/Alias/AuditGlobal
+
+    #-- S3 ------------------------------------------------------------------------------
+    - Base/S3/Bucket/Audit
+    - Base/S3/BucketPolicy/Audit
+    - Base/S3/Bucket/LogsGlobal
+    - Base/S3/BucketPolicy/LogsGlobal
+
+    #-- CloudTrail ----------------------------------------------------------------------
+    - Base/CloudTrail/Trail/Audit
+
+    #-- Lambda Functions ----------------------------------------------------------------
+    - Base/Lambda/Function/IAMPasswordPolicy
+
+    #-- IAM -----------------------------------------------------------------------------
+    - Base/IAM/Group/AWSUserAdministrator
+    - Base/IAM/Group/AWSUserPowerUser
+    - Base/IAM/Group/AWSUserReadOnly
+    - Base/IAM/Group/AWSUserHuman
+    - Base/IAM/Group/AWSUserBilling
+    - Base/IAM/Group/AWSUserSupport
+    - Base/IAM/Role/LambdaFunctionIAMPasswordPolicy
+    - Base/IAM/Role/LogGroupCloudTrailAudit
+
+    #-- Cloudwatch Logs -----------------------------------------------------------------
+    - Base/Logs/LogGroup/CloudTrailAudit
+    - Base/Logs/LogGroup/LambdaFunctionIAMPasswordPolicy
+
+    #-- DynamoDB ------------------------------------------------------------------------
+    - Base/DynamoDB/Table/AccountManifestCloudFormation
+    - Base/DynamoDB/Table/AccountManifestSecrets
+
+    #-- Custom --------------------------------------------------------------------------
+    - Base/Custom/IAMPasswordPolicy
+
+##-------------------------------------------------------------------------------------------------
+  Outputs:
+    #-- KMS -----------------------------------------------------------------------------
+    - Base/KMS/KMSKeyAudit
+    - Base/KMS/KMSKeyAliasAudit
+
+    #-- S3 ------------------------------------------------------------------------------
+    - Base/S3/S3BucketAudit
+    - Base/S3/S3BucketLogs
+
+    #-- CloudTrail ----------------------------------------------------------------------
+    - Base/Logs/LogGroupCloudTrailAuditId
+    - Base/Logs/LogGroupCloudTrailAuditArn
+
+    #-- IAM -----------------------------------------------------------------------------
+    - Base/IAM/Group/IAMGroupAWSUserAdministratorName
+    - Base/IAM/Group/IAMGroupAWSUserAdministratorArn
+    - Base/IAM/Group/IAMGroupAWSUserPowerUserName
+    - Base/IAM/Group/IAMGroupAWSUserPowerUserArn
+    - Base/IAM/Group/IAMGroupAWSUserReadOnlyName
+    - Base/IAM/Group/IAMGroupAWSUserReadOnlyArn
+    - Base/IAM/Group/IAMGroupAWSUserHumanName
+    - Base/IAM/Group/IAMGroupAWSUserHumanArn
+    - Base/IAM/Group/IAMGroupAWSUserBillingName
+    - Base/IAM/Group/IAMGroupAWSUserBillingArn
+    - Base/IAM/Group/IAMGroupAWSUserSupportName
+    - Base/IAM/Group/IAMGroupAWSUserSupportArn
+
+##-------------------------------------------------------------------------------------------------
+  Targets:

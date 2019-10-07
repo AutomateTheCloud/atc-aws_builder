@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Network/ECSubnetGroupRestrictedId
+# class:   output
+##-------------------------------------------------------------------------------------------------
+ECSubnetGroupRestrictedId:
+  Description: "ElastiCache Subnet Group (Restricted): ID"
+  Value: !Ref ECSubnetGroupRestricted
+  Export:
+    Name: !Sub "${AWS::StackName}-ECSubnetGroupRestrictedId"

@@ -1,0 +1,433 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EC2/SecurityGroup/Database
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+SecurityGroupDatabase:
+  Type: "AWS::EC2::SecurityGroup"
+  Properties:
+    GroupName: !Join [ "", [ !Select [1, !Split ["|", !Ref "Project"]], "-", !Select [1, !Split ["|", !Ref "Function"]], "-rds-", !Select [3, !Split ["|", !Ref "Organization"]], "-", !Select [1, !Split ["|", !Ref "Organization"]], "-", !Ref "AWS::Region" ] ]
+    GroupDescription: !Join [ "", [ !Select [0, !Split ["|", !Ref "Project"]], " - ", !Select [0, !Split ["|", !Ref "Function"]], " - RDS (", !Select [3, !Split ["|", !Ref "Organization"]], ") [", !Select [0, !Split ["|", !Ref "Organization"]], " / ", !Ref "AWS::Region", "]" ] ]
+    VpcId: !GetAtt "StackReferenceResultsVPC.VPCId"
+    SecurityGroupIngress:
+    - !If
+        - ExistsStackReferenceTarget1
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsTarget1.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Application: ", !GetAtt "StackReferenceResultsTarget1.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceTarget2
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsTarget2.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Application: ", !GetAtt "StackReferenceResultsTarget2.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceTarget3
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsTarget3.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Application: ", !GetAtt "StackReferenceResultsTarget3.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceTarget4
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsTarget4.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Application: ", !GetAtt "StackReferenceResultsTarget4.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceTarget5
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsTarget5.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Application: ", !GetAtt "StackReferenceResultsTarget5.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceTarget6
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsTarget6.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Application: ", !GetAtt "StackReferenceResultsTarget6.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceTarget7
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsTarget7.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Application: ", !GetAtt "StackReferenceResultsTarget7.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceTarget8
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsTarget8.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Application: ", !GetAtt "StackReferenceResultsTarget8.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceTarget9
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsTarget9.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Application: ", !GetAtt "StackReferenceResultsTarget9.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceTarget10
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsTarget10.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Application: ", !GetAtt "StackReferenceResultsTarget10.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsSecurityGroupTarget1
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          CidrIp:                !Select [0, !Split ["|", !Ref "SecurityGroupTarget1"]]
+          Description:           !Join [ "", [ "Access: ", !Select [1, !Split ["|", !Ref "SecurityGroupTarget1"]] ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsSecurityGroupTarget2
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          CidrIp:                !Select [0, !Split ["|", !Ref "SecurityGroupTarget2"]]
+          Description:           !Join [ "", [ "Access: ", !Select [1, !Split ["|", !Ref "SecurityGroupTarget2"]] ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsSecurityGroupTarget3
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          CidrIp:                !Select [0, !Split ["|", !Ref "SecurityGroupTarget3"]]
+          Description:           !Join [ "", [ "Access: ", !Select [1, !Split ["|", !Ref "SecurityGroupTarget3"]] ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsSecurityGroupTarget4
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          CidrIp:                !Select [0, !Split ["|", !Ref "SecurityGroupTarget4"]]
+          Description:           !Join [ "", [ "Access: ", !Select [1, !Split ["|", !Ref "SecurityGroupTarget4"]] ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsSecurityGroupTarget5
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          CidrIp:                !Select [0, !Split ["|", !Ref "SecurityGroupTarget5"]]
+          Description:           !Join [ "", [ "Access: ", !Select [1, !Split ["|", !Ref "SecurityGroupTarget5"]] ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsSecurityGroupTarget6
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          CidrIp:                !Select [0, !Split ["|", !Ref "SecurityGroupTarget6"]]
+          Description:           !Join [ "", [ "Access: ", !Select [1, !Split ["|", !Ref "SecurityGroupTarget6"]] ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsSecurityGroupTarget7
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          CidrIp:                !Select [0, !Split ["|", !Ref "SecurityGroupTarget7"]]
+          Description:           !Join [ "", [ "Access: ", !Select [1, !Split ["|", !Ref "SecurityGroupTarget7"]] ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsSecurityGroupTarget8
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          CidrIp:                !Select [0, !Split ["|", !Ref "SecurityGroupTarget8"]]
+          Description:           !Join [ "", [ "Access: ", !Select [1, !Split ["|", !Ref "SecurityGroupTarget8"]] ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsSecurityGroupTarget9
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          CidrIp:                !Select [0, !Split ["|", !Ref "SecurityGroupTarget9"]]
+          Description:           !Join [ "", [ "Access: ", !Select [1, !Split ["|", !Ref "SecurityGroupTarget9"]] ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsSecurityGroupTarget10
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          CidrIp:                !Select [0, !Split ["|", !Ref "SecurityGroupTarget10"]]
+          Description:           !Join [ "", [ "Access: ", !Select [1, !Split ["|", !Ref "SecurityGroupTarget10"]] ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceVPN1
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsVPN1.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "VPN: ", !GetAtt "StackReferenceResultsVPN1.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceVPN2
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsVPN2.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "VPN: ", !GetAtt "StackReferenceResultsVPN2.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceAdministrative1
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsAdministrative1.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Administrative: ", !GetAtt "StackReferenceResultsAdministrative1.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceAdministrative2
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsAdministrative2.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Administrative: ", !GetAtt "StackReferenceResultsAdministrative2.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceSecurity1
+        - IpProtocol:            "-1"
+          FromPort:              "0"
+          ToPort:                "65535"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsSecurity1.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Security: ", !GetAtt "StackReferenceResultsSecurity1.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceSecurity2
+        - IpProtocol:            "-1"
+          FromPort:              "0"
+          ToPort:                "65535"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsSecurity2.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Security: ", !GetAtt "StackReferenceResultsSecurity2.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    SecurityGroupEgress:
+    - !If
+        - ExistsStackReferenceTarget1
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsTarget1.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Application: ", !GetAtt "StackReferenceResultsTarget1.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceTarget2
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsTarget2.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Application: ", !GetAtt "StackReferenceResultsTarget2.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceTarget3
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsTarget3.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Application: ", !GetAtt "StackReferenceResultsTarget3.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceTarget4
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsTarget4.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Application: ", !GetAtt "StackReferenceResultsTarget4.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceTarget5
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsTarget5.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Application: ", !GetAtt "StackReferenceResultsTarget5.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceTarget6
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsTarget6.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Application: ", !GetAtt "StackReferenceResultsTarget6.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceTarget7
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsTarget7.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Application: ", !GetAtt "StackReferenceResultsTarget7.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceTarget8
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsTarget8.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Application: ", !GetAtt "StackReferenceResultsTarget8.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceTarget9
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsTarget9.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Application: ", !GetAtt "StackReferenceResultsTarget9.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceTarget10
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsTarget10.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Application: ", !GetAtt "StackReferenceResultsTarget10.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsSecurityGroupTarget1
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          CidrIp:                !Select [0, !Split ["|", !Ref "SecurityGroupTarget1"]]
+          Description:           !Join [ "", [ "Access: ", !Select [1, !Split ["|", !Ref "SecurityGroupTarget1"]] ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsSecurityGroupTarget2
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          CidrIp:                !Select [0, !Split ["|", !Ref "SecurityGroupTarget2"]]
+          Description:           !Join [ "", [ "Access: ", !Select [1, !Split ["|", !Ref "SecurityGroupTarget2"]] ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsSecurityGroupTarget3
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          CidrIp:                !Select [0, !Split ["|", !Ref "SecurityGroupTarget3"]]
+          Description:           !Join [ "", [ "Access: ", !Select [1, !Split ["|", !Ref "SecurityGroupTarget3"]] ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsSecurityGroupTarget4
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          CidrIp:                !Select [0, !Split ["|", !Ref "SecurityGroupTarget4"]]
+          Description:           !Join [ "", [ "Access: ", !Select [1, !Split ["|", !Ref "SecurityGroupTarget4"]] ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsSecurityGroupTarget5
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          CidrIp:                !Select [0, !Split ["|", !Ref "SecurityGroupTarget5"]]
+          Description:           !Join [ "", [ "Access: ", !Select [1, !Split ["|", !Ref "SecurityGroupTarget5"]] ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsSecurityGroupTarget6
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          CidrIp:                !Select [0, !Split ["|", !Ref "SecurityGroupTarget6"]]
+          Description:           !Join [ "", [ "Access: ", !Select [1, !Split ["|", !Ref "SecurityGroupTarget6"]] ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsSecurityGroupTarget7
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          CidrIp:                !Select [0, !Split ["|", !Ref "SecurityGroupTarget7"]]
+          Description:           !Join [ "", [ "Access: ", !Select [1, !Split ["|", !Ref "SecurityGroupTarget7"]] ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsSecurityGroupTarget8
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          CidrIp:                !Select [0, !Split ["|", !Ref "SecurityGroupTarget8"]]
+          Description:           !Join [ "", [ "Access: ", !Select [1, !Split ["|", !Ref "SecurityGroupTarget8"]] ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsSecurityGroupTarget9
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          CidrIp:                !Select [0, !Split ["|", !Ref "SecurityGroupTarget9"]]
+          Description:           !Join [ "", [ "Access: ", !Select [1, !Split ["|", !Ref "SecurityGroupTarget9"]] ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsSecurityGroupTarget10
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          CidrIp:                !Select [0, !Split ["|", !Ref "SecurityGroupTarget10"]]
+          Description:           !Join [ "", [ "Access: ", !Select [1, !Split ["|", !Ref "SecurityGroupTarget10"]] ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceVPN1
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsVPN1.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "VPN: ", !GetAtt "StackReferenceResultsVPN1.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceVPN2
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsVPN2.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "VPN: ", !GetAtt "StackReferenceResultsVPN2.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceAdministrative1
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsAdministrative1.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Administrative: ", !GetAtt "StackReferenceResultsAdministrative1.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceAdministrative2
+        - IpProtocol:            "tcp"
+          FromPort:              !Ref "Port"
+          ToPort:                !Ref "Port"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsAdministrative2.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Administrative: ", !GetAtt "StackReferenceResultsAdministrative2.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceSecurity1
+        - IpProtocol:            "-1"
+          FromPort:              "0"
+          ToPort:                "65535"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsSecurity1.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Security: ", !GetAtt "StackReferenceResultsSecurity1.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    - !If
+        - ExistsStackReferenceSecurity2
+        - IpProtocol:            "-1"
+          FromPort:              "0"
+          ToPort:                "65535"
+          SourceSecurityGroupId: !GetAtt "StackReferenceResultsSecurity2.SecurityGroupInstanceId"
+          Description:           !Join [ "", [ "Security: ", !GetAtt "StackReferenceResultsSecurity2.InstanceDescription" ] ]
+        - !Ref "AWS::NoValue"
+    Tags:
+      - Key: "Name"
+        Value: !Join [ "", [ !Select [1, !Split ["|", !Ref "Project"]], "-", !Select [1, !Split ["|", !Ref "Function"]], "-rds-", !Select [3, !Split ["|", !Ref "Organization"]], "-", !Select [1, !Split ["|", !Ref "Organization"]], "-", !Ref "AWS::Region" ] ]
+  DependsOn:
+    - "StackReferenceResultsVPC"

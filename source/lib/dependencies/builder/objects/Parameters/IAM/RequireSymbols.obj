@@ -1,0 +1,13 @@
+##---------------------------------------------------------------------------------------
+# object: IAM/RequireSymbols
+# notes:
+#   - CIS Amazon Web Services Foundations
+#     - 1.7: Ensure IAM password policy require at least one symbol
+##---------------------------------------------------------------------------------------
+RequireSymbols:
+  Description: "You can require that IAM user passwords contain at least one of the following nonalphanumeric characters: ! @ # $ % ^ & * ( ) _ + - = [ ] {} | '"
+  Type: String
+  Default: true
+  AllowedValues:
+  - true
+  - false

@@ -1,0 +1,20 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SNS/Subscription/Critical3
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+SNSSubscriptionCritical3:
+  Type: "AWS::SNS::Subscription"
+  Condition: "EnabledSNSSubscriptionCritical3"
+  Properties:
+    TopicArn: !Ref "SNSTopicCritical"
+    Endpoint: !Ref "SNSSubscriptionCritical3Endpoint"
+    Protocol: !Ref "SNSSubscriptionCritical3Protocol"
+    DeliveryPolicy:
+      healthyRetryPolicy:
+        numRetries: 5
+        minDelayTarget: 20
+        maxDelayTarget: 30
+        numMinDelayRetries: 2
+        numMaxDelayRetries: 3
+        numNoDelayRetries: 0
+        backoffFunction: exponential

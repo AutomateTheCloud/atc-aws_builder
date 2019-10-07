@@ -1,0 +1,10 @@
+##-##-------------------------------------------------------------------------------------------------
+# object:  AutoScaling/LaunchConfigurationInstanceSpotId
+# class:   output
+##-------------------------------------------------------------------------------------------------
+LaunchConfigurationInstanceSpotId:
+  Condition: "EnabledSpot"
+  Description: "Launch Configuration (Instance - Spot): ID"
+  Value: !Ref "LaunchConfigurationInstanceSpot"
+  Export:
+    Name: !Sub "${AWS::StackName}-LaunchConfigurationInstanceSpotId"

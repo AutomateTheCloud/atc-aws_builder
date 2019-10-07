@@ -1,0 +1,13 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Custom/StackReferenceResultsVPN1
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+StackReferenceResultsVPN1:
+  Condition: "ExistsStackReferenceVPN1"
+  Type: "Custom::StackReferenceResultsVPN1"
+  Version: "1.0"
+  Properties:
+    "ServiceToken": !Join [ "", [ "arn:aws:lambda:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":function:stack-reference" ] ]
+    "Region": !Ref "AWS::Region"
+    "StackName": !Ref "StackReferenceVPN1"
+    "LastUpdate": !Ref "LastUpdate"

@@ -1,0 +1,35 @@
+##-------------------------------------------------------------------------------------------------
+# object:  S3/Bucket/WebsiteOrigin
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+BucketWebsiteOrigin:
+  Type: "AWS::S3::Bucket"
+  DeletionPolicy: "Retain"
+  Properties:
+    BucketName: !Join [ "", [ "origin", "-", !Select [1, !Split ["|", !Ref "Project"]], "-", !Select [1, !Split ["|", !Ref "Function"]], "-", !Select [3, !Split ["|", !Ref "Organization"]], "-", !Ref "AWS::Region", "-", !Ref "AWS::AccountId" ] ]
+    BucketEncryption:
+        ServerSideEncryptionConfiguration:
+        - ServerSideEncryptionByDefault:
+            SSEAlgorithm: "AES256"
+    AccessControl: "Private"
+    LifecycleConfiguration:
+      Rules:
+      - Status: Enabled
+        NoncurrentVersionExpirationInDays: !Ref "S3NoncurrentVersionExpiration"
+    CorsConfiguration:
+      CorsRules:
+      - AllowedHeaders: ['*']
+        AllowedMethods: [GET, POST, HEAD]
+        AllowedOrigins: ['*']
+        MaxAge: "3600"
+    VersioningConfiguration:
+      Status: "Enabled"
+    WebsiteConfiguration:
+      IndexDocument: !If [ExistsS3DocumentIndex, !Ref "S3DocumentIndex", !Ref "AWS::NoValue"]
+      ErrorDocument: !If [ExistsS3DocumentError, !Ref "S3DocumentError", !Ref "AWS::NoValue"]
+    LoggingConfiguration:
+      DestinationBucketName: !Join [ "", [ !Ref "AWS::AccountId", "-", "logs", "-", !Ref "AWS::Region" ] ]
+      LogFilePrefix: !Join [ "", [ "s3/", "origin", "-", !Select [1, !Split ["|", !Ref "Project"]], "-", !Select [1, !Split ["|", !Ref "Function"]], "-", !Select [3, !Split ["|", !Ref "Organization"]], "-", !Ref "AWS::Region", "-", !Ref "AWS::AccountId", "/" ] ]
+    Tags:
+      - Key: "Name"
+        Value: !Join [ "", [ "origin", "-", !Select [1, !Split ["|", !Ref "Project"]], "-", !Select [1, !Split ["|", !Ref "Function"]], "-", !Select [3, !Split ["|", !Ref "Organization"]], "-", !Ref "AWS::Region", "-", !Ref "AWS::AccountId" ] ]

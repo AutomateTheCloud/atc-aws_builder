@@ -1,0 +1,144 @@
+##-------------------------------------------------------------------------------------------------
+# object: Instance/Initialize
+##-------------------------------------------------------------------------------------------------
+Paradigm:
+  Parameters:
+    #-- Instance ------------------------------------------------------------------------
+    - Base/Instance/InstanceType
+    - Base/Instance/VolumeSize
+    - Base/Instance/SwapSize
+    - Base/Instance/InstanceUsers
+    - Base/Instance/KeypairOverride
+
+    #-- AutoScaling ---------------------------------------------------------------------
+    - Base/AutoScaling/LaunchTemplateUpdated
+    - Base/AutoScaling/AutoScalingDetails
+
+    #-- Network Related -----------------------------------------------------------------
+    - Base/Network/SubnetType
+
+    #-- SNS -----------------------------------------------------------------------------
+    - Base/SNS/SNSSubscriptionEmail1
+    - Base/SNS/SNSSubscriptionEmail2
+    - Base/SNS/SNSSubscriptionEmail3
+    - Base/SNS/SNSSubscriptionEmail4
+
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/StackReference/StackReferenceVPC
+    - Base/StackReference/StackReferenceCodeDeploy
+    - Base/StackReference/StackReferenceEFS
+    - Base/StackReference/StackReferenceTarget1
+    - Base/StackReference/StackReferenceTarget2
+    - Base/StackReference/StackReferenceTarget3
+    - Base/StackReference/StackReferenceTarget4
+    - Base/StackReference/StackReferenceTarget5
+    - Base/StackReference/StackReferenceTarget6
+    - Base/StackReference/StackReferenceTarget7
+    - Base/StackReference/StackReferenceTarget8
+    - Base/StackReference/StackReferenceTarget9
+    - Base/StackReference/StackReferenceTarget10
+    - Base/StackReference/StackReferenceAdministrative1
+    - Base/StackReference/StackReferenceAdministrative2
+    - Base/StackReference/StackReferenceSecurity1
+    - Base/StackReference/StackReferenceSecurity2
+
+##-------------------------------------------------------------------------------------------------
+  Mappings:
+
+##-------------------------------------------------------------------------------------------------
+  Conditions:
+    #-- Instance ------------------------------------------------------------------------
+    - Base/Instance/ExistsRootVolumeSize
+    - Base/Instance/ExistsApplicationVolumeSize
+    - Base/Instance/ExistsSwapSize
+    - Base/Instance/ExistsInstanceUsers
+    - Base/Instance/ExistsKeypairOverride
+
+    #-- Network Related -----------------------------------------------------------------
+    - Base/Network/SubnetTypePublic
+    - Base/Network/SubnetTypePrivate
+    - Base/Network/SubnetTypeRestricted
+
+    #-- SNS -----------------------------------------------------------------------------
+    - Base/SNS/ExistsSNSSubscriptionEmail1
+    - Base/SNS/ExistsSNSSubscriptionEmail2
+    - Base/SNS/ExistsSNSSubscriptionEmail3
+    - Base/SNS/ExistsSNSSubscriptionEmail4
+
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/StackReference/ExistsStackReferenceCodeDeploy
+    - Base/StackReference/ExistsStackReferenceEFS
+    - Base/StackReference/ExistsStackReferenceTarget1
+    - Base/StackReference/ExistsStackReferenceTarget2
+    - Base/StackReference/ExistsStackReferenceTarget3
+    - Base/StackReference/ExistsStackReferenceTarget4
+    - Base/StackReference/ExistsStackReferenceTarget5
+    - Base/StackReference/ExistsStackReferenceTarget6
+    - Base/StackReference/ExistsStackReferenceTarget7
+    - Base/StackReference/ExistsStackReferenceTarget8
+    - Base/StackReference/ExistsStackReferenceTarget9
+    - Base/StackReference/ExistsStackReferenceTarget10
+    - Base/StackReference/ExistsStackReferenceAdministrative1
+    - Base/StackReference/ExistsStackReferenceAdministrative2
+    - Base/StackReference/ExistsStackReferenceSecurity1
+    - Base/StackReference/ExistsStackReferenceSecurity2
+
+##-------------------------------------------------------------------------------------------------
+  Resources:
+    #-- Security Group ------------------------------------------------------------------
+    - Base/EC2/SecurityGroup/Instance
+    - Base/EC2/SecurityGroupEgress/InstanceEFS
+    - Base/EC2/SecurityGroupIngress/InstanceEFS
+
+    #-- IAM -----------------------------------------------------------------------------
+    - Base/IAM/InstanceProfile/Instance
+    - Base/IAM/Role/Instance
+
+    #-- SNS -----------------------------------------------------------------------------
+    - Base/SNS/Topic/AutoScalingGroupInstance
+    - Base/SNS/Subscription/AutoScalingGroupInstanceEmail1
+    - Base/SNS/Subscription/AutoScalingGroupInstanceEmail2
+    - Base/SNS/Subscription/AutoScalingGroupInstanceEmail3
+    - Base/SNS/Subscription/AutoScalingGroupInstanceEmail4
+
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/Custom/StackReferenceResultsVPC
+    - Base/Custom/StackReferenceResultsCodeDeploy
+    - Base/Custom/StackReferenceResultsEFS
+    - Base/Custom/StackReferenceResultsTarget1
+    - Base/Custom/StackReferenceResultsTarget2
+    - Base/Custom/StackReferenceResultsTarget3
+    - Base/Custom/StackReferenceResultsTarget4
+    - Base/Custom/StackReferenceResultsTarget5
+    - Base/Custom/StackReferenceResultsTarget6
+    - Base/Custom/StackReferenceResultsTarget7
+    - Base/Custom/StackReferenceResultsTarget8
+    - Base/Custom/StackReferenceResultsTarget9
+    - Base/Custom/StackReferenceResultsTarget10
+    - Base/Custom/StackReferenceResultsAdministrative1
+    - Base/Custom/StackReferenceResultsAdministrative2
+    - Base/Custom/StackReferenceResultsSecurity1
+    - Base/Custom/StackReferenceResultsSecurity2
+
+##-------------------------------------------------------------------------------------------------
+  Outputs:
+    #-- Instance ------------------------------------------------------------------------
+    - Base/Instance/InstanceDescription
+    - Base/Instance/SecurityGroupInstanceId
+    - Base/AutoScaling/AutoScalingGroupInstanceId
+    - Base/EC2/LaunchTemplateInstanceId
+
+    #-- IAM -----------------------------------------------------------------------------
+    - Base/IAM/Role/RoleInstanceName
+
+    #-- SNS -----------------------------------------------------------------------------
+    - Base/SNS/Topic/AutoScalingGroupInstanceArn
+    - Base/SNS/Topic/AutoScalingGroupInstanceTopicName
+
+    #-- VPC -----------------------------------------------------------------------------
+    - Base/VPC/VPCStackID
+
+##-------------------------------------------------------------------------------------------------
+  Targets:
+    #-- EC2 -----------------------------------------------------------------------------
+    - Base/EC2/LaunchTemplateInstance

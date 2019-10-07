@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/RDSDBClusterParameterGroupName
+# class:   output
+##-------------------------------------------------------------------------------------------------
+ClusterParameterGroupName:
+  Description: "Cluster Parameter Group Name"
+  Value: !Ref "RDSDBClusterParameterGroup"
+  Export:
+    Name: !Sub "${AWS::StackName}-ClusterParameterGroupName"

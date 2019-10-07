@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Network/RouteTableRestrictedId
+# class:   output
+##-------------------------------------------------------------------------------------------------
+RouteTableRestrictedId:
+  Description: "Route Table: Restricted"
+  Value: !Ref RouteTableRestricted
+  Export:
+    Name: !Sub "${AWS::StackName}-RouteTableRestrictedId"

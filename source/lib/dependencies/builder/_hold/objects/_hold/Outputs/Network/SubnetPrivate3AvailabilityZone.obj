@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Network/SubnetPrivate3AvailabilityZone
+# class:   output
+##-------------------------------------------------------------------------------------------------
+SubnetPrivate3AvailabilityZone:
+  Description: "Subnet (Private3): Availability Zone"
+  Value: !GetAtt "SubnetPrivate3.AvailabilityZone"
+  Export:
+    Name: !Sub "${AWS::StackName}-SubnetPrivate3AvailabilityZone"

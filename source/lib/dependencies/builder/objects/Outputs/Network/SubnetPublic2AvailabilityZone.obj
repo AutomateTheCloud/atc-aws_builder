@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: Network/SubnetPublic2AvailabilityZone
+##---------------------------------------------------------------------------------------
+SubnetPublic2AvailabilityZone:
+  Description: "Subnet (Public2): Availability Zone"
+  Value: !GetAtt "SubnetPublic2.AvailabilityZone"
+  Export:
+    Name: !Sub "${AWS::StackName}-SubnetPublic2AvailabilityZone"

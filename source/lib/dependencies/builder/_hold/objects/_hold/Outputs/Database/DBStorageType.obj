@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/DBStorageType
+# class:   output
+##-------------------------------------------------------------------------------------------------
+DBStorageType:
+  Description: "Database Storage Type"
+  Value: !Ref "DBStorageType"
+  Export:
+    Name: !Sub "${AWS::StackName}-DBStorageType"

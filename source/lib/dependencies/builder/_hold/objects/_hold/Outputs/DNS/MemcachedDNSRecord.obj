@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DNS/MemcachedDNSRecord
+# class:   output
+##-------------------------------------------------------------------------------------------------
+MemcachedDNSRecord:
+  Description: "Memcached: DNS Record"
+  Value: !Join [ "", [ "memcached-", !Ref "MemcachedReferenceName", "-", !Ref "AWS::Region", ".", !GetAtt "StackReferenceResultsVPC.DomainUtilityName" ] ]
+  Export:
+    Name: !Sub "${AWS::StackName}-MemcachedDNSRecord"

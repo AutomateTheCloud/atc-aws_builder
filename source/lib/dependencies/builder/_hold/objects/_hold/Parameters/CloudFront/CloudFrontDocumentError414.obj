@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  CloudFront/CloudFrontDocumentError414
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+CloudFrontDocumentError414:
+  Type:                  String
+  Default:               "error.html"
+  Description:           "CloudFront: Document - Error414"
+

@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SNS/Topic/Warning
+# class:   output
+##-------------------------------------------------------------------------------------------------
+SNSTopicWarning:
+  Description: "SNS Topic (warning): ARN"
+  Value: !Ref "SNSTopicWarning"
+  Export:
+    Name: !Sub "${AWS::StackName}-SNSTopicWarning"

@@ -1,0 +1,13 @@
+##---------------------------------------------------------------------------------------
+# object:  Custom/StackReferenceResultsTarget5
+##---------------------------------------------------------------------------------------
+StackReferenceResultsTarget5:
+  Condition: "ExistsStackReferenceTarget5"
+  Type: "Custom::StackReferenceResultsTarget5"
+  Version: "1.0"
+  Properties:
+    "ServiceToken": !Join [ "", [ "arn:aws:lambda:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":function:stack-reference" ] ]
+    "Region": !Ref "AWS::Region"
+    "StackName": !Ref "StackReferenceTarget5"
+    "LastUpdate": !Ref "LastUpdate"
+

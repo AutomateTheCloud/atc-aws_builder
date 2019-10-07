@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  LoadBalancer/TargetGroupInstanceNLBARN
+# class:   output
+##-------------------------------------------------------------------------------------------------
+TargetGroupInstanceNLBARN:
+  Description: "Target Group (InstanceNLB): ARN"
+  Value: !Ref "TargetGroupInstanceNLB"
+  Export:
+    Name: !Sub "${AWS::StackName}-TargetGroupInstanceNLBARN"

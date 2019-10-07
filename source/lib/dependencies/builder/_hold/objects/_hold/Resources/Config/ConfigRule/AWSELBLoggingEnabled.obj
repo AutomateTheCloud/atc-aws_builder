@@ -1,0 +1,17 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Config/ConfigRule/AWSELBLoggingEnabled
+# class:   resource
+# cis:     
+##-------------------------------------------------------------------------------------------------
+ConfigRuleAWSELBLoggingEnabled:
+  Type: "AWS::Config::ConfigRule"
+  Properties:
+    ConfigRuleName: "aws-elb-logging-enabled"
+    Description: "Checks whether the Application Load Balancers and the Classic Load Balancers have logging enabled"
+    Scope:
+      ComplianceResourceTypes:
+        - "AWS::ElasticLoadBalancing::LoadBalancer"
+        - "AWS::ElasticLoadBalancingV2::LoadBalancer"
+    Source:
+      Owner: AWS
+      SourceIdentifier: "ELB_LOGGING_ENABLED"

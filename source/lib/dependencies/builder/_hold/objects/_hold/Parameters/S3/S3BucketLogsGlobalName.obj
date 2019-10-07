@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  S3/S3BucketLogsGlobalName
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+S3BucketLogsGlobalName:
+  Type:                  String
+  Description:           "S3: Bucket Name (Logs - Global)"

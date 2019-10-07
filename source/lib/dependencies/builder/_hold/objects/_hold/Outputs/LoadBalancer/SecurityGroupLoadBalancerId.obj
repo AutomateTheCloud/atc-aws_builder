@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  LoadBalancer/SecurityGroupLoadBalancerId
+# class:   output
+##-------------------------------------------------------------------------------------------------
+SecurityGroupLoadBalancerId:
+  Description: "Security Group (LoadBalancer): ID"
+  Value: !Ref "SecurityGroupLoadBalancer"
+  Export:
+    Name: !Sub "${AWS::StackName}-SecurityGroupLoadBalancerId"

@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: Logs/LogGroupCloudTrailAuditId
+##---------------------------------------------------------------------------------------
+LogGroupCloudTrailAuditId:
+  Description: "Log Group: CloudTrailAudit (ID)"
+  Value: !Ref "LogGroupCloudTrailAudit"
+  Export:
+    Name: !Sub "${AWS::StackName}-LogGroupCloudTrailAuditId"

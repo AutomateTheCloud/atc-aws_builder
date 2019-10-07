@@ -1,0 +1,15 @@
+##---------------------------------------------------------------------------------------
+# object: Config/ConfigRule/AWSVPCFlowLogsEnabled
+# notes:
+#   - CIS Amazon Web Services Foundations
+#     - 2.9: Ensure VPC flow logging is enabled in all VPCs
+##---------------------------------------------------------------------------------------
+ConfigRuleAWSVPCFlowLogsEnabled:
+  Type: "AWS::Config::ConfigRule"
+  Properties:
+    ConfigRuleName: "aws-vpc-flow-logs-enabled"
+    Description: "Checks whether Amazon Virtual Private Cloud flow logs are found and enabled for Amazon VPC"
+    MaximumExecutionFrequency: "TwentyFour_Hours"
+    Source:
+      Owner: AWS
+      SourceIdentifier: "VPC_FLOW_LOGS_ENABLED"

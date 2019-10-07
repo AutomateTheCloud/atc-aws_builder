@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: Logs/LogGroup/LambdaFunctionAMILookupCustom
+##---------------------------------------------------------------------------------------
+LogGroupLambdaFunctionAMILookupCustom:
+  Type: "AWS::Logs::LogGroup"
+  Properties:
+    LogGroupName: !Sub "/aws/lambda/${LambdaFunctionAMILookupCustom}"
+    RetentionInDays: !Ref "LogRetentionAMILookupCustom"

@@ -1,0 +1,6 @@
+##-------------------------------------------------------------------------------------------------
+# object:  DNS/ExistsDNSLoadBalancerNLB
+# class:   condition
+##-------------------------------------------------------------------------------------------------
+ExistsDNSLoadBalancerNLB:
+  !Not [!Equals [!Ref "DNSLoadBalancerNLB", ""]]

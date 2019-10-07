@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: Network/SubnetType
+##---------------------------------------------------------------------------------------
+SubnetType:
+  Description: "Subnet Type"
+  Value: !Ref "SubnetType"
+  Export:
+    Name: !Sub "${AWS::StackName}-SubnetType"

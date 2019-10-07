@@ -1,0 +1,103 @@
+##-------------------------------------------------------------------------------------------------
+# object:  IAM/Group/AWSUserHuman
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+IAMGroupAWSUserHuman:
+  Type: "AWS::IAM::Group"
+  Properties:
+    GroupName: "AWS-User_Human"
+    Path: "/"
+    Policies:
+    - PolicyName: "policy_aws-user_human"
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Sid: "AllowUserstoListAWSs"
+            Effect: "Allow"
+            Action:
+              - "iam:ListAWSAliases"
+              - "iam:ListUsers"
+              - "iam:GetAWSPasswordPolicy"
+              - "iam:GetAWSSummary"
+            Resource:
+              - "*"
+          -
+            Sid: "AllowUserstoManageOwnAWS"
+            Effect: "Allow"
+            Action:
+              - "iam:ChangePassword"
+              - "iam:CreateAccessKey"
+              - "iam:CreateLoginProfile"
+              - "iam:DeleteAccessKey"
+              - "iam:DeleteLoginProfile"
+              - "iam:GetLoginProfile"
+              - "iam:ListAccessKeys"
+              - "iam:UpdateAccessKey"
+              - "iam:UpdateLoginProfile"
+              - "iam:ListSigningCertificates"
+              - "iam:DeleteSigningCertificate"
+              - "iam:UpdateSigningCertificate"
+              - "iam:UploadSigningCertificate"
+              - "iam:ListSSHPublicKeys"
+              - "iam:GetSSHPublicKey"
+              - "iam:DeleteSSHPublicKey"
+              - "iam:UpdateSSHPublicKey"
+              - "iam:UploadSSHPublicKey"
+            Resource:
+              - "arn:aws:iam::*:user/${aws:username}"
+          -
+            Sid: "AllowUserstoListOnlyThierMFA"
+            Effect: "Allow"
+            Action:
+              - "iam:ListVirtualMFADevices"
+              - "iam:ListMFADevices"
+            Resource:
+              - "arn:aws:iam::*:mfa/*"
+              - "arn:aws:iam::*:user/${aws:username}"
+          -
+            Sid: "AllowUsertoManageThierMFA"
+            Effect: "Allow"
+            Action:
+              - "iam:CreateVirtualMFADevice"
+              - "iam:DeleteVirtualMFADevice"
+              - "iam:EnableMFADevice"
+              - "iam:ResyncMFADevice"
+            Resource:
+              - "arn:aws:iam::*:mfa/${aws:username}"
+              - "arn:aws:iam::*:user/${aws:username}"
+          -
+            Sid: "AllowUserstoDeactiveTheirMFAWhenUseingMFA"
+            Effect: "Allow"
+            Action:
+              - "iam:DeactivateMFADevice"
+            Resource:
+              - "arn:aws:iam::*:mfa/${aws:username}"
+              - "arn:aws:iam::*:user/${aws:username}"
+            Condition:
+              Bool:
+                "aws:MultiFactorAuthPresent": "true"
+          -
+            Sid: "BlockMostAccessUnlessSignedinwithMFA"
+            Effect: "Deny"
+            NotAction:
+              - "iam:ChangePassword"
+              - "iam:CreateVirtualMFADevice"
+              - "iam:DeleteVirtualMFADevice"
+              - "iam:ListVirtualMFADevices"
+              - "iam:EnableMFADevice"
+              - "iam:ResyncMFADevice"
+              - "iam:ListAWSAliases"
+              - "iam:ListUsers"
+              - "iam:ListSSHPublicKeys"
+              - "iam:ListAccessKeys"
+              - "iam:ListServiceSpecificCredentials"
+              - "iam:ListMFADevices"
+              - "iam:GetAWSSummary"
+              - "sts:GetSessionToken"
+            Resource:
+              - "arn:aws:iam::*:mfa/${aws:username}"
+              - "arn:aws:iam::*:user/${aws:username}"
+            Condition:
+              BoolIfExists:
+                "aws:MultiFactorAuthPresent": "false"

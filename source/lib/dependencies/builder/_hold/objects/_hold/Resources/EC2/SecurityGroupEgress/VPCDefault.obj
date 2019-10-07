@@ -1,0 +1,13 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EC2/SecurityGroupEgress/VPCDefault
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+SecurityGroupEgressVPCDefault:
+  Type: "AWS::EC2::SecurityGroupEgress"
+  Properties:
+    GroupId:     !GetAtt "VPC.DefaultSecurityGroup"
+    IpProtocol:  "-1"
+    FromPort:    "0"
+    ToPort:      "65535"
+    CidrIp:      "127.0.0.1/32"
+    Description: "Blackhole"

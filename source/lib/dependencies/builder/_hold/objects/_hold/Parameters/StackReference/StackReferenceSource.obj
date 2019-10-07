@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  StackReference/StackReferenceSource
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+StackReferenceSource:
+  Type:                  String
+  Description:           "Stack Reference: Source"

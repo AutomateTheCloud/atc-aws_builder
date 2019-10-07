@@ -1,0 +1,12 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/MultiAZ
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+MultiAZ:
+  Type:                  String
+  Default:               "no"
+  AllowedValues:
+    - "yes"
+    - "no"
+  Description:           "Multi AZ"
+  ConstraintDescription: "yes or no"

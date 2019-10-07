@@ -1,0 +1,17 @@
+##---------------------------------------------------------------------------------------
+# object: Config/ConfigRule/AWSIAMUserNoPoliciesCheck
+# notes:
+#   - CIS Amazon Web Services Foundations
+#     - 1.16: Ensure IAM policies are attached only to groups or roles
+##---------------------------------------------------------------------------------------
+ConfigRuleAWSIAMUserNoPoliciesCheck:
+  Type: "AWS::Config::ConfigRule"
+  Properties:
+    ConfigRuleName: "aws-iam-user-no-policies-check"
+    Description: "Checks that none of your IAM users have policies attached. IAM users must inherit permissions from IAM groups or roles"
+    Scope:
+      ComplianceResourceTypes:
+        - 'AWS::IAM::User'
+    Source:
+      Owner: AWS
+      SourceIdentifier: "IAM_USER_NO_POLICIES_CHECK"

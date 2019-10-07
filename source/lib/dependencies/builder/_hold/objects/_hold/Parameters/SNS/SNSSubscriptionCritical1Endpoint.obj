@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SNS/SNSSubscriptionCritical1Endpoint
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+SNSSubscriptionCritical1Endpoint:
+  Type:                  String
+  Description:           "SNS Subscription (critical) 1: Endpoint"

@@ -1,0 +1,10 @@
+##---------------------------------------------------------------------------------------
+# object: IAM/Group/AWSUserPowerUser
+##---------------------------------------------------------------------------------------
+IAMGroupAWSUserPowerUser:
+  Type: "AWS::IAM::Group"
+  Properties:
+    GroupName: "AWS-User_PowerUser"
+    Path: "/"
+    ManagedPolicyArns:
+      - arn:aws:iam::aws:policy/PowerUserAccess

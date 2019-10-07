@@ -1,0 +1,35 @@
+##-------------------------------------------------------------------------------------------------
+# object:  KMS/Key/KMSKey
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+KMSKey:
+  Type: "AWS::KMS::Key"
+  Properties:
+    Enabled: true
+    EnableKeyRotation: true
+    Description: !Join [ "", [ !Select [0, !Split ["|", !Ref "Project"]], " - ", !Select [0, !Split ["|", !Ref "Function"]], " (", !Select [3, !Split ["|", !Ref "Organization"]], ") - [", !Select [0, !Split ["|", !Ref "Organization"]], "]" ] ]
+    KeyPolicy:
+      Version: "2012-10-17"
+      Id: !Join [ "", [ "keypolicy", "_", !Select [1, !Split ["|", !Ref "Project"]], "-", !Select [1, !Split ["|", !Ref "Function"]], "-", !Select [3, !Split ["|", !Ref "Organization"]], "-", !Ref "AWS::Region" ] ]
+      Statement:
+        - Sid: "Enable Root KMS Permissions"
+          Effect: Allow
+          Principal:
+            AWS:
+              - !Join [ "", [ "arn:aws:iam::", !Ref "AWS::AccountId", ":root" ] ]
+          Action: "kms:*"
+          Resource: "*"
+    Tags:
+      - Key: "Organization"
+        Value: !Select [0, !Split ["|", !Ref "Organization"]]
+      - Key: "Project"
+        Value: !Select [0, !Split ["|", !Ref "Project"]]
+      - Key: "Function"
+        Value: !Select [0, !Split ["|", !Ref "Function"]]
+      - Key: "Environment"
+        Value: !Select [3, !Split ["|", !Ref "Organization"]]
+      - Key: "Owner"
+        Value: !Select [0, !Split ["|", !Ref "Owner"]]
+      - Key: "Contact"
+        Value: !Select [1, !Split ["|", !Ref "Owner"]]
+        

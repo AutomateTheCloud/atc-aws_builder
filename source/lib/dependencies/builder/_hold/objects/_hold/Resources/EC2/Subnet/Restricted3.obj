@@ -1,0 +1,16 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EC2/Subnet/Restricted3
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+SubnetRestricted3:
+  Type: "AWS::EC2::Subnet"
+  Properties:
+    VpcId: !Ref "VPC"
+    CidrBlock: !Join [ "", [ !GetAtt "VPCSubnetCIDRResults.subnet-restricted-3-cidrstart", "/", !GetAtt "VPCSubnetCIDRResults.subnet-restricted-3-netmask" ] ]
+    AvailabilityZone: !Ref "AvailabilityZone3"
+    Tags:
+      - Key: "Name"
+        Value: !Join [ "_", [ "subnet", !Select [1, !Split ["|", !Ref "Organization"]], "restricted-3", !Ref "AWS::Region" ] ]
+      - Key: "Network"
+        Value: "restricted"
+  DependsOn: "VPCSubnetCIDRResults"

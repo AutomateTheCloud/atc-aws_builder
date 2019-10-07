@@ -1,0 +1,15 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Route53/RecordSetGroup/DNSDistributionWebsite
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+RecordSetGroupDNSDistributionWebsite:
+  Condition: "ExistsDNSDistributionWebsite"
+  Type: "AWS::Route53::RecordSetGroup"
+  Properties:
+    HostedZoneId: !Select [2, !Split ["|", !Ref "DNSDistributionWebsite"]]
+    RecordSets:
+    - Name: !Join [ "", [ !Select [0, !Split ["|", !Ref "DNSDistributionWebsite"]], ".", !Select [1, !Split ["|", !Ref "DNSDistributionWebsite"]] ] ]
+      Type: "CNAME"
+      TTL: "300"
+      ResourceRecords:
+        - !GetAtt "DistributionWebsite.DomainName"

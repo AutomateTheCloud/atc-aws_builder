@@ -1,0 +1,12 @@
+##---------------------------------------------------------------------------------------
+# object: GuardDuty/GuardDutyFindingPublishingFrequency
+##---------------------------------------------------------------------------------------
+GuardDutyFindingPublishingFrequency:
+  Description: "GuardDuty: Finding Publishing Frequency"
+  Type: String
+  Default: "SIX_HOURS"
+  AllowedValues:
+    - "FIFTEEN_MINUTES"
+    - "ONE_HOUR"
+    - "SIX_HOURS"
+  ConstraintDescription: "Possible values are: FIFTEEN_MINUTES, ONE_HOUR, SIX_HOURS"

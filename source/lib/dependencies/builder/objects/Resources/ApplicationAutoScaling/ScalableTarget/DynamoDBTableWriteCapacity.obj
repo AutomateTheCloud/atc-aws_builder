@@ -1,0 +1,15 @@
+##---------------------------------------------------------------------------------------
+# object: ApplicationAutoScaling/ScalableTarget/DynamoDBTableWriteCapacity
+##---------------------------------------------------------------------------------------
+ScalableTargetDynamoDBTableWriteCapacity: 
+  Type: "AWS::ApplicationAutoScaling::ScalableTarget"
+  Properties:
+    ResourceId: !Join
+      - /
+      - - table
+        - !Ref "DynamoDBTable"
+    MaxCapacity: !Ref "WriteCapacityMax"
+    MinCapacity: !Ref "WriteCapacityMin"
+    RoleARN: !GetAtt "RoleDynamoDBScaling.Arn"
+    ScalableDimension: "dynamodb:table:WriteCapacityUnits"
+    ServiceNamespace: "dynamodb"

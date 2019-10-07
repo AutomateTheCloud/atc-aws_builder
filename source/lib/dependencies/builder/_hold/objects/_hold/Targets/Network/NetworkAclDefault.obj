@@ -1,0 +1,5 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Network/NetworkAclDefault
+# class:   target
+##-------------------------------------------------------------------------------------------------
+tag_ec2|NetworkAclDefaultId|Name|default_${DETAILS_PROJECT_ABBR}_${DETAILS_FUNCTION_ABBR}_${DETAILS_ENVIRONMENT}_${DETAILS_ORGANIZATION_ABBR}_${DETAILS_REGION}

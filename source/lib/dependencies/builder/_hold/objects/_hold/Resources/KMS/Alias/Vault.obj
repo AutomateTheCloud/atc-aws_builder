@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  KMS/Alias/Vault
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+KMSAliasVault:
+  Type: "AWS::KMS::Alias"
+  Properties:
+    AliasName: !Join [ "", [ "alias/vault-", !Ref "AWS::Region" ] ]
+    TargetKeyId: !Ref "KMSKeyVault"

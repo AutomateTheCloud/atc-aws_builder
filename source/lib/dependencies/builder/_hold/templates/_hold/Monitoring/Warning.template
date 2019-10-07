@@ -1,0 +1,57 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Monitoring/Warning
+# class:   template
+##-------------------------------------------------------------------------------------------------
+
+Paradigm:
+##-------------------------------------------------------------------------------------------------
+  Parameters:
+    #-- SNS -----------------------------------------------------------------------------
+    - Base/SNS/SNSSubscriptionWarning1Endpoint
+    - Base/SNS/SNSSubscriptionWarning1Protocol
+    - Base/SNS/SNSSubscriptionWarning2Endpoint
+    - Base/SNS/SNSSubscriptionWarning2Protocol
+    - Base/SNS/SNSSubscriptionWarning3Endpoint
+    - Base/SNS/SNSSubscriptionWarning3Protocol
+    - Base/SNS/SNSSubscriptionWarning4Endpoint
+    - Base/SNS/SNSSubscriptionWarning4Protocol
+
+##-------------------------------------------------------------------------------------------------
+  Mappings:
+
+##-------------------------------------------------------------------------------------------------
+  Conditions:
+    #-- SNS -----------------------------------------------------------------------------
+    - Base/SNS/EnabledSNSSubscriptionWarning1
+    - Base/SNS/EnabledSNSSubscriptionWarning2
+    - Base/SNS/EnabledSNSSubscriptionWarning3
+    - Base/SNS/EnabledSNSSubscriptionWarning4
+
+##-------------------------------------------------------------------------------------------------
+  Resources:
+    #-- SNS -----------------------------------------------------------------------------
+    - Base/SNS/Topic/Warning
+    - Base/SNS/Subscription/Warning1
+    - Base/SNS/Subscription/Warning2
+    - Base/SNS/Subscription/Warning3
+    - Base/SNS/Subscription/Warning4
+
+##-------------------------------------------------------------------------------------------------
+  Outputs:
+    #-- SNS -----------------------------------------------------------------------------
+    - Base/SNS/Topic/Warning
+
+    #-- Tags Related --------------------------------------------------------------------
+    - Base/Details/AccountName
+    - Base/Details/AccountAbbr
+    - Base/Details/AccountNumber
+    - Base/Details/OrganizationName
+    - Base/Details/OrganizationAbbr
+    - Base/Details/Environment
+    - Base/Details/ProjectName
+    - Base/Details/ProjectAbbr
+    - Base/Details/FunctionName
+    - Base/Details/FunctionAbbr
+    - Base/Details/Owner
+    - Base/Details/Contact
+    - Base/Details/Region

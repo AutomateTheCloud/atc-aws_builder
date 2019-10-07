@@ -1,0 +1,29 @@
+##-------------------------------------------------------------------------------------------------
+# object:  CodeDeploy/DeploymentGroup/Target2LB_NLB
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+DeploymentGroupTarget2LB:
+  Condition: "EnabledCodeDeployTarget2LB"
+  Type: "AWS::CodeDeploy::DeploymentGroup"
+  Properties:
+    ApplicationName: !Ref "CodeDeployApplicationApp"
+    DeploymentGroupName: !Join [ "-", [ !Select [1, !Split ["|", !Ref "CodeDeployApplication"]], !Ref "DeploymentGroupAppendTarget2" ] ]
+    AutoRollbackConfiguration:
+      Enabled: "true"
+      Events:
+        - DEPLOYMENT_FAILURE
+        - DEPLOYMENT_STOP_ON_ALARM
+        - DEPLOYMENT_STOP_ON_REQUEST
+    AutoScalingGroups:
+      - !GetAtt "StackReferenceResultsTarget2.AutoScalingGroupInstanceId"
+    LoadBalancerInfo:
+      TargetGroupInfoList:
+        - Name: !GetAtt "StackReferenceResultsTarget2.TargetGroupInstanceNLBName"
+    DeploymentStyle:
+      DeploymentOption: WITH_TRAFFIC_CONTROL
+    DeploymentConfigName: "CodeDeployDefault.AllAtOnce"
+    ServiceRoleArn: !GetAtt "RoleCodeDeploy.Arn"
+  DependsOn:
+    - "RoleCodeDeploy"
+    - "StackReferenceResultsTarget2"
+

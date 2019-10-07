@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: Logs/LogGroup/LambdaFunctionConfigEvaluateConfigInAllRegions
+##---------------------------------------------------------------------------------------
+LogGroupLambdaFunctionConfigEvaluateConfigInAllRegions:
+  Type: "AWS::Logs::LogGroup"
+  Properties:
+    LogGroupName: !Sub "/aws/lambda/${LambdaFunctionConfigEvaluateConfigInAllRegions}"
+    RetentionInDays: "14"

@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Instance/ClusterName
+# class:   output
+##-------------------------------------------------------------------------------------------------
+ClusterName:
+  Description: "Cluster Name"
+  Value: !Ref "ClusterName"
+  Export:
+    Name: !Sub "${AWS::StackName}-ClusterName"

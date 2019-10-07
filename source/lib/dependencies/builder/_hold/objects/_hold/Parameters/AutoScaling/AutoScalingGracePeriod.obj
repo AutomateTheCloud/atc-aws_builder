@@ -1,0 +1,8 @@
+##-------------------------------------------------------------------------------------------------
+# object:  AutoScaling/AutoScalingGracePeriod
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+AutoScalingGracePeriod:
+  Type:                  String
+  Default:               "600"
+  Description:           "AutoScaling: Grace Period (in seconds)"

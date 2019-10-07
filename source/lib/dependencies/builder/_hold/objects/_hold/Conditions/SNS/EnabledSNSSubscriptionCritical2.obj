@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  SNS/EnabledSNSSubscriptionCritical2
+# class:   condition
+##-------------------------------------------------------------------------------------------------
+EnabledSNSSubscriptionCritical2: !And
+  - !Not [!Equals [!Ref "SNSSubscriptionCritical2Endpoint", ""]]
+  - !Not [!Equals [!Ref "SNSSubscriptionCritical2Protocol", ""]]

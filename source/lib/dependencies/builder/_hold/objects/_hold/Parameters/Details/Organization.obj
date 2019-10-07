@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Details/Organization
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+Organization:
+  Type:                  String
+  Description:           "Details: Organization (OrganizationName | OrganizationAbbr | region | environment)"

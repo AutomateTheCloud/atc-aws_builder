@@ -1,0 +1,7 @@
+##---------------------------------------------------------------------------------------
+# object: DynamoDB/ReadCapacityScaleOutCooldown
+##---------------------------------------------------------------------------------------
+ReadCapacityScaleOutCooldown:
+  Description: "DynamoDB Read Capacity (Scale Out Cooldown in Seconds)"
+  Type: Number
+  Default: 60

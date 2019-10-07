@@ -1,0 +1,6 @@
+##---------------------------------------------------------------------------------------
+# object: StackReference/ExistsStackReferenceDynamoDBTable4
+##---------------------------------------------------------------------------------------
+ExistsStackReferenceDynamoDBTable4:
+  !Not [!Equals [!Ref "StackReferenceDynamoDBTable4", ""]]
+

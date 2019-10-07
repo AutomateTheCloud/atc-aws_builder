@@ -1,0 +1,7 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/ClusterParameterGroupName
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+ClusterParameterGroupName:
+  Type:                  String
+  Description:           "Cluster Parameter Group Name"

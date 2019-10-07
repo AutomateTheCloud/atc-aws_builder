@@ -1,0 +1,10 @@
+##-------------------------------------------------------------------------------------------------
+# object:  EIP/EIPInstanceIpAddress
+# class:   output
+##-------------------------------------------------------------------------------------------------
+EIPInstanceIpAddress:
+  Condition: "EnabledElasticIp"
+  Description: "Elastic IP (Instance): IP Address"
+  Value: !Ref "EIPInstance"
+  Export:
+    Name: !Sub "${AWS::StackName}-EIPInstanceIpAddress"

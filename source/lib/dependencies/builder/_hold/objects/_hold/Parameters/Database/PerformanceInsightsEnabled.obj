@@ -1,0 +1,12 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Database/PerformanceInsightsEnabled
+# class:   parameter
+##-------------------------------------------------------------------------------------------------
+PerformanceInsightsEnabled:
+  Type:                  String
+  Default:               "yes"
+  AllowedValues:
+    - "yes"
+    - "no"
+  Description:           "Enable Performance Insights"
+  ConstraintDescription: "yes or no"

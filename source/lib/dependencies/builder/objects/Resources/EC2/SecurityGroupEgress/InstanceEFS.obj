@@ -1,0 +1,13 @@
+##---------------------------------------------------------------------------------------
+# object: EC2/SecurityGroupEgress/InstanceEFS
+##---------------------------------------------------------------------------------------
+SecurityGroupEgressInstanceEFS:
+  Condition: "ExistsStackReferenceEFS"
+  Type: "AWS::EC2::SecurityGroupEgress"
+  Properties:
+    GroupId:               !GetAtt "StackReferenceResultsEFS.SecurityGroupApplicationEFSId"
+    IpProtocol:            "tcp"
+    FromPort:              "2049"
+    ToPort:                "2049"
+    SourceSecurityGroupId: !Ref "SecurityGroupInstance"
+    Description: !Join [ "", [ !Select [0, !Split ["|", !Ref "Project"]], " - ", !Select [0, !Split ["|", !Ref "Function"]], " (", !Select [3, !Split ["|", !Ref "Organization"]], ") - [", !Select [0, !Split ["|", !Ref "Organization"]], "]" ] ]

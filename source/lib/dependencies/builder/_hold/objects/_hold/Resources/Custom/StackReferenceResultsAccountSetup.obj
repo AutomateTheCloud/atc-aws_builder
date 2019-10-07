@@ -1,0 +1,13 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Custom/StackReferenceResultsAccountSetup
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+StackReferenceResultsAccountSetup:
+  Condition: "ExistsStackReferenceAccountSetup"
+  Type: "Custom::StackReferenceResultsAccountSetup"
+  Version: "1.0"
+  Properties:
+    "ServiceToken": !Join [ "", [ "arn:aws:lambda:", !Ref "AWS::Region", ":", !Ref "AWS::AccountId", ":function:stack-reference" ] ]
+    "Region": !Ref "AWS::Region"
+    "StackName": !Ref "StackReferenceAccountSetup"
+    "LastUpdate": !Ref "LastUpdate"

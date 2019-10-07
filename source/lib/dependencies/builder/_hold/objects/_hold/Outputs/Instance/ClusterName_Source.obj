@@ -1,0 +1,9 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Instance/ClusterName_Source
+# class:   output
+##-------------------------------------------------------------------------------------------------
+ClusterName:
+  Description: "Cluster Name"
+  Value: !GetAtt "StackReferenceResultsSource.ClusterName"
+  Export:
+    Name: !Sub "${AWS::StackName}-ClusterName"

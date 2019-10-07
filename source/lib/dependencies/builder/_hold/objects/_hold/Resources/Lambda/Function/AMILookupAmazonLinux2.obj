@@ -1,0 +1,54 @@
+##-------------------------------------------------------------------------------------------------
+# object:  Lambda/Function/AMILookupAmazonLinux2
+# class:   resource
+##-------------------------------------------------------------------------------------------------
+LambdaFunctionAMILookupAmazonLinux2:
+  Type: "AWS::Lambda::Function"
+  Properties:
+    FunctionName: "ami-lookup-amazonlinux2"
+    Description: "AMI Lookup - AmazonLinux2"
+    Handler: "index.handler"
+    Code:
+      ZipFile:
+        !Sub |
+          var response = require('cfn-response');
+          exports.handler = function(event, context) {
+            if (event.RequestType == 'Delete') {
+              response.send(event, context, response.SUCCESS);
+              return;
+            }
+            var regionName = event.ResourceProperties.Region;
+            var responseData = {};
+            if (regionName) {
+              var aws = require('aws-sdk');
+              var ec2 = new aws.EC2({region: regionName});
+              var describeImagesParams = {
+                Filters: [{ Name: 'name', Values: ['amzn2-ami-hvm-2.0.*x86_64-gp2']}],
+                Owners: ['amazon']
+              };
+              ec2.describeImages(describeImagesParams, function(err, describeImagesResult) {
+                if (err) {
+                  responseData = {Error: 'DescribeImages call failed'};
+                  response.send(event, context, response.FAILED, responseData);
+                }
+                else {
+                  var images = describeImagesResult.Images;
+                  images.sort(function(x, y) { return y.Name.localeCompare(x.Name); });
+                  for (var j = 0; j < images.length; j++) {
+                    if (isBeta(images[j].Name)) continue;
+                    responseData['Id'] = images[j].ImageId;
+                    break;
+                  }
+                }
+                response.send(event, context, response.SUCCESS, responseData);
+              });
+            } else {
+              responseData = {Error: 'Region name not specified'};
+              response.send(event, context, response.FAILED, responseData);
+            }
+          };
+          function isBeta(imageName){return imageName.toLowerCase().indexOf('beta') > -1 || imageName.toLowerCase().indexOf('.rc') > -1;}
+    Role: !GetAtt "IAMRoleLambdaFunctionAMILookupAmazonLinux2.Arn"
+    Runtime: "nodejs8.10"
+    MemorySize: "128"
+    Timeout: "180"
