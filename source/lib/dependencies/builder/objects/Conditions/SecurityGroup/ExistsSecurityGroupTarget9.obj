@@ -1,0 +1,5 @@
+##---------------------------------------------------------------------------------------
+# object: SecurityGroup/ExistsSecurityGroupTarget9
+##---------------------------------------------------------------------------------------
+ExistsSecurityGroupTarget9:
+  !Not [!Equals [!Ref "SecurityGroupTarget9", ""]]

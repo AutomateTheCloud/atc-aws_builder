@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: DNS/DNSElastiCacheDomain
+##---------------------------------------------------------------------------------------
+DNSElastiCacheDomain:
+  Description: "DNS: ElastiCache (Domain)"
+  Value: !Select [1, !Split ["|", !Ref "DNSElastiCache"]]
+  Export:
+    Name: !Sub "${AWS::StackName}-DNSElastiCacheDomain"

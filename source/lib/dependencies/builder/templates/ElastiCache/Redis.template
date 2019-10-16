@@ -1,0 +1,202 @@
+##-------------------------------------------------------------------------------------------------
+# object: ElastiCache/Redis
+##-------------------------------------------------------------------------------------------------
+
+Paradigm:
+##-------------------------------------------------------------------------------------------------
+  Parameters:
+    #-- Redis Info ----------------------------------------------------------------------
+    - Base/ElastiCache/ReferenceName
+    - Base/ElastiCache/CacheNodeType
+    - Base/ElastiCache/EngineVersion
+    - Base/ElastiCache/ParameterGroupName
+
+    #-- Encryption ----------------------------------------------------------------------
+    - Base/ElastiCache/StorageEncryptionEnabled
+    - Base/ElastiCache/TransitEncryptionEnabled
+
+    #-- Redis Replica Info --------------------------------------------------------------
+    - Base/ElastiCache/ReplicaCount
+
+    #-- Network -------------------------------------------------------------------------
+    - Base/Network/SubnetType
+    - Base/ElastiCache/Port
+
+    #-- DNS -----------------------------------------------------------------------------
+    - Base/DNS/DNSElastiCache
+
+    #-- Maintenance ---------------------------------------------------------------------
+    - Base/ElastiCache/AutoMinorVersionUpgrade
+    - Base/ElastiCache/PreferredMaintenanceWindow
+
+    #-- Backups -------------------------------------------------------------------------
+    - Base/ElastiCache/SnapshotRetentionLimit
+    - Base/ElastiCache/SnapshotWindow
+
+    #-- SNS -----------------------------------------------------------------------------
+    - Base/SNS/SNSSubscriptionEmail1
+    - Base/SNS/SNSSubscriptionEmail2
+    - Base/SNS/SNSSubscriptionEmail3
+    - Base/SNS/SNSSubscriptionEmail4
+
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/StackReference/StackReferenceVPC
+    - Base/StackReference/StackReferenceTarget1
+    - Base/StackReference/StackReferenceTarget2
+    - Base/StackReference/StackReferenceTarget3
+    - Base/StackReference/StackReferenceTarget4
+    - Base/StackReference/StackReferenceTarget5
+    - Base/StackReference/StackReferenceTarget6
+    - Base/StackReference/StackReferenceTarget7
+    - Base/StackReference/StackReferenceTarget8
+    - Base/StackReference/StackReferenceTarget9
+    - Base/StackReference/StackReferenceTarget10
+    - Base/StackReference/StackReferenceAdministrative1
+    - Base/StackReference/StackReferenceAdministrative2
+    - Base/StackReference/StackReferenceSecurity1
+    - Base/StackReference/StackReferenceSecurity2
+    - Base/StackReference/StackReferenceVPN1
+    - Base/StackReference/StackReferenceVPN2
+
+    #-- SecurityGroup Reference ---------------------------------------------------------
+    - Base/SecurityGroup/SecurityGroupTarget1
+    - Base/SecurityGroup/SecurityGroupTarget2
+    - Base/SecurityGroup/SecurityGroupTarget3
+    - Base/SecurityGroup/SecurityGroupTarget4
+    - Base/SecurityGroup/SecurityGroupTarget5
+    - Base/SecurityGroup/SecurityGroupTarget6
+    - Base/SecurityGroup/SecurityGroupTarget7
+    - Base/SecurityGroup/SecurityGroupTarget8
+    - Base/SecurityGroup/SecurityGroupTarget9
+    - Base/SecurityGroup/SecurityGroupTarget10
+
+##-------------------------------------------------------------------------------------------------
+  Mappings:
+
+##-------------------------------------------------------------------------------------------------
+  Conditions:
+    #-- Network -------------------------------------------------------------------------
+    - Base/Network/SubnetTypePublic
+    - Base/Network/SubnetTypePrivate
+    - Base/Network/SubnetTypeRestricted
+
+    #-- SNS -----------------------------------------------------------------------------
+    - Base/SNS/ExistsSNSSubscriptionEmail1
+    - Base/SNS/ExistsSNSSubscriptionEmail2
+    - Base/SNS/ExistsSNSSubscriptionEmail3
+    - Base/SNS/ExistsSNSSubscriptionEmail4
+
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/StackReference/ExistsStackReferenceTarget1
+    - Base/StackReference/ExistsStackReferenceTarget2
+    - Base/StackReference/ExistsStackReferenceTarget3
+    - Base/StackReference/ExistsStackReferenceTarget4
+    - Base/StackReference/ExistsStackReferenceTarget5
+    - Base/StackReference/ExistsStackReferenceTarget6
+    - Base/StackReference/ExistsStackReferenceTarget7
+    - Base/StackReference/ExistsStackReferenceTarget8
+    - Base/StackReference/ExistsStackReferenceTarget9
+    - Base/StackReference/ExistsStackReferenceTarget10
+    - Base/StackReference/ExistsStackReferenceAdministrative1
+    - Base/StackReference/ExistsStackReferenceAdministrative2
+    - Base/StackReference/ExistsStackReferenceSecurity1
+    - Base/StackReference/ExistsStackReferenceSecurity2
+    - Base/StackReference/ExistsStackReferenceVPN1
+    - Base/StackReference/ExistsStackReferenceVPN2
+
+    #-- SecurityGroup Reference ---------------------------------------------------------
+    - Base/SecurityGroup/ExistsSecurityGroupTarget1
+    - Base/SecurityGroup/ExistsSecurityGroupTarget2
+    - Base/SecurityGroup/ExistsSecurityGroupTarget3
+    - Base/SecurityGroup/ExistsSecurityGroupTarget4
+    - Base/SecurityGroup/ExistsSecurityGroupTarget5
+    - Base/SecurityGroup/ExistsSecurityGroupTarget6
+    - Base/SecurityGroup/ExistsSecurityGroupTarget7
+    - Base/SecurityGroup/ExistsSecurityGroupTarget8
+    - Base/SecurityGroup/ExistsSecurityGroupTarget9
+    - Base/SecurityGroup/ExistsSecurityGroupTarget10
+
+##-------------------------------------------------------------------------------------------------
+  Resources:
+    #-- Network Related -----------------------------------------------------------------
+    - Base/EC2/SecurityGroup/ElastiCache
+
+    #-- SNS -----------------------------------------------------------------------------
+    - Base/SNS/Topic/ElastiCache
+    - Base/SNS/Subscription/ElastiCacheEmail1
+    - Base/SNS/Subscription/ElastiCacheEmail2
+    - Base/SNS/Subscription/ElastiCacheEmail3
+    - Base/SNS/Subscription/ElastiCacheEmail4
+
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/Custom/StackReferenceResultsVPC
+    - Base/Custom/StackReferenceResultsTarget1
+    - Base/Custom/StackReferenceResultsTarget2
+    - Base/Custom/StackReferenceResultsTarget3
+    - Base/Custom/StackReferenceResultsTarget4
+    - Base/Custom/StackReferenceResultsTarget5
+    - Base/Custom/StackReferenceResultsTarget6
+    - Base/Custom/StackReferenceResultsTarget7
+    - Base/Custom/StackReferenceResultsTarget8
+    - Base/Custom/StackReferenceResultsTarget9
+    - Base/Custom/StackReferenceResultsTarget10
+    - Base/Custom/StackReferenceResultsVPN1
+    - Base/Custom/StackReferenceResultsVPN2
+    - Base/Custom/StackReferenceResultsAdministrative1
+    - Base/Custom/StackReferenceResultsAdministrative2
+    - Base/Custom/StackReferenceResultsSecurity1
+    - Base/Custom/StackReferenceResultsSecurity2
+
+##-------------------------------------------------------------------------------------------------
+  Outputs:
+    #-- Redis Info ----------------------------------------------------------------------
+    - Base/ElastiCache/ReferenceName
+    - Base/ElastiCache/CacheNodeType
+    - Base/ElastiCache/EngineVersion
+    - Base/ElastiCache/ParameterGroupName
+
+    #-- Encryption ----------------------------------------------------------------------
+    - Base/ElastiCache/StorageEncryptionEnabled
+    - Base/ElastiCache/TransitEncryptionEnabled
+
+    #-- Redis Replica Info --------------------------------------------------------------
+    - Base/ElastiCache/ReplicaCount
+
+    #-- Network Related -----------------------------------------------------------------
+    - Base/Network/SubnetType
+    - Base/ElastiCache/Port
+    - Base/ElastiCache/ElastiCacheSubnetGroupId
+    - Base/ElastiCache/ElastiCacheSecurityGroupId
+
+    #-- SNS -----------------------------------------------------------------------------
+    - Base/SNS/Topic/ElastiCacheArn
+    - Base/SNS/Topic/ElastiCacheTopicName
+
+    #-- Maintenance ---------------------------------------------------------------------
+    - Base/ElastiCache/AutoMinorVersionUpgrade
+    - Base/ElastiCache/PreferredMaintenanceWindow
+
+    #-- Backups -------------------------------------------------------------------------
+    - Base/ElastiCache/SnapshotRetentionLimit
+    - Base/ElastiCache/SnapshotWindow
+    
+    #-- DNS -----------------------------------------------------------------------------
+    - Base/DNS/DNSElastiCacheDomain
+    - Base/DNS/DNSElastiCacheHostedZoneID
+    - Base/DNS/DNSElastiCacheRecordWrite
+    - Base/DNS/DNSElastiCacheRecordRead
+    
+    #-- Tags Related --------------------------------------------------------------------
+    - Base/Details/AccountName
+    - Base/Details/AccountAbbr
+    - Base/Details/AccountNumber
+    - Base/Details/OrganizationName
+    - Base/Details/OrganizationAbbr
+    - Base/Details/Environment
+    - Base/Details/ProjectName
+    - Base/Details/ProjectAbbr
+    - Base/Details/FunctionName
+    - Base/Details/FunctionAbbr
+    - Base/Details/Owner
+    - Base/Details/Contact
+    - Base/Details/Region

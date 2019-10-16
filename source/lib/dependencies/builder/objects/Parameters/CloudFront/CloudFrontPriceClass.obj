@@ -1,0 +1,12 @@
+##---------------------------------------------------------------------------------------
+# object:  CloudFront/CloudFrontPriceClass
+##---------------------------------------------------------------------------------------
+CloudFrontPriceClass:
+  Description: "CloudFront: Price Class"
+  Type: String
+  Default: "PriceClass_100"
+  AllowedValues:
+    - "PriceClass_100"
+    - "PriceClass_200"
+    - "PriceClass_All"
+  ConstraintDescription: "PriceClass_100, PriceClass_200, PriceClass_All"

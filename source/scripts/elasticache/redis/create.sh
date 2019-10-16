@@ -3,7 +3,7 @@
 # alias:   aws_builder.elasticache.redis.create
 # script:  create.sh
 # purpose: Creates Redis Elasticache (supports snapshots)
-# version: 1.0.0
+# version: 1.0.1
 ###------------------------------------------------------------------------------------------------
 
 ###------------------------------------------------------------------------------------------------
@@ -15,6 +15,7 @@ declare -a ARGUMENTS_DESCRIPTION=(
     '-t <timeout> : Timeout (in minutes)'
     '-S <snapshot_arn> : Snapshot Name to create new Redis (optional)'
     '-c <cluster_name> : Cluster Name to use snapshots from to create new Redis (optional)'
+    '-v : Verify Connection after Creation'
     '-r <region> : AWS Region'
     '-P <profile> : AWS Profile (optional)'
 )
@@ -45,6 +46,7 @@ CLOUDFORMATION_STACK_NAME="" # -s
 AWS_OPERATION_TIMEOUT="" # -t
 SNAPSHOT_NAME="" # -s
 CLUSTER_NAME_FOR_SNAPSHOT="" # -c
+VERIFY_CONNECTION=no # -v
 AWS_REGION="" # -r
 
 TAKE_SNAPSHOT=no
@@ -53,12 +55,13 @@ ELASTICACHE_PREVIOUS_OCCURRENCE=""
 ###------------------------------------------------------------------------------------------------
 ## Main
 # Process Arguments
-while getopts "hVs:t:S:c:r:P:" OPTION; do
+while getopts "hVs:t:S:c:v:r:P:" OPTION; do
     case $OPTION in
         s) CLOUDFORMATION_STACK_NAME=$OPTARG;;
         t) AWS_OPERATION_TIMEOUT=$OPTARG;;
         S) SNAPSHOT_NAME=$OPTARG;;
         c) CLUSTER_NAME_FOR_SNAPSHOT=$OPTARG;;
+        v) VERIFY_CONNECTION=yes;;
         r) AWS_REGION=$OPTARG;;
         P) AWS_PROFILE_TARGET=$OPTARG;;
         h) usage; exit 0;;
@@ -153,17 +156,19 @@ if [ ${RETURNVAL} -ne 0 ]; then
 fi
 line_break
 
-log_notice "Checking to see if Elasticache Redis Endpoint is Healthy"
-redis_get_info "${ELASTICACHE_ENDPOINT_WRITE}" "${ELASTICACHE_PORT}"
-RETURNVAL="$?"
-if [ ${RETURNVAL} -ne 0 ]; then
-    TMP_ERROR_MSG="Failed to retrieve Redis Information. To be safe, we will assume something went wrong and abort the operation"
-    log_error "- ${TMP_ERROR_MSG}"
-    log_warning "Performing Cleanup"
-    redis_delete "${ELASTICACHE_REFERENCEID}" "${AWS_REGION}"
-    exit_logic $RETURNVAL "${TMP_ERROR_MSG}"
+if option_enabled VERIFY_CONNECTION; then
+    log_notice "Checking to see if Elasticache Redis Endpoint is Healthy"
+    redis_get_info "${ELASTICACHE_ENDPOINT_WRITE}" "${ELASTICACHE_PORT}"
+    RETURNVAL="$?"
+    if [ ${RETURNVAL} -ne 0 ]; then
+        TMP_ERROR_MSG="Failed to retrieve Redis Information. To be safe, we will assume something went wrong and abort the operation"
+        log_error "- ${TMP_ERROR_MSG}"
+        log_warning "Performing Cleanup"
+        redis_delete "${ELASTICACHE_REFERENCEID}" "${AWS_REGION}"
+        exit_logic $RETURNVAL "${TMP_ERROR_MSG}"
+    fi
+    line_break
 fi
-line_break
 
 log_notice "Setting DNS Record"
 redis_set_dns

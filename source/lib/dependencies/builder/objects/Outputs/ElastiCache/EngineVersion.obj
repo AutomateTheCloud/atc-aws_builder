@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: ElastiCache/EngineVersion
+##---------------------------------------------------------------------------------------
+EngineVersion:
+  Description: "ElastiCache: Engine Version"
+  Value: !Ref "EngineVersion"
+  Export:
+    Name: !Sub "${AWS::StackName}-EngineVersion"

@@ -1,0 +1,5 @@
+##---------------------------------------------------------------------------------------
+# object: SSL/ExistsSSLCertACMCertificateArn
+##---------------------------------------------------------------------------------------
+ExistsSSLCertACMCertificateArn:
+  !Not [!Equals [!Ref SSLCertACMCertificateArn, ""]]

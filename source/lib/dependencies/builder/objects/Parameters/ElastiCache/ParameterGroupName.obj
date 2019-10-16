@@ -1,0 +1,6 @@
+##---------------------------------------------------------------------------------------
+# object: ElastiCache/ParameterGroupName
+##---------------------------------------------------------------------------------------
+ParameterGroupName:
+  Description: "ElastiCache: Parameter Group Name"
+  Type: String

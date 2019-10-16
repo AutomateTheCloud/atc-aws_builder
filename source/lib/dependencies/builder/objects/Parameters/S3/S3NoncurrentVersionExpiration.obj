@@ -1,0 +1,7 @@
+##---------------------------------------------------------------------------------------
+# object:  S3/S3NoncurrentVersionExpiration
+##---------------------------------------------------------------------------------------
+S3NoncurrentVersionExpiration:
+  Description: "S3: Noncurrent Version Expiration (Days)"
+  Type: Number
+  Default: 3650

@@ -1,0 +1,7 @@
+##---------------------------------------------------------------------------------------
+# object: ElastiCache/SnapshotRetentionLimit
+##---------------------------------------------------------------------------------------
+SnapshotRetentionLimit:
+  Description: "ElastiCache: Snapshot Retention Limit"
+  Type: Number
+  Default: 14

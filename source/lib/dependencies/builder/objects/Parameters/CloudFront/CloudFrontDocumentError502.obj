@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object:  CloudFront/CloudFrontDocumentError502
+##---------------------------------------------------------------------------------------
+CloudFrontDocumentError502:
+  Description: "CloudFront: Document - Error502"
+  Type: String
+  Default: "error.html"
+

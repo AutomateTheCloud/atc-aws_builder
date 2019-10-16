@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: ElastiCache/TransitEncryptionEnabled
+##---------------------------------------------------------------------------------------
+TransitEncryptionEnabled:
+  Description: "ElastiCache: Transit Encryption Enabled"
+  Value: !Ref "TransitEncryptionEnabled"
+  Export:
+    Name: !Sub "${AWS::StackName}-TransitEncryptionEnabled"

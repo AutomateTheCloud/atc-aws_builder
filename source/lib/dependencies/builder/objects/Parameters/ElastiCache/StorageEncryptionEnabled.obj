@@ -1,0 +1,11 @@
+##---------------------------------------------------------------------------------------
+# object: ElastiCache/StorageEncryptionEnabled
+##---------------------------------------------------------------------------------------
+StorageEncryptionEnabled:
+  Description: "ElastiCache: Storage Encryption Enabled"
+  Type: String
+  Default: "true"
+  AllowedValues:
+    - "true"
+    - "false"
+  ConstraintDescription: "true or false"

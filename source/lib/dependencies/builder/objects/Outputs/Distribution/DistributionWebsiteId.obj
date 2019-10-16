@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: Distribution/DistributionWebsiteId
+##---------------------------------------------------------------------------------------
+DistributionId:
+  Description: "CloudFront Distribution: Website"
+  Value: !Ref "DistributionWebsite"
+  Export:
+    Name: !Sub "${AWS::StackName}-DistributionId"

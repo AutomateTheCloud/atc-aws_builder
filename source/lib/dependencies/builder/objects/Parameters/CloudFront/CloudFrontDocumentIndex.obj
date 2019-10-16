@@ -1,0 +1,7 @@
+##---------------------------------------------------------------------------------------
+# object:  CloudFront/CloudFrontDocumentIndex
+##---------------------------------------------------------------------------------------
+CloudFrontDocumentIndex:
+  Description: "CloudFront: Document - Index"
+  Type: String
+  Default: "index.html"

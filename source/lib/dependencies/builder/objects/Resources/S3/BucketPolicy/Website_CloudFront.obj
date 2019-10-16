@@ -1,0 +1,21 @@
+##---------------------------------------------------------------------------------------
+# object: S3/Bucket/Policy/Website_CloudFront
+##---------------------------------------------------------------------------------------
+S3BucketPolicyWebsite:
+  Type: "AWS::S3::BucketPolicy"
+  Properties:
+    Bucket: !Ref "S3BucketWebsite"
+    PolicyDocument:
+      Version: "2012-10-17"
+      Statement:
+        -
+          Sid: "cloudfront_read"
+          Effect: "Allow"
+          Principal:
+              CanonicalUser: !GetAtt "CloudFrontOriginAccessIdentityWebsite.S3CanonicalUserId"
+          Action:
+            - "s3:GetObject"
+          Resource:
+            - !Join [ "", [ "arn:aws:s3:::", !Ref "S3BucketWebsite", "/*" ] ]
+  DependsOn:
+    - "S3BucketWebsite"

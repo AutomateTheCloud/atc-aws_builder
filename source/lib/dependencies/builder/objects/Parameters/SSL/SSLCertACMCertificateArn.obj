@@ -1,0 +1,6 @@
+##---------------------------------------------------------------------------------------
+# object:  SSL/SSLCertACMCertificateArn
+##---------------------------------------------------------------------------------------
+SSLCertACMCertificateArn:
+  Description: "SSL Cert: ACM Certificate ARN"
+  Type: String

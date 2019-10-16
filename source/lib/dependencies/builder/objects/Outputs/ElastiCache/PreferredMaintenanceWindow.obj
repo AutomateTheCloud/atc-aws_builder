@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: ElastiCache/PreferredMaintenanceWindow
+##---------------------------------------------------------------------------------------
+PreferredMaintenanceWindow:
+  Description: "ElastiCache: Preferred Maintenance Window"
+  Value: !Ref "PreferredMaintenanceWindow"
+  Export:
+    Name: !Sub "${AWS::StackName}-PreferredMaintenanceWindow"

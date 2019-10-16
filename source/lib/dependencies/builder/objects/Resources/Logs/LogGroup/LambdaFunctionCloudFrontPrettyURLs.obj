@@ -1,0 +1,13 @@
+##---------------------------------------------------------------------------------------
+# object: Logs/LogGroup/LambdaFunctionCloudFrontPrettyURLs
+##---------------------------------------------------------------------------------------
+LogGroupLambdaFunctionCloudFrontPrettyURLs:
+  Type: "AWS::Logs::LogGroup"
+  Properties:
+    LogGroupName: !Sub "/aws/lambda/${LambdaFunctionCloudFrontPrettyURLs}"
+    RetentionInDays: 3
+LogGroupLambdaFunctionEdgeCloudFrontPrettyURLs:
+  Type: "AWS::Logs::LogGroup"
+  Properties:
+    LogGroupName: !Sub "/aws/lambda/${AWS::Region}.${LambdaFunctionCloudFrontPrettyURLs}"
+    RetentionInDays: 3

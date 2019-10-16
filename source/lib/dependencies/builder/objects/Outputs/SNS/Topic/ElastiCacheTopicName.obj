@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: SNS/Topic/ElastiCacheTopicName
+##---------------------------------------------------------------------------------------
+SNSTopicElastiCacheTopicName:
+  Description: "SNS Topic (ElastiCache): Topic Name"
+  Value: !GetAtt "SNSTopicElastiCache.TopicName"
+  Export:
+    Name: !Sub "${AWS::StackName}-SNSTopicElastiCacheTopicName"

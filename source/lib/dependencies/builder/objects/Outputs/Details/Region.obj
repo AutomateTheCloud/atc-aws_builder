@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: Details/Region
+##---------------------------------------------------------------------------------------
+Region:
+  Description: "Details: Region"
+  Value: !Ref "AWS::Region"
+  Export:
+    Name: !Sub "${AWS::StackName}-Region"

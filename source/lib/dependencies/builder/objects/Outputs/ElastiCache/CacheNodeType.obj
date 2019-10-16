@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: ElastiCache/CacheNodeType
+##---------------------------------------------------------------------------------------
+CacheNodeType:
+  Description: "ElastiCache: Cache Node Type"
+  Value: !Ref "CacheNodeType"
+  Export:
+    Name: !Sub "${AWS::StackName}-CacheNodeType"

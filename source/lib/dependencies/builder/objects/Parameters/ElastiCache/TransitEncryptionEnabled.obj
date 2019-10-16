@@ -1,0 +1,11 @@
+##---------------------------------------------------------------------------------------
+# object: ElastiCache/TransitEncryptionEnabled
+##---------------------------------------------------------------------------------------
+TransitEncryptionEnabled:
+  Description: "ElastiCache: Transit Encryption Enabled"
+  Type: String
+  Default: "true"
+  AllowedValues:
+    - "true"
+    - "false"
+  ConstraintDescription: "true or false"

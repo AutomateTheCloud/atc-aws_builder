@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: DNS/DNSElastiCacheRecordWrite
+##---------------------------------------------------------------------------------------
+DNSElastiCacheRecordWrite:
+  Description: "DNS: ElastiCache - Record (Write)"
+  Value: !Join [ "", [ !Select [0, !Split ["|", !Ref "DNSElastiCache"]], ".write.elasticache.", !Ref "AWS::Region", ".", !Select [1, !Split ["|", !Ref "DNSElastiCache"]] ] ]
+  Export:
+    Name: !Sub "${AWS::StackName}-DNSElastiCacheRecordWrite"

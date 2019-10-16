@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object:  CloudFront/CloudFrontDocumentError404
+##---------------------------------------------------------------------------------------
+CloudFrontDocumentError404:
+  Description: "CloudFront: Document - Error404"
+  Type: String
+  Default: "error.html"
+

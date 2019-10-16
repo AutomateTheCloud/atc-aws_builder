@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: ElastiCache/ReferenceName
+##---------------------------------------------------------------------------------------
+ReferenceName:
+  Description: "ElastiCache: Reference Name"
+  Value: !Ref "ReferenceName"
+  Export:
+    Name: !Sub "${AWS::StackName}-ReferenceName"

@@ -1,0 +1,11 @@
+##---------------------------------------------------------------------------------------
+# object: ElastiCache/AutoMinorVersionUpgrade
+##---------------------------------------------------------------------------------------
+AutoMinorVersionUpgrade:
+  Description: "ElastiCache: Auto Minor Version Upgrade"
+  Type: String
+  Default: "true"
+  AllowedValues:
+    - "true"
+    - "false"
+  ConstraintDescription: "true or false"

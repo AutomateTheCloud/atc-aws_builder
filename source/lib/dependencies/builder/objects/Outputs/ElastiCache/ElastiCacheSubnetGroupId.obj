@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: ElastiCache/ElastiCacheSubnetGroupId
+##---------------------------------------------------------------------------------------
+ElastiCacheSubnetGroupId:
+  Description: "ElastiCache: Subnet Group ID"
+  Value: !If [SubnetTypePublic, !GetAtt "StackReferenceResultsVPC.ECSubnetGroupPublicId", !If [SubnetTypePrivate, !GetAtt "StackReferenceResultsVPC.ECSubnetGroupPrivateId", !GetAtt "StackReferenceResultsVPC.ECSubnetGroupRestrictedId"]]
+  Export:
+    Name: !Sub "${AWS::StackName}-ElastiCacheSubnetGroupId"

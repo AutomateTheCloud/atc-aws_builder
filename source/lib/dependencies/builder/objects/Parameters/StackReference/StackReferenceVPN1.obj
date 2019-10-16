@@ -1,0 +1,6 @@
+##---------------------------------------------------------------------------------------
+# object: StackReference/StackReferenceVPN1
+##---------------------------------------------------------------------------------------
+StackReferenceVPN1:
+  Description: "Stack Reference: VPN1"
+  Type: String

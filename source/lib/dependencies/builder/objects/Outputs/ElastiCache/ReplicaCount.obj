@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: ElastiCache/ReplicaCount
+##---------------------------------------------------------------------------------------
+ReplicaCount:
+  Description: "ElastiCache: Replica Count"
+  Value: !Ref ReplicaCount
+  Export:
+    Name: !Sub "${AWS::StackName}-ReplicaCount"

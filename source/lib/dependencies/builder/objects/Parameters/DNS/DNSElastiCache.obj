@@ -1,0 +1,6 @@
+##---------------------------------------------------------------------------------------
+# object: DNS/DNSElastiCache
+##---------------------------------------------------------------------------------------
+DNSElastiCache:
+  Description: "DNS: ElastiCache (Subdomain|Domain|HostedZoneID)"
+  Type: String

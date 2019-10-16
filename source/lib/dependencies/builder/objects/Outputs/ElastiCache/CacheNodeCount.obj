@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: ElastiCache/CacheNodeCount
+##---------------------------------------------------------------------------------------
+CacheNodeCount:
+  Description: "ElastiCache: Cache Node Count"
+  Value: !Ref "CacheNodeCount"
+  Export:
+    Name: !Sub "${AWS::StackName}-CacheNodeCount"

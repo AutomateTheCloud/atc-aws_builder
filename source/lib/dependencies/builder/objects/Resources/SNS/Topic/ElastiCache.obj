@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: SNS/Topic/ElastiCache
+##---------------------------------------------------------------------------------------
+SNSTopicElastiCache:
+  Type: "AWS::SNS::Topic"
+  Properties:
+    TopicName: !Join [ "_", [ "elasticache", !Select [1, !Split ["|", !Ref "Project"]], !Select [1, !Split ["|", !Ref "Function"]], !Select [3, !Split ["|", !Ref "Organization"]], !Select [1, !Split ["|", !Ref "Organization"]], !Ref "AWS::Region" ] ]
+    DisplayName: !Join [ "_", [ "elasticache", !Select [1, !Split ["|", !Ref "Project"]], !Select [1, !Split ["|", !Ref "Function"]], !Select [3, !Split ["|", !Ref "Organization"]], !Select [1, !Split ["|", !Ref "Organization"]], !Ref "AWS::Region" ] ]

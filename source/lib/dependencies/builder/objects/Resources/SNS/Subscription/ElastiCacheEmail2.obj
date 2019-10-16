@@ -1,0 +1,10 @@
+##---------------------------------------------------------------------------------------
+# object: SNS/Subscription/ElastiCacheEmail2
+##---------------------------------------------------------------------------------------
+SNSSubscriptionElastiCacheEmail2:
+  Condition: "ExistsSNSSubscriptionEmail2"
+  Type: "AWS::SNS::Subscription"
+  Properties:
+    Endpoint: !Ref "SNSSubscriptionEmail2"
+    Protocol: "email"
+    TopicArn: !Ref "SNSTopicElastiCache"

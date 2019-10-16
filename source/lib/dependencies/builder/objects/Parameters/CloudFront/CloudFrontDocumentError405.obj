@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object:  CloudFront/CloudFrontDocumentError405
+##---------------------------------------------------------------------------------------
+CloudFrontDocumentError405:
+  Description: "CloudFront: Document - Error405"
+  Type: String
+  Default: "error.html"
+

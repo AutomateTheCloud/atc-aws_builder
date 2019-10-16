@@ -1,0 +1,159 @@
+##---------------------------------------------------------------------------------------
+# object: CloudFront/Distribution/Website_S3
+##---------------------------------------------------------------------------------------
+DistributionWebsite:
+  Type: "AWS::CloudFront::Distribution"
+  Properties:
+    DistributionConfig:
+      Comment: !Join [ "", [ "S3 Website (", !Ref "S3BucketWebsite", ")" ] ]
+      Aliases:
+      - !If
+          - ExistsWebsiteAlias1
+          - !Ref "WebsiteAlias1"
+          - !Ref "AWS::NoValue"
+      - !If
+          - ExistsWebsiteAlias2
+          - !Ref "WebsiteAlias2"
+          - !Ref "AWS::NoValue"
+      - !If
+          - ExistsWebsiteAlias3
+          - !Ref "WebsiteAlias3"
+          - !Ref "AWS::NoValue"
+      - !If
+          - ExistsWebsiteAlias4
+          - !Ref "WebsiteAlias4"
+          - !Ref "AWS::NoValue"
+      - !If
+          - ExistsWebsiteAlias5
+          - !Ref "WebsiteAlias5"
+          - !Ref "AWS::NoValue"
+      - !If
+          - ExistsWebsiteAlias6
+          - !Ref "WebsiteAlias6"
+          - !Ref "AWS::NoValue"
+      Enabled: "true"
+      PriceClass: !Ref "CloudFrontPriceClass"
+      ViewerCertificate:
+        AcmCertificateArn: !If [ExistsSSLCertACMCertificateArn, !Ref "SSLCertACMCertificateArn", !Ref "AWS::NoValue"]
+        ServerCertificateId: !If [ExistsSSLCertIAMCertificateId, !Ref "SSLCertIAMCertificateId", !Ref "AWS::NoValue"]
+        SslSupportMethod: "sni-only"
+        MinimumProtocolVersion: !Ref "CloudFrontSSLMinimumProtocolVersion"
+      HttpVersion: "http2"
+      DefaultCacheBehavior:
+        AllowedMethods:
+        - GET
+        - HEAD
+        Compress: "true"
+        ForwardedValues:
+          QueryString: "true"
+          Cookies:
+            Forward: "all"
+          Headers:
+            - "Access-Control-Request-Headers"
+            - "Access-Control-Request-Method"
+            - "Origin"
+        TargetOriginId: !Join [ "_", [ "s3", !Ref "S3BucketWebsite" ] ]
+        ViewerProtocolPolicy: redirect-to-https
+      Logging:
+        IncludeCookies: "true"
+        Bucket: !Join [ "", [ !GetAtt "StackReferenceResultsInitialize.S3BucketLogs", ".s3.amazonaws.com" ] ]
+        Prefix: !Join [ "", [ "cloudfront/", !Select [1, !Split ["|", !Ref "Project"]], "-", !Select [1, !Split ["|", !Ref "Function"]], "-", !Select [3, !Split ["|", !Ref "Organization"]], "-", !Ref "AWS::Region", "/" ] ]
+      DefaultRootObject: !If [ExistsCloudFrontDocumentIndex, !Ref "CloudFrontDocumentIndex", !Ref "AWS::NoValue"]
+      CustomErrorResponses:
+        - !If
+          - "ExistsCloudFrontDocumentError400"
+          - ErrorCode: "400"
+            ResponsePagePath: !Join [ "", [ "/", !Ref "CloudFrontDocumentError400" ] ]
+            ResponseCode: "400"
+            ErrorCachingMinTTL: "30"
+          - !Ref "AWS::NoValue"
+        - !If
+          - "ExistsCloudFrontDocumentError403"
+          - ErrorCode: "403"
+            ResponsePagePath: !Join [ "", [ "/", !Ref "CloudFrontDocumentError403" ] ]
+            ResponseCode: "403"
+            ErrorCachingMinTTL: "30"
+          - !Ref "AWS::NoValue"
+        - !If
+          - "ExistsCloudFrontDocumentError404"
+          - ErrorCode: "404"
+            ResponsePagePath: !Join [ "", [ "/", !Ref "CloudFrontDocumentError404" ] ]
+            ResponseCode: "404"
+            ErrorCachingMinTTL: "30"
+          - !Ref "AWS::NoValue"
+        - !If
+          - "ExistsCloudFrontDocumentError405"
+          - ErrorCode: "405"
+            ResponsePagePath: !Join [ "", [ "/", !Ref "CloudFrontDocumentError405" ] ]
+            ResponseCode: "405"
+            ErrorCachingMinTTL: "30"
+          - !Ref "AWS::NoValue"
+        - !If
+          - "ExistsCloudFrontDocumentError414"
+          - ErrorCode: "414"
+            ResponsePagePath: !Join [ "", [ "/", !Ref "CloudFrontDocumentError414" ] ]
+            ResponseCode: "414"
+            ErrorCachingMinTTL: "30"
+          - !Ref "AWS::NoValue"
+        - !If
+          - "ExistsCloudFrontDocumentError416"
+          - ErrorCode: "416"
+            ResponsePagePath: !Join [ "", [ "/", !Ref "CloudFrontDocumentError416" ] ]
+            ResponseCode: "416"
+            ErrorCachingMinTTL: "30"
+          - !Ref "AWS::NoValue"
+        - !If
+          - "ExistsCloudFrontDocumentError500"
+          - ErrorCode: "500"
+            ResponsePagePath: !Join [ "", [ "/", !Ref "CloudFrontDocumentError500" ] ]
+            ResponseCode: "500"
+            ErrorCachingMinTTL: "30"
+          - !Ref "AWS::NoValue"
+        - !If
+          - "ExistsCloudFrontDocumentError501"
+          - ErrorCode: "501"
+            ResponsePagePath: !Join [ "", [ "/", !Ref "CloudFrontDocumentError501" ] ]
+            ResponseCode: "501"
+            ErrorCachingMinTTL: "30"
+          - !Ref "AWS::NoValue"
+        - !If
+          - "ExistsCloudFrontDocumentError502"
+          - ErrorCode: "502"
+            ResponsePagePath: !Join [ "", [ "/", !Ref "CloudFrontDocumentError502" ] ]
+            ResponseCode: "502"
+            ErrorCachingMinTTL: "30"
+          - !Ref "AWS::NoValue"
+        - !If
+          - "ExistsCloudFrontDocumentError503"
+          - ErrorCode: "503"
+            ResponsePagePath: !Join [ "", [ "/", !Ref "CloudFrontDocumentError503" ] ]
+            ResponseCode: "503"
+            ErrorCachingMinTTL: "30"
+          - !Ref "AWS::NoValue"
+        - !If
+          - "ExistsCloudFrontDocumentError504"
+          - ErrorCode: "504"
+            ResponsePagePath: !Join [ "", [ "/", !Ref "CloudFrontDocumentError504" ] ]
+            ResponseCode: "504"
+            ErrorCachingMinTTL: "30"
+          - !Ref "AWS::NoValue"
+      Origins:
+      - S3OriginConfig:
+          OriginAccessIdentity: !Join [ "", [ "origin-access-identity/cloudfront/", !Ref "CloudFrontOriginAccessIdentityWebsite", ] ]
+        DomainName: !GetAtt "S3BucketWebsite.DomainName"
+        Id: !Join [ "_", [ "s3", !Ref "S3BucketWebsite" ] ]
+    Tags:
+      - Key: "Organization"
+        Value: !Select [0, !Split ["|", !Ref "Organization"]]
+      - Key: "Project"
+        Value: !Select [0, !Split ["|", !Ref "Project"]]
+      - Key: "Function"
+        Value: !Select [0, !Split ["|", !Ref "Function"]]
+      - Key: "Environment"
+        Value: !Select [3, !Split ["|", !Ref "Organization"]]
+      - Key: "Owner"
+        Value: !Select [0, !Split ["|", !Ref "Owner"]]
+      - Key: "Contact"
+        Value: !Select [1, !Split ["|", !Ref "Owner"]]
+  DependsOn:
+    - "S3BucketWebsite"

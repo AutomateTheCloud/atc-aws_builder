@@ -1,0 +1,9 @@
+##---------------------------------------------------------------------------------------
+# object: DNS/DNSWebsiteRecord
+##---------------------------------------------------------------------------------------
+DNSWebsiteRecord:
+  Condition: "ExistsDNSWebsite"
+  Description: "DNS: Website Record"
+  Value: !Join [ "", [ !Select [0, !Split ["|", !Ref "DNSWebsite"]], ".", !Select [1, !Split ["|", !Ref "DNSWebsite"]] ] ]
+  Export:
+    Name: !Sub "${AWS::StackName}-DNSWebsiteRecord"

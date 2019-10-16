@@ -1,0 +1,107 @@
+##-------------------------------------------------------------------------------------------------
+# object: Website/CloudFront_S3_PrettyURLs
+##-------------------------------------------------------------------------------------------------
+
+Paradigm:
+##-------------------------------------------------------------------------------------------------
+  Parameters:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/StackReference/StackReferenceInitialize
+
+    #-- SSL Certificate -----------------------------------------------------------------
+    - Base/SSL/SSLCertACMCertificateArn
+    - Base/SSL/SSLCertIAMCertificateId
+
+    #-- S3 ------------------------------------------------------------------------------
+    - Base/S3/S3NoncurrentVersionExpiration
+
+    #-- CloudFront ----------------------------------------------------------------------
+    - Base/CloudFront/CloudFrontPriceClass
+    - Base/CloudFront/CloudFrontSSLMinimumProtocolVersion
+    - Base/CloudFront/CloudFrontDocumentIndex
+    - Base/CloudFront/CloudFrontDocumentError400
+    - Base/CloudFront/CloudFrontDocumentError403
+    - Base/CloudFront/CloudFrontDocumentError404
+    - Base/CloudFront/CloudFrontDocumentError405
+    - Base/CloudFront/CloudFrontDocumentError414
+    - Base/CloudFront/CloudFrontDocumentError416
+    - Base/CloudFront/CloudFrontDocumentError500
+    - Base/CloudFront/CloudFrontDocumentError501
+    - Base/CloudFront/CloudFrontDocumentError502
+    - Base/CloudFront/CloudFrontDocumentError503
+    - Base/CloudFront/CloudFrontDocumentError504
+
+    #-- Website Configuration -----------------------------------------------------------
+    - Base/Website/WebsiteAlias1
+    - Base/Website/WebsiteAlias2
+    - Base/Website/WebsiteAlias3
+    - Base/Website/WebsiteAlias4
+    - Base/Website/WebsiteAlias5
+    - Base/Website/WebsiteAlias6
+
+    #-- DNS ---------------------------------------------------------------------------------
+    - Base/DNS/DNSWebsite
+
+##-------------------------------------------------------------------------------------------------
+  Mappings:
+
+##-------------------------------------------------------------------------------------------------
+  Conditions:
+    #-- SSL Certificate -----------------------------------------------------------------
+    - Base/SSL/ExistsSSLCertACMCertificateArn
+    - Base/SSL/ExistsSSLCertIAMCertificateId
+
+    #-- CloudFront ----------------------------------------------------------------------
+    - Base/CloudFront/ExistsCloudFrontDocumentIndex
+    - Base/CloudFront/ExistsCloudFrontDocumentError400
+    - Base/CloudFront/ExistsCloudFrontDocumentError403
+    - Base/CloudFront/ExistsCloudFrontDocumentError404
+    - Base/CloudFront/ExistsCloudFrontDocumentError405
+    - Base/CloudFront/ExistsCloudFrontDocumentError414
+    - Base/CloudFront/ExistsCloudFrontDocumentError416
+    - Base/CloudFront/ExistsCloudFrontDocumentError500
+    - Base/CloudFront/ExistsCloudFrontDocumentError501
+    - Base/CloudFront/ExistsCloudFrontDocumentError502
+    - Base/CloudFront/ExistsCloudFrontDocumentError503
+    - Base/CloudFront/ExistsCloudFrontDocumentError504
+    
+    #-- Website Configuration -----------------------------------------------------------
+    - Base/Website/ExistsWebsiteAlias1
+    - Base/Website/ExistsWebsiteAlias2
+    - Base/Website/ExistsWebsiteAlias3
+    - Base/Website/ExistsWebsiteAlias4
+    - Base/Website/ExistsWebsiteAlias5
+    - Base/Website/ExistsWebsiteAlias6
+
+    #-- DNS -----------------------------------------------------------------------------
+    - Base/DNS/ExistsDNSWebsite
+
+##-------------------------------------------------------------------------------------------------
+  Resources:
+    #-- Stack Reference -----------------------------------------------------------------
+    - Base/Custom/StackReferenceResultsInitialize
+
+    #-- CloudFront ----------------------------------------------------------------------
+    - Base/CloudFront/Distribution/Website_S3_PrettyURLs
+    - Base/CloudFront/CloudFrontOriginAccessIdentity/Website_S3
+
+    #-- S3 Bucket -----------------------------------------------------------------------
+    - Base/S3/Bucket/Website_CloudFront
+    - Base/S3/BucketPolicy/Website_CloudFront
+
+    #-- Lambda --------------------------------------------------------------------------
+    - Base/Lambda/Function/CloudFrontPrettyURLs
+    - Base/Lambda/Version/CloudFrontPrettyURLs
+    - Base/IAM/Role/LambdaFunctionCloudFrontPrettyURLs
+    - Base/Logs/LogGroup/LambdaFunctionCloudFrontPrettyURLs
+
+    #-- DNS -----------------------------------------------------------------------------
+    - Base/Route53/RecordSetGroup/DNSWebsite
+
+##-------------------------------------------------------------------------------------------------
+  Outputs:
+    #-- Website -------------------------------------------------------------------------
+    - Base/S3/S3BucketWebsite
+    - Base/Distribution/DistributionWebsiteId
+    - Base/Distribution/DistributionWebsiteURL
+    - Base/DNS/DNSWebsiteRecord

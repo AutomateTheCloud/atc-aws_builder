@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: CloudFront/CloudFrontOriginAccessIdentity/Website_S3
+##---------------------------------------------------------------------------------------
+CloudFrontOriginAccessIdentityWebsite:
+  Type: "AWS::CloudFront::CloudFrontOriginAccessIdentity"
+  Properties:
+    CloudFrontOriginAccessIdentityConfig:
+      Comment: !Ref "S3BucketWebsite"

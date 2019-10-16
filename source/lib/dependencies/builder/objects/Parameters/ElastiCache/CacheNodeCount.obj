@@ -1,0 +1,7 @@
+##---------------------------------------------------------------------------------------
+# object: ElastiCache/CacheNodeCount
+##---------------------------------------------------------------------------------------
+CacheNodeCount:
+  Description: "ElastiCache: Cache Node Count"
+  Type: Number
+  Default: 1

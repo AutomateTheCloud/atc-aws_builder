@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: Lambda/Version/CloudFrontPrettyURLs
+##---------------------------------------------------------------------------------------
+LambdaVersionCloudFrontPrettyURLs:
+  Type: "AWS::Lambda::Version"
+  Properties:
+    FunctionName: !Ref "LambdaFunctionCloudFrontPrettyURLs"
+    Description: "CloudFormation Pretty URL Lambda Function"

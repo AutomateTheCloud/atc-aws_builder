@@ -1,0 +1,7 @@
+##---------------------------------------------------------------------------------------
+# object: ElastiCache/ReplicaCount
+##---------------------------------------------------------------------------------------
+ReplicaCount:
+  Description: "ElastiCache: Replica Count"
+  Type: Number
+  Default: 0

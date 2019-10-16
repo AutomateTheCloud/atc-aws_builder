@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: ElastiCache/StorageEncryptionEnabled
+##---------------------------------------------------------------------------------------
+StorageEncryptionEnabled:
+  Description: "ElastiCache: Storage Encryption Enabled"
+  Value: !Ref "StorageEncryptionEnabled"
+  Export:
+    Name: !Sub "${AWS::StackName}-StorageEncryptionEnabled"

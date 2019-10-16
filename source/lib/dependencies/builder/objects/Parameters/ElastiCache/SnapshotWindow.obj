@@ -1,0 +1,7 @@
+##---------------------------------------------------------------------------------------
+# object: ElastiCache/SnapshotWindow
+##---------------------------------------------------------------------------------------
+SnapshotWindow:
+  Description: "ElastiCache: Snapshot Window"
+  Type: String
+  Default: 02:00-04:00

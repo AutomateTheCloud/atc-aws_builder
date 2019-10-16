@@ -1,0 +1,20 @@
+##---------------------------------------------------------------------------------------
+# object: IAM/Role/LambdaFunctionCloudFrontPrettyURLs
+##---------------------------------------------------------------------------------------
+IAMRoleLambdaFunctionCloudFrontPrettyURLs:
+  Type: "AWS::IAM::Role"
+  Properties:
+    RoleName: !Join [ "", [ "lambda", "_", "cfpretty", "-", !Select [1, !Split ["|", !Ref "Project"]], "-", !Select [1, !Split ["|", !Ref "Function"]], "-", !Select [3, !Split ["|", !Ref "Organization"]], "-", !Ref "AWS::Region" ] ]
+    AssumeRolePolicyDocument:
+      Version: "2012-10-17"
+      Statement:
+        - Effect: "Allow"
+          Principal:
+            Service:
+              - "edgelambda.amazonaws.com"
+              - "lambda.amazonaws.com"
+          Action:
+            - "sts:AssumeRole"
+    Path: "/"
+    ManagedPolicyArns:
+      - "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"

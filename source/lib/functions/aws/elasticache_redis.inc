@@ -1,7 +1,7 @@
 ###------------------------------------------------------------------------------------------------
 # script:  elasticache_redis.inc
 # purpose: Collection of functions related to AWS (ElastiCache - Redis)
-# version: 1.0.0
+# version: 1.0.1
 #
 # function list:
 #          - load_info_redis
@@ -17,7 +17,10 @@
 #          - redis_poll_status
 #          - redis_set_dns
 ###------------------------------------------------------------------------------------------------
-REQUIRED_EXECUTABLES+=('aws' 'redis-cli')
+REQUIRED_EXECUTABLES+=(
+    'aws'
+    'redis-cli'
+)
 
 ###------------------------------------------------------------------------------------------------
 # Variables
@@ -35,20 +38,22 @@ STACK_VARIABLES_REQUIRED+=(
     'CacheNodeType'
     'EngineVersion'
     'ReplicaCount'
-    'EncryptionEnabled'
+    'StorageEncryptionEnabled'
+    'TransitEncryptionEnabled'
     'ParameterGroupName'
     'SubnetType'
-    'ElasticacheSubnetGroupId'
-    'ElasticacheSecurityGroupId'
+    'ElastiCacheSubnetGroupId'
+    'ElastiCacheSecurityGroupId'
     'Port'
-    'DNSElasticacheDomain'
-    'DNSElasticacheHostedZoneID'
-    'DNSElasticacheRecordRead'
-    'DNSElasticacheRecordWrite'
+    'DNSElastiCacheDomain'
+    'DNSElastiCacheHostedZoneID'
+    'DNSElastiCacheRecordRead'
+    'DNSElastiCacheRecordWrite'
     'AutoMinorVersionUpgrade'
     'PreferredMaintenanceWindow'
     'SnapshotRetentionLimit'
     'SnapshotWindow'
+    'SNSTopicElastiCacheArn'
     'AccountName'
     'AccountAbbr'
     'AccountNumber'
@@ -73,14 +78,16 @@ ELASTICACHE_DETAILS_VARIABLES+=(
     'Engine'
     'EngineVersion'
     'ParameterGroupName'
-    'EncryptionEnabled'
+    'StorageEncryptionEnabled'
+    'TransitEncryptionEnabled'
+    'SNSTopicElastiCacheArn'
 )
 
 ELASTICACHE_NETWORK_VARIABLES+=(
     'Port'
     'SubnetType'
-    'ElasticacheSubnetGroupId'
-    'ElasticacheSecurityGroupId'
+    'ElastiCacheSubnetGroupId'
+    'ElastiCacheSecurityGroupId'
 )
 
 ELASTICACHE_SNAPSHOT_VARIABLES+=(
@@ -94,14 +101,18 @@ ELASTICACHE_MAINTENANCE_VARIABLES+=(
 )
 
 ELASTICACHE_DNS_VARIABLES+=(
-    'DNSElasticacheHostedZoneID'
-    'DNSElasticacheRecordWrite'
-    'DNSElasticacheRecordRead'
+    'DNSElastiCacheHostedZoneID'
+    'DNSElastiCacheRecordWrite'
+    'DNSElastiCacheRecordRead'
 )
 
 ELASTICACHE_ENDPOINT_VARIABLES+=(
     'Endpoint_Read'
     'Endpoint_Write'
+)
+
+SECRETS_VARIABLES_OPTIONAL+=(
+    'AuthToken'
 )
 
 ELASTICACHE_INFO_VARIABLES+=(
@@ -158,9 +169,23 @@ function load_info_redis() {
     verify_array_key_values "STACK_VARIABLES_REQUIRED[@]" "ELASTICACHE"
     RETURNVAL="$?"; if [ ${RETURNVAL} -ne 0 ]; then return $RETURNVAL; fi
 
+    log_notice "${FUNCTION_DESCRIPTION}: loading Secrets"
+    for TMP_KEY in "${SECRETS_VARIABLES_OPTIONAL[@]}"; do
+        TMP_VAR="$(to_upper "ELASTICACHE_${TMP_KEY}")"
+        TMP_PARAMETER="/secrets/${ELASTICACHE_PROJECTABBR}/${ELASTICACHE_FUNCTIONABBR}/${ELASTICACHE_ENVIRONMENT}/vars/${TMP_KEY}"
+        parameter_get_silent ${TMP_VAR} "${TMP_PARAMETER}" yes "${TMP_AWS_REGION}"
+    done
+
     if(! is_int "${ELASTICACHE_REPLICACOUNT}"); then
         log_error "${FUNCTION_DESCRIPTION}: Replica Count is not an integer [${ELASTICACHE_REPLICACOUNT}]"
         return $E_BAD_ARGS
+    fi
+
+    if option_enabled ELASTICACHE_TRANSITENCRYPTIONENABLED; then
+        if(is_empty "${ELASTICACHE_AUTHTOKEN}"); then
+            log_error "${FUNCTION_DESCRIPTION}: Transit Encryption is enabled, but no Auth Token is specified"
+            return $E_BAD_ARGS
+        fi
     fi
 
     ELASTICACHE_REFERENCEID="${ELASTICACHE_REFERENCENAME}-$(generate_uuid "" 2)"
@@ -171,7 +196,6 @@ function load_info_redis() {
     else
         ELASTICACHE_MULTIAZENABLED=no
     fi
-
 
     for TMP_KEY in "${ELASTICACHE_DETAILS_VARIABLES[@]}"; do
         if [ ${#TMP_KEY} -gt $KEY_MAX_LENGTH ]; then KEY_MAX_LENGTH=${#TMP_KEY}; fi
@@ -194,42 +218,42 @@ function load_info_redis() {
     KEY_MAX_LENGTH=$((${KEY_MAX_LENGTH}+1))
 
     line_break
-    log_highlight "Elasticache - Details"
+    log_highlight "ElastiCache - Details"
     for TMP_KEY in "${ELASTICACHE_DETAILS_VARIABLES[@]}"; do
         TMP_VAR="$(to_upper "ELASTICACHE_${TMP_KEY}")"
         log "$(printf "%-1s %-${KEY_MAX_LENGTH}s %s" "-" "${TMP_KEY}:" "[${!TMP_VAR}]")"
     done
 
     line_break
-    log_highlight "Elasticache - Info"
+    log_highlight "ElastiCache - Info"
     for TMP_KEY in "${ELASTICACHE_INFO_VARIABLES[@]}"; do
         TMP_VAR="$(to_upper "ELASTICACHE_${TMP_KEY}")"
         log "$(printf "%-1s %-${KEY_MAX_LENGTH}s %s" "-" "${TMP_KEY}:" "[${!TMP_VAR}]")"
     done
 
     line_break
-    log_highlight "Elasticache - Network"
+    log_highlight "ElastiCache - Network"
     for TMP_KEY in "${ELASTICACHE_NETWORK_VARIABLES[@]}"; do
         TMP_VAR="$(to_upper "ELASTICACHE_${TMP_KEY}")"
         log "$(printf "%-1s %-${KEY_MAX_LENGTH}s %s" "-" "${TMP_KEY}:" "[${!TMP_VAR}]")"
     done
 
     line_break
-    log_highlight "Elasticache - Snapshot"
+    log_highlight "ElastiCache - Snapshot"
     for TMP_KEY in "${ELASTICACHE_SNAPSHOT_VARIABLES[@]}"; do
         TMP_VAR="$(to_upper "ELASTICACHE_${TMP_KEY}")"
         log "$(printf "%-1s %-${KEY_MAX_LENGTH}s %s" "-" "${TMP_KEY}:" "[${!TMP_VAR}]")"
     done
 
     line_break
-    log_highlight "Elasticache - Maintenance"
+    log_highlight "ElastiCache - Maintenance"
     for TMP_KEY in "${ELASTICACHE_MAINTENANCE_VARIABLES[@]}"; do
         TMP_VAR="$(to_upper "ELASTICACHE_${TMP_KEY}")"
         log "$(printf "%-1s %-${KEY_MAX_LENGTH}s %s" "-" "${TMP_KEY}:" "[${!TMP_VAR}]")"
     done
 
     line_break
-    log_highlight "Elasticache - DNS"
+    log_highlight "ElastiCache - DNS"
     for TMP_KEY in "${ELASTICACHE_DNS_VARIABLES[@]}"; do
         TMP_VAR="$(to_upper "ELASTICACHE_${TMP_KEY}")"
         log "$(printf "%-1s %-${KEY_MAX_LENGTH}s %s" "-" "${TMP_KEY}:" "[${!TMP_VAR}]")"
@@ -280,15 +304,21 @@ function redis_create() {
     local ARG_CACHE_SUBNET_GROUP_NAME="--cache-subnet-group-name ${ELASTICACHE_ELASTICACHESUBNETGROUPID}"
     local ARG_SECURITY_GROUP_IDS="--security-group-ids ${ELASTICACHE_ELASTICACHESECURITYGROUPID}"
     local ARG_PORT="--port ${ELASTICACHE_PORT}"
+    local ARG_NOTIFICATION_TOPIC_ARN="--notification-topic-arn ${ELASTICACHE_SNSTOPICELASTICACHEARN}"
+
+    if option_enabled ELASTICACHE_TRANSITENCRYPTIONENABLED; then
+        local ARG_TRANSIT_ENCRYPTION="--transit-encryption-enabled"
+        local ARG_AUTH_TOKEN="--auth-token ${ELASTICACHE_AUTHTOKEN}"
+    else
+        local ARG_TRANSIT_ENCRYPTION="--no-transit-encryption-enabled"
+        local ARG_AUTH_TOKEN=""
+    fi
+
     local ARG_SNAPSHOT_RETENTION_LIMIT="--snapshot-retention-limit ${ELASTICACHE_SNAPSHOTRETENTIONLIMIT}"
     if [ ${ELASTICACHE_SNAPSHOTRETENTIONLIMIT} -gt 0 ]; then
         local ARG_SNAPSHOT_WINDOW="--snapshot-window ${ELASTICACHE_SNAPSHOTWINDOW}"
     else
         local ARG_SNAPSHOT_WINDOW=""
-    fi
-    if [[ ${ELASTICACHE_CACHENODETYPE} = "cache.t2."* ]]; then
-        ARG_SNAPSHOT_RETENTION_LIMIT=""
-        ARG_SNAPSHOT_WINDOW=""
     fi
     local ARG_PREFERRED_MAINTENANCE_WINDOW="--preferred-maintenance-window ${ELASTICACHE_PREFERREDMAINTENANCEWINDOW}"
     if option_enabled ELASTICACHE_AUTOMINORVERSIONUPGRADE; then
@@ -306,10 +336,10 @@ function redis_create() {
     else
         local ARG_AUTOMATIC_FAILOVER="--no-automatic-failover-enabled"
     fi
-    if option_enabled ELASTICACHE_ENCRYPTIONENABLED; then
-        local ARG_ENCRYPTION="--at-rest-encryption-enabled"
+    if option_enabled ELASTICACHE_STORAGEENCRYPTIONENABLED; then
+        local ARG_STORAGE_ENCRYPTION="--at-rest-encryption-enabled"
     else
-        local ARG_ENCRYPTION=""
+        local ARG_STORAGE_ENCRYPTION=""
     fi
 
     generate_temp_file AWS_FILE_RESPONSE "aws_cli response file"
@@ -350,7 +380,7 @@ ZZEOF
         RETRY_ENABLED=no
 
         log "${FUNCTION_DESCRIPTION}: Creating Redis (Attempt::${COUNTER} of ${AWS_EC_DEFAULT_RETRY_COUNT})"
-        $(which aws) ${AWS_REGION_STRING} elasticache create-replication-group ${ARG_REPLICATION_GROUP_ID} --replication-group-description "${ELASTICACHE_DESCRIPTION}" ${ARG_SNAPSHOT_NAME} ${ARG_CACHE_NODE_TYPE} ${ARG_ENGINE} ${ARG_ENGINE_VERSION} ${ARG_REPLICAS_PER_NODE_GROUP} ${ARG_CACHE_PARAMETER_GROUP_NAME} ${ARG_CACHE_SUBNET_GROUP_NAME} ${ARG_SECURITY_GROUP_IDS} ${ARG_PORT} ${ARG_SNAPSHOT_RETENTION_LIMIT} ${ARG_SNAPSHOT_WINDOW} ${ARG_PREFERRED_MAINTENANCE_WINDOW} ${ARG_MINOR_VERSION_UPGRADE} ${ARG_AUTOMATIC_FAILOVER} ${ARG_ENCRYPTION} --tags file://${FILE_TAGS_JSON}>${AWS_FILE_RESPONSE} 2>${AWS_FILE_ERROR}
+        $(which aws) ${AWS_REGION_STRING} elasticache create-replication-group ${ARG_REPLICATION_GROUP_ID} --replication-group-description "${ELASTICACHE_DESCRIPTION}" ${ARG_SNAPSHOT_NAME} ${ARG_CACHE_NODE_TYPE} ${ARG_ENGINE} ${ARG_ENGINE_VERSION} ${ARG_REPLICAS_PER_NODE_GROUP} ${ARG_CACHE_PARAMETER_GROUP_NAME} ${ARG_CACHE_SUBNET_GROUP_NAME} ${ARG_SECURITY_GROUP_IDS} ${ARG_PORT} ${ARG_NOTIFICATION_TOPIC_ARN} ${ARG_TRANSIT_ENCRYPTION} ${ARG_AUTH_TOKEN} ${ARG_SNAPSHOT_RETENTION_LIMIT} ${ARG_SNAPSHOT_WINDOW} ${ARG_PREFERRED_MAINTENANCE_WINDOW} ${ARG_MINOR_VERSION_UPGRADE} ${ARG_AUTOMATIC_FAILOVER} ${ARG_STORAGE_ENCRYPTION} --tags file://${FILE_TAGS_JSON}>${AWS_FILE_RESPONSE} 2>${AWS_FILE_ERROR}
         RETURNVAL="$?"
         $(which sed) -i "s/\o15/_AWS_BAD_IGNORE\\n/g" "${AWS_FILE_RESPONSE}"
         $(which sed) -i '/_AWS_BAD_IGNORE/d' "${AWS_FILE_RESPONSE}"
@@ -369,17 +399,17 @@ ZZEOF
         fi
     done
 
-    call_sleep 30 "allowing Elasticache Redis time to warmup"
+    call_sleep 30 "allowing ElastiCache Redis time to warmup"
     line_break
 
-    log "- Waiting for Elasticache Redis to become available"
+    log "- Waiting for ElastiCache Redis to become available"
     redis_poll_status "${ELASTICACHE_REFERENCEID}" yes "${AWS_OPERATION_TIMEOUT}" "" "${TMP_AWS_REGION}"
     RETURNVAL="$?"
     if [ ${RETURNVAL} -ne 0 ]; then
-        log_error "- Elasticache Redis failed to become available, cannot continue"
+        log_error "- ElastiCache Redis failed to become available, cannot continue"
         return $RETURNVAL
     else
-        log "- Elasticache Redis is now available"
+        log "- ElastiCache Redis is now available"
     fi
 
     log "${FUNCTION_DESCRIPTION}: gathering endpoints"
@@ -389,7 +419,7 @@ ZZEOF
     verify_array_key_values "ELASTICACHE_ENDPOINT_VARIABLES[@]" "ELASTICACHE"
     RETURNVAL="$?"
     if [ ${RETURNVAL} -ne 0 ]; then
-        log_error "${FUNCTION_DESCRIPTION}: Failed to load required variables [Elasticache Endpoints]"
+        log_error "${FUNCTION_DESCRIPTION}: Failed to load required variables [ElastiCache Endpoints]"
         return $RETURNVAL
     fi
 
@@ -636,6 +666,7 @@ function redis_get_info() {
     local TMP_PORT="${2}"
 
     local RETURNVAL=""
+    local AWS_REGION_STRING=""
     local TMP_FILE_INFO=""
 
     if(is_empty "${TMP_ENDPOINT_ADDRESS}"); then

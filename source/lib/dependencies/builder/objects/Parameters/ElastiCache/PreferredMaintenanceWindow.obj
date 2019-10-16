@@ -1,0 +1,7 @@
+##---------------------------------------------------------------------------------------
+# object: ElastiCache/PreferredMaintenanceWindow
+##---------------------------------------------------------------------------------------
+PreferredMaintenanceWindow:
+  Description: "ElastiCache: Preferred Maintenance Window"
+  Type: String
+  Default: mon:01:00-mon:02:00

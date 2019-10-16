@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: Details/AccountName
+##---------------------------------------------------------------------------------------
+AccountName:
+  Description: "Details: AccountName"
+  Value: !Select [0, !Split ["|", !Ref "Account"]]
+  Export:
+    Name: !Sub "${AWS::StackName}-AccountName"

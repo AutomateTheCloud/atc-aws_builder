@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: ElastiCache/AutoMinorVersionUpgrade
+##---------------------------------------------------------------------------------------
+AutoMinorVersionUpgrade:
+  Description: "ElastiCache: Auto Minor Version Upgrade"
+  Value: !Ref "AutoMinorVersionUpgrade"
+  Export:
+    Name: !Sub "${AWS::StackName}-AutoMinorVersionUpgrade"

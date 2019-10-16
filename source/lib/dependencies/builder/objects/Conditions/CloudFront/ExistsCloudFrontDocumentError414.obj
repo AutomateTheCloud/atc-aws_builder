@@ -1,0 +1,6 @@
+##---------------------------------------------------------------------------------------
+# object: CloudFront/ExistsCloudFrontDocumentError414
+##---------------------------------------------------------------------------------------
+ExistsCloudFrontDocumentError414:
+  !Not [!Equals [!Ref "CloudFrontDocumentError414", ""]]
+

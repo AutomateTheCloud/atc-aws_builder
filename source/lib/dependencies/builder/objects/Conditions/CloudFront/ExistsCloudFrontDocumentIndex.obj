@@ -1,0 +1,6 @@
+##---------------------------------------------------------------------------------------
+# object: CloudFront/ExistsCloudFrontDocumentIndex
+##---------------------------------------------------------------------------------------
+ExistsCloudFrontDocumentIndex:
+  !Not [!Equals [!Ref "CloudFrontDocumentIndex", ""]]
+

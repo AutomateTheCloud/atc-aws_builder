@@ -1,0 +1,14 @@
+##---------------------------------------------------------------------------------------
+# object:  CloudFront/CloudFrontSSLMinimumProtocolVersion
+##---------------------------------------------------------------------------------------
+CloudFrontSSLMinimumProtocolVersion:
+  Description: "CloudFront: SSL - Minimum Protocol Version"
+  Type: String
+  Default: "TLSv1.1_2016"
+  AllowedValues:
+    - "SSLv3"
+    - "TLSv1"
+    - "TLSv1.1_2016"
+    - "TLSv1.2_2018"
+    - "TLSv1_2016"
+  ConstraintDescription: "SSLv3, TLSv1, TLSv1.1_2016, TLSv1.2_2018, TLSv1_2016"

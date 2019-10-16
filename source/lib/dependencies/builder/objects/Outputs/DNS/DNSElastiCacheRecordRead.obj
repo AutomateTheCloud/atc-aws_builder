@@ -1,0 +1,8 @@
+##---------------------------------------------------------------------------------------
+# object: DNS/DNSElastiCacheRecordRead
+##---------------------------------------------------------------------------------------
+DNSElastiCacheRecordRead:
+  Description: "DNS: ElastiCache - Record (Read)"
+  Value: !Join [ "", [ !Select [0, !Split ["|", !Ref "DNSElastiCache"]], ".read.elasticache.", !Ref "AWS::Region", ".", !Select [1, !Split ["|", !Ref "DNSElastiCache"]] ] ]
+  Export:
+    Name: !Sub "${AWS::StackName}-DNSElastiCacheRecordRead"
